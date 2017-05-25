@@ -1,5 +1,5 @@
 {
-  "name": "course.thesis",
+  "name": "course.ynck",
   "version": "1.0.0",
   "scripts": {
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test grunt test",
     "build": "webpack --watch"
   },
-  "author": "Hack Reactor",
+  "author": "Ynck",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.24.1",

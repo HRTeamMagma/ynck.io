@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 
 const config = {
+  devtool: 'source-map',
   entry: './client/src/app',
   output: {
     path: path.join(__dirname, 'public/dist'),
