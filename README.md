@@ -4,10 +4,10 @@ The project description
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Helen Tang
+- An Yu
+- Devon Weldon
+- Scott Moschella
 
 ## Roadmap
 
