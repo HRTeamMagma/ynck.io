@@ -10,12 +10,15 @@ exports.up = function(knex, Promise) {
       table.string('city', 100).nullable();
       table.string('state', 20).nullable();
       table.string('phone', 100).nullable();
+      table.integer('user_id').references('profiles.id');
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('images', function(table) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
+      table.string('image_type', 100);
       table.integer('user_id').references('profiles.id');
+      table.index('image_type');
     }),
     knex.schema.createTableIfNotExists('tags', function(table) {
       table.increments('id').unsigned().primary();
