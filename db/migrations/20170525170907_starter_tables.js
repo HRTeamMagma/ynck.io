@@ -31,7 +31,7 @@ exports.up = function(knex, Promise) {
       table.integer('image_id').references('images.id');
       table.integer('tag_id').references('tags.id');
     }),
-    knex.schema.createTableIfNotExists('user_favorite', function(table) {
+    knex.schema.createTableIfNotExists('users_favorites', function(table) {
       table.increments('id').unsigned().primary();
       table.integer('image_id').references('images.id');
       table.integer('user_id').references('profiles.id');
