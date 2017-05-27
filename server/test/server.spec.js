@@ -1,5 +1,4 @@
 'use strict';
-require('dotenv').config();
 const request = require('supertest');
 const express = require('express');
 const expect = require('chai').expect;
