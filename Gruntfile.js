@@ -1,3 +1,4 @@
+require('dotenv').config();
 const config = require('config')['knex'];
 
 module.exports = function(grunt) {
