@@ -7,6 +7,8 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const config = require('config')['passport'];
 const models = require('../../db/models');
 
+console.log("the process env", process.env.GOOGLE_CLIENT_ID);
+
 passport.serializeUser((profile, done) => {
   done(null, profile.id);
 });
