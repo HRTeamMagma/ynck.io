@@ -16,8 +16,11 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('images', function(table) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
-      table.string('image_type', 100);
+    }),
+    knex.schema.createTableIfNotExists('images_users', function(table) {
       table.integer('user_id').references('profiles.id');
+      table.integer('image_id').references('images.id');
+      table.string('image_type', 100);
       table.index('image_type');
     }),
     knex.schema.createTableIfNotExists('tags', function(table) {
@@ -55,6 +58,7 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTableIfExists('user_favorite'),
     knex.schema.dropTableIfExists('tags_images'),
     knex.schema.dropTableIfExists('tags'),
+    knex.schema.dropTableIfExists('images_users'),
     knex.schema.dropTableIfExists('images'),
     knex.schema.dropTableIfExists('shops')
   ]);
