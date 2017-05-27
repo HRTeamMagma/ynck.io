@@ -2,3 +2,8 @@ language: node_js
 node_js:
   - "7"
 before_install: npm install -g grunt-cli
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database ynck;' -U postgres
+  - psql -c 'create database ynck_test;' -U postgres
