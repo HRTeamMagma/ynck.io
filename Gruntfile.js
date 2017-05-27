@@ -2,6 +2,7 @@ require('dotenv').config();
 const config = require('config')['knex'];
 
 module.exports = function(grunt) {
+  console.log("Google ID", process.env.GOOGLE_CLIENT_ID);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
