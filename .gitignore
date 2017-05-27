@@ -1,4 +1,8 @@
 # Project specific
+config/development.js
+config/production.js
+config/staging.js
+config/test.js
 config/development.json
 config/production.json
 config/staging.json
@@ -29,6 +33,9 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
+
+# Dotenv
+.env
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
