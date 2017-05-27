@@ -3,4 +3,4 @@ node_js:
   - "7"
 before_install: npm install -g grunt-cli
 env:
-  DB_HOSTNAME = localhost
+- DB_HOSTNAME = localhost
