@@ -3,6 +3,7 @@ const config = require('config')['knex'];
 
 module.exports = function(grunt) {
   console.log("Google ID", process.env.GOOGLE_CLIENT_ID);
+  console.log("db hostname", process.env.DB_HOSTNAME);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
