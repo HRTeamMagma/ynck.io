@@ -1,4 +1,8 @@
 # Project specific
+config/development.js
+config/production.js
+config/staging.js
+config/test.js
 config/development.json
 config/production.json
 config/staging.json
