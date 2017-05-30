@@ -15,7 +15,7 @@
     "body-parser": "^1.17.1",
     "bookshelf": "^0.10.3",
     "connect-flash": "^0.1.1",
-    "connect-redis": "^3.2.0",
+    "connect-redis": "^3.3.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
