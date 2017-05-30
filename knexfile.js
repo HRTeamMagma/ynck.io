@@ -8,43 +8,43 @@ if (process.env.NODE_ENV === 'test') {
   dbName = process.env.DB_NAME_TEST;
   debugSetting = false;
   poolSetting = {
-    "min": 1,
-    "max": 2
+    'min': 1,
+    'max': 2
   };
 } else if (process.env.NODE_ENV === 'production') {
   // Production
   dbName = process.env.DB_NAME;
   debugSetting = false;
   poolSetting = {
-    "min": 2,
-    "max": 10
+    'min': 2,
+    'max': 10
   };
 } else {
   // Development
   dbName = process.env.DB_NAME;
   debugSetting = false;
   poolSetting = {
-    "min": 1,
-    "max": 2
+    'min': 1,
+    'max': 2
   };
 }
 
 module.exports = {
-  "client": "postgresql",
-  "connection": {
-    "database": dbName,
-    "user": process.env.DB_USERNAME,
-    "password": process.env.DB_PASSWORD,
-    "host": process.env.DB_HOSTNAME,
-    "port": process.env.DB_PORT
+  'client': 'postgresql',
+  'connection': {
+    'database': dbName,
+    'user': process.env.DB_USERNAME,
+    'password': process.env.DB_PASSWORD,
+    'host': process.env.DB_HOSTNAME,
+    'port': process.env.DB_PORT
   },
-  "debug": debugSetting,
-  "pool": poolSetting,
-  "migrations": {
-    "tableName": "knex_migrations",
-    "directory": "db/migrations"
+  'debug': debugSetting,
+  'pool': poolSetting,
+  'migrations': {
+    'tableName': 'knex_migrations',
+    'directory': 'db/migrations'
   },
-  "seeds": {
-    "directory": "db/seeds"
+  'seeds': {
+    'directory': 'db/seeds'
   }
 };
