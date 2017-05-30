@@ -6,7 +6,7 @@ var poolSetting;
 if (process.env.NODE_ENV === 'test') {
   // Testing
   dbName = process.env.DB_NAME_TEST;
-  debugSetting = true;
+  debugSetting = false;
   poolSetting = {
     "min": 1,
     "max": 2
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'test') {
 } else {
   // Development
   dbName = process.env.DB_NAME;
-  debugSetting = true;
+  debugSetting = false;
   poolSetting = {
     "min": 1,
     "max": 2
