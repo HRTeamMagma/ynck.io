@@ -23,8 +23,8 @@ exports.up = function (knex, Promise) {
 
 exports.down = function (knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('auths'),
-    knex.schema.dropTable('profiles')
+    knex.raw('DROP TABLE IF EXISTS auths CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS profiles CASCADE')
   ]);
 };
 
