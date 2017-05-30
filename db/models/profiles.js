@@ -1,10 +1,10 @@
-const db = require('../');
+const bookshelf = require('../');
 
-const Profile = db.Model.extend({
+const Profile = bookshelf.Model.extend({
   tableName: 'profiles',
   auths: function() {
     return this.hasMany('Auth');
   }
 });
 
-module.exports = db.model('Profile', Profile);
+module.exports = bookshelf.model('Profile', Profile);
