@@ -4,10 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-// const config = require('config')['passport'];
 const models = require('../../db/models');
-
-console.log("the process env", process.env.GOOGLE_CLIENT_ID);
 
 passport.serializeUser((profile, done) => {
   done(null, profile.id);
