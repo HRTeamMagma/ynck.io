@@ -1,7 +1,15 @@
 require('dotenv').config();
-const config = require('config')['knex'];
+// const config = require('config')['knex'];
 
 module.exports = function(grunt) {
+  let dbName;
+// check the environment and create a DB connection
+  if (process.env.NODE_ENV === 'test') {
+    dbName = process.env.DB_NAME_TEST;
+  } else {
+    dbName = process.env.DB_NAME;
+  }
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -21,16 +29,15 @@ module.exports = function(grunt) {
     pgcreatedb: {
       default: {
         connection: {
-          user: config.connection.user,
-          password: config.connection.password,
-          host: config.connection.host,
-          port: config.connection.port,
+          user: process.env.DB_USERNAME,
+          password: process.env.DB_PASSWORD,
+          host: process.env.DB_HOSTNAME,
+          port: process.env.DB_PORT,
           database: 'template1'
         },
-        name: config.connection.database
+        name: dbName
       }
     }
-
   });
 
   grunt.loadNpmTasks('grunt-mocha-test');
