@@ -54,12 +54,12 @@ exports.down = function(knex, Promise) {
     knex.schema.table('profiles', function(table) {
       table.dropColumn('shop_id');
     }),
-    knex.schema.dropTableIfExists('ratings'),
-    knex.schema.dropTableIfExists('user_favorite'),
-    knex.schema.dropTableIfExists('tags_images'),
-    knex.schema.dropTableIfExists('tags'),
-    knex.schema.dropTableIfExists('images_users'),
-    knex.schema.dropTableIfExists('images'),
-    knex.schema.dropTableIfExists('shops')
+    knex.raw('DROP TABLE IF EXISTS ratings CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS users_favorites CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS tags_images CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS tags CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS images_users CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS images CASCADE'),
+    knex.raw('DROP TABLE IF EXISTS shops CASCADE')
   ]);
 };
