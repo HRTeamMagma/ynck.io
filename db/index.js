@@ -1,7 +1,8 @@
 const knex = require('knex')(require('../knexfile'));
-const db = require('bookshelf')(knex);
+const bookshelf = require('bookshelf')(knex);
+var cascadeDelete = require('bookshelf-cascade-delete');
 
-db.plugin('registry');
+bookshelf.plugin(cascadeDelete);
+bookshelf.plugin('registry');
 
-module.exports = db;
-
+module.exports = bookshelf;
