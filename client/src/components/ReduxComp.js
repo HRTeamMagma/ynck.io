@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../actions/actionCreators';
 
 import Main from './Main';
-//
+
 
 var mapStateToProps = function (state) {
   return {
-    posts: 'hello',
-    comments: 'shit'
+    posts: state.posts,
+    comments: state.comments
   };
 };
 
