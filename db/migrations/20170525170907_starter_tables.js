@@ -9,8 +9,8 @@ exports.up = function(knex, Promise) {
       table.string('address2', 100).nullable();
       table.string('city', 100).nullable();
       table.string('state', 20).nullable();
+      table.string('zip', 10).nullable();
       table.string('phone', 100).nullable();
-      table.integer('user_id').references('profiles.id');
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('images', function(table) {
@@ -44,22 +44,35 @@ exports.up = function(knex, Promise) {
     }),
     // this adds the necessary shop_id column to the profile table
     knex.schema.table('profiles', function(table) {
-      table.integer('shop_id').references('shops.id');
+      table.integer('shop_id').nullable();
+      table.foreign('shop_id').references('shops.id');
     })
   ]);
 };
 
 exports.down = function(knex, Promise) {
-  return Promise.all([
-    knex.schema.table('profiles', function(table) {
-      table.dropColumn('shop_id');
-    }),
-    knex.raw('DROP TABLE IF EXISTS ratings CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS users_favorites CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS tags_images CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS tags CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS images_users CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS images CASCADE'),
-    knex.raw('DROP TABLE IF EXISTS shops CASCADE')
-  ]);
+  return knex.schema.table('profiles', function(table) {
+    table.dropColumn('shop_id');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('ratings');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('users_favorites');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('tags_images');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('tags');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('images_users');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('images');
+  })
+  .then(() => {
+    return knex.schema.dropTableIfExists('shops');
+  });
 };
