@@ -1,8 +1,8 @@
-const db = require('../');
+const bookshelf = require('../');
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
 
-const Auth = db.Model.extend({
+const Auth = bookshelf.Model.extend({
   tableName: 'auths',
   profile: function() {
     return this.belongsTo('Profile');
@@ -33,4 +33,4 @@ const Auth = db.Model.extend({
   }
 });
 
-module.exports = db.model('Auth', Auth);
+module.exports = bookshelf.model('Auth', Auth);
