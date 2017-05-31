@@ -10,6 +10,11 @@ const config = {
   },
   module: {
     rules: [
+      {
+        test: /\.scss$/,
+        include: path.join(__dirname, 'public/stylesheets'),
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
       { test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client/src'),
         exclude: ['node_modules'],

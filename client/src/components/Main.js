@@ -6,7 +6,7 @@ import Home from './Home';
 class Main extends React.Component {
   render() {
     return (
-          <div>
+          <div id="container">
             Hello
             {this.props.comments.Devon[0].text}
             <Home /> 
