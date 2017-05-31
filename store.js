@@ -21,7 +21,7 @@ const defaultState = {
   ]
 };
 
-const store = createStore(rootReducer, defaultState);
+const store = createStore(rootReducer, defaultState, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 
 export default store;
