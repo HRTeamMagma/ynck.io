@@ -5,6 +5,7 @@ const Banner = React.createClass ({
     return (
       <div>
         <h1>Catchy Slogan</h1>
+        <img src='assets/banner.png'></img>
       </div>
     );
   }
