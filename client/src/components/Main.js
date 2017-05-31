@@ -4,15 +4,13 @@ import { Route, Link, BrowserRouter } from 'react-router-dom';
 import Home from './Home';
 
 class Main extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
           <div>
             Hello
-            <Home />         
+            {this.props.comments.Devon[0].text}
+            <Home /> 
+            
           </div>
     );
   }
