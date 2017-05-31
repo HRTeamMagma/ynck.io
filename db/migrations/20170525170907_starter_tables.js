@@ -17,9 +17,9 @@ exports.up = function(knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
     }),
-    knex.schema.createTableIfNotExists('images_users', function(table) {
-      table.integer('user_id').references('profiles.id');
-      table.integer('image_id').references('images.id');
+    knex.schema.createTableIfNotExists('profiles_images', function(table) {
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.string('image_type', 100);
       table.index('image_type');
     }),
@@ -28,24 +28,24 @@ exports.up = function(knex, Promise) {
       table.string('name', 50).nullable().unique();
     }),
     knex.schema.createTableIfNotExists('tags_images', function(table) {
-      table.integer('image_id').references('images.id');
+      table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.integer('tag_id').references('tags.id');
     }),
-    knex.schema.createTableIfNotExists('users_favorites', function(table) {
+    knex.schema.createTableIfNotExists('profiles_favorites', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('image_id').references('images.id');
-      table.integer('user_id').references('profiles.id');
+      table.integer('image_id').references('images.id').onDelete('CASCADE');
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
     }),
     knex.schema.createTableIfNotExists('ratings', function(table) {
       table.increments('id').unsigned().primary();
-      table.integer('shop_id').references('shops.id');
-      table.integer('user_id').references('profiles.id');
+      table.integer('shop_id').references('shops.id').onDelete('CASCADE');
+      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
       table.integer('value').unsigned();
     }),
     // this adds the necessary shop_id column to the profile table
     knex.schema.table('profiles', function(table) {
       table.integer('shop_id').nullable();
-      table.foreign('shop_id').references('shops.id');
+      table.foreign('shop_id').references('shops.id').onDelete('CASCADE');
     })
   ]);
 };
@@ -58,7 +58,7 @@ exports.down = function(knex, Promise) {
     return knex.schema.dropTableIfExists('ratings');
   })
   .then(() => {
-    return knex.schema.dropTableIfExists('users_favorites');
+    return knex.schema.dropTableIfExists('profiles_favorites');
   })
   .then(() => {
     return knex.schema.dropTableIfExists('tags_images');
@@ -67,7 +67,7 @@ exports.down = function(knex, Promise) {
     return knex.schema.dropTableIfExists('tags');
   })
   .then(() => {
-    return knex.schema.dropTableIfExists('images_users');
+    return knex.schema.dropTableIfExists('profiles_images');
   })
   .then(() => {
     return knex.schema.dropTableIfExists('images');
