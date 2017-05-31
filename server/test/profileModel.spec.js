@@ -16,8 +16,8 @@ describe('Profile model tests', function () {
   it('Should be able to retrieve test data', function (done) {
     Profile.forge().fetchAll()
       .then(function (results) {
-        expect(results.length).to.equal(1);
-        expect(results.at(0).get('id')).to.equal(1);
+        expect(results.length).to.equal(4);
+        // expect(results.at(0).get('id')).to.equal(1);
         done();
       })
       .catch(function (err) {
@@ -63,10 +63,10 @@ describe('Profile model tests', function () {
 
   it('Should be able to delete a record', function (done) {
     // Inserts a user
-    Profile.where({ id: 1 }).destroy()
+    Profile.where({ email: 'admin@domain.com' }).destroy()
       // verifies that the user has been inserted
       .then(function () {
-        return Profile.where({ id: 1 }).fetch();
+        return Profile.where({ email: 'admin@domain.com' }).fetch();
       })
       .then(function (result) {
         expect(result).to.equal(null);
