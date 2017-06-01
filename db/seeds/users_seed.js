@@ -2,10 +2,10 @@ const models = require('../models');
 var faker = require('faker');
 var randomWords = require('random-words');
 
-let createTag = (knex, id) => {
+let createTag = (knex, id, word) => {
   return knex('tags').insert({
     id,
-    name: randomWords()
+    name: word
   });
 };
 
@@ -107,9 +107,10 @@ exports.seed = function (knex, Promise) {
       return Promise.all(records);
     })
     .then(() => {
+      let words = ['funny', 'cute', 'classic', 'flash', 'cartoon', 'crazy', 'simple', 'nerd', 'videogame', 'retro'];
       let tags = [];
       for ( let i = 1; i <= 10; i++ ) {
-        tags.push( createTag( knex, i) );
+        tags.push( createTag( knex, i, words[i - 1]) );
       }
       return Promise.all(tags);
     })
