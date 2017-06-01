@@ -8,7 +8,7 @@ const Header = React.createClass ({
     return (
         <div className="site_header">
           <div className="logo">
-            <Link to="/"><h1>Ynck</h1></Link>
+            <Link to="/"><h1>ynck</h1></Link>
           </div>
           <nav>
             <li><a href="/login">Log in</a></li>
