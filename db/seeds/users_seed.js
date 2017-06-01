@@ -34,7 +34,8 @@ exports.seed = function (knex, Promise) {
         first: 'System',
         last: 'Admin',
         display: 'Administrator',
-        email: 'admin@domain.com'
+        email: 'admin@domain.com',
+        shop_id: null
       }).save();
     })
     .error(err => {
@@ -107,7 +108,7 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       let tags = [];
-      for ( let i = 1; i <=10; i++ ) {
+      for ( let i = 1; i <= 10; i++ ) {
         tags.push( createTag( knex, i) );
       }
       return Promise.all(tags);
@@ -115,7 +116,7 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       let records = [];
 
-      for ( let i = 1; i <= 10; i++)  {
+      for ( let i = 1; i <= 10; i++) {
         records.push( createTagImage( knex, ( Math.floor( Math.random() * 10 ) + 1 ), i ) );
         records.push( createTagImage( knex, i, ( Math.floor( Math.random() * 10 ) + 1 ) ) );
       }
@@ -156,5 +157,27 @@ exports.seed = function (knex, Promise) {
       .update({
         shop_id: 1
       });
+    })
+    .then(() => {
+      return knex('profiles_images').insert([
+        {
+          user_id: 1,
+          image_id: 1,
+          image_type: 'design'
+        },
+        {
+          user_id: 2,
+          image_id: 2,
+          image_type: 'tattoo'
+        },
+        {
+          user_id: 3,
+          image_id: 3,
+          image_type: 'inspiration'
+        }
+      ]);
+    })
+    .then(() => {
+
     });
 };
