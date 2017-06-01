@@ -9,6 +9,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
+        {console.log('user logged in:' + userFromServer + !!userFromServer)}
         <Header />
         <Home /> 
         { this.props.children }

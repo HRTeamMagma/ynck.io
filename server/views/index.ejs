@@ -1,6 +1,9 @@
 <% include head.ejs%>
 
     <div id='root'></div>
+    <script type='text/javascript'>
+      var userFromServer =<%-JSON.stringify(loggedIn)%>
+    </script>
     <script src="/dist/bundle.js"></script>
 
 <% include foot.ejs%>
