@@ -11,4 +11,9 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
+router.route('/profile/mytattoos')
+  .get((req,res) => {
+
+  });
+
 module.exports = router;
