@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './components/Main';
+import Profile from './components/Profile/Profile';
 import '../../public/stylesheets/main.scss'; // or `.scss` if you chose scss
 
 import ReduxComp from './components/ReduxComp';
 
-import { Route, Link, BrowserRouter } from 'react-router-dom';
+import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../../store';
 // import { Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -13,8 +14,10 @@ import store from '../../store';
 const router = (
   <Provider store={store}>
     <BrowserRouter>
-      <Route path="/" component={ReduxComp}>
-      </Route>
+      <Switch>
+        <Route exact path = "/" component={ReduxComp}></Route>
+        <Route path = "/profile" component={Profile}></Route>
+      </Switch>
     </BrowserRouter>
  </Provider>
 

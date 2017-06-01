@@ -36,7 +36,7 @@ router.route('/signup')
 
 router.route('/profile') //change this route????
   .get(middleware.auth.verify, (req, res) => {
-    res.render('index.ejs', {
+    res.render('index.ejs', { 
       user: req.user, loggedIn: req.user // get the user out of session and pass to template
     });
   });
