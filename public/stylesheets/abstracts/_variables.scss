@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+
+
+/// Regular font family
+/// @type List
+$base-font-family: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$base-font-size: 16px;
+$base-font-weight: normal;
+$base-line-height: 1.33;
+
+$light-grey: #fafafa;
+$mid-grey: #4a4a4a;
+$dark-grey: #2a2a2a;
+$maroon: #8f4b5a;
+
+$color-base: $dark-grey;
+$color-link: $color-base;
+$color-link-hover: $maroon;
+$placeholder: #7bb05a;
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+$small-spacing: 20px;
+$med-spacing: 40px;
+$large-spacing: 60px;
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px,
+) !default;
+
+
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

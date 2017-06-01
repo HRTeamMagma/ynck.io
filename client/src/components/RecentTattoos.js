@@ -3,8 +3,9 @@ import React from 'react';
 const RecentTattoos = React.createClass ({
   render () {
     return (
-      <div>
-        Three Recent Images
+      <div className="recent_tattoos">
+        <div className="tattoo">
+        </div>
       </div>
     );
   }

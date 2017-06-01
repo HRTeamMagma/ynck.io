@@ -9,16 +9,13 @@ class Home extends React.Component {
     super(props);
   
     this.state = {
-
     };
   }
   render () {
     return (
       <div className>
-        <Header />
         <Banner />
         <RecentTattoos />
-        <Footer />
       </div>
     );
   }

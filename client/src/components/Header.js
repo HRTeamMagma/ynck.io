@@ -1,12 +1,20 @@
 import React from 'react';
 import Search from './Search';
+import { Route, Link, BrowserRouter } from 'react-router-dom';
+
 
 const Header = React.createClass ({
   render () {
     return (
-      <div>
-        <Search />
-      </div>
+        <div className="site_header">
+          <div className="logo">
+            <Link to="/"><h1>Ynck</h1></Link>
+          </div>
+          <nav>
+            <li><a href="/login">Log in</a></li>
+            <li><a href="/signup">Sign up</a></li>
+          </nav>
+        </div>
     );
   }
 });
