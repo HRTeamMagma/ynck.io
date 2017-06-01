@@ -178,6 +178,27 @@ exports.seed = function (knex, Promise) {
       ]);
     })
     .then(() => {
-
+      return knex('ratings').insert([
+        {
+          shop_id: 2,
+          user_id: 3,
+          value: 4
+        },
+        {
+          shop_id: 1,
+          user_id: 3,
+          value: 1
+        },
+        {
+          shop_id: 1,
+          user_id: 1,
+          value: 5
+        },
+        {
+          shop_id: 2,
+          user_id: 2,
+          value: 5
+        }
+      ]);
     });
 };
