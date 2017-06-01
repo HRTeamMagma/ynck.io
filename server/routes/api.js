@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const dummy = require('../../dummyData');
 
 router.route('/')
   .get((req, res) => {
@@ -11,9 +12,29 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
-router.route('/profile/mytattoos')
+router.route('/profile/my-tattoos')
   .get((req,res) => {
-
+    res.send(dummy.myTattoos);
+  })
+  .post((req, res) => {
+    console.log(req.body);
   });
+
+router.route('/profile/favorites')
+  .get((req,res) => {
+    res.send(dummy.favorites);
+  })
+  .post((req, res) => {
+    console.log(req.body);
+  });
+
+router.route('/profile/designs')
+  .get((req,res) => {
+    res.send(dummy.designs);
+  })
+  .post((req, res) => {
+    console.log(req.body);
+  });
+
 
 module.exports = router;
