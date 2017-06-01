@@ -1,4 +1,22 @@
-.recent_tattoos {
+.feed_container {
+  width: $site-width;
   height: 400px;
-  background-color: $placeholder;
+  margin: auto;
+  padding: $med-spacing 0;
+}
+
+.recent_tattoos {
+
+}
+
+.image_grid img {
+  width: 300px;
+  height: 200px;
+  margin-top: $small-spacing;
+  margin-right: $med-spacing;
+}
+
+
+.image_grid img:last-of-type {
+  margin-right: 0;
 }
