@@ -1,5 +1,6 @@
 
-body {
-  color: $text-color;
-  font: normal 125% / 1.4 $text-font-stack;
+h1 {
+  font-size: $base-font-size*2;
+  padding: 0px;
+  margin: 0px;
 }

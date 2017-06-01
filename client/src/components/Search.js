@@ -3,7 +3,7 @@ import React from 'react';
 const Search = React.createClass ({
   render () {
     return (
-      <div>
+      <div id="searchbox">
         Search Box
       </div>
     );

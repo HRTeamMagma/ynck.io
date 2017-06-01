@@ -2,7 +2,12 @@
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
-// test
-#container {
-  background-color: red;
+
+.site_header {
+  width: 980px;
+  margin: auto;
+}
+
+.logo {
+  display: inline-block;
 }

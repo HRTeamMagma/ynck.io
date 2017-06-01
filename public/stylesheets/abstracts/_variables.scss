@@ -8,45 +8,29 @@
 
 /// Regular font family
 /// @type List
-$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$base-font-family: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$base-font-size: 16px;
+$base-font-weight: normal;
+$base-line-height: 1.33;
 
-/// Code (monospace) font family
-/// @type List
-$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+$light-grey: #fafafa;
+$mid-grey: #4a4a4a;
+$dark-grey: #2a2a2a;
+$maroon: #8f4b5a;
 
-
-
-
-
-/// Copy text color
-/// @type Color
-$text-color: rgb(34, 34, 34) !default;
-
-/// Main brand color
-/// @type Color
-$brand-color: rgb(229, 0, 80) !default;
-
-/// Light grey
-/// @type Color
-$light-grey: rgb(237, 237, 237) !default;
-
-/// Medium grey
-/// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
-
-/// Dark grey
-/// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
-
-
-
+$color-base: $dark-grey;
+$color-link: $color-base;
+$color-link-hover: $maroon;
+$placeholder: #7bb05a;
 
 
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
 
-
+$small-spacing: 20px;
+$med-spacing: 40px;
+$large-spacing: 60px;
 
 
 

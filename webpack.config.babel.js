@@ -15,7 +15,8 @@ const config = {
         include: path.join(__dirname, 'public/stylesheets'),
         loaders: ["style-loader", "css-loader", "sass-loader"]
       },
-      { test: /\.(js|jsx)$/,
+      { 
+        test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client/src'),
         exclude: ['node_modules'],
         use: [
@@ -25,6 +26,11 @@ const config = {
             }
           }
         ]
+      },
+      {
+        test: /\.(jpe?g|gif|png)$/,
+        include: path.join(__dirname, 'public'),
+        loader: 'file-loader?emitFile=false&name=[path][name].[ext]'
       }
     ]
   }

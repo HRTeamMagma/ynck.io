@@ -14,18 +14,19 @@ This file should not contain anything but `@import` and comments.
 // 2. Base stuff
 @import
   'base/base',
-  'base/fonts',
   'base/typography',
   'base/helpers';
 
 // 3. Layout-related sections
 @import
   'layout/header',
-  'layout/footer';
+  'layout/footer',
+  'layout/navigation';
 
 // 4. Components
 @import
-  'components/button';
+  'components/button',
+  'components/feed';
 
 // 5. Page-specific styles
 @import

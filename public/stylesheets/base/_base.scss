@@ -21,15 +21,26 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  color: $color-base;
+  font-size: $base-font-size;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+  line-height: 1.6;
+  margin: auto;
+}
+
+
+
 /**
  * Basic styles for links
  */
 a {
-  color: $brand-color;
+  color: $color-link;
   text-decoration: none;
 
   @include on-event {
-    color: $text-color;
-    text-decoration: underline;
+    color: $color-link-hover;
+    text-decoration: none;
   }
 }
