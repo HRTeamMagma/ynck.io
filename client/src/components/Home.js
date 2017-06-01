@@ -1,16 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter } from 'react-router-dom';
-
+import Header from './Header';
+import Banner from './Banner';
+import RecentTattoos from './RecentTattoos';
+import Footer from './Footer';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+  
+    this.state = {
+    };
   }
-
-  render() {
+  render () {
     return (
-      <div>This is the homepage</div>
+      <div className>
+        <Banner />
+        <RecentTattoos />
+      </div>
     );
   }
 }

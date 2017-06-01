@@ -5,7 +5,13 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    res.render('index.ejs');
+    if (!req.user) {
+      var loggedInUser = false;
+    } else {
+      loggedInUser = req.user;
+    }
+    
+    res.render('index.ejs', {loggedIn: loggedInUser});
   });
 
 router.route('/login')
@@ -28,10 +34,10 @@ router.route('/signup')
     failureFlash: true
   }));
 
-router.route('/profile')
+router.route('/profile') //change this route????
   .get(middleware.auth.verify, (req, res) => {
-    res.render('profile.ejs', {
-      user: req.user // get the user out of session and pass to template
+    res.render('index.ejs', {
+      user: req.user, loggedIn: req.user // get the user out of session and pass to template
     });
   });
 
