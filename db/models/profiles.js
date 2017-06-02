@@ -9,10 +9,13 @@ const Profile = bookshelf.Model.extend({
     return this.hasOne('Shop');
   },
   images: function() {
-    return this.hasMany('Image').withPivot(['image_type']);
+    return this.belongsToMany('Image').withPivot(['image_type']);
   },
   ratings: function() {
-    return this.hasMany('Rating').withPivot(['value']);
+    return this.belongsToMany('Shop').through('Rating');
+  },
+  favorites: function() {
+    return this.belongsToMany('Image').through('Favorite');
   }
 });
 
