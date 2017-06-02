@@ -1,0 +1,25 @@
+.dropdown {
+  background-color: $white;
+  border: 1px solid $divider-grey;
+  margin-top: $mini-spacing;
+  position: relative;
+  z-index: 100;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: block;
+      border-bottom: 1px solid $divider-grey;
+      width: 100%;
+      padding: $mini-spacing $small-spacing;
+      &:hover {
+        background-color: $light-grey;
+        cursor: pointer; 
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}

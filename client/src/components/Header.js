@@ -1,9 +1,43 @@
 import React from 'react';
 import Search from './Home/Search';
 import { Route, Link, BrowserRouter } from 'react-router-dom';
+import DropdownMenu from './DropdownMenu';
 
 
-const Header = React.createClass ({
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpen: false
+    };
+    this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.handleBodyClick = this.handleBodyClick.bind(this);
+  }
+
+  componentDidMount() {
+    document.body.addEventListener('click', this.handleBodyClick);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('click', this.handleBodyClick);
+  }
+
+  // Hide dropdown menu when user clicks out
+  handleDropdownClick(e) {
+    e.preventDefault();
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  // Hide dropdown menu when user clicks out
+  handleBodyClick() {
+    this.setState({
+      isOpen: false
+    });
+  }
+
   render () {
     return (
         <div className="site_header">
@@ -12,8 +46,8 @@ const Header = React.createClass ({
           </div>
           {this.props.loggedInUser ? (
             <nav>
-              <li><a href="/logout">Log out</a></li>
-              <li> { this.props.loggedInUser.first } </li>
+              <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
+              <DropdownMenu isOpen={this.state.isOpen} />
             </nav>
             ) : (
             <nav>
@@ -21,10 +55,9 @@ const Header = React.createClass ({
               <li><a href="/login">Log in</a></li>              
             </nav>
             )}
-
         </div>
     );
   }
-});
+}
 
 export default Header;
