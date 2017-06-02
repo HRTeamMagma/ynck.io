@@ -87,3 +87,27 @@ module.exports.myTattoos = {
     }
   ]
 };
+
+module.exports.shop = {
+  shopInfo: {
+    name: 'High Voltage Tattoo',
+    address1: '1259 North La Brea Avenue',
+    address2: 'Suite 200',
+    city: 'West Hollywood',
+    state: 'California',
+    zip: '90038-1023',
+    url: 'http://www.highvoltagetattoo.com/',
+    phone: '310-555-1212',
+    rating: '4.5',
+    profileImage: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
+  },
+  images: ['https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5418d65ee4b0167dcbb284f8/5447e89ce4b076e086113242/1493887896096/natetattoo1.jpg?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5504a37ae4b0edf4bc9d8062/5504a56ee4b01b33c96f5fa1/1426367859962/index-5.jpg?format=2500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/54383060e4b00691cb32b572/54383100e4b041b006cd5d2a/1412968704816/CHRIS3.jpg?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5420b14de4b0c158abee324b/54b60ac6e4b0a3e130ce3aa2/1431660632459/Screen+Shot+2015-01-13+at+10.19.35+PM.png?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5504a37ae4b0edf4bc9d8062/5504a592e4b01b33c96f6058/1426367893650/index-12.jpg?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5438336ce4b0f6700b8e006c/544176c8e4b0d342bff98c14/1413576394378/audreykawasaki.jpg?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5418d65ee4b0167dcbb284f8/5447e8d2e4b04e884a0c0580/1493887841650/natetattoo28.jpg?format=1500w',
+    'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5418d65ee4b0167dcbb284f8/5447e8e9e4b04e884a0c05c2/1493887842059/natetattoo41.jpg?format=1500w'
+  ]
+};
