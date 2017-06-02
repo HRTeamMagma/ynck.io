@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
+import Header from './../Header';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Profile extends React.Component {
       myTattoos: [],
     };
 
-    axios.get('/api/profile/my-tattoos', {
+    axios.get(`/api/user/${this.props.loggedInUser.id}`, {
       params: {
         id: this.props.loggedInUser.id,
       }
@@ -30,6 +31,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
+        <Header />
         <UserInfo />
         <Feed myTattoos = {this.state.myTattoos}/>
       </div>

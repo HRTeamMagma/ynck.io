@@ -44,7 +44,7 @@ router.route('/signup')
     failureFlash: true
   }));
 
-router.route('/profile') //change this route????
+router.route('/user') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     res.render('index.ejs', { 
       user: req.user // get the user out of session and pass to template
