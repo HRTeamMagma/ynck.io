@@ -10,10 +10,18 @@ const Header = React.createClass ({
           <div className="logo">
             <Link to="/"><h1>ynck</h1></Link>
           </div>
-          <nav>
-            <li><a href="/login">Log in</a></li>
-            <li><a href="/signup">Sign up</a></li>
-          </nav>
+          {this.props.loggedInUser ? (
+            <nav>
+              <li><a href="/logout">Log out</a></li>
+              <li> { this.props.loggedInUser.first } </li>
+            </nav>
+            ) : (
+            <nav>
+              <li><a href="/signup">Sign up</a></li>
+              <li><a href="/login">Log in</a></li>              
+            </nav>
+            )}
+
         </div>
     );
   }
