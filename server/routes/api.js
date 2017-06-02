@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const dummy = require('../../dummyData');
+const ProfileController = require('../controllers').Profiles;
+const ImageController = require('../controllers').Images;
+// these routes start with api
 
 router.route('/')
   .get((req, res) => {
@@ -12,7 +15,10 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
-router.route('/profile/my-tattoos')
+router.route('/latest-images')
+  .get(ImageController.getLatestImages);
+
+router.route('/user/my-tattoos')
   .get((req, res) => {
     res.send(dummy.myTattoos);
   })
@@ -21,16 +27,14 @@ router.route('/profile/my-tattoos')
     res.send(201);
   });
 
-router.route('/profile/favorites')
-  .get((req, res) => {
-    res.send(dummy.favorites);
-  })
+router.route('/user/favorites')
+  .get(ProfileController.getFavorites)
   .post((req, res) => {
     console.log(req.body);
     res.send(201);
   });
 
-router.route('/profile/designs')
+router.route('/user/designs')
   .get((req, res) => {
     res.send(dummy.designs);
   })
