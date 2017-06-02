@@ -18,6 +18,7 @@ router.route('/profile/my-tattoos')
   })
   .post((req, res) => {
     console.log(req.body);
+    res.send(201);
   });
 
 router.route('/profile/favorites')
@@ -26,6 +27,7 @@ router.route('/profile/favorites')
   })
   .post((req, res) => {
     console.log(req.body);
+    res.send(201);
   });
 
 router.route('/profile/designs')
@@ -34,7 +36,16 @@ router.route('/profile/designs')
   })
   .post((req, res) => {
     console.log(req.body);
+    res.send(201);
   });
 
+router.route('/shop')
+  .get((req, res) => {
+    res.send(dummy.shop);
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    res.send(201);
+  });
 
 module.exports = router;
