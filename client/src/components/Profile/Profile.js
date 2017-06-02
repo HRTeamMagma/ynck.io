@@ -12,7 +12,11 @@ class Profile extends React.Component {
       myTattoos: [],
     };
 
-    axios.get('/api/profile/my-tattoos').then((results) => {
+    axios.get('/api/profile/my-tattoos', {
+      params: {
+        id: this.props.loggedInUser.id,
+      }
+    }).then((results) => {
       this.setState({
         myTattoos: results.data.images,
       });
