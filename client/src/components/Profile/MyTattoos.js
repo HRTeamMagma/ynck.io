@@ -1,11 +1,26 @@
 import React from 'react';
 
-const MyTattoos = () => {
-  return (
-    <div>
-      MyTattoos Feed
-    </div>
-  );
-};
+class MyTattoos extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  
+  render() {
+    return (
+      <div>
+        MyTattoos Feed
+        {this.props.myTattoos.map ((images, i) => {
+          return (
+            <div key={i}> 
+              <img src = {images.url}></img>
+            </div>
+          );
+        })}
+        
+      </div>
+    );
+  }
+}
 
 export default MyTattoos;
