@@ -13,7 +13,7 @@ router.route('/')
   });
 
 router.route('/profile/my-tattoos')
-  .get((req,res) => {
+  .get((req, res) => {
     res.send(dummy.myTattoos);
   })
   .post((req, res) => {
@@ -21,7 +21,7 @@ router.route('/profile/my-tattoos')
   });
 
 router.route('/profile/favorites')
-  .get((req,res) => {
+  .get((req, res) => {
     res.send(dummy.favorites);
   })
   .post((req, res) => {
@@ -29,7 +29,7 @@ router.route('/profile/favorites')
   });
 
 router.route('/profile/designs')
-  .get((req,res) => {
+  .get((req, res) => {
     res.send(dummy.designs);
   })
   .post((req, res) => {
