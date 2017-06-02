@@ -70,7 +70,6 @@ module.exports.getUserProfilePage = (req, res) => {
       let allImages = profile.related('images').toJSON();
       let responseObj = {};
       allImages.forEach(function(image) {
-        console.log(image);
         let thisImage = {};
         thisImage.tags = [];
         thisImage.id = image.id;
@@ -86,8 +85,15 @@ module.exports.getUserProfilePage = (req, res) => {
           responseObj[image._pivot_image_type] = [thisImage];
         }
       });
-      // console.log(responseObj);
-      res.render('index.ejs', {userData: responseObj});
+      console.log(responseObj);
+
+      let theUser;
+      if (req.user) {
+        theUser = req.user;
+      } else {
+        theUser = false;
+      }
+      res.render('index.ejs', {userData: responseObj, user: theUser});
     });
 };
 
