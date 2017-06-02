@@ -16,8 +16,10 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('images', function(table) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
     }),
     knex.schema.createTableIfNotExists('images_profiles', function(table) {
+      table.increments('id').unsigned().primary();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.string('image_type', 100);
@@ -32,6 +34,7 @@ exports.up = function(knex, Promise) {
       table.integer('tag_id').references('tags.id');
     }),
     knex.schema.createTableIfNotExists('favorites', function(table) {
+      table.increments('id').unsigned().primary();
       table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     }),
