@@ -35,7 +35,8 @@ exports.seed = function (knex, Promise) {
         last: 'Admin',
         display: 'Administrator',
         email: 'admin@domain.com',
-        shop_id: null
+        shop_id: null,
+        profile_image: 'https://pbs.twimg.com/profile_images/863826013251227648/bvhrddjv.jpg'
       }).save();
     })
     .error(err => {
@@ -62,21 +63,24 @@ exports.seed = function (knex, Promise) {
           last: 'Admin2',
           display: 'Administrator2',
           email: 'admin2@domain.com',
-          shop_id: null
+          shop_id: null,
+          profile_image: 'https://pbs.twimg.com/profile_images/865981444161642496/-wxhRxPD.jpg'
         },
         {
           first: 'Bazooka',
           last: 'Joe',
           display: 'Mr. Cool',
           email: 'cool@bazooka.com',
-          shop_id: null
+          shop_id: null,
+          profile_image: 'https://pbs.twimg.com/profile_images/718588760003383296/2AG8omMO.jpg'
         },
         {
           first: 'Beyonce',
           last: 'Knowles',
           display: 'Bey',
           email: 'beyonce@beyonce.com',
-          shop_id: null
+          shop_id: null,
+          profile_image: 'https://pbs.twimg.com/profile_images/860171768119517187/2UlAzLGD.jpg'
         }
       ]);
     })
@@ -133,7 +137,8 @@ exports.seed = function (knex, Promise) {
           city: faker.address.city(),
           state: faker.address.state(),
           zip: faker.address.zipCode(),
-          phone: faker.phone.phoneNumber()
+          phone: faker.phone.phoneNumber(),
+          shop_image: 'https://www.form.ink/wp-content/uploads/2016/02/best-tattoo-shops-in-atlanta-abt-tattoo.png'
         },
         {
           name: randomWords(),
@@ -143,7 +148,8 @@ exports.seed = function (knex, Promise) {
           city: faker.address.city(),
           state: faker.address.state(),
           zip: faker.address.zipCode(),
-          phone: faker.phone.phoneNumber()
+          phone: faker.phone.phoneNumber(),
+          shop_image: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg'
         }
       ]);
     })
