@@ -1,5 +1,6 @@
 const express = require('express');
 const middleware = require('../middleware');
+const ProfileController = require('../controllers').Profiles;
 
 const router = express.Router();
 
@@ -13,6 +14,9 @@ router.route('/')
     
     res.render('index.ejs', {loggedIn: loggedInUser});
   });
+
+router.route('/user/:id')
+  .get(ProfileController.getUserProfilePage);
 
 router.route('/login')
   .get((req, res) => {
