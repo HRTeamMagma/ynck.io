@@ -47,7 +47,7 @@ class Header extends React.Component {
           {this.props.loggedInUser ? (
             <nav>
               <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
-              <DropdownMenu isOpen={this.state.isOpen} />
+              <DropdownMenu isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
             </nav>
             ) : (
             <nav>
