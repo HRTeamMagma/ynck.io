@@ -17,8 +17,8 @@ exports.up = function(knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
     }),
-    knex.schema.createTableIfNotExists('profiles_images', function(table) {
-      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+    knex.schema.createTableIfNotExists('images_profiles', function(table) {
+      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.string('image_type', 100);
       table.index('image_type');
@@ -27,19 +27,18 @@ exports.up = function(knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('name', 50).nullable().unique();
     }),
-    knex.schema.createTableIfNotExists('tags_images', function(table) {
+    knex.schema.createTableIfNotExists('images_tags', function(table) {
       table.integer('image_id').references('images.id').onDelete('CASCADE');
       table.integer('tag_id').references('tags.id');
     }),
-    knex.schema.createTableIfNotExists('profiles_favorites', function(table) {
-      table.increments('id').unsigned().primary();
+    knex.schema.createTableIfNotExists('favorites', function(table) {
       table.integer('image_id').references('images.id').onDelete('CASCADE');
-      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     }),
     knex.schema.createTableIfNotExists('ratings', function(table) {
       table.increments('id').unsigned().primary();
       table.integer('shop_id').references('shops.id').onDelete('CASCADE');
-      table.integer('user_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('value').unsigned();
     }),
     // this adds the necessary shop_id column to the profile table
@@ -58,16 +57,16 @@ exports.down = function(knex, Promise) {
     return knex.schema.dropTableIfExists('ratings');
   })
   .then(() => {
-    return knex.schema.dropTableIfExists('profiles_favorites');
+    return knex.schema.dropTableIfExists('favorites');
   })
   .then(() => {
-    return knex.schema.dropTableIfExists('tags_images');
+    return knex.schema.dropTableIfExists('images_tags');
   })
   .then(() => {
     return knex.schema.dropTableIfExists('tags');
   })
   .then(() => {
-    return knex.schema.dropTableIfExists('profiles_images');
+    return knex.schema.dropTableIfExists('images_profiles');
   })
   .then(() => {
     return knex.schema.dropTableIfExists('images');
