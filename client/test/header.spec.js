@@ -1,5 +1,3 @@
-// For some unexplained crazy reason...the tests blow up if these spec files don't start with 'home'.
-
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
