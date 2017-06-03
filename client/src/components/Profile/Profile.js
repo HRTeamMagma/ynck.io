@@ -36,8 +36,14 @@ class Profile extends React.Component {
     return (
       <div>
         <Header />
-        <UserInfo />
-        <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
+        <div className="feed_container">
+          <div className="profile_sidebar">
+            <UserInfo />
+          </div>
+          <div className="main_content">
+            <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
+          </div>
+        </div>
       </div>
     );
   }
