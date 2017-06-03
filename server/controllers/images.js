@@ -1,18 +1,12 @@
 const models = require('../../db/models');
 const knex = require('../../db/').knex;
+const helper = require('../helpers/db_helpers');
 
 module.exports.getLatestImages = (req, res) => {
   
   models.Image.where({image_type: 'tattoo'}).fetchAll({withRelated: ['tags']})
   .then(result => {
-    result = result.toJSON();
-    result.forEach(function(element) {
-      if (element.tags.length > 0) {
-        element.tags = element.tags.map(tag => {
-          return tag.name;
-        });
-      }
-    });
+    result = helper.cleanTags(result.toJSON());
     res.send(result);
   });
 
