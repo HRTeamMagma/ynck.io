@@ -11,6 +11,8 @@ class Profile extends React.Component {
 
     this.state = {
       myTattoos: [],
+      myDesigns: [],
+      myInspirations: [],
     };
 
     axios.get('/api/profiles/images', {
@@ -20,7 +22,9 @@ class Profile extends React.Component {
     }).then((results) => {
       console.log(results);
       this.setState({
-        myTattoos: results.data.design,
+        myTattoos: results.data.tattoo,
+        myDesigns: results.data.design,
+        myInspirations: results.data.inspiration
       });
     }).catch((error) => {
       console.log(error);
@@ -34,7 +38,7 @@ class Profile extends React.Component {
       <div>
         <Header />
         <UserInfo />
-        <Feed myTattoos = {this.state.myTattoos}/>
+        <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
       </div>
     );
   }
