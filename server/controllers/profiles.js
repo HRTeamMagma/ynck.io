@@ -85,7 +85,6 @@ module.exports.getUserProfilePage = (req, res) => {
           responseObj[image._pivot_image_type] = [thisImage];
         }
       });
-      console.log(responseObj);
 
       let theUser;
       if (req.user) {
@@ -106,7 +105,6 @@ module.exports.getUserImages = (req, res) => {
       let allImages = profile.related('images').toJSON();
       let responseObj = {};
       allImages.forEach(function(image) {
-        console.log(image);
         let thisImage = {};
         thisImage.tags = [];
         thisImage.id = image.id;
@@ -133,7 +131,6 @@ module.exports.getFavorites = (req, res) => {
       if (!profile) {
         throw profile;
       }
-      console.log(profile.related('favorites').toJSON());
       res.send(profile.related('favorites').toJSON());
     });
 };
