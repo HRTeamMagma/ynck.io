@@ -56,15 +56,16 @@ router.route('/user/designs')
   });
 
 router.route('/shop')
-  .get((req, res) => {
-    var address = dummy.shop.shopInfo.address1 + ' ' + dummy.shop.shopInfo.address2;
-    latLong.latLong(address, function(result) {
-      dummy.shop.lat = result[0].latitude;
-      dummy.shop.lon = result[0].longitude;
-      res.send(dummy.shop);
-    });
+  .get(ShopController.getShopInfo)
+
+    // var address = dummy.shop.shopInfo.address1 + ' ' + dummy.shop.shopInfo.address2;
+    // latLong.latLong(address, function(result) {
+    //   dummy.shop.lat = result[0].latitude;
+    //   dummy.shop.lon = result[0].longitude;
+    //   res.send(dummy.shop);
+    // });
     
-  })
+
   .post((req, res) => {
     console.log(req.body);
     res.send(201);
