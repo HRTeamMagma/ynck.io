@@ -4,6 +4,7 @@ const router = express.Router();
 const dummy = require('../../dummyData');
 const ProfileController = require('../controllers').Profiles;
 const ImageController = require('../controllers').Images;
+const ShopController = require('../controllers').Shops;
 const latLong = require('../../LatLong');
 // these routes start with api
 
@@ -25,6 +26,13 @@ router.route('/user/my-tattoos')
     console.log(req.body);
     res.send(201);
   });
+
+// router.route('/shop')
+//   .get(ShopController.getShopInfo)
+//   .post((req, res) => {
+//     console.log(req.body);
+//     res.send(201);
+//   })
 
 router.route('/user/inspirations')
   .get(ProfileController.getUserInspirations)
