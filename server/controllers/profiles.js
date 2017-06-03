@@ -125,6 +125,14 @@ module.exports.getUserImages = (req, res) => {
     });
 };
 
+module.exports.getUserTattoos = (req, res) => {
+  models.Image.where({ profile_id: req.query.id, image_type: 'tattoo' }).fetchAll({withRelated: ['tags']})
+  .then(results => {
+    res.send(results.toJSON());
+  });
+
+};
+
 module.exports.getFavorites = (req, res) => {
   models.Profile.where({ id: req.query.id }).fetch({withRelated: ['favorites.tags']})
     .then(profile => {
