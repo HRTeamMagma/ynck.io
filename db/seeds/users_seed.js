@@ -4,10 +4,10 @@ var faker = require('faker');
 var randomWords = require('random-words');
 const dummyData = require('../../dummyData');
 
-let createShopImage = (knex, id) => {
-  return knex('shop_images').insert({
+let createShopImage = (knex, index) => {
+  return knex('shopimages').insert({
     title: randomWords(),
-    url: dummyData.shop.images[i],
+    url: dummyData.shop.images[index],
     shop_id: 1
   });
 };
@@ -155,7 +155,7 @@ exports.seed = function (knex, Promise) {
           zip: '90038-1023',
           phone: '310-555-1212',
           rating: '4.5',
-          profileImage: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
+          shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
         },
         {
           name: randomWords(),
@@ -167,7 +167,7 @@ exports.seed = function (knex, Promise) {
           zip: faker.address.zipCode(),
           phone: faker.phone.phoneNumber(),
           rating: '1.7',
-          profileImage: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg'
+          shop_image: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg'
         }
       ]);
     })
