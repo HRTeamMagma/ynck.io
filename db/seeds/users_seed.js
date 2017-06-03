@@ -1,4 +1,5 @@
 const models = require('../models');
+const photoData = require('../../photoData');
 var faker = require('faker');
 var randomWords = require('random-words');
 
@@ -9,12 +10,12 @@ let createTag = (knex, id, word) => {
   });
 };
 
-let createImage = (knex, id) => {
+let createImage = (knex, photo, id) => {
   Math.floor(Math.random() * 3);
   var types = ['tattoo', 'inspiration', 'design'];
   return knex('images').insert({
     id,
-    url: faker.image.imageUrl(),
+    url: photo.url,
     profile_id: Math.floor(Math.random() * 4) + 1,
     image_type: types[Math.floor(Math.random() * 3)],
     favoriteCount: Math.floor(Math.random() * 100)
@@ -110,8 +111,9 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       let records = [];
-      for (let i = 1; i <= 20; i++) {
-        records.push(createImage(knex, i));
+      console.log(photoData.data.length);
+      for (let i = 1; i < photoData.data.length; i++) {
+        records.push(createImage(knex, photoData.data[i], i));
       }
       return Promise.all(records);
     })
@@ -170,110 +172,6 @@ exports.seed = function (knex, Promise) {
         shop_id: 1
       });
     })
-    // .then(() => {
-    //   return knex('images_profiles').insert([
-    //     {
-    //       profile_id: 1,
-    //       image_id: 1,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 1,
-    //       image_id: 2,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 1,
-    //       image_id: 3,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 1,
-    //       image_id: 4,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 2,
-    //       image_id: 5,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 2,
-    //       image_id: 6,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 2,
-    //       image_id: 7,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 2,
-    //       image_id: 8,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 3,
-    //       image_id: 9,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 3,
-    //       image_id: 10,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 3,
-    //       image_id: 11,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 3,
-    //       image_id: 12,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 13,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 14,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 15,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 16,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 17,
-    //       image_type: 'inspiration'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 18,
-    //       image_type: 'design'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 19,
-    //       image_type: 'tattoo'
-    //     },
-    //     {
-    //       profile_id: 4,
-    //       image_id: 20,
-    //       image_type: 'inspiration'
-    //     }
-    //   ]);
-    // })
     .then(() => {
       return knex('ratings').insert([
         {
