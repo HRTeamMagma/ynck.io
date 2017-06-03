@@ -1,20 +1,41 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
 
-const RecentTattoos = React.createClass ({
-  render () {
+class RecentTattoos extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      images: []
+    };
+  }
+
+  componentDidMount() {
+    console.log('get request called');
+    axios.get('/api/latest-images')
+    .then((res) => {
+      this.setState({
+        images: res.data
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    });
+  }
+
+  render() {
     return (
       <div className="feed_container">
         <div className="recent_tattoos">
           <h2>Recent tattoos</h2>
           <div className="image_grid">
-            <img src="assets/images/tattoo1.jpeg"/>
-            <img src="assets/images/tattoo2.jpeg"/>
-            <img src="assets/images/tattoo3.jpeg"/>
+            { this.state.images.map((image, index) => <img src={image.url}/>) }
           </div>
         </div>
       </div>
     );
   }
-});
+}
 
 export default RecentTattoos;

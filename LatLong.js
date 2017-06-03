@@ -14,7 +14,3 @@ module.exports.latLong = (address, callback) => {
     callback(res);
   });
 };
-
-module.exports.latLong(ad, function(res) {
-  console.log('latlong: ', res);
-});
