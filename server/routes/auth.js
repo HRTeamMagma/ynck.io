@@ -1,5 +1,6 @@
 const express = require('express');
 const middleware = require('../middleware');
+const ProfileController = require('../controllers').Profiles;
 
 const router = express.Router();
 
@@ -9,6 +10,16 @@ router.route('/')
       var loggedInUser = false;
     } else {
       loggedInUser = req.user;
+    }
+    res.render('index.ejs', { user: loggedInUser });
+  });
+
+router.route('/user/:id')
+  .get((req, res) => {
+    if (!req.user) {
+      var loggedInUser = false;
+    } else {
+      var loggedInUser = req.user;
     }
     res.render('index.ejs', { user: loggedInUser });
   });
@@ -33,7 +44,7 @@ router.route('/signup')
     failureFlash: true
   }));
 
-router.route('/profile') //change this route????
+router.route('/user') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     res.render('index.ejs', { 
       user: req.user // get the user out of session and pass to template

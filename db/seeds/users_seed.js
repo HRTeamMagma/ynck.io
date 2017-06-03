@@ -17,7 +17,7 @@ let createImage = (knex, id) => {
 };
 
 let createTagImage = (knex, imageId, tagId) => {
-  return knex('tags_images').insert({
+  return knex('images_tags').insert({
     image_id: imageId,
     tag_id: tagId
   });
@@ -166,20 +166,105 @@ exports.seed = function (knex, Promise) {
       });
     })
     .then(() => {
-      return knex('profiles_images').insert([
+      return knex('images_profiles').insert([
         {
-          user_id: 1,
+          profile_id: 1,
           image_id: 1,
           image_type: 'design'
         },
         {
-          user_id: 2,
+          profile_id: 1,
           image_id: 2,
           image_type: 'tattoo'
         },
         {
-          user_id: 3,
+          profile_id: 1,
           image_id: 3,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 1,
+          image_id: 4,
+          image_type: 'design'
+        },
+        {
+          profile_id: 2,
+          image_id: 5,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 2,
+          image_id: 6,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 2,
+          image_id: 7,
+          image_type: 'design'
+        },
+        {
+          profile_id: 2,
+          image_id: 8,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 3,
+          image_id: 9,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 3,
+          image_id: 10,
+          image_type: 'design'
+        },
+        {
+          profile_id: 3,
+          image_id: 11,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 3,
+          image_id: 12,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 13,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 14,
+          image_type: 'design'
+        },
+        {
+          profile_id: 4,
+          image_id: 15,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 4,
+          image_id: 16,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 17,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 18,
+          image_type: 'design'
+        },
+        {
+          profile_id: 4,
+          image_id: 19,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 4,
+          image_id: 20,
           image_type: 'inspiration'
         }
       ]);
@@ -188,23 +273,95 @@ exports.seed = function (knex, Promise) {
       return knex('ratings').insert([
         {
           shop_id: 2,
-          user_id: 3,
+          profile_id: 3,
           value: 4
         },
         {
           shop_id: 1,
-          user_id: 3,
+          profile_id: 3,
           value: 1
         },
         {
           shop_id: 1,
-          user_id: 1,
+          profile_id: 1,
           value: 5
         },
         {
           shop_id: 2,
-          user_id: 2,
+          profile_id: 2,
           value: 5
+        }
+      ]);
+    })
+    .then(() => {
+      return knex('favorites').insert([
+        {
+          profile_id: 2,
+          image_id: 4
+        },
+        {
+          profile_id: 2,
+          image_id: 2
+        },
+        {
+          profile_id: 3,
+          image_id: 5
+        },
+        {
+          profile_id: 3,
+          image_id: 2
+        },
+        {
+          profile_id: 1,
+          image_id: 2
+        },
+        {
+          profile_id: 1,
+          image_id: 5
+        },
+        {
+          profile_id: 2,
+          image_id: 6
+        },
+        {
+          profile_id: 2,
+          image_id: 8
+        },
+        {
+          profile_id: 3,
+          image_id: 7
+        },
+        {
+          profile_id: 3,
+          image_id: 8
+        },
+        {
+          profile_id: 1,
+          image_id: 9
+        },
+        {
+          profile_id: 1,
+          image_id: 10
+        },
+        {
+          profile_id: 4,
+          image_id: 8
+        },
+        {
+          profile_id: 4,
+          image_id: 7
+        },
+        {
+          profile_id: 4,
+          image_id: 15
+        },
+        {
+          profile_id: 4,
+          image_id: 9
+        },
+        {
+          profile_id: 4,
+          image_id: 10
         }
       ]);
     });
