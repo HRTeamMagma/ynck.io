@@ -4,6 +4,7 @@ const router = express.Router();
 const dummy = require('../../dummyData');
 const ProfileController = require('../controllers').Profiles;
 const ImageController = require('../controllers').Images;
+const latLong = require('../../LatLong');
 // these routes start with api
 
 router.route('/')
@@ -45,7 +46,13 @@ router.route('/user/designs')
 
 router.route('/shop')
   .get((req, res) => {
-    res.send(dummy.shop);
+    var address = dummy.shop.shopInfo.address1 + ' ' + dummy.shop.shopInfo.address2;
+    latLong.latLong(address, function(result) {
+      dummy.shop.lat = result[0].latitude;
+      dummy.shop.lon = result[0].longitude;
+      res.send(dummy.shop);
+    });
+    
   })
   .post((req, res) => {
     console.log(req.body);
