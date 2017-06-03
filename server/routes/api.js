@@ -56,7 +56,7 @@ router.route('/user/designs')
   });
 
 router.route('/shop')
-  .get(ShopController.getShopInfo)
+  .get(ShopController.getShopInfoForUser)
 
     // var address = dummy.shop.shopInfo.address1 + ' ' + dummy.shop.shopInfo.address2;
     // latLong.latLong(address, function(result) {
