@@ -152,6 +152,15 @@ module.exports.getUserDesigns = (req, res) => {
     });
 };
 
+module.exports.getUserInspirations = (req, res) => {
+  models.Image.where({ profile_id: req.query.id, image_type: 'inspiration' }).fetchAll({withRelated: ['tags']})
+    .then(results => {
+      results = helper.cleanTags(results.toJSON());
+      res.send({images: results});
+    });
+};
+
+
 // module.exports.deleteOne = (req, res) => {
 //   models.Profile.where({ id: req.params.id }).fetch()
 //     .then(profile => {
