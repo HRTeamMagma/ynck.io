@@ -6,7 +6,7 @@ const Shop = bookshelf.Model.extend({
     return this.belongsTo('Profile');
   },
   ratings: function() {
-    return this.hasMany('Rating').withPivot(['value']);
+    return this.belongsToMany('Profile').through('Rating');
   }
 });
 
