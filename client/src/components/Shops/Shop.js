@@ -1,19 +1,8 @@
 import React from 'react';
 import Header from '../Header';
-import ShopLeader from './ShopLeader';
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
-
-// var NodeGeocoder = require('node-geocoder');
-
-// var LatLong = require('./LatLong');
-
-// var NodeGeocoder = require('node-geocoder');
-// // var options = {
-// //   provider: 'google',
-// // };
-// // var geocoder = NodeGeocoder(options);
 
 const axios = require('axios');
 
@@ -51,9 +40,12 @@ class Shop extends React.Component {
       <div >
         <Header/>
         <div className="feed_container">
+          <h1 className="profile_name">
+            {this.state.shop.name}
+           </h1> 
           <div className="profile_sidebar">
-            <ShopLeader image={this.state.shop.profileImage}/>
-            <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} name={this.state.shop.name} rating={this.state.shop.rating}/>
+            <img src={this.state.shop.profileImage} className="profile_image"/>
+            <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} rating={this.state.shop.rating}/>
             <MapView lat={this.state.lat} lon={this.state.lon}/>
           </div>
           <div className="main_content">

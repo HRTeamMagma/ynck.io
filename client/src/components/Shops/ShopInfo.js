@@ -14,9 +14,6 @@ class ShopInfo extends React.Component {
     return (
       <div className="shop_info">
         <div>
-          {this.props.name}
-        </div>
-        <div>
           {this.props.rating} / 5
         </div>
         <div>
