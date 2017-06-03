@@ -7,6 +7,9 @@ const Shop = bookshelf.Model.extend({
   },
   ratings: function() {
     return this.belongsToMany('Profile').through('Rating');
+  },
+  shopimages: function() {
+    return this.hasMany('Shopimage');
   }
 });
 
