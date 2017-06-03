@@ -342,6 +342,26 @@ exports.seed = function (knex, Promise) {
         {
           profile_id: 1,
           image_id: 10
+        },
+        {
+          profile_id: 4,
+          image_id: 8
+        },
+        {
+          profile_id: 4,
+          image_id: 7
+        },
+        {
+          profile_id: 4,
+          image_id: 15
+        },
+        {
+          profile_id: 4,
+          image_id: 9
+        },
+        {
+          profile_id: 4,
+          image_id: 10
         }
       ]);
     });
