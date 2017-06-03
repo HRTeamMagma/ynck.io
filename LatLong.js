@@ -15,6 +15,6 @@ module.exports.latLong = (address, callback) => {
   });
 };
 
-module.exports.latLong(ad, function(res){
-  console.log(res);
+module.exports.latLong(ad, function(res) {
+  console.log('latlong: ', res);
 });
