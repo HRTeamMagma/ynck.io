@@ -1,6 +1,6 @@
 import React from 'react';
 
-class MyTattoos extends React.Component {
+class MyInspirations extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,8 +9,8 @@ class MyTattoos extends React.Component {
   render() {
     return (
       <div>
-        MyTattoos Feed
-        {this.props.myTattoos.map ((images, i) => {
+        MyInspirations Feed
+        {this.props.myInspirations.map ((images, i) => {
           return (
             <div key={i}> 
               <img src = {images.url}></img>
@@ -23,4 +23,4 @@ class MyTattoos extends React.Component {
   }
 }
 
-export default MyTattoos;
+export default MyInspirations;
