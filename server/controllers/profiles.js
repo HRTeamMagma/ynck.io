@@ -98,7 +98,7 @@ module.exports.getUserProfilePage = (req, res) => {
 };
 
 module.exports.getUserImages = (req, res) => {
-  models.Profile.where({ id: req.params.id }).fetch({withRelated: ['images.tags']})
+  models.Profile.where({ id: req.query.id }).fetch({withRelated: ['images.tags']})
     .then(profile => {
       if (!profile) {
         throw profile;

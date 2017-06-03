@@ -15,7 +15,14 @@ router.route('/')
   });
 
 router.route('/user/:id')
-  .get(ProfileController.getUserProfilePage);
+  .get((req, res) => {
+    if (!req.user) {
+      var loggedInUser = false;
+    } else {
+      var loggedInUser = req.user;
+    }
+    res.render('index.ejs', { user: loggedInUser });
+  });
 
 router.route('/login')
   .get((req, res) => {
