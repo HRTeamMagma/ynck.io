@@ -1,3 +1,19 @@
+const models = require('../models');
+const photoData = require('../../photoData');
+
+let createTag = (knex, id, word) => {
+  return knex('tags').insert({
+    id,
+    name: word
+  });
+};
+
+let createTagImage = (knex, imageId, tagId) => {
+  return knex('images_tags').insert({
+    image_id: imageId,
+    tag_id: tagId
+  });
+};
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
