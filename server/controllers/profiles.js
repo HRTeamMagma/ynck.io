@@ -1,4 +1,5 @@
 const models = require('../../db/models');
+const helper = require('../helpers/db_helpers');
 
 module.exports.getAll = (req, res) => {
   models.Profile.fetchAll()
@@ -67,6 +68,7 @@ module.exports.getUserProfilePage = (req, res) => {
       if (!profile) {
         throw profile;
       }
+      
       let allImages = profile.related('images').toJSON();
       let responseObj = {};
       allImages.forEach(function(image) {
@@ -97,27 +99,24 @@ module.exports.getUserProfilePage = (req, res) => {
 };
 
 module.exports.getUserImages = (req, res) => {
-  models.Profile.where({ id: req.query.id }).fetch({withRelated: ['images.tags']})
-    .then(profile => {
-      if (!profile) {
-        throw profile;
+  models.Image.where({ profile_id: req.query.id }).fetchAll({withRelated: ['tags']})
+    .then(results => {
+      if (!results) {
+        throw results;
       }
-      let allImages = profile.related('images').toJSON();
+      let allImages = helper.cleanTags(results.toJSON());
+//       res.send(allImages)
+//     })
+// }
       let responseObj = {};
       allImages.forEach(function(image) {
-        let thisImage = {};
-        thisImage.tags = [];
-        thisImage.id = image.id;
-        if (image.tags.length > 0) {
-          image.tags.forEach(function(tag) {
-            thisImage.tags.push(tag.name);
-          });
-        }
-        thisImage.url = image.url;
-        if (responseObj[image._pivot_image_type]) {
-          responseObj[image._pivot_image_type].push(thisImage);
+        // let thisImage = {};
+        // thisImage.id = image.id;
+        // thisImage.url = image.url;
+        if (responseObj[image.image_type]) {
+          responseObj[image.image_type].push(image);
         } else {
-          responseObj[image._pivot_image_type] = [thisImage];
+          responseObj[image.image_type] = [image];
         }
       });
       // console.log(responseObj);
@@ -125,23 +124,42 @@ module.exports.getUserImages = (req, res) => {
     });
 };
 
+
 module.exports.getUserTattoos = (req, res) => {
   models.Image.where({ profile_id: req.query.id, image_type: 'tattoo' }).fetchAll({withRelated: ['tags']})
   .then(results => {
-    res.send(results.toJSON());
+    results = helper.cleanTags(results.toJSON());
+    res.send({images: results});
   });
-
 };
 
-module.exports.getFavorites = (req, res) => {
+module.exports.getUserFavorites = (req, res) => {
   models.Profile.where({ id: req.query.id }).fetch({withRelated: ['favorites.tags']})
-    .then(profile => {
-      if (!profile) {
-        throw profile;
+    .then(results => {
+      if (!results) {
+        throw results;
       }
-      res.send(profile.related('favorites').toJSON());
+      results = helper.cleanTags(results.related('favorites').toJSON());
+      res.send({images: results});
     });
 };
+
+module.exports.getUserDesigns = (req, res) => {
+  models.Image.where({ profile_id: req.query.id, image_type: 'design' }).fetchAll({withRelated: ['tags']})
+    .then(results => {
+      results = helper.cleanTags(results.toJSON());
+      res.send({images: results});
+    });
+};
+
+module.exports.getUserInspirations = (req, res) => {
+  models.Image.where({ profile_id: req.query.id, image_type: 'inspiration' }).fetchAll({withRelated: ['tags']})
+    .then(results => {
+      results = helper.cleanTags(results.toJSON());
+      res.send({images: results});
+    });
+};
+
 
 // module.exports.deleteOne = (req, res) => {
 //   models.Profile.where({ id: req.params.id }).fetch()

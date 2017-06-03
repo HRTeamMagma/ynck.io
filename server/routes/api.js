@@ -26,17 +26,22 @@ router.route('/user/my-tattoos')
     res.send(201);
   });
 
+router.route('/user/inspirations')
+  .get(ProfileController.getUserInspirations)
+  .post((req, res) => {
+    console.log(req.body);
+    res.send(201);
+  });
+
 router.route('/user/favorites')
-  .get(ProfileController.getFavorites)
+  .get(ProfileController.getUserFavorites)
   .post((req, res) => {
     console.log(req.body);
     res.send(201);
   });
 
 router.route('/user/designs')
-  .get((req, res) => {
-    res.send(dummy.designs);
-  })
+  .get(ProfileController.getUserDesigns)
   .post((req, res) => {
     console.log(req.body);
     res.send(201);
