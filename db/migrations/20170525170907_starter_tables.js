@@ -16,12 +16,9 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('images', function(table) {
       table.increments('id').unsigned().primary();
       table.string('url', 150).notNullable();
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-    }),
-    knex.schema.createTableIfNotExists('images_profiles', function(table) {
-      table.increments('id').unsigned().primary();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-      table.integer('image_id').references('images.id').onDelete('CASCADE');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.integer('favoriteCount').defaultTo(0);
       table.string('image_type', 100);
       table.index('image_type');
     }),
@@ -67,9 +64,6 @@ exports.down = function(knex, Promise) {
   })
   .then(() => {
     return knex.schema.dropTableIfExists('tags');
-  })
-  .then(() => {
-    return knex.schema.dropTableIfExists('images_profiles');
   })
   .then(() => {
     return knex.schema.dropTableIfExists('images');

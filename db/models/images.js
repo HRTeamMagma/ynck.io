@@ -3,7 +3,7 @@ const bookshelf = require('../');
 const Image = bookshelf.Model.extend({
   tableName: 'images',
   profile: function() {
-    return this.belongsToMany('Profile').withPivot(['image_type']);
+    return this.belongsTo('Profile');
   },
   tags: function() {
     return this.belongsToMany('Tag');

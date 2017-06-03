@@ -20,9 +20,7 @@ router.route('/latest-images')
   .get(ImageController.getLatestImages);
 
 router.route('/user/my-tattoos')
-  .get((req, res) => {
-    res.send(dummy.myTattoos);
-  })
+  .get(ProfileController.getUserTattoos)
   .post((req, res) => {
     console.log(req.body);
     res.send(201);
