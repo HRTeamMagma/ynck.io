@@ -5,7 +5,7 @@ import Home from '../src/components/Home/Home';
 
 
 describe('<Home/>', function () {
-  it('should have a logo', function () {
+  it('should have homeContainer', function () {
     const wrapper = shallow(<Home/>);
     expect(wrapper.find('.homeContainer')).to.have.length(1);
   });
