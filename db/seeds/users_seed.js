@@ -226,6 +226,46 @@ exports.seed = function (knex, Promise) {
           profile_id: 3,
           image_id: 12,
           image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 13,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 14,
+          image_type: 'design'
+        },
+        {
+          profile_id: 4,
+          image_id: 15,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 4,
+          image_id: 16,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 17,
+          image_type: 'inspiration'
+        },
+        {
+          profile_id: 4,
+          image_id: 18,
+          image_type: 'design'
+        },
+        {
+          profile_id: 4,
+          image_id: 19,
+          image_type: 'tattoo'
+        },
+        {
+          profile_id: 4,
+          image_id: 20,
+          image_type: 'inspiration'
         }
       ]);
     })
