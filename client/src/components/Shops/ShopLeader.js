@@ -13,15 +13,7 @@ class ShopLeader extends React.Component {
   render () {
     return (
       <div>
-        <img src={this.props.image} className="shop_profile_image"/> 
-        <div>
-        {this.props.name}
-        </div>
-        <div>
-        {this.props.rating} / 5
-        </div>
-
-
+        <img src={this.props.image} className="profile_image"/> 
       </div>
     );
   }

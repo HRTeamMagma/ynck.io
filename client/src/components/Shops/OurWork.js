@@ -12,8 +12,13 @@ class OurWork extends React.Component {
   }
   render () {
     return (
-      <div>
-        <img src={this.props.image} className="example-work-photo" />
+      <div className="shop_work">
+        <h2>Our Work</h2>
+        <div className="image_grid">
+        { this.props.images.map(image => <img src={image}/>) }
+
+          
+        </div>
       </div>
     );
   }
