@@ -9,7 +9,6 @@ module.exports.getLatestImages = (req, res) => {
     result = helper.cleanTags(result.toJSON());
     res.send(result);
   });
-
   // knex('images').orderBy('created_at', 'desc').where('image_type', '=', 'tattoo').limit(10)
   // .then(result => {
   //   res.send(result);
