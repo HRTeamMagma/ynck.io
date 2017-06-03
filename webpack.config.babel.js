@@ -8,6 +8,11 @@ const config = {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js'
   },
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
   module: {
     rules: [
       {
@@ -22,7 +27,7 @@ const config = {
         use: [
           { loader: 'babel-loader',
             options: {
-              presets: ['react', 'es2015']
+              presets: ['react', 'es2015', 'stage-0']
             }
           }
         ]
