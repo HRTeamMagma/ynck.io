@@ -6,7 +6,7 @@ const Profile = bookshelf.Model.extend({
     return this.hasMany('Auth');
   },
   shop: function() {
-    return this.hasOne('Shop');
+    return this.belongsTo('Shop');
   },
   images: function() {
     return this.hasMany('Image');

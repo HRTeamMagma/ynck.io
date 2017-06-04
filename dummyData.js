@@ -99,7 +99,7 @@ module.exports.shop = {
     url: 'http://www.highvoltagetattoo.com/',
     phone: '310-555-1212',
     rating: '4.5',
-    profileImage: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
+    shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
   },
   images: ['https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5418d65ee4b0167dcbb284f8/5447e89ce4b076e086113242/1493887896096/natetattoo1.jpg?format=1500w',
     'https://static1.squarespace.com/static/53e01abee4b0e0cc35c74588/5504a37ae4b0edf4bc9d8062/5504a56ee4b01b33c96f5fa1/1426367859962/index-5.jpg?format=2500w',

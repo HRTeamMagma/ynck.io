@@ -5,3 +5,4 @@ module.exports.Tag = require('./tags');
 module.exports.Shop = require('./shops');
 module.exports.Rating = require('./ratings');
 module.exports.Favorite = require('./favorites');
+module.exports.Shopimage = require('./shopimages');

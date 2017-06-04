@@ -2,6 +2,15 @@ const models = require('../models');
 const photoData = require('../../photoData');
 var faker = require('faker');
 var randomWords = require('random-words');
+const dummyData = require('../../dummyData');
+
+let createShopImage = (knex, index) => {
+  return knex('shopimages').insert({
+    title: randomWords(),
+    url: dummyData.shop.images[index],
+    shop_id: 1
+  });
+};
 
 let createTag = (knex, id, word) => {
   return knex('tags').insert({
@@ -11,7 +20,6 @@ let createTag = (knex, id, word) => {
 };
 
 let createImage = (knex, photo, id) => {
-  Math.floor(Math.random() * 3);
   var types = ['tattoo', 'inspiration', 'design'];
   return knex('images').insert({
     id,
@@ -111,7 +119,6 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       let records = [];
-      console.log(photoData.data.length);
       for (let i = 1; i < photoData.data.length; i++) {
         records.push(createImage(knex, photoData.data[i], i));
       }
@@ -137,15 +144,16 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return knex('shops').insert([
         {
-          name: randomWords(),
-          url: faker.internet.url(),
-          address1: faker.address.streetAddress(),
-          address2: faker.address.secondaryAddress(),
-          city: faker.address.city(),
-          state: faker.address.state(),
-          zip: faker.address.zipCode(),
-          phone: faker.phone.phoneNumber(),
-          shop_image: 'https://www.form.ink/wp-content/uploads/2016/02/best-tattoo-shops-in-atlanta-abt-tattoo.png'
+          name: 'High Voltage Tattoo',
+          url: 'http://www.highvoltagetattoo.com/',
+          address1: '1259 North La Brea Avenue',
+          address2: 'Suite 200',
+          city: 'West Hollywood',
+          state: 'California',
+          zip: '90038-1023',
+          phone: '310-555-1212',
+          rating: '4.5',
+          shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
         },
         {
           name: randomWords(),
@@ -156,6 +164,7 @@ exports.seed = function (knex, Promise) {
           state: faker.address.state(),
           zip: faker.address.zipCode(),
           phone: faker.phone.phoneNumber(),
+          rating: '1.7',
           shop_image: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg'
         }
       ]);
@@ -195,6 +204,13 @@ exports.seed = function (knex, Promise) {
           value: 5
         }
       ]);
+    })
+    .then(() => {
+      let shopImages = [];
+      dummyData.shop.images.forEach(function(image, index) {
+        shopImages.push(createShopImage(knex, index));
+      });
+      return Promise.all(shopImages);
     })
     .then(() => {
       return knex('favorites').insert([

@@ -2,11 +2,14 @@ const bookshelf = require('../');
 
 const Shop = bookshelf.Model.extend({
   tableName: 'shops',
-  owner: function() {
-    return this.belongsTo('Profile');
+  profile: function() {
+    return this.hasOne('Profile');
   },
   ratings: function() {
-    return this.hasMany('Rating').withPivot(['value']);
+    return this.belongsToMany('Profile').through('Rating');
+  },
+  shopimages: function() {
+    return this.hasMany('Shopimage');
   }
 });
 
