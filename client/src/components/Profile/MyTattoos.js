@@ -8,16 +8,11 @@ class MyTattoos extends React.Component {
   
   render() {
     return (
-      <div>
-        MyTattoos Feed
-        {this.props.myTattoos.map ((images, i) => {
-          return (
-            <div key={i}> 
-              <img src = {images.url}></img>
-            </div>
-          );
-        })}
-        
+      <div>  
+        <h2>MyTattoos Feed</h2>
+          <div className="image_grid">  
+            {this.props.myTattoos.map ((images, i) => <img src = {images.url}/>)}
+          </div>
       </div>
     );
   }

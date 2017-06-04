@@ -14,7 +14,7 @@ class Feed extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="shop_work">
         <MyTattoos myTattoos = {this.props.myTattoos}/>
         <MyDesigns myDesigns = {this.props.myDesigns}/>
         <MyInspirations myInspirations = {this.props.myInspirations}/>

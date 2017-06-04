@@ -9,15 +9,10 @@ class MyInspirations extends React.Component {
   render() {
     return (
       <div>
-        MyInspirations Feed
-        {this.props.myInspirations.map ((images, i) => {
-          return (
-            <div key={i}> 
-              <img src = {images.url}></img>
-            </div>
-          );
-        })}
-        
+        <h2>My Inspirations Feed</h2>
+        <div className="image_grid">  
+            {this.props.myInspirations.map ((images, i) => <img src = {images.url}/>)}
+          </div>
       </div>
     );
   }

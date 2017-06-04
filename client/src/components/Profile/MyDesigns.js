@@ -9,15 +9,10 @@ class MyDesigns extends React.Component {
   render() {
     return (
       <div>
-        MyDesigns Feed
-        {this.props.myDesigns.map ((images, i) => {
-          return (
-            <div key={i}> 
-              <img src = {images.url}></img>
-            </div>
-          );
-        })}
-        
+        <h2>My Designs Feed</h2>
+         <div className="image_grid">  
+            {this.props.myDesigns.map ((images, i) => <img src = {images.url}/>)}
+          </div>
       </div>
     );
   }
