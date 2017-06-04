@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('shops', function (table) {
       table.increments('id').unsigned().primary();
+      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.string('name', 100).nullable().unique();
       table.string('url', 150).nullable();
       table.string('address1', 100).nullable();
@@ -43,20 +44,19 @@ exports.up = function(knex, Promise) {
       table.integer('value').unsigned();
     }),
     // this adds the necessary shop_id column to the profile table
-    knex.schema.table('profiles', function(table) {
-      table.integer('shop_id').nullable();
-      table.foreign('shop_id').references('shops.id').onDelete('CASCADE');
-    })
+    // knex.schema.table('profiles', function(table) {
+    //   table.integer('shop_id').nullable();
+    //   table.foreign('shop_id').references('shops.id').onDelete('CASCADE');
+    // })
   ]);
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.table('profiles', function(table) {
-    table.dropColumn('shop_id');
-  })
-  .then(() => {
-    return knex.schema.dropTableIfExists('ratings');
-  })
+  // return knex.schema.table('profiles', function(table) {
+  //   table.dropColumn('shop_id');
+  // })
+  // .then(() => {
+  return knex.schema.dropTableIfExists('ratings')
   .then(() => {
     return knex.schema.dropTableIfExists('favorites');
   })
