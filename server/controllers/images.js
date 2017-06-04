@@ -4,7 +4,7 @@ const helper = require('../helpers/db_helpers');
 
 module.exports.getLatestImages = (req, res) => {
   
-  models.Image.where({image_type: 'tattoo'}).orderBy('created_at', 'DESC').fetchPage({page: 1, pageSize: 5, withRelated: ['tags']})
+  models.Image.where({image_type: 'tattoo'}).orderBy('created_at', 'DESC').fetchPage({page: 1, pageSize: 6, withRelated: ['tags']})
   .then(result => {
     result = helper.cleanTags(result.toJSON());
     res.send(result);
