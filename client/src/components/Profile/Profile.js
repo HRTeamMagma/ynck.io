@@ -13,6 +13,7 @@ class Profile extends React.Component {
       myTattoos: [],
       myDesigns: [],
       myInspirations: [],
+      userInfo: [],
     };
 
     axios.get('/api/profiles/images', {
@@ -30,6 +31,16 @@ class Profile extends React.Component {
       console.log(error);
     });
 
+    axios.get(`/api/profiles/${loggedInUser.id}`)
+    .then((results) => {
+      console.log(results.data);
+      this.setState({
+        userInfo: results.data,
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+
   }
 
   render() {
@@ -38,7 +49,7 @@ class Profile extends React.Component {
         <Header />
         <div className="feed_container">
           <div className="profile_sidebar">
-            <UserInfo />
+            <UserInfo userInfo = {this.state.userInfo}/>
           </div>
           <div className="main_content">
             <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
