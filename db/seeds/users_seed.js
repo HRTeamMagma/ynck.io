@@ -20,7 +20,6 @@ let createTag = (knex, id, word) => {
 };
 
 let createImage = (knex, photo, id) => {
-  Math.floor(Math.random() * 3);
   var types = ['tattoo', 'inspiration', 'design'];
   return knex('images').insert({
     id,
@@ -50,7 +49,6 @@ exports.seed = function (knex, Promise) {
         last: 'Admin',
         display: 'Administrator',
         email: 'admin@domain.com',
-        shop_id: null,
         profile_image: 'https://pbs.twimg.com/profile_images/863826013251227648/bvhrddjv.jpg'
       }).save();
     })
@@ -78,7 +76,6 @@ exports.seed = function (knex, Promise) {
           last: 'Admin2',
           display: 'Administrator2',
           email: 'admin2@domain.com',
-          shop_id: null,
           profile_image: 'https://pbs.twimg.com/profile_images/865981444161642496/-wxhRxPD.jpg'
         },
         {
@@ -86,7 +83,6 @@ exports.seed = function (knex, Promise) {
           last: 'Joe',
           display: 'Mr. Cool',
           email: 'cool@bazooka.com',
-          shop_id: null,
           profile_image: 'https://pbs.twimg.com/profile_images/718588760003383296/2AG8omMO.jpg'
         },
         {
@@ -94,7 +90,6 @@ exports.seed = function (knex, Promise) {
           last: 'Knowles',
           display: 'Bey',
           email: 'beyonce@beyonce.com',
-          shop_id: null,
           profile_image: 'https://pbs.twimg.com/profile_images/860171768119517187/2UlAzLGD.jpg'
         }
       ]);
@@ -120,7 +115,6 @@ exports.seed = function (knex, Promise) {
     })
     .then(() => {
       let records = [];
-      console.log(photoData.data.length);
       for (let i = 1; i < photoData.data.length; i++) {
         records.push(createImage(knex, photoData.data[i], i));
       }
@@ -155,7 +149,8 @@ exports.seed = function (knex, Promise) {
           zip: '90038-1023',
           phone: '310-555-1212',
           rating: '4.5',
-          shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
+          shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png',
+          profile_id: 2
         },
         {
           name: randomWords(),
@@ -167,21 +162,10 @@ exports.seed = function (knex, Promise) {
           zip: faker.address.zipCode(),
           phone: faker.phone.phoneNumber(),
           rating: '1.7',
-          shop_image: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg'
+          shop_image: 'https://c1.staticflickr.com/3/2112/2183178160_2064667a4d_z.jpg',
+          profile_id: 1
         }
       ]);
-    })
-    .then(() => {
-      return knex('profiles').where('id', '=', '1')
-      .update({
-        shop_id: 2
-      });
-    })
-    .then(() => {
-      return knex('profiles').where('id', '=', '2')
-      .update({
-        shop_id: 1
-      });
     })
     .then(() => {
       return knex('ratings').insert([
