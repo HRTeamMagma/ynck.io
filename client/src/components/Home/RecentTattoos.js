@@ -30,7 +30,17 @@ class RecentTattoos extends React.Component {
         <div className="recent_tattoos">
           <h2>Recent tattoos</h2>
           <div className="image_grid">
-            { this.state.images.map((image, index) => <img src={image.url}/>) }
+              { this.state.images.map((image, index) => {
+                return (
+                  <span>
+                    <div className="overlay_container">
+                      <img src="./assets/icons/heart.png" className="favorite"/>
+                    </div>
+                    <div className="grid_images">
+                      <img src={image.url}/>
+                    </div>
+                  </span>
+                ); })}
           </div>
         </div>
       </div>
