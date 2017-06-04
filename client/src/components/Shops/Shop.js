@@ -22,7 +22,7 @@ class Shop extends React.Component {
     //   console.log(res);
     // });
 
-    axios.get('/api/shop')
+    axios.get('/api/shop', {params: {id: 2}})
       .then((res) => {
         this.setState({shop: res.data.shopInfo, images: res.data.images, lat: res.data.lat, lon: res.data.lon});
         console.log('lon: ', this.state.lon, 'lat: ', this.state.lat);
@@ -44,7 +44,7 @@ class Shop extends React.Component {
             {this.state.shop.name}
            </h1> 
           <div className="profile_sidebar">
-            <img src={this.state.shop.profileImage} className="profile_image"/>
+            <img src={this.state.shop.shop_image} className="profile_image"/>
             <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} rating={this.state.shop.rating}/>
             <MapView lat={this.state.lat} lon={this.state.lon}/>
           </div>
