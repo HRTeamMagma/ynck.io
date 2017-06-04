@@ -2,8 +2,8 @@ const bookshelf = require('../');
 
 const Shop = bookshelf.Model.extend({
   tableName: 'shops',
-  owner: function() {
-    return this.belongsTo('Profile');
+  profile: function() {
+    return this.hasOne('Profile');
   },
   ratings: function() {
     return this.belongsToMany('Profile').through('Rating');
