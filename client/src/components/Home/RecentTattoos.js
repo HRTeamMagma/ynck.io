@@ -9,18 +9,36 @@ class RecentTattoos extends React.Component {
     this.state = {
       images: []
     };
+    this.getLatestImages = this.getLatestImages.bind(this);
+    this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
   }
 
   componentDidMount() {
-    console.log('get request called');
+    this.getLatestImages();
+  }
+
+  getLatestImages() {
     axios.get('/api/latest-images')
     .then((res) => {
       this.setState({
         images: res.data
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  handleFavoriteClick() {
+    console.log('favorite clicked');
+    axios.post('/api/favorite')
+    .then((res) => {
+      // this.setState({
+      //   images: res.data
+      // });
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
@@ -30,17 +48,16 @@ class RecentTattoos extends React.Component {
         <div className="recent_tattoos">
           <h2>Recent tattoos</h2>
           <div className="image_grid">
-              { this.state.images.map((image, index) => {
+              { this.state.images.map((image, i) => {
                 return (
-                  <span>
+                  <div key={i} className="solo_image">
                     <div className="overlay_container">
-                      <img src="./assets/icons/heart.png" className="favorite"/>
+                      <img src="./assets/icons/heart.png" className="favorite" onClick={this.handleFavoriteClick}/>
                     </div>
-                    <div className="grid_images">
-                      <img src={image.url}/>
-                    </div>
-                  </span>
-                ); })}
+                    <img src={image.url} className="base_pic" />
+                  </div>
+                ); 
+              })}
           </div>
         </div>
       </div>
@@ -48,4 +65,6 @@ class RecentTattoos extends React.Component {
   }
 }
 
+
 export default RecentTattoos;
+

@@ -40,21 +40,24 @@ class Header extends React.Component {
 
   render () {
     return (
-        <div className="site_header">
-          <div className="logo">
-            <Link to="/"><h1>ynck</h1></Link>
+        <div>
+          <div className="site_header">
+            <div className="logo">
+              <Link to="/"><h1>ynck</h1></Link>
+            </div>
+            {this.props.loggedInUser ? (
+              <nav>
+                <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
+                <DropdownMenu isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
+              </nav>
+              ) : (
+              <nav>
+                <li><a href="/signup">Sign up</a></li>
+                <li><a href="/login">Log in</a></li>              
+              </nav>
+              )}
           </div>
-          {this.props.loggedInUser ? (
-            <nav>
-              <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
-              <DropdownMenu isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
-            </nav>
-            ) : (
-            <nav>
-              <li><a href="/signup">Sign up</a></li>
-              <li><a href="/login">Log in</a></li>              
-            </nav>
-            )}
+          <div className="divider"></div>
         </div>
     );
   }

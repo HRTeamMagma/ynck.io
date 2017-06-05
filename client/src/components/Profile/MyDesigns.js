@@ -7,10 +7,10 @@ const MyDesigns = React.createClass({
   render() {
     return (
       <div>  
-        <h2>My Designs Feed</h2>
+        <h2>My Designs</h2>
           <div className="image_grid">  
-            <Carousel slidesToShow={3}>
-              {this.props.myDesigns.map ((images, i) => <img src = {images.url}/>)}
+            <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
+              {this.props.myDesigns.map ((images, i) => <img key={i} src={images.url}/>)}
             </Carousel>
           </div>
       </div>

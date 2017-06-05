@@ -12,7 +12,7 @@ class OurWork extends React.Component {
   }
   render () {
     return (
-      <div className="shop_work">
+      <div className="user_stream">
         <h2>Our Work</h2>
         <div className="image_grid">
         { this.props.images.map(image => <img src={image.url}/>) }

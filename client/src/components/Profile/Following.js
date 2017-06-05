@@ -3,7 +3,7 @@ import React from 'react';
 const Following = () => {
   return (
     <div>
-      Following Feed
+      {/*Following Feed*/}
     </div>
   );
 };
