@@ -4,8 +4,7 @@ var React = require('react');
 
 var Carousel = require('nuka-carousel');
 
-const Carry = React.createClass({
-  mixins: [Carousel.ControllerMixin],
+class Carry extends React.Component {
   render() {
     return (
       <Carousel slidesToShow={2}>
@@ -13,6 +12,6 @@ const Carry = React.createClass({
       </Carousel>
     );
   }
-});
+}
 
 module.exports = Carry;

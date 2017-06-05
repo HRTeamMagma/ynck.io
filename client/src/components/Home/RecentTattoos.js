@@ -35,17 +35,19 @@ class RecentTattoos extends React.Component {
   }
 
   getFavorites() {
-    axios.get('/api/user/favorites', {
-      params: { user_id: this.props.loggedInUser.id }
-    })
-    .then((res) => {
-      this.setState({
-        user_favorites: res.data.images
+    if (this.props.loggedInUser) {
+      axios.get('/api/user/favorites', {
+        params: { user_id: this.props.loggedInUser.id }
+      })
+      .then((res) => {
+        this.setState({
+          user_favorites: res.data.images
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    }
   }
 
   //  TO DO: Set state dynamically so favorite status refreshes

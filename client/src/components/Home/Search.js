@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = React.createClass ({
+class Search extends React.Component {
   render () {
     return (
       <div id="searchbox">
@@ -8,6 +8,6 @@ const Search = React.createClass ({
       </div>
     );
   }
-});
+}
 
 export default Search;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Link, BrowserRouter } from 'react-router-dom';
 
 
-const About = React.createClass ({
+class About extends React.Component {
   render () {
     return (
       <div>
@@ -10,6 +10,6 @@ const About = React.createClass ({
       </div>
     );
   }
-});
+}
 
 export default About;
