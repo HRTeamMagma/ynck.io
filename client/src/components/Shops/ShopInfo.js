@@ -12,6 +12,7 @@ class ShopInfo extends React.Component {
   render () {
     return (
       <div className="shop_info">
+        <p className="info_element"><strong>Rating</strong>: {this.props.rating}</p>    
         <p className="info_element">{this.props.address1}</p>    
         <p className="info_element">{this.props.city}, {this.props.state}</p> 
         <p className="info_element">{this.props.phone}</p> 
