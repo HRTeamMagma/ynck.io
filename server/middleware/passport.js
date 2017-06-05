@@ -122,10 +122,12 @@ passport.use('facebook', new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-  profileFields: ['id', 'emails', 'name']
+  profileFields: ['id', 'emails', 'photos', 'name']
 },
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
-);
+  (accessToken, refreshToken, profile, done) => {
+    getOrCreateOAuthProfile('facebook', profile, done);
+  }
+));
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
 passport.use('twitter', new TwitterStrategy({
@@ -154,11 +156,11 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
-
       let profileInfo = {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
+        profile_image: oauthProfile.photos[0].value,
         email: oauthProfile.emails[0].value
       };
 
