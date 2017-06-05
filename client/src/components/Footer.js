@@ -6,7 +6,7 @@ const Footer = React.createClass ({
   render () {
     return (
       <footer>
-        <Link to="/about">About</Link>
+        © Ynck 2017
       </footer>
     );
   }

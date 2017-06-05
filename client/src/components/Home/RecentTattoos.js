@@ -32,15 +32,11 @@ class RecentTattoos extends React.Component {
           <div className="image_grid">
               { this.state.images.map((image, index) => {
                 return (
-                  <span>
-                    <div className="overlay_container">
-                      <img src="./assets/icons/heart.png" className="favorite"/>
-                    </div>
-                    <div className="grid_images">
-                      <img src={image.url}/>
-                    </div>
-                  </span>
-                ); })}
+                  <div className="grid_image">
+                    <img src={image.url}/>
+                  </div>
+                ); 
+              })}
           </div>
         </div>
       </div>

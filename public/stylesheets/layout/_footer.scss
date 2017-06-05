@@ -3,6 +3,11 @@
 // -----------------------------------------------------------------------------
 
 footer {
-  margin: $small-spacing 0;
+  clear: both;
+  color: $mid-grey;
+  background-color: $light-grey;
+  font-size: $text-small;
   text-align: center;
+  height: 100px;
+  padding-top: $med-spacing;
 }
