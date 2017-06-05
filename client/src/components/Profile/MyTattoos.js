@@ -1,21 +1,21 @@
 import React from 'react';
+import Carousel from 'nuka-carousel';
 
-class MyTattoos extends React.Component {
-  constructor(props) {
-    super(props);
+const MyTattoos = React.createClass({
 
-  }
-  
+  mixins: [Carousel.ControllerMixin],
   render() {
     return (
       <div>  
-        <h2>MyTattoos Feed</h2>
+        <h2>My Tattoos Feed</h2>
           <div className="image_grid">  
-            {this.props.myTattoos.map ((images, i) => <img src = {images.url}/>)}
+            <Carousel slidesToShow={3}>
+              {this.props.myTattoos.map ((images, i) => <img src = {images.url}/>)}
+            </Carousel>
           </div>
       </div>
     );
   }
-}
+});
 
 export default MyTattoos;
