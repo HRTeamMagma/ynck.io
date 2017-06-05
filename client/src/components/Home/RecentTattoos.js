@@ -9,6 +9,8 @@ class RecentTattoos extends React.Component {
     this.state = {
       images: []
     };
+    this.getLatestImages = this.getLatestImages.bind(this);
+    this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +29,19 @@ class RecentTattoos extends React.Component {
     });
   }
 
+  handleFavoriteClick() {
+    console.log('favorite clicked');
+    axios.post('/api/favorite')
+    .then((res) => {
+      // this.setState({
+      //   images: res.data
+      // });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
       <div className="feed_container">
@@ -37,7 +52,7 @@ class RecentTattoos extends React.Component {
                 return (
                   <div key={i} className="solo_image">
                     <div className="overlay_container">
-                      <img src="./assets/icons/heart.png" className="favorite" />
+                      <img src="./assets/icons/heart.png" className="favorite" onClick={this.handleFavoriteClick}/>
                     </div>
                     <img src={image.url} className="base_pic" />
                   </div>
