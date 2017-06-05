@@ -46,13 +46,6 @@ class Shop extends React.Component {
             {this.state.shop.name}
           </h1> 
 
-          <div className="rating">       
-            {this.state.shop.rating ?
-              <StarRating name="disabled" size={20} totalStars={5} rating={rating} editing={false} disabled={true} />
-              : null 
-            }
-          </div>
-
           <div className="profile_sidebar">
             <img src={this.state.shop.shop_image} className="profile_image"/>
             <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} rating={this.state.shop.rating}/>
