@@ -7,14 +7,19 @@ class RecentTattoos extends React.Component {
     super(props);
 
     this.state = {
-      images: []
+      images: [],
+      user_favorites: []
+      // favoritedImage: '' 
     };
     this.getLatestImages = this.getLatestImages.bind(this);
-    this.handleFavoriteClick = this.handleFavoriteClick.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+    // this.toggleFavorite = this.toggleFavorite.bind(this);
+    this.saveFavoriteStatus = this.saveFavoriteStatus.bind(this);
   }
 
   componentDidMount() {
     this.getLatestImages();
+    this.getFavorites();
   }
 
   getLatestImages() {
@@ -29,13 +34,35 @@ class RecentTattoos extends React.Component {
     });
   }
 
-  handleFavoriteClick() {
-    console.log('favorite clicked');
-    axios.post('/api/favorite')
+  getFavorites() {
+    axios.get('/api/user/favorites', {
+      params: { user_id: this.props.loggedInUser.id }
+    })
     .then((res) => {
-      // this.setState({
-      //   images: res.data
-      // });
+      this.setState({
+        user_favorites: res.data.images
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  //  TO DO: Set state dynamically so favorite status refreshes
+  // toggleFavorite(imageID) {
+  //   console.log('imageID', imageID)
+  //   this.setState({
+  //     favoritedImage: imageID
+  //   })
+  //   console.log('statefavoritedImage', this.state.favoritedImage)
+
+  //   this.saveFavoriteStatus();
+  // }
+
+  saveFavoriteStatus(imageID) {
+    axios.post('/api/user/favorites', {loggedInUser: this.props.loggedInUser, favoritedImage: imageID})
+    .then((res) => {
+      console.log('Successfully updated fave status');
     })
     .catch((error) => {
       console.log(error);
@@ -43,6 +70,11 @@ class RecentTattoos extends React.Component {
   }
 
   render() {
+    var listOfFaves = [];
+    this.state.user_favorites.map((fave, i) => {
+      listOfFaves.push(fave.id);
+    });
+
     return (
       <div className="feed_container">
         <div className="recent_tattoos">
@@ -52,7 +84,10 @@ class RecentTattoos extends React.Component {
                 return (
                   <div key={i} className="solo_image">
                     <div className="overlay_container">
-                      <img src="./assets/icons/heart.png" className="favorite" onClick={this.handleFavoriteClick}/>
+                      { listOfFaves.includes(image.id) ? 
+                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id); } }/> 
+                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id); } }/> 
+                        };
                     </div>
                     <img src={image.url} className="base_pic" />
                   </div>
