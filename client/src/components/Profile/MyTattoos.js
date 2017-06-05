@@ -1,9 +1,8 @@
 import React from 'react';
 import Carousel from 'nuka-carousel';
 
-const MyTattoos = React.createClass({
+class MyTattoos extends React.Component {
 
-  mixins: [Carousel.ControllerMixin],
   render() {
     return (
       <div>  
@@ -16,6 +15,6 @@ const MyTattoos = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default MyTattoos;

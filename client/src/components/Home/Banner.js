@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Banner = React.createClass ({
+class Banner extends React.Component {
   render () {
     return (
       <div className="banner">
@@ -10,6 +10,6 @@ const Banner = React.createClass ({
       </div>
     );
   }
-});
+}
 
 export default Banner;

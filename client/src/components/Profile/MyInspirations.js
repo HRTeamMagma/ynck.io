@@ -1,9 +1,8 @@
 import React from 'react';
 import Carousel from 'nuka-carousel';
 
-const MyInspirations = React.createClass({
+class MyInspirations extends React.Component {
 
-  mixins: [Carousel.ControllerMixin],
   render() {
     return (
       <div>  
@@ -16,6 +15,6 @@ const MyInspirations = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default MyInspirations;
