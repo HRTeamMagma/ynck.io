@@ -15,7 +15,7 @@ class Home extends React.Component {
     return (
       <div className="homeContainer">
         <Banner />
-        <RecentTattoos />
+        <RecentTattoos loggedInUser={this.props.loggedInUser}/>
       </div>
     );
   }

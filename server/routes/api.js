@@ -5,6 +5,7 @@ const dummy = require('../../dummyData');
 const ProfileController = require('../controllers').Profiles;
 const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
+
 // these routes start with api
 
 router.route('/')
@@ -42,10 +43,7 @@ router.route('/user/inspirations')
 
 router.route('/user/favorites')
   .get(ProfileController.getUserFavorites)
-  .post((req, res) => {
-    console.log(req.body);
-    res.send(201);
-  });
+  .post(ProfileController.addToUserFavorites);
 
 router.route('/user/designs')
   .get(ProfileController.getUserDesigns)
