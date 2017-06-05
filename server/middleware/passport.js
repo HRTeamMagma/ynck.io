@@ -122,7 +122,7 @@ passport.use('facebook', new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-  profileFields: ['id', 'emails', 'photos', 'name']
+  profileFields: ['id', 'emails', 'picture.type(large)', 'name']
 },
   (accessToken, refreshToken, profile, done) => {
     getOrCreateOAuthProfile('facebook', profile, done);
@@ -140,6 +140,7 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
+  console.log(oauthProfile);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
