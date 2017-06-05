@@ -4,10 +4,17 @@
   padding: $med-spacing 0 $large-spacing 0;
 }
 
+// On homepage
 .recent_tattoos {
-  .grid_image {
+  .solo_image {
     margin-right: $med-spacing;
     display: inline-block;
+
+    .base_pic {
+      width: 300px;
+      height: 200px;
+      margin-top: $small-spacing;
+    }
 
     &:nth-of-type(3) {
       margin-right: 0;
@@ -15,15 +22,10 @@
     &:last-of-type {
       margin-right: 0;
     }
-    img {
-      width: 300px;
-      height: 200px;
-      margin-top: $small-spacing;
-    }
   }
 }
 
-
+// On profile, shop pages
 .user_stream {
   .image_grid {
     width: 700px;
