@@ -26,18 +26,14 @@ module.exports.addToUserFavorites = (req, res) => {
         profile_id: loggedInUserID, 
         image_id: favoritedImageID
       }).save()
-      .then(success => {
-        models.Image.where({id: favoritedImageID}).fetch()
+      .tap( favorite => {
+        models.Image.where({id: favorite.get('image_id')}).fetch()
         .then( result => {
           let favCount = result.attributes.favoriteCount;
           result.save({favoriteCount: favCount + 1}, {method: 'update'})
           .then(success => {
             res.send(201);
           });
-        })
-        .catch(error => {
-          res.send(500);
-          throw error;
         });
       })
       .catch(error => {
@@ -49,10 +45,6 @@ module.exports.addToUserFavorites = (req, res) => {
         .then(result => {
           let favCount = result.attributes.favoriteCount;
           result.save({favoriteCount: favCount - 1}, {method: 'update'});
-        })
-        .catch(error => {
-          res.send(500);
-          throw error;
         })
         .then(success => {
           models.Favorite.where({profile_id: loggedInUserID, image_id: favoritedImageID}).destroy()
