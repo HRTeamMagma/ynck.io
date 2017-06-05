@@ -14,7 +14,7 @@ export class MapView extends React.Component {
     return (
       <div>
         <Map
-          style={{height: '25vh'}}
+          style={{height: '40vh'}}
           center={[this.props.lat, this.props.lon]}
           zoom={12}>
           <TileLayer
