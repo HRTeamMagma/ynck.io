@@ -7,6 +7,7 @@ module.exports.getLatestImages = (req, res) => {
   models.Image.where({image_type: 'tattoo'}).orderBy('created_at', 'DESC').fetchPage({page: 1, pageSize: 6, withRelated: ['tags']})
   .then(result => {
     result = helper.cleanTags(result.toJSON());
+    
     res.send(result);
   });
   // knex('images').orderBy('created_at', 'desc').where('image_type', '=', 'tattoo').limit(10)

@@ -12,15 +12,18 @@ class RecentTattoos extends React.Component {
   }
 
   componentDidMount() {
-    console.log('get request called');
+    this.getLatestImages();
+  }
+
+  getLatestImages() {
     axios.get('/api/latest-images')
     .then((res) => {
       this.setState({
         images: res.data
-      })
-      .catch((error) => {
-        console.log(error);
       });
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
@@ -30,9 +33,9 @@ class RecentTattoos extends React.Component {
         <div className="recent_tattoos">
           <h2>Recent tattoos</h2>
           <div className="image_grid">
-              { this.state.images.map((image, index) => {
+              { this.state.images.map((image, i) => {
                 return (
-                  <div className="grid_image">
+                  <div key={i} className="grid_image">
                     <img src={image.url}/>
                   </div>
                 ); 
@@ -44,4 +47,6 @@ class RecentTattoos extends React.Component {
   }
 }
 
+
 export default RecentTattoos;
+
