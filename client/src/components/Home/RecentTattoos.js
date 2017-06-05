@@ -64,6 +64,7 @@ class RecentTattoos extends React.Component {
     axios.post('/api/user/favorites', {loggedInUser: this.props.loggedInUser, favoritedImage: imageID})
     .then((res) => {
       console.log('Successfully updated fave status');
+      this.getFavorites();
     })
     .catch((error) => {
       console.log(error);
