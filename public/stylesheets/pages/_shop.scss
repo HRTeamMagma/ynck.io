@@ -17,15 +17,17 @@
 
 }
 
-.profile_info {
-  text-align: center;
+.shop_info {
   padding: $small-spacing;
   border: 1px solid $divider-grey;
+	margin-top: $small-spacing;
 
   p {
     color: $mid-grey;
     font-size: 14px;
     line-height: 20px;
+		padding: 0;
+    margin: 0;
   }
 }
 
@@ -33,7 +35,13 @@
   display: inline-block;
 }
 
+.rating {
+  margin: $mini-spacing 0 $small-spacing;
 
+	input {
+		visibility: hidden;
+	}
+}
 
 
 

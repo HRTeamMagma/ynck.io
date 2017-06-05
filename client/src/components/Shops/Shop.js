@@ -4,6 +4,8 @@ import Footer from '../Footer';
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
+import StarRating from 'react-star-rating';
+
 
 const axios = require('axios');
 
@@ -31,28 +33,37 @@ class Shop extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
-
-    
-        
-      
   }
+
   render () {
+    var rating = Math.floor(this.state.shop.rating);
+
     return (
       <div >
         <Header loggedInUser={loggedInUser}/>
         <div className="feed_container">
           <h1 className="profile_name">
             {this.state.shop.name}
-           </h1> 
+          </h1> 
+
+          <div className="rating">       
+            {this.state.shop.rating ?
+              <StarRating name="disabled" size={20} totalStars={5} rating={rating} editing={false} disabled={true} />
+              : null 
+            }
+          </div>
+
           <div className="profile_sidebar">
             <img src={this.state.shop.shop_image} className="profile_image"/>
             <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} rating={this.state.shop.rating}/>
             <MapView lat={this.state.lat} lon={this.state.lon}/>
           </div>
+
           <div className="main_content">
             <OurWork images={this.state.images}/>
           </div>
         </div>
+
         <Footer />
       </div>
     );

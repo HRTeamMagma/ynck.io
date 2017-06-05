@@ -17,10 +17,20 @@
   margin-bottom: $small-spacing;
 }
 
-.shop_info {
+.profile_info {
+  text-align: center;
   padding: $small-spacing;
   border: 1px solid $divider-grey;
-  margin-top: $small-spacing;
+
+  .user_display_name {
+    margin-bottom: $small-spacing;
+  }
+
+  p {
+    color: $mid-grey;
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 .main_content {
