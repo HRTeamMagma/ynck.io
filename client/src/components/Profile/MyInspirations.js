@@ -7,10 +7,10 @@ const MyInspirations = React.createClass({
   render() {
     return (
       <div>  
-        <h2>My Inspirations Feed</h2>
+        <h2>Inspiration</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3}>
-              {this.props.myInspirations.map ((images, i) => <img src = {images.url}/>)}
+              {this.props.myInspirations.map ((images, i) => <img key={i} src ={images.url}/>)}
             </Carousel>
           </div>
       </div>

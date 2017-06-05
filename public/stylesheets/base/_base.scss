@@ -30,11 +30,6 @@ body {
   margin: auto;
 }
 
-
-
-/**
- * Basic styles for links
- */
 a {
   color: $color-link;
   text-decoration: none;
@@ -43,4 +38,8 @@ a {
     color: $color-link-hover;
     text-decoration: none;
   }
+}
+
+.divider {
+  border-bottom: 1px solid $light-grey;
 }

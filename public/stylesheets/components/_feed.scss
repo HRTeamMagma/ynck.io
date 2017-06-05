@@ -5,8 +5,6 @@
 }
 
 .recent_tattoos {
-
-
   .grid_image {
     margin-right: $med-spacing;
     display: inline-block;
@@ -23,4 +21,27 @@
       margin-top: $small-spacing;
     }
   }
+}
+
+
+.user_stream {
+  .image_grid {
+    width: 700px;
+    margin-bottom: $large-spacing;
+  }
+
+  .image_grid img {
+    width: 200px;
+    height: 150px;
+    margin-top: $small-spacing;
+    margin-right: $small-spacing;
+   }
+
+  .image_grid img:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.profile_name {
+  margin-bottom: $small-spacing;
 }

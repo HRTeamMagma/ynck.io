@@ -7,10 +7,10 @@ const MyTattoos = React.createClass({
   render() {
     return (
       <div>  
-        <h2>My Tattoos Feed</h2>
+        <h2>My Tattoos</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3}>
-              {this.props.myTattoos.map ((images, i) => <img src = {images.url}/>)}
+              {this.props.myTattoos.map ((images, i) => <img key={i} src={images.url}/>)}
             </Carousel>
           </div>
       </div>
