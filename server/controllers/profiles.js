@@ -133,25 +133,6 @@ module.exports.getUserTattoos = (req, res) => {
   });
 };
 
-module.exports.getUserFavorites = (req, res) => {
-  models.Profile.where({ id: req.query.user_id }).fetch({withRelated: ['favorites.tags']})
-    .then(results => {
-      if (!results) {
-        throw results;
-      }
-      results = helper.cleanTags(results.related('favorites').toJSON());
-      res.send({images: results});
-    });
-};
-
-module.exports.addToUserFavorites = (req, res) => {
-  models.Favorite.forge({ 
-    profile_id: req.body.loggedInUser.id, 
-    image_id: req.body.favoritedImage 
-  }).save();
-
-  res.send(201);
-};
 
 module.exports.getUserDesigns = (req, res) => {
   models.Image.where({ profile_id: req.query.id, image_type: 'design' }).fetchAll({withRelated: ['tags']})
