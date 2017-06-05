@@ -85,8 +85,8 @@ class RecentTattoos extends React.Component {
                   <div key={i} className="solo_image">
                     <div className="overlay_container">
                       { listOfFaves.includes(image.id) ? 
-                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id); } }/> 
-                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id); } }/> 
+                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id) } }/> 
+                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.saveFavoriteStatus(image.id) } }/> 
                         };
                     </div>
                     <img src={image.url} className="base_pic" />
