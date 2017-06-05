@@ -15,9 +15,7 @@ class OurWork extends React.Component {
       <div className="user_stream">
         <h2>Our Work</h2>
         <div className="image_grid">
-        { this.props.images.map(image => <img src={image.url}/>) }
-
-          
+        { this.props.images.map((image, i) => <img src={image.url} key={i} />) }
         </div>
       </div>
     );
