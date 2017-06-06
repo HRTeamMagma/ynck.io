@@ -31,6 +31,14 @@
     font-size: 14px;
     line-height: 20px;
   }
+  a {
+    color: $mid-grey;
+    font-size: 14px;
+    line-height: 20px;
+    &:hover {
+      color: $maroon;
+    }
+  }
 }
 
 .main_content {
