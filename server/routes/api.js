@@ -6,6 +6,7 @@ const ProfileController = require('../controllers').Profiles;
 const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
 const FavoriteController = require('../controllers').Favorites;
+const upload = require('../helpers/upload_helpers');
 // these routes start with api
 
 router.route('/')
@@ -17,9 +18,6 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
-router.route('/latest-images')
-  .get(ImageController.getLatestImages);
-
 router.route('/user/edit')
   .post(ProfileController.editUserProfile);
 
@@ -29,13 +27,6 @@ router.route('/user/my-tattoos')
     console.log(req.body);
     res.send(201);
   });
-
-// router.route('/shop')
-//   .get(ShopController.getShopInfo)
-//   .post((req, res) => {
-//     console.log(req.body);
-//     res.send(201);
-//   })
 
 router.route('/user/inspirations')
   .get(ProfileController.getUserInspirations)
@@ -66,5 +57,11 @@ router.route('/shop')
 
 router.route('/create/shop')
   .post(ShopController.createShop);
+
+router.route('/latest-images')
+  .get(ImageController.getLatestImages);
+
+router.route('/upload-image')
+  .post(upload.single('imageUpload'), ImageController.uploadImage);
 
 module.exports = router;
