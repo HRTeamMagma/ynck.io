@@ -16,13 +16,22 @@ class Profile extends React.Component {
       myInspirations: [],
       userInfo: [],
     };
+    this.getUserImages = this.getUserImages.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
+  }
 
+  componentDidMount() {
+    this.getUserImages();
+    this.getUserInfo();
+  }
+
+  getUserImages() {
     axios.get('/api/profiles/images', {
       params: {
-        id: loggedInUser.id,
+        id: this.props.match.params.id,
       }
-    }).then((results) => {
-      console.log(results);
+    })
+    .then((results) => {
       this.setState({
         myTattoos: results.data.tattoo,
         myDesigns: results.data.design,
@@ -31,17 +40,17 @@ class Profile extends React.Component {
     }).catch((error) => {
       console.log(error);
     });
+  }
 
-    axios.get(`/api/profiles/${loggedInUser.id}`)
+  getUserInfo() {
+    axios.get(`/api/profiles/${this.props.match.params.id}`)
     .then((results) => {
-      console.log(results.data);
       this.setState({
         userInfo: results.data,
       });
     }).catch((error) => {
       console.log(error);
     });
-
   }
 
   render() {
