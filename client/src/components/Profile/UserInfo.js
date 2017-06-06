@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 class UserInfo extends React.Component {
@@ -7,14 +7,42 @@ class UserInfo extends React.Component {
     super(props);
 
     this.state = {
-      editMode: false
+      editMode: false,
+      name: '',
+      bio: ''
     };
     this.handleEditProfile = this.handleEditProfile.bind(this);
+    this.saveEdits = this.saveEdits.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
-  handleEditProfile() {
+
+  handleEditProfile(e) {
+    e.preventDefault();
     this.setState({
       editMode: true
+    });
+  }
+
+  saveEdits() {    
+    console.log('statea', this.state.name);
+    console.log('bio', this.state.bio);
+    // axios.post('/users/edit',{name: this.state.name, bio: this.state.bio})
+    // .then((res) => {
+    //   console.log('Successfully saved edits');
+        // this.setState({
+        //   editMode: false
+        // });
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
+  }
+
+  cancelEdit(e) {
+    e.preventDefault();
+    this.setState({
+      editMode: false
     });
   }
 
@@ -27,15 +55,18 @@ class UserInfo extends React.Component {
           <div>
             <h2 className="user_display_name">{this.props.userData.first} {this.props.userData.last}</h2>
             <p> { tempHardCodedBio } </p>
-            { loggedInUser.id === this.props.userData.id ?
-              <a href="#" onClick={this.handleEditProfile}>edit profile</a>
+
+            { loggedInUser.id === this.props.userInfo.id ?
+              <a href="#" onClick={(e) => this.handleEditProfile(e)}>edit profile</a>
               : null
             }
           </div>
           : 
           <div className="editMode">
-            <input name="name" type="text" placeholder={`${this.props.userData.first} ${this.props.userData.last}`}/>
-            <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} />
+
+            <input name="name" type="text" placeholder={`${this.props.userData.first} ${this.props.userData.last}`} onChange={(e) => this.setState({name: e.target.value})}/>
+            <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} onChange={(e) => this.setState({bio: e.target.value})}/>
+            <a href="#" onClick={(e) => this.cancelEdit(e)}>Cancel</a><button onClick={this.saveEdits}>Save changes</button>
           </div>
         }
       </div>
