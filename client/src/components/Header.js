@@ -2,6 +2,7 @@ import React from 'react';
 import Search from './Home/Search';
 import { Route, Link, BrowserRouter } from 'react-router-dom';
 import DropdownMenu from './DropdownMenu';
+import axios from 'axios';
 
 
 class Header extends React.Component {
@@ -9,12 +10,25 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      userInfo: [],
     };
+
+    axios.get(`/api/profiles/${loggedInUser.id}`)
+    .then((results) => {
+      console.log(results.data);
+      this.setState({
+        userInfo: results.data,
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleBodyClick = this.handleBodyClick.bind(this);
   }
 
+  
   componentDidMount() {
     document.body.addEventListener('click', this.handleBodyClick);
   }
@@ -38,6 +52,7 @@ class Header extends React.Component {
     });
   }
 
+
   render () {
     return (
         <div>
@@ -47,6 +62,7 @@ class Header extends React.Component {
             </div>
             {this.props.loggedInUser ? (
               <nav>
+                <img className ='header-photo' src={this.state.userInfo.profile_image}/>
                 <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
                 <DropdownMenu isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
               </nav>
