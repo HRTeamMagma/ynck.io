@@ -7,7 +7,6 @@ const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
 const FavoriteController = require('../controllers').Favorites;
 const upload = require('../helpers/upload_helpers');
-// these routes start with api
 
 router.route('/')
   .get((req, res) => {
