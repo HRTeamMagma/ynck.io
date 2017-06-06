@@ -23,12 +23,13 @@
   border: 1px solid $divider-grey;
 
   textarea {
-    margin-top: $mini-spacing;
+    margin: $mini-spacing auto;
     width: 100%;
   }
 
   a {
     @include secondary-body-font;
+    padding-right: $small-spacing;
     &:hover {
       color: $maroon;
     }
@@ -41,4 +42,10 @@
 
 .main_content {
   display: inline-block;
+}
+
+.edit-icon {
+  background: url('/assets/icons/edit.png') no-repeat center;
+  width: $icon-size;
+  height: $icon-size;
 }
