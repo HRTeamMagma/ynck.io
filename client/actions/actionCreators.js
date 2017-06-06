@@ -5,6 +5,12 @@ export var increment = function (index) {
   };
 };
 
+export var decrement = function (index) {
+  return {
+    type: 'DECREMENT_LIKES',
+    index
+  };
+};
 
 export var addComment = function (postId, author, comment) {
   return {
