@@ -1,8 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
 
-plugins.push(new webpack.DefinePlugin({ "global.GENTLY": false }));
-
 const config = {
   devtool: 'source-map',
   entry: './client/src/app',
@@ -13,6 +11,7 @@ const config = {
   node: {
     __dirname: true,
   },
+  plugins: [new webpack.DefinePlugin({ "global.GENTLY": false })],
   externals: {
     'cheerio': 'window',
     'react/lib/ExecutionEnvironment': true,
