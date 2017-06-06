@@ -23,12 +23,20 @@
   }
 }
 
-/// Make a context based selector a little more friendly
-/// @author Hugo Giraudel
-/// @param {String} $context
-@mixin when-inside($context) {
-  #{$context} & {
-    @content;
-  }
+
+@mixin base-body-font {
+  color: $base-color;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+}
+
+@mixin secondary-body-font {
+  color: $mid-grey;
+  font-family: $base-font-family;
+  font-size: 14px;
+  font-weight: $base-font-weight;
+  line-height: 20px;
 }
 
