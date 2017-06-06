@@ -18,7 +18,7 @@ const router = (
     <BrowserRouter>
       <Switch>
         <Route exact path = "/" component={ReduxComp}></Route>
-        <Route path = "/user" component={Profile}></Route>
+        <Route path = "/user/:id" render={(props) => (<Profile {...props} />)} />
         <Route path = "/shop" component={Shop}></Route>
       </Switch>
     </BrowserRouter>
