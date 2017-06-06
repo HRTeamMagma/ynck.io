@@ -1,12 +1,17 @@
 import webpack from 'webpack';
 import path from 'path';
 
+plugins.push(new webpack.DefinePlugin({ "global.GENTLY": false }));
+
 const config = {
   devtool: 'source-map',
   entry: './client/src/app',
   output: {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js'
+  },
+  node: {
+    __dirname: true,
   },
   externals: {
     'cheerio': 'window',
