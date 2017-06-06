@@ -17,4 +17,8 @@ h3 {
   padding: 0px;
 }
 
-
+p {
+  @include secondary-body-font
+  margin: 0;
+  padding: 0;
+}

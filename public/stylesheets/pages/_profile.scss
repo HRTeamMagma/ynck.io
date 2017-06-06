@@ -22,22 +22,20 @@
   padding: $small-spacing;
   border: 1px solid $divider-grey;
 
-  .user_display_name {
-    margin-bottom: $small-spacing;
+  textarea {
+    margin-top: $mini-spacing;
+    width: 100%;
   }
 
-  p {
-    color: $mid-grey;
-    font-size: 14px;
-    line-height: 20px;
-  }
   a {
-    color: $mid-grey;
-    font-size: 14px;
-    line-height: 20px;
+    @include secondary-body-font;
     &:hover {
       color: $maroon;
     }
+  }
+
+  .user_display_name {
+    margin-bottom: $small-spacing;
   }
 }
 
