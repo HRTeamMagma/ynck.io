@@ -1,9 +1,14 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+// import { routerReducer } from 'react-router-redux';
 
-import comments from './comments';
+import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './reducerRecentImages';
 
-const rootReducer = combineReducers({comments, routing: routerReducer});
+const rootReducer = combineReducers({
+  recentImages, 
+  recentImagesHasErrored,
+  recentImagesIsLoading
+  // routing: routerReducer
+});
 
 export default rootReducer;
 
