@@ -4,11 +4,22 @@ const helper = require('../helpers/db_helpers');
 
 module.exports.getLatestImages = (req, res) => {
   
-  models.Image.where({image_type: 'tattoo'}).orderBy('id', 'DESC').fetchPage({page: 1, pageSize: 6, withRelated: ['tags']})
-  .then(result => {
-    result = helper.cleanTags(result.toJSON());
-    
-    res.send(result);
+  models.Image.where({image_type: 'tattoo'}).orderBy('id', 'DESC').fetchPage({page: 1, pageSize: 6, withRelated: ['tags', 'profile']})
+  .then(images => {
+    images = helper.cleanTags(images.toJSON());
+    images.forEach(function(image) {
+      let cleanProfile = image.profile;
+      delete cleanProfile.email;
+      delete cleanProfile.phone;
+      delete cleanProfile.created_at;
+      delete cleanProfile.updated_at;
+      cleanProfile.profileUrl = '/user/' + image.profile.id;
+      image.profile = cleanProfile;
+    });
+    res.send(images);
+  })
+  .error(err => {
+    res.send(500, 'Error: ' + err);
   });
   // knex('images').orderBy('created_at', 'desc').where('image_type', '=', 'tattoo').limit(10)
   // .then(result => {
