@@ -1,6 +1,6 @@
 export var decrement = function (index) {
   return {
-    type: 'DECREMENT_LIKES',
+    type: 'DECREMENT_FAVORITES',
     index
   };
 };
