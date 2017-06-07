@@ -7,7 +7,6 @@ module.exports.uploadImage = (req, res) => {
   res.status(200).send(req.file);
 };
 
-
 module.exports.getLatestImages = (req, res) => {
   // if the user is logged in
   if (req.user) {
