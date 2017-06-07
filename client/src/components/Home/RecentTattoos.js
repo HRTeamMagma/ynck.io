@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { recentImagesFetchData } from '../../../actions/actionRecentImages';
+import { getUserFavorites } from '../../../actions/actionFavorites';
 
 class RecentTattoos extends React.Component {
   constructor(props) {
@@ -12,13 +13,13 @@ class RecentTattoos extends React.Component {
     //   user_favorites: []
     // };
     this.getLatestImages = this.getLatestImages.bind(this);
-    // this.getFavorites = this.getFavorites.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
     // this.saveFavoriteStatus = this.saveFavoriteStatus.bind(this);
   }
 
   componentDidMount() {
     this.getLatestImages();
-    // this.getFavorites();
+    this.getFavorites();
   }
 
   getLatestImages() {
@@ -27,18 +28,20 @@ class RecentTattoos extends React.Component {
 
   getFavorites() {
     if (this.props.loggedInUser) {
-      axios.get('/api/user/favorites', {
-        params: { user_id: this.props.loggedInUser.id }
-      })
-      .then((res) => {
-        this.setState({
-          user_favorites: res.data.images
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      this.props.getUserFavorites('/api/user/favorites', this.props.loggedInUser.id );
     }
+    //   axios.get('/api/user/favorites', {
+    //     params: { user_id: this.props.loggedInUser.id }
+    //   })
+    //   .then((res) => {
+    //     this.setState({
+    //       user_favorites: res.data.images
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // }
   }
 
 
@@ -65,6 +68,10 @@ class RecentTattoos extends React.Component {
     if (this.props.recentImagesIsLoading) {
       return <p>Loading…</p>;
     }
+
+    // if(this.props.getFavoritesIsLoading) {
+    //   return <h1>I'm a spinner!!!!!</h1>
+    // }
 
     return (
       <div className="feed_container">
@@ -96,13 +103,17 @@ const mapStateToProps = (state) => {
   return {
     recentImages: state.recentImages,
     recentImagesHasErrored: state.recentImagesHasErrored,
-    recentImagesIsLoading: state.recentImagesIsLoading
+    recentImagesIsLoading: state.recentImagesIsLoading,
+    getFavoritesHasErrored: state.getFavoritesHasErrored,
+    getFavoritesIsLoading: state.getFavoritesIsLoading,
+    userFavorites: state.userFavorites
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    recentImagesFetchData: (url) => dispatch(recentImagesFetchData(url))
+    recentImagesFetchData: (url) => dispatch(recentImagesFetchData(url)),
+    getUserFavorites: (url, id) => dispatch(getUserFavorites(url, id))
   };
 };
 
