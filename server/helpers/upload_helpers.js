@@ -11,6 +11,14 @@ AWS.config.update(
     subregion: 'us-west-2'
   });
 
+const imageFilter = function (req, file, cb) {
+  // accept image only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return cb(new Error('Only image files are allowed!'), false);
+  }
+  cb(null, true);
+};
+
 module.exports = multer({
   storage: multerS3({
     s3: s3,
@@ -22,5 +30,6 @@ module.exports = multer({
     key: function (req, file, cb) {
       cb(null, uuidV4() + file.originalname);
     }
-  })
+  }),
+  fileFilter: imageFilter
 });
