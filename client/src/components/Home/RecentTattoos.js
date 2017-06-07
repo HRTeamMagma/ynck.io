@@ -8,11 +8,10 @@ class RecentTattoos extends React.Component {
     this.state = {
       images: [],
       user_favorites: []
-      // favoritedImage: '' 
     };
+    
     this.getLatestImages = this.getLatestImages.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
-    // this.toggleFavorite = this.toggleFavorite.bind(this);
     this.saveFavoriteStatus = this.saveFavoriteStatus.bind(this);
   }
 
@@ -48,17 +47,6 @@ class RecentTattoos extends React.Component {
       });
     }
   }
-
-  //  TO DO: Set state dynamically so favorite status refreshes
-  // toggleFavorite(imageID) {
-  //   console.log('imageID', imageID)
-  //   this.setState({
-  //     favoritedImage: imageID
-  //   })
-  //   console.log('statefavoritedImage', this.state.favoritedImage)
-
-  //   this.saveFavoriteStatus();
-  // }
 
   saveFavoriteStatus(imageID) {
     axios.post('/api/user/favorites', {loggedInUser: this.props.loggedInUser, favoritedImage: imageID})

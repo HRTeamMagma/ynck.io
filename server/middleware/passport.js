@@ -115,8 +115,7 @@ passport.use('google', new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
-);
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done)));
 
 passport.use('facebook', new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
@@ -124,10 +123,7 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
   profileFields: ['id', 'emails', 'picture.type(large)', 'name']
 },
-  (accessToken, refreshToken, profile, done) => {
-    getOrCreateOAuthProfile('facebook', profile, done);
-  }
-));
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done)));
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
 passport.use('twitter', new TwitterStrategy({
@@ -140,7 +136,6 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  console.log(oauthProfile);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
