@@ -1,6 +1,7 @@
 import React from 'react';
 import { divIcon } from 'leaflet';
 import { Map, Marker, Popup, TileLayer, Icon } from 'react-leaflet';
+
 const position = [51.0, -0.09];
 export class MapView extends React.Component {
   constructor(props) {

@@ -3,8 +3,7 @@ import axios from 'axios';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
-import Header from './../Header';
-import Footer from './../Footer';
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -57,7 +56,6 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <Header loggedInUser={loggedInUser}/>
         <div className="feed_container">
           <div className="profile_sidebar">
             <UserInfo userInfo = {this.state.userInfo}/>
@@ -66,7 +64,6 @@ class Profile extends React.Component {
             <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

@@ -30,14 +30,9 @@ class RecentTattoos extends React.Component {
 
   addAFavorite(imageId, index) {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
-    // this.getFavorites();
   }
 
   render() {
-    // var listOfFaves = [];
-    // this.props.userFavorites.map((fave, i) => {
-    //   listOfFaves.push(fave.id);
-    // });
 
     if (this.props.recentImagesHasErrored) {
       return <p>Sorry! There was an error loading the items</p>;
@@ -52,7 +47,6 @@ class RecentTattoos extends React.Component {
           <h2>Recent tattoos</h2>
 
           <div className="image_grid">
-            {console.log("RECENT IMAGES TO BE MAPPED: ", this.props.recentImages)}
               { this.props.recentImages.map((image, i) => {
                 return (
                   <div key={i} className="solo_image">

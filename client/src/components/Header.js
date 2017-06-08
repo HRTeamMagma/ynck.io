@@ -1,8 +1,9 @@
 import React from 'react';
-import Search from './Home/Search';
-import { Route, Link, BrowserRouter } from 'react-router-dom';
-import DropdownMenu from './DropdownMenu';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import Search from './Home/Search';
+import DropdownMenu from './DropdownMenu';
 
 
 class Header extends React.Component {
@@ -51,7 +52,6 @@ class Header extends React.Component {
       isOpen: false
     });
   }
-
 
   render () {
     return (

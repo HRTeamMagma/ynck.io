@@ -17,7 +17,6 @@ export const recentImagesIsLoading = (state = false, action) => {
 };
 
 export const recentImages = (state = [], action) => {
-  console.log(state.length);
   switch (action.type) {
   case 'RECENT_IMAGES_FETCH_DATA_SUCCESS':
     return action.recentImages;

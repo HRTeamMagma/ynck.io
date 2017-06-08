@@ -1,13 +1,12 @@
 import React from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
+import axios from 'axios';
+
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
 import StarRating from 'react-star-rating';
 
 
-const axios = require('axios');
 
 // import hopeify from '../../../../hopeify';
 
@@ -40,7 +39,6 @@ class Shop extends React.Component {
 
     return (
       <div >
-        <Header loggedInUser={loggedInUser}/>
         <div className="feed_container">
           <h1 className="profile_name">
             {this.state.shop.name}
@@ -57,7 +55,6 @@ class Shop extends React.Component {
           </div>
         </div>
 
-        <Footer />
       </div>
     );
   }
