@@ -1,3 +1,4 @@
+//userFavorites
 export const getFavoritesHasErrored = ( state = false, action ) => {
   switch (action.type) {
   case 'GET_FAVORITES_HAS_ERRORED' :
@@ -19,7 +20,7 @@ export const getFavoritesIsLoading = ( state = false, action ) => {
 export const userFavorites = ( state = [], action ) => {
   switch (action.type) {
   case 'GET_FAVORITES_SUCCESS' :
-    return action.favoriteArray;
+    return action.userFavorites;
   default:
     return state;
   }
