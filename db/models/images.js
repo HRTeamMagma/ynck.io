@@ -9,7 +9,7 @@ const Image = bookshelf.Model.extend({
     return this.belongsToMany('Tag');
   },
   favorites: function() {
-    return this.belongsToMany('Profile').through('favorites');
+    return this.belongsToMany('Profile').through('Favorite');
   }
 });
 
