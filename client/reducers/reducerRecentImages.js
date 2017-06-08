@@ -7,7 +7,6 @@ export const recentImagesHasErrored = (state = false, action) => {
   }
 };
 
-
 export const recentImagesIsLoading = (state = false, action) => {
   switch (action.type) {
   case 'RECENT_IMAGES_IS_LOADING':
@@ -17,11 +16,20 @@ export const recentImagesIsLoading = (state = false, action) => {
   }
 };
 
-
 export const recentImages = (state = [], action) => {
+  console.log(state.length);
   switch (action.type) {
   case 'RECENT_IMAGES_FETCH_DATA_SUCCESS':
     return action.recentImages;
+  case 'RECENT_IMAGE_WAS_FAVORITED':
+    let i = action.i;
+    return [
+      ...state.slice(0, i),
+      Object.assign({}, state[i], {
+        isFavorited: !state[i].isFavorited
+      }),
+      ...state.slice(i + 1)
+    ];
   default:
     return state;
   }
