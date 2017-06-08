@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
+import Layout from './../Layout';
+
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
@@ -39,8 +39,8 @@ class Shop extends React.Component {
     var rating = Math.floor(this.state.shop.rating);
 
     return (
+      <Layout>
       <div >
-        <Header loggedInUser={loggedInUser}/>
         <div className="feed_container">
           <h1 className="profile_name">
             {this.state.shop.name}
@@ -57,8 +57,8 @@ class Shop extends React.Component {
           </div>
         </div>
 
-        <Footer />
       </div>
+      </Layout>
     );
   }
 }

@@ -3,6 +3,7 @@ import Header from './../Header';
 import Banner from './Banner';
 import RecentTattoos from './RecentTattoos';
 import Footer from './../Footer';
+import Layout from './../Layout';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,10 +14,12 @@ class Home extends React.Component {
   }
   render () {
     return (
-      <div className="homeContainer">
-        <Banner />
-        <RecentTattoos loggedInUser={this.props.loggedInUser}/>
-      </div>
+      <Layout>
+        <div className="homeContainer">
+          <Banner />
+          <RecentTattoos loggedInUser={this.props.loggedInUser}/>
+        </div>
+       </Layout>
     );
   }
 }
