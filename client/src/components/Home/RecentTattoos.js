@@ -47,7 +47,6 @@ class RecentTattoos extends React.Component {
           <h2>Recent tattoos</h2>
 
           <div className="image_grid">
-            {console.log("RECENT IMAGES TO BE MAPPED: ", this.props.recentImages)}
               { this.props.recentImages.map((image, i) => {
                 return (
                   <div key={i} className="solo_image">
