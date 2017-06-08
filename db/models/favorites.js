@@ -5,7 +5,7 @@ const Favorite = bookshelf.Model.extend({
   user: function() {
     return this.belongsTo('Profile');
   },
-  shop: function() {
+  image: function() {
     return this.belongsTo('Image');
   }
 });
