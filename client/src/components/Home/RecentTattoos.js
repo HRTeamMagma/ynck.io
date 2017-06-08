@@ -30,14 +30,14 @@ class RecentTattoos extends React.Component {
 
   addToFavorites(imageId) {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId);
-    this.getFavorites();
+    // this.getFavorites();
   }
 
   render() {
-    var listOfFaves = [];
-    this.props.userFavorites.map((fave, i) => {
-      listOfFaves.push(fave.id);
-    });
+    // var listOfFaves = [];
+    // this.props.userFavorites.map((fave, i) => {
+    //   listOfFaves.push(fave.id);
+    // });
 
     if (this.props.recentImagesHasErrored) {
       return <p>Sorry! There was an error loading the items</p>;
@@ -56,7 +56,7 @@ class RecentTattoos extends React.Component {
                 return (
                   <div key={i} className="solo_image">
                     <div className="overlay_container">
-                      { listOfFaves.includes(image.id) ? 
+                      { image.isFavorited ?
                         <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addToFavorites(image.id); } }/> 
                       : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addToFavorites(image.id); } }/> 
                         }
