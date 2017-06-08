@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from './../Layout';
+import axios from 'axios';
 
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
@@ -7,7 +7,6 @@ import MapView from './MapView';
 import StarRating from 'react-star-rating';
 
 
-const axios = require('axios');
 
 // import hopeify from '../../../../hopeify';
 
@@ -39,7 +38,6 @@ class Shop extends React.Component {
     var rating = Math.floor(this.state.shop.rating);
 
     return (
-      <Layout>
       <div >
         <div className="feed_container">
           <h1 className="profile_name">
@@ -58,7 +56,6 @@ class Shop extends React.Component {
         </div>
 
       </div>
-      </Layout>
     );
   }
 }

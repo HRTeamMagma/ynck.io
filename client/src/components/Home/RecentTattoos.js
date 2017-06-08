@@ -30,14 +30,9 @@ class RecentTattoos extends React.Component {
 
   addAFavorite(imageId, index) {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
-    // this.getFavorites();
   }
 
   render() {
-    // var listOfFaves = [];
-    // this.props.userFavorites.map((fave, i) => {
-    //   listOfFaves.push(fave.id);
-    // });
 
     if (this.props.recentImagesHasErrored) {
       return <p>Sorry! There was an error loading the items</p>;
