@@ -37,3 +37,42 @@ export const recentImagesFetchData = (url) => {
 };
 
 
+export const addToFavoritesIsLoading = (bool) => {
+  return {
+    type: 'ADD_TO_FAVORITES_IS_LOADING',
+    bool
+  };
+};
+
+export const addToFavoritesSuccess = (recentImages, i) => {
+  return {
+    type: 'RECENT_IMAGE_WAS_FAVORITED',
+    recentImages: recentImages,
+    i
+  };
+};
+
+export const addToFavoritesHasErrored = (bool) => {
+  return {
+    type: 'ADD_TO_FAVORITES_HAS_ERRORED',
+    bool
+  };
+};
+
+
+export const addToFavorites = (url, loggedInUser, imageId, recentImages, index) => {
+  return (dispatch) => {
+    dispatch(addToFavoritesIsLoading(true));
+    axios.post(url, {
+      loggedInUser: loggedInUser,
+      favoritedImage: imageId
+    })
+    .then(success => {
+      dispatch(addToFavoritesIsLoading(false));
+      dispatch(addToFavoritesSuccess(recentImages, index));
+    })
+    .catch(error => {
+      dispatch(addToFavoritesHasErrored(true));
+    });
+  };
+};

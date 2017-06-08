@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { recentImagesFetchData } from '../../../actions/actionRecentImages';
-import { getUserFavorites, addToFavorites } from '../../../actions/actionFavorites';
+import { recentImagesFetchData, addToFavorites } from '../../../actions/actionRecentImages';
+import { getUserFavorites } from '../../../actions/actionFavorites';
 
 class RecentTattoos extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class RecentTattoos extends React.Component {
 
     this.getLatestImages = this.getLatestImages.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
-    this.addToFavorites = this.addToFavorites.bind(this);
+    this.addAFavorite = this.addAFavorite.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +28,8 @@ class RecentTattoos extends React.Component {
     }
   }
 
-  addToFavorites(imageId) {
-    this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId);
+  addAFavorite(imageId, index) {
+    this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
     // this.getFavorites();
   }
 
@@ -52,13 +52,14 @@ class RecentTattoos extends React.Component {
           <h2>Recent tattoos</h2>
 
           <div className="image_grid">
+            {console.log("RECENT IMAGES TO BE MAPPED: ", this.props.recentImages)}
               { this.props.recentImages.map((image, i) => {
                 return (
                   <div key={i} className="solo_image">
                     <div className="overlay_container">
                       { image.isFavorited ?
-                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addToFavorites(image.id); } }/> 
-                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addToFavorites(image.id); } }/> 
+                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
+                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
                         }
                     </div>
                     <img src={image.url} className="base_pic" />
@@ -87,7 +88,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     recentImagesFetchData: (url) => dispatch(recentImagesFetchData(url)),
     getUserFavorites: (url, id) => dispatch(getUserFavorites(url, id)),
-    addToFavorites: (url, loggedInUser, imageId) => dispatch(addToFavorites(url, loggedInUser, imageId))
+    addToFavorites: (url, loggedInUser, imageId, imageArray, index) => dispatch(addToFavorites(url, loggedInUser, imageId, imageArray, index))
   };
 };
 
