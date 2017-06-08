@@ -5,23 +5,32 @@ import { Provider } from 'react-redux';
 import '../../public/stylesheets/main.scss'; 
 
 import store from './store';
+import Layout from './components/Layout';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import Shop from './components/Shops/Shop';
 
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-const router = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path = "/" component={Home} />
-        <Route path = "/user/:id" component={Profile} />
-        <Route path = "/shop" component={Shop} />
-      </Switch>
-    </BrowserRouter>
- </Provider>
-);
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Layout>
+              <Route exact path="/" render={(props) => (<Home loggedInUser={loggedInUser} {...props} />)} />
+              <Route path = "/user/:id" component={Profile} />
+              <Route path = "/shop" component={Shop} />
+            </Layout>
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    );
+  }
+}
 
-
-ReactDOM.render(router, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
