@@ -103,24 +103,29 @@ module.exports.getUserImages = (req, res) => {
     .then(results => {
       if (!results) {
         throw results;
+      } else {
+        models.Profile.where({id: req.query.id}).fetch()
+        .then(result => {
+          let allImages = helper.cleanTags(results.toJSON());
+    //       res.send(allImages)
+    //     })
+    // }
+          let responseObj = {};
+          responseObj.userProfile = result.toJSON();
+          allImages.forEach(function(image) {
+            // let thisImage = {};
+            // thisImage.id = image.id;
+            // thisImage.url = image.url;
+            if (responseObj[image.image_type]) {
+              responseObj[image.image_type].push(image);
+            } else {
+              responseObj[image.image_type] = [image];
+            }
+          });
+          // console.log(responseObj);
+          res.send(responseObj);
+        });
       }
-      let allImages = helper.cleanTags(results.toJSON());
-//       res.send(allImages)
-//     })
-// }
-      let responseObj = {};
-      allImages.forEach(function(image) {
-        // let thisImage = {};
-        // thisImage.id = image.id;
-        // thisImage.url = image.url;
-        if (responseObj[image.image_type]) {
-          responseObj[image.image_type].push(image);
-        } else {
-          responseObj[image.image_type] = [image];
-        }
-      });
-      // console.log(responseObj);
-      res.send(responseObj);
     });
 };
 
