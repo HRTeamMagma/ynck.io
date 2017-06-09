@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './reducerRecentImages';
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   getFavoritesIsLoading,
   userFavorites,
   userData,
-  shop
+  shop,
+  form: formReducer
 
 });
 

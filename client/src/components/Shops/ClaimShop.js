@@ -1,4 +1,5 @@
 import React from 'react';
+import YelpSearchForm from './YelpSearchForm';
 
 class ClaimShop extends React.Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class ClaimShop extends React.Component {
     return ( 
       <div> 
         <h1>Claim Your Shop </h1>
-        
+        <YelpSearchForm />
       </div>
     );
   }
