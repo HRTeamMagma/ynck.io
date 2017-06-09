@@ -9,40 +9,22 @@ class UserInfo extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
-      description: '',
-      editMode: false
+      description: ''
     };
-    this.handleEditProfile = this.handleEditProfile.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
-  }
-
-  handleEditProfile(e) {
-    e.preventDefault();
-    this.setState({
-      editMode: true
-    });
-  }
-
-  cancelEdit(e) {
-    e.preventDefault();
-    this.setState({
-      editMode: false
-    });
   }
 
   render() {
-    var tempHardCodedBio = 'My tattoos are my source of strength, with which I channel sasha fierce.';
     return ( 
       <div className="profile_info">
         <img src={this.props.userData.profile_image} className="user_profile_image"/>
-        { !this.state.editMode ?
+        { !this.props.editMode ?
           <div>
-            <h2 className="user_display_name">{this.props.userData.first} {this.props.userData.last}</h2>
-            <p> { tempHardCodedBio } </p>
+            <h2 className="user_name">{this.props.userData.first} {this.props.userData.last}</h2>
+            <p> { this.props.userData.profile_description } </p>
 
             { loggedInUser.id === this.props.userData.id ?
             <div>
-              <a href="#" onClick={(e) => this.handleEditProfile(e)}>edit</a>
+              <a href="#" onClick={(e) => this.props.handleEditProfile(e)}>edit</a>
               </div>
               : null
             }
@@ -51,8 +33,8 @@ class UserInfo extends React.Component {
           <div className="editMode">
             <input name="name" type="text" placeholder={`${this.props.userData.first}`} onChange={(e) => this.setState({firstName: e.target.value})}/>
             <input name="name" type="text" placeholder={`${this.props.userData.last}`} onChange={(e) => this.setState({lastName: e.target.value})}/>
-            <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} onChange={(e) => this.setState({description: e.target.value})}/>
-            <a href="#" onClick={(e) => this.cancelEdit(e)}>Cancel</a><button onClick={ () => this.props.saveEdits(this.state.firstName, this.state.lastName, this.state.description)}>Save changes</button>
+            <textarea className="editBio" name="bio" placeholder={`${this.props.userData.profile_description}`} onChange={(e) => this.setState({description: e.target.value})}/>
+            <a href="#" onClick={(e) => this.props.cancelEdit(e)}>Cancel</a><button onClick={ () => this.props.saveEdits(this.state.firstName, this.state.lastName, this.state.description)}>Save changes</button>
           </div>
         }
       </div>

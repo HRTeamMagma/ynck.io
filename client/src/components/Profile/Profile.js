@@ -11,8 +11,27 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      editMode: false
+    };
     this.getUserData = this.getUserData.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
+    this.handleEditProfile = this.handleEditProfile.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+  }
+
+  handleEditProfile(e) {
+    e.preventDefault();
+    this.setState({
+      editMode: true
+    });
+  }
+
+  cancelEdit(e) {
+    e.preventDefault();
+    this.setState({
+      editMode: false
+    });
   }
 
   componentDidMount() {
@@ -25,6 +44,10 @@ class Profile extends React.Component {
 
   saveEdits(firstName, lastName, description) {  
     this.props.updateUserData('/api/user/edit', this.props.userData.userProfile, loggedInUser.id, firstName, lastName, description);
+    this.setState({
+      editMode: false
+    });
+    this.getUserData();
   }
   
 
@@ -34,8 +57,8 @@ class Profile extends React.Component {
         <div className="feed_container">
           <div className="profile_sidebar">
             { this.props.userData.userProfile ? 
-              <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } /> 
-              : null 
+              <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
+              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } /> : null 
             }
           </div>
           <div className="main_content">
