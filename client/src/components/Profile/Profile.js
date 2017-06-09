@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchAllUserData } from './../../../actions/actionUserInfo';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
@@ -9,59 +11,33 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      myTattoos: [],
-      myDesigns: [],
-      myInspirations: [],
-      userInfo: [],
-    };
-    this.getUserImages = this.getUserImages.bind(this);
-    // this.getUserInfo = this.getUserInfo.bind(this);
+    this.getUserData = this.getUserData.bind(this);
   }
 
   componentDidMount() {
-    this.getUserImages();
+    this.getUserData();
   }
 
-  getUserImages() {
-    axios.get('/api/profiles/images', {
-      params: {
-        id: this.props.match.params.id,
-      }
-    })
-    .then((results) => {
-      console.log(results.data.userProfile);
-      this.setState({
-        myTattoos: results.data.tattoo,
-        myDesigns: results.data.design,
-        myInspirations: results.data.inspiration,
-        userInfo: results.data.userProfile
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
+  getUserData() {
+    this.props.fetchAllUserData('/api/profiles/user-data', this.props.match.params.id);
   }
 
-  // getUserInfo() {
-  //   axios.get(`/api/profiles/${this.props.match.params.id}`)
-  //   .then((results) => {
-  //     this.setState({
-  //       userInfo: results.data,
-  //     });
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
 
   render() {
     return (
       <div>
         <div className="feed_container">
           <div className="profile_sidebar">
-            <UserInfo userInfo = {this.state.userInfo}/>
+             { this.props.userData.userProfile ? 
+                <UserInfo userData = {this.props.userData.userProfile}/> 
+                : null 
+             }
           </div>
           <div className="main_content">
-            <Feed myTattoos = {this.state.myTattoos} myDesigns = {this.state.myDesigns} myInspirations = {this.state.myInspirations}/>
+            { this.props.userData ? 
+              <Feed myTattoos = {this.props.userData.tattoo} myDesigns = {this.props.userData.design} myInspirations = {this.props.userData.inspiration}/>
+              : null 
+             }
           </div>
         </div>
       </div>
@@ -69,4 +45,19 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+
+
+const mapStateToProps = (state) => {
+  return {
+    userData: state.userData
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id))
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

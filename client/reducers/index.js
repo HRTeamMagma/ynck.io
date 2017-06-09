@@ -2,6 +2,9 @@ import { combineReducers } from 'redux';
 
 import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './reducerRecentImages';
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
+import { userData } from './reducerUserInfo';
+
+
 
 const rootReducer = combineReducers({
   recentImages, 
@@ -9,7 +12,9 @@ const rootReducer = combineReducers({
   recentImagesIsLoading,
   getFavoritesHasErrored,
   getFavoritesIsLoading,
-  userFavorites
+  userFavorites,
+  userData
+
 });
 
 export default rootReducer;
