@@ -173,6 +173,8 @@ module.exports.editUserProfile = (req, res) => {
       .catch(() => {
         res.sendStatus(404);
       });
+  } else {
+    res.sendStatus(500);
   }
 };
 // module.exports.deleteOne = (req, res) => {
