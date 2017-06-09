@@ -7,36 +7,20 @@ class UserInfo extends React.Component {
     super(props);
 
     this.state = {
-      editMode: false,
-      name: '',
-      bio: ''
+      firstName: '',
+      lastName: '',
+      description: '',
+      editMode: false
     };
     this.handleEditProfile = this.handleEditProfile.bind(this);
-    this.saveEdits = this.saveEdits.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
   }
-
 
   handleEditProfile(e) {
     e.preventDefault();
     this.setState({
       editMode: true
     });
-  }
-
-  saveEdits() {    
-    console.log('statea', this.state.name);
-    console.log('bio', this.state.bio);
-    // axios.post('/users/edit',{name: this.state.name, bio: this.state.bio})
-    // .then((res) => {
-    //   console.log('Successfully saved edits');
-        // this.setState({
-        //   editMode: false
-        // });
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
   }
 
   cancelEdit(e) {
@@ -65,10 +49,10 @@ class UserInfo extends React.Component {
           </div>
           : 
           <div className="editMode">
-
-            <input name="name" type="text" placeholder={`${this.props.userData.first} ${this.props.userData.last}`} onChange={(e) => this.setState({name: e.target.value})}/>
-            <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} onChange={(e) => this.setState({bio: e.target.value})}/>
-            <a href="#" onClick={(e) => this.cancelEdit(e)}>Cancel</a><button onClick={this.saveEdits}>Save changes</button>
+            <input name="name" type="text" placeholder={`${this.props.userData.first}`} onChange={(e) => this.setState({firstName: e.target.value})}/>
+            <input name="name" type="text" placeholder={`${this.props.userData.last}`} onChange={(e) => this.setState({lastName: e.target.value})}/>
+            <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} onChange={(e) => this.setState({description: e.target.value})}/>
+            <a href="#" onClick={(e) => this.cancelEdit(e)}>Cancel</a><button onClick={ () => this.props.saveEdits(this.state.firstName, this.state.lastName, this.state.description)}>Save changes</button>
           </div>
         }
       </div>
