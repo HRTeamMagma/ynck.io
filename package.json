@@ -54,6 +54,7 @@
     "react-star-rating": "^1.4.2",
     "redis": "^2.7.1",
     "redux": "^3.6.0",
+    "redux-form": "^6.7.0",
     "redux-thunk": "^2.2.0",
     "request": "^2.79.0",
     "request-promise": "^4.2.1",
