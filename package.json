@@ -58,6 +58,7 @@
     "redis": "^2.7.1",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
+    "redux-form": "^6.7.0",
     "redux-thunk": "^2.2.0",
     "request": "^2.79.0",
     "request-promise": "^4.2.1",
