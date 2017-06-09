@@ -13,7 +13,6 @@ class UserInfo extends React.Component {
   }
 
   handleEditProfile() {
-    console.log('handleeditprofiled');
     this.setState({
       editMode: true
     });
@@ -23,19 +22,19 @@ class UserInfo extends React.Component {
     var tempHardCodedBio = 'My tattoos are my source of strength, with which I channel sasha fierce.';
     return ( 
       <div className="profile_info">
-        <img src={this.props.userInfo.profile_image} className="user_profile_image"/>
+        <img src={this.props.userData.profile_image} className="user_profile_image"/>
         { !this.state.editMode ?
           <div>
-            <h2 className="user_display_name">{this.props.userInfo.first} {this.props.userInfo.last}</h2>
+            <h2 className="user_display_name">{this.props.userData.first} {this.props.userData.last}</h2>
             <p> { tempHardCodedBio } </p>
-            { loggedInUser.id === this.props.userInfo.id ?
+            { loggedInUser.id === this.props.userData.id ?
               <a href="#" onClick={this.handleEditProfile}>edit profile</a>
               : null
             }
           </div>
           : 
           <div className="editMode">
-            <input name="name" type="text" placeholder={`${this.props.userInfo.first} ${this.props.userInfo.last}`}/>
+            <input name="name" type="text" placeholder={`${this.props.userData.first} ${this.props.userData.last}`}/>
             <textarea className="editBio" name="bio" placeholder={`${tempHardCodedBio}`} />
           </div>
         }
