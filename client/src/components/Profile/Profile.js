@@ -83,7 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
-    updateUserData: (url, userData, id, name, profile_description) => dispatch(updateUserData(url, userData, id, name, profile_description))
+    updateUserData: (url, userData, id, firstName, lastName, profile_description) => dispatch(updateUserData(url, userData, id, firstName, lastName, profile_description))
   };
 };
 

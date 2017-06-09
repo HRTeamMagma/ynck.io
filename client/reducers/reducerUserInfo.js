@@ -3,9 +3,6 @@ export const userData = (state = [], action) => {
   case 'FETCH_USER_DATA_SUCCESS':
     return action.userData;
   case 'UPDATE_USER_DATA_SUCCESS':
-    console.log('action first', action.first);
-    console.log('state', state);
-
     return Object.assign({}, state, {
       first: action.first,
       last: action.last,
