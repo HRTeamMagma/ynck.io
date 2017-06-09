@@ -20,6 +20,9 @@ router.route('/')
 router.route('/latest-images')
   .get(ImageController.getLatestImages);
 
+router.route('/user/edit')
+  .post(ProfileController.editUserProfile);
+
 router.route('/user/my-tattoos')
   .get(ProfileController.getUserTattoos)
   .post((req, res) => {
@@ -40,6 +43,7 @@ router.route('/user/inspirations')
     console.log(req.body);
     res.send(201);
   });
+
 
 router.route('/user/favorites')
   .get(FavoriteController.getUserFavorites)
