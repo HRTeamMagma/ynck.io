@@ -21,10 +21,11 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.getUserImages();
+    
   }
 
   getUserImages() {
-    axios.get('/api/profiles/images', {
+    axios.get('/api/profiles/user-data', {
       params: {
         id: this.props.match.params.id,
       }

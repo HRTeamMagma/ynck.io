@@ -9,7 +9,7 @@ router.route('/')
   // .post(ProfileController.create)
   ;
 
-router.route('/images')
+router.route('/user-data')
   .get(ProfileController.getUserImages);
   
 // router.route('/user')
