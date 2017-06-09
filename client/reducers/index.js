@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './reducerRecentImages';
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
 import { userData } from './reducerUserInfo';
-import { shop} from './reducerShopInfo';
+import { shop } from './reducerShopInfo';
 
 
 
@@ -16,7 +16,6 @@ const rootReducer = combineReducers({
   userFavorites,
   userData,
   shop
-
 });
 
 export default rootReducer;

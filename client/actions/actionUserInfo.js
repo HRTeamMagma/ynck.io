@@ -18,3 +18,34 @@ export const fetchAllUserData = (url, userId) => {
     });  
   };   
 };
+
+export const updateUserDataSuccess = (userData, first, last, profile_description) => {
+  return {
+    type: 'UPDATE_USER_DATA_SUCCESS',
+    userData,
+    first,
+    last,
+    profile_description
+  };
+};
+
+export const updateUserData = (url, userData, id, first, last, profile_description) => {
+  console.log('updateUserData userData', userData);
+  console.log('updateUserData first', first);
+  console.log('updateUserData last', last);
+
+  return (dispatch) => {
+    axios.post(url, {
+      id, 
+      first,
+      last,
+      profile_description
+    })
+    .then(success => {
+      dispatch(updateUserDataSuccess(userData, first, last, profile_description));
+      console.log('userData', userData);
+    });
+  };
+};
+
+
