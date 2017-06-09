@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchShopInfo } from '../../../actions/actionShopInfo';
+
 
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
 import StarRating from 'react-star-rating';
-
-
 
 // import hopeify from '../../../../hopeify';
 
@@ -14,44 +15,47 @@ class Shop extends React.Component {
   constructor(props) {
     super(props);
   
-    this.state = {
-      shop: {},
-      images: [],
-      lon: 51.0,
-      lat: -0.09
-    };
+    this.renderShopInfo = this.renderShopInfo.bind(this);
+
     // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
     //   console.log(res);
     // });
-
-    axios.get('/api/shop', {params: {id: 2}})
-      .then((res) => {
-        this.setState({shop: res.data.shopInfo, images: res.data.images, lat: res.data.lat, lon: res.data.lon});
-        console.log('lon: ', this.state.lon, 'lat: ', this.state.lat);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    //use of store (REDUXIFIED api call)
+    this.props.fetchShopInfo('/api/shop', 2);
+    setTimeout( ()=> {
+      console.log('the shpppp:', this.props.shop.lat);
+    }, 1000);
   }
 
-  render () {
-    var rating = Math.floor(this.state.shop.rating);
+  
 
+  componentDidMount() {
+    
+  }
+  
+  renderShopInfo (key) {
+    if (key === 'lon' || key === 'lat' || key === 'images') {
+      return this.props.shop ? this.props.shop[key] : null;
+    }
+    return this.props.shop.shopInfo ? this.props.shop.shopInfo[key] : null;
+  }
+  
+
+  render () {
     return (
       <div >
         <div className="feed_container">
           <h1 className="profile_name">
-            {this.state.shop.name}
+            {this.renderShopInfo('name')}
+            {/*{this.props.shop.shopInfo ? this.props.shop.shopInfo.name : null}*/}
           </h1> 
-
           <div className="profile_sidebar">
-            <img src={this.state.shop.shop_image} className="profile_image"/>
-            <ShopInfo address1={this.state.shop.address1} address2={this.state.shop.address2} city={this.state.shop.city} state={this.state.shop.state} phone={this.state.shop.phone} rating={this.state.shop.rating}/>
-            <MapView lat={this.state.lat} lon={this.state.lon}/>
+            <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
+            <ShopInfo address1={this.renderShopInfo('address1')} address2={this.renderShopInfo('address2')} city={this.renderShopInfo('city')} state={this.renderShopInfo('state')} phone={this.renderShopInfo('phone')} rating={this.renderShopInfo('rating')}/>
+            <MapView lat={this.renderShopInfo('lat') || .34} lon={this.renderShopInfo('lon') || 32.5}/>
           </div>
-
           <div className="main_content">
-            <OurWork images={this.state.images}/>
+            <OurWork images={this.renderShopInfo('images') || []}/>
           </div>
         </div>
 
@@ -60,5 +64,19 @@ class Shop extends React.Component {
   }
 }
 
-export default Shop;
+const mapStateToProps = (state) => {
+  return {
+    shop: state.shop
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchShopInfo: (url, id) => dispatch(fetchShopInfo(url, id))
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+
 
