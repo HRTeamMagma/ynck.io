@@ -5,6 +5,7 @@ import { fetchAllUserData, updateUserData } from './../../../actions/actionUserI
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
+
 import Following from './Following';
 import { CometSpinLoader } from 'react-css-loaders';
 
