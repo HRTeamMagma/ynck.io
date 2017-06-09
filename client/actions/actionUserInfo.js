@@ -30,9 +30,6 @@ export const updateUserDataSuccess = (userData, first, last, profile_description
 };
 
 export const updateUserData = (url, userData, id, first, last, profile_description) => {
-  console.log('updateUserData userData', userData);
-  console.log('updateUserData first', first);
-  console.log('updateUserData last', last);
 
   return (dispatch) => {
     axios.post(url, {
@@ -43,7 +40,6 @@ export const updateUserData = (url, userData, id, first, last, profile_descripti
     })
     .then(success => {
       dispatch(updateUserDataSuccess(userData, first, last, profile_description));
-      console.log('userData', userData);
     });
   };
 };

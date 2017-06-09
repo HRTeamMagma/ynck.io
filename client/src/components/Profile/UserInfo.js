@@ -31,9 +31,9 @@ class UserInfo extends React.Component {
           </div>
           : 
           <div className="editMode">
-            <input name="name" type="text" placeholder={`${this.props.userData.first}`} onChange={(e) => this.setState({firstName: e.target.value})}/>
-            <input name="name" type="text" placeholder={`${this.props.userData.last}`} onChange={(e) => this.setState({lastName: e.target.value})}/>
-            <textarea className="editBio" name="bio" placeholder={`${this.props.userData.profile_description}`} onChange={(e) => this.setState({description: e.target.value})}/>
+            <input name="firstName" type="text" placeholder={`${this.props.userData.first}`} onChange={(e) => this.setState({firstName: e.target.value})}/>
+            <input name="lastName" type="text" placeholder={`${this.props.userData.last}`} onChange={(e) => this.setState({lastName: e.target.value})}/>
+            <textarea className="editBio" name="description" placeholder={`${this.props.userData.profile_description}`} onChange={(e) => this.setState({description: e.target.value})}/>
             <a href="#" onClick={(e) => this.props.cancelEdit(e)}>Cancel</a><button onClick={ () => this.props.saveEdits(this.state.firstName, this.state.lastName, this.state.description)}>Save changes</button>
           </div>
         }
