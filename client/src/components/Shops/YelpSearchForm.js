@@ -6,16 +6,12 @@ const YelpSearchForm = props => {
   return (
     <form onSubmit={ handleSubmit }>
       <div>
-        <label htmlFor="firstName">First Name</label>
-        <Field name="firstName" component="input" type="text" />
+        <label htmlFor="term">Tattoo Parlor</label>
+        <Field name="term" component="input" type="text" />
       </div>
       <div>
-        <label htmlFor="lastName">Last Name</label>
-        <Field name="lastName" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <Field name="email" component="input" type="email" />
+        <label htmlFor="location">City, State</label>
+        <Field name="location" component="input" type="text" />
       </div>
       <button type="submit">Submit</button>
     </form>
