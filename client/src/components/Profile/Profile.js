@@ -50,7 +50,7 @@ class Profile extends React.Component {
     this.setState({
       editMode: false
     });
-he
+  }
   
   // TODO 
   followUser(e) {
