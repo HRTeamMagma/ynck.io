@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('shops', function (table) {
       table.increments('id').unsigned().primary();
       table.string('name', 100).nullable().unique();
-      table.string('url', 150).nullable();
+      table.string('url', 1024).nullable();
       table.string('address1', 100).nullable();
       table.string('address2', 100).nullable();
       table.string('city', 100).nullable();
