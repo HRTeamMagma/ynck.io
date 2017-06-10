@@ -47,7 +47,6 @@ class Shop extends React.Component {
         <div className="feed_container">
           <h1 className="profile_name">
             {this.renderShopInfo('name')}
-            {/*{this.props.shop.shopInfo ? this.props.shop.shopInfo.name : null}*/}
           </h1> 
           <div className="profile_sidebar">
             <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
