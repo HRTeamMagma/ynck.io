@@ -16,29 +16,41 @@ class Shop extends React.Component {
     super(props);
 
     this.state = {
-      showEditButton: false,
+      allowEdits: false,
+      editAddress: false,
       editMode: false,
+      editName: false,
+      editedName: '',
+      editedAddress: '',
+      editedCity: ''
     };
   
     this.renderShopInfo = this.renderShopInfo.bind(this);
-
+    this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
+    
     // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
     //   console.log(res);
     // });
     //use of store (REDUXIFIED api call)
     //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
     this.props.fetchShopInfo('/api/shop', 2);
-    setTimeout( ()=> {
-      console.log('the shpppp:', loggedInUser.shop_id);
-    }, 4000);
-    loggedInUser.shop_id === 2 ? this.setState({showEditButton: true}) : null;
+    console.log('proppppppp:', this.props);    
   }
 
   
 
   componentDidMount() {
-    
+    this.checkIfLoggedIn(loggedInUser.shop_id);
+    var address = this.renderShopInfo('address1');
   }
+  
+  checkIfLoggedIn (userShopId) {
+    if (userShopId === 2) {
+      this.setState({allowEdits: true});
+    }
+   
+  }
+
   
   renderShopInfo (key) {
     if (key === 'lon' || key === 'lat' || key === 'images') {
@@ -46,18 +58,56 @@ class Shop extends React.Component {
     }
     return this.props.shop.shopInfo ? this.props.shop.shopInfo[key] : null;
   }
+
+
   
 
   render () {
     return (
       <div >
         <div className="feed_container">
-          <h1 className="profile_name">
-            {this.renderShopInfo('name')}
+          <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
+            {!this.state.editName ? this.renderShopInfo('name') : null}
           </h1> 
+            {this.state.editName ? 
+            (<div>
+                <input type="text" value={this.state.editedName} onChange={(e)=> this.setState({editedName: e.target.value})}/>
+              <div>
+                  <div>
+                  <a href="#" onClick={(e) => this.setState({editName: false})}>Cancel</a>
+                  </div>
+                <div>
+                  <a href="#" onClick={(e) => this.setState({editName: false})}>Save Name Change</a>
+                </div>
+              </div>
+            </div>) : null}
+          
           <div className="profile_sidebar">
             <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
+            <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city}) : null}>
+            {!this.state.editAddress ?
             <ShopInfo address1={this.renderShopInfo('address1')} address2={this.renderShopInfo('address2')} city={this.renderShopInfo('city')} state={this.renderShopInfo('state')} phone={this.renderShopInfo('phone')} rating={this.renderShopInfo('rating')}/>
+            : null
+            }
+            </div>
+            {this.state.editAddress ?
+            (<div>
+                <div>Address: 
+                  <input type="text" value={this.state.editedAddress} onChange={(e)=> this.setState({editedAddress: e.target.value})}/>
+                </div>
+                <div>
+                  City: 
+                  <input type="text" value={this.state.editedCity} onChange={(e)=> this.setState({editedCity: e.target.value})}/>
+                </div>
+                <div>
+                  <a href="#" onClick={(e) => this.setState({editAddress: false})}>Cancel</a>
+                </div>
+                <div>
+                  <a href="#" onClick={(e) => this.setState({editAddress: false})}>Save changes</a>
+                </div>
+              </div>) 
+              : null
+            }
             <MapView lat={this.renderShopInfo('lat') || .34} lon={this.renderShopInfo('lon') || 32.5}/>
           </div>
           <div className="main_content">
