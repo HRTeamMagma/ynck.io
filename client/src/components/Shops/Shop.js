@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchShopInfo } from '../../../actions/actionShopInfo';
+import { fetchShopInfo, updateShopData } from '../../../actions/actionShopInfo';
 
 
 import ShopInfo from './ShopInfo';
@@ -22,11 +22,13 @@ class Shop extends React.Component {
       editName: false,
       editedName: '',
       editedAddress: '',
-      editedCity: ''
+      editedCity: '',
+      editedOffice: ''
     };
   
     this.renderShopInfo = this.renderShopInfo.bind(this);
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
+    this.saveEdits = this.saveEdits.bind(this);
     
     // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
     //   console.log(res);
@@ -34,7 +36,7 @@ class Shop extends React.Component {
     //use of store (REDUXIFIED api call)
     //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
     this.props.fetchShopInfo('/api/shop', 2);
-    console.log('proppppppp:', this.props);    
+       
   }
 
   
@@ -59,12 +61,18 @@ class Shop extends React.Component {
     return this.props.shop.shopInfo ? this.props.shop.shopInfo[key] : null;
   }
 
+  saveEdits (name, address1, address2, city) {
+    this.props.updateShopData('/api/shop', 2, name, address1, address2, city);
+    this.setState({editAddress: false, editName: false});
+  }
+
 
   
 
   render () {
     return (
       <div >
+        {console.log('proppppppp:', this.props.shop) }
         <div className="feed_container">
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : null}
@@ -77,14 +85,14 @@ class Shop extends React.Component {
                   <a href="#" onClick={(e) => this.setState({editName: false})}>Cancel</a>
                   </div>
                 <div>
-                  <a href="#" onClick={(e) => this.setState({editName: false})}>Save Name Change</a>
+                  <a href="#" onClick={(e) => this.saveEdits(this.state.editedName, this.props.shop.shopInfo.address1, this.props.shop.shopInfo.address2, this.props.shop.shopInfo.city)}>Save Changes</a>
                 </div>
               </div>
             </div>) : null}
           
           <div className="profile_sidebar">
             <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
-            <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city}) : null}>
+            <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city, editedOffice: this.state.editedOffice || this.props.shop.shopInfo.address2}) : null}>
             {!this.state.editAddress ?
             <ShopInfo address1={this.renderShopInfo('address1')} address2={this.renderShopInfo('address2')} city={this.renderShopInfo('city')} state={this.renderShopInfo('state')} phone={this.renderShopInfo('phone')} rating={this.renderShopInfo('rating')}/>
             : null
@@ -95,6 +103,9 @@ class Shop extends React.Component {
                 <div>Address: 
                   <input type="text" value={this.state.editedAddress} onChange={(e)=> this.setState({editedAddress: e.target.value})}/>
                 </div>
+                <div>Office#: 
+                  <input type="text" value={this.state.editedOffice} onChange={(e)=> this.setState({editedOffice: e.target.value})}/>
+                </div>
                 <div>
                   City: 
                   <input type="text" value={this.state.editedCity} onChange={(e)=> this.setState({editedCity: e.target.value})}/>
@@ -103,7 +114,7 @@ class Shop extends React.Component {
                   <a href="#" onClick={(e) => this.setState({editAddress: false})}>Cancel</a>
                 </div>
                 <div>
-                  <a href="#" onClick={(e) => this.setState({editAddress: false})}>Save changes</a>
+                  <a href="#" onClick={(e) => this.saveEdits(this.props.shop.shopInfo.name, this.state.editedAddress, this.state.editedOffice, this.state.editedCity)}>Save changes</a>
                 </div>
               </div>) 
               : null
@@ -128,7 +139,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchShopInfo: (url, id) => dispatch(fetchShopInfo(url, id))
+    fetchShopInfo: (url, id) => dispatch(fetchShopInfo(url, id)),
+    updateShopData: (url, id, name, address1, address2, city) => dispatch(updateShopData(url, id, name, address1, address2, city))
   };
 };
 
