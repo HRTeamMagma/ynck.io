@@ -155,7 +155,28 @@ module.exports.getUserInspirations = (req, res) => {
     });
 };
 
-
+module.exports.editUserProfile = (req, res) => {
+  if (req.user.id === req.body.id) {
+    models.Profile.where({ id: req.body.id }).fetch()
+      .then(profile => {
+        if (!profile) {
+          throw profile;
+        }
+        return profile.save(req.body, { method: 'update' });
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .error(err => {
+        res.status(500).send(err);
+      })
+      .catch(() => {
+        res.sendStatus(404);
+      });
+  } else {
+    res.sendStatus(500);
+  }
+};
 // module.exports.deleteOne = (req, res) => {
 //   models.Profile.where({ id: req.params.id }).fetch()
 //     .then(profile => {

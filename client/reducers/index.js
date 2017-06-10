@@ -4,7 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './reducerRecentImages';
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
 import { userData } from './reducerUserInfo';
-import { shop} from './reducerShopInfo';
+import { shop } from './reducerShopInfo';
 
 
 
@@ -18,7 +18,6 @@ const rootReducer = combineReducers({
   userData,
   shop,
   form: formReducer
-
 });
 
 export default rootReducer;

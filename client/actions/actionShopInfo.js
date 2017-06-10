@@ -12,7 +12,6 @@ export const fetchShopInfo = (url, userId) => {
     axios.get(url, {params: {id: userId}})
       .then(success => {
         
-        console.log('dlfjkdfjfjdlk: ', success);
         dispatch(shopInfo(success.data));
       })
       .catch(error => {

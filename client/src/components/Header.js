@@ -17,7 +17,6 @@ class Header extends React.Component {
 
     axios.get(`/api/profiles/${loggedInUser.id}`)
     .then((results) => {
-      console.log(results.data);
       this.setState({
         userInfo: results.data,
       });
