@@ -64,4 +64,7 @@ router.route('/shop')
     res.send(201);
   });
 
+router.route('/create/shop')
+  .post(ShopController.createShop);
+
 module.exports = router;

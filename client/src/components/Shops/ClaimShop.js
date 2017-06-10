@@ -13,6 +13,7 @@ class ClaimShop extends React.Component {
 
     this.submit = this.submit.bind(this);
     this.findParlor = this.findParlor.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
   }
   submit (values) {
@@ -34,8 +35,17 @@ class ClaimShop extends React.Component {
     .catch(error => console.log(error));
   }
 
+  handleClick (selectedShop) {
+    axios.post('/api/create/shop', {
+      data: selectedShop
+    })
+    .then((success) => {
+      console.log(success);
+    })
+    .catch(error => console.log(error));
+  }
+
   render () {
-    console.log('state: ', this.state.tattooParlors);
     return ( 
       <div> 
         <h1>Claim Your Shop</h1>
@@ -43,10 +53,11 @@ class ClaimShop extends React.Component {
         {this.state.tattooParlors.map((parlor, i) => {
           return (
             <div key={i}>
-              <h3>{parlor.name}</h3>
+              <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
               <div className='recent_tattoos'>
-                <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude}/>
+                <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height='60vh' width='60vh' zoom={13}/>
               </div>
+              <button onClick={() => this.handleClick(parlor)}>Claim Shop</button>
             </div>
           );
         })}

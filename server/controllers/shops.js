@@ -20,6 +20,10 @@ module.exports.getShopInfoForUser = (req, res) => {
   });
 };
 
+module.exports.createShop = (req, res) => {
+  console.log(req.body);
+};
+
 
     // var address = dummy.shop.shopInfo.address1 + ' ' + dummy.shop.shopInfo.address2;
     // latLong.latLong(address, function(result) {
