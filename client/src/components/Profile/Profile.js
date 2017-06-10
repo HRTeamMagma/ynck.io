@@ -49,7 +49,6 @@ class Profile extends React.Component {
     this.setState({
       editMode: false
     });
-    this.getUserData();
   }
   
   // TODO 
