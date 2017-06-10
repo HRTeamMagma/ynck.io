@@ -9,7 +9,7 @@ class UserInfo extends React.Component {
     this.state = {
       firstName: this.props.userData.first,
       lastName: this.props.userData.last,
-      description: this.props.userData.description
+      description: this.props.userData.profile_description
     };
   }
 
