@@ -5,6 +5,7 @@ import { fetchAllUserData, updateUserData } from './../../../actions/actionUserI
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
+import Following from './Following';
 
 
 class Profile extends React.Component {
@@ -18,6 +19,7 @@ class Profile extends React.Component {
     this.saveEdits = this.saveEdits.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
+    this.followUser = this.followUser.bind(this);
   }
 
   handleEditProfile(e) {
@@ -50,7 +52,11 @@ class Profile extends React.Component {
     this.getUserData();
   }
   
-
+  // TODO 
+  followUser(e) {
+    console.log('follow user called');
+  }
+  
   render() {
     return (
       <div>
@@ -58,9 +64,12 @@ class Profile extends React.Component {
           <div className="profile_sidebar">
             { this.props.userData.userProfile ? 
               <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
-              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } /> : null 
-            }
+              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
+              followUser = { this.followUser } /> : null 
+            }  
+             <Following />
           </div>
+
           <div className="main_content">
             { this.props.userData ? 
               <Feed myTattoos = {this.props.userData.tattoo} myDesigns = {this.props.userData.design} myInspirations = {this.props.userData.inspiration}/>

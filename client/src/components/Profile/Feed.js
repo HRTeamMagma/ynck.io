@@ -2,7 +2,6 @@ import React from 'react';
 import MyTattoos from './MyTattoos';
 import MyDesigns from './MyDesigns';
 import MyInspirations from './MyInspirations';
-import Following from './Following';
 
 class Feed extends React.Component {
   constructor(props) {
@@ -27,7 +26,6 @@ class Feed extends React.Component {
           <MyInspirations myInspirations = {this.props.myInspirations}/>
           : null
         }
-        <Following />
       </div>
     );
   }
