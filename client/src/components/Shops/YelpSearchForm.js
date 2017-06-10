@@ -24,5 +24,5 @@ const YelpSearchForm = props => {
 
 
 export default reduxForm({
-  form: 'shopSearch' // a unique identifier for this form
+  form: 'shopSearch' 
 })(YelpSearchForm);

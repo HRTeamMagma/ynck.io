@@ -1,6 +1,7 @@
 import React from 'react';
 import YelpSearchForm from './YelpSearchForm';
 import axios from 'axios';
+import MapView from './MapView';
 
 class ClaimShop extends React.Component {
   constructor (props) {
@@ -26,13 +27,6 @@ class ClaimShop extends React.Component {
       }
     })
     .then (response => {
-      // let tattooParlors = [];
-      // response.data.filter((results) => {
-      //   if (results.categories[0].alias === 'tattoo' || results.categories[1].alias === 'tattoo') {
-      //     tattooParlors.push(results);
-      //     console.log(this.state.tattooParlors);
-      //   } 
-      // });
       this.setState({
         tattooParlors: response.data,
       });
@@ -47,7 +41,14 @@ class ClaimShop extends React.Component {
         <h1>Claim Your Shop</h1>
         <YelpSearchForm onSubmit={this.submit}/>
         {this.state.tattooParlors.map((parlor, i) => {
-          return <div key={i}>{parlor.name}</div>;
+          return (
+            <div key={i}>
+              <h3>{parlor.name}</h3>
+              <div className='recent_tattoos'>
+                <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude}/>
+              </div>
+            </div>
+          );
         })}
       </div>
     );
