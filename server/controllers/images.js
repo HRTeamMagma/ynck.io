@@ -3,8 +3,17 @@ const knex = require('../../db/').knex;
 const helper = require('../helpers/db_helpers');
 
 module.exports.uploadImage = (req, res) => {
-  console.log('got an upload', req.file);
-  res.status(200).send(req.file);
+  // console.log('got an upload', req.file);
+  Image.forge({
+    url: req.file.location,
+    profile_id: req.user.id,
+    image_type: req.file.image_type
+  })
+  .then(image => {
+    console.log(image);
+    res.status(200).send(req.file);
+  })
+  .catch(error => res.sendStatus(500));
 };
 
 module.exports.getLatestImages = (req, res) => {
