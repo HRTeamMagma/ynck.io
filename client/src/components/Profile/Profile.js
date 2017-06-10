@@ -6,6 +6,7 @@ import { fetchAllUserData, updateUserData } from './../../../actions/actionUserI
 import UserInfo from './UserInfo';
 import Feed from './Feed';
 import Following from './Following';
+import { CometSpinLoader } from 'react-css-loaders';
 
 
 class Profile extends React.Component {
@@ -49,7 +50,7 @@ class Profile extends React.Component {
     this.setState({
       editMode: false
     });
-  }
+he
   
   // TODO 
   followUser(e) {
@@ -57,16 +58,21 @@ class Profile extends React.Component {
   }
   
   render() {
+
     return (
       <div>
         <div className="feed_container">
+          {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
           <div className="profile_sidebar">
             { this.props.userData.userProfile ? 
-              <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
-              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
-              followUser = { this.followUser } /> : null 
+              <div>
+                <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
+                handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
+                followUser = { this.followUser } />
+                <Following />
+              </div>  
+              : null
             }  
-             <Following />
           </div>
 
           <div className="main_content">
@@ -84,7 +90,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userData: state.userData
+    userData: state.userData,
+    userDataIsLoading: state.userDataIsLoading
   };
 };
 

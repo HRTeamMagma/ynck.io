@@ -1,3 +1,13 @@
+export const userDataIsLoading = (state = false, action) => {
+  switch (action.type) {
+  case 'USER_DATA_IS_LOADING':
+    return action.userDataIsLoading;
+  default:
+    return state;
+  }
+};
+
+
 export const userData = (state = [], action) => {
   switch (action.type) {
   case 'FETCH_USER_DATA_SUCCESS':
