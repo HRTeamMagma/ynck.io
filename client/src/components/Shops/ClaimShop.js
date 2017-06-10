@@ -36,6 +36,7 @@ class ClaimShop extends React.Component {
   }
 
   handleClick (selectedShop) {
+    console.log(selectedShop);
     axios.post('/api/create/shop', {
       data: selectedShop
     })

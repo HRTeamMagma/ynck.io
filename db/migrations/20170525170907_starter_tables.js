@@ -45,7 +45,7 @@ exports.up = function(knex, Promise) {
     // this adds the necessary shop_id column to the profile table
     knex.schema.table('profiles', function(table) {
       table.integer('shop_id').nullable();
-      table.foreign('shop_id').references('shops.id').onDelete('CASCADE');
+      table.foreign('shop_id').references('shops.id');
     })
   ]);
 };

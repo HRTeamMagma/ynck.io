@@ -37,7 +37,6 @@ module.exports.createShop = (req, res) => {
   })
   .save()
   .tap(shop => {
-    console.log('owner: ', owner);
     models.Profile.where({
       id: owner
     })
@@ -50,6 +49,16 @@ module.exports.createShop = (req, res) => {
     })
     .catch(error => console.log(error));
   });
+  // .tap(shop => {
+  //   models.Shopimage.forge({
+  //     url: shopToAdd.image_url,
+  //     shop_id: shop.get('id')
+  //   })
+  //   .then(success => {
+  //     res.sendStatus(201);
+  //   })
+  //   .catch(error => console.log(error));
+  // });
 };
 
 
