@@ -21,7 +21,35 @@ module.exports.getShopInfoForUser = (req, res) => {
 };
 
 module.exports.createShop = (req, res) => {
-  console.log(req.body);
+  let shopToAdd = req.body.data;
+  let owner = req.user.id;
+  models.Shop.forge({
+    name: shopToAdd.name,
+    url: shopToAdd.url,
+    address1: shopToAdd.location.address1,
+    address2: shopToAdd.location.address2,
+    city: shopToAdd.location.city,
+    state: shopToAdd.location.state,
+    zip: shopToAdd.location.zip_code,
+    phone: shopToAdd.phone,
+    rating: shopToAdd.rating,
+    shop_image: null
+  })
+  .save()
+  .tap(shop => {
+    console.log('owner: ', owner);
+    models.Profile.where({
+      id: owner
+    })
+    .fetch()
+    .then( res => {
+      res.save({shop_id: shop.get('id')}, {method: 'update'});
+    })
+    .then( res => {
+      res.send(201);
+    })
+    .catch(error => console.log(error));
+  });
 };
 
 
