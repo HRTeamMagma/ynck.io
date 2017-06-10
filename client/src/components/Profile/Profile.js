@@ -5,6 +5,7 @@ import { fetchAllUserData, updateUserData } from './../../../actions/actionUserI
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
+import Following from './Following';
 
 
 class Profile extends React.Component {
@@ -65,8 +66,10 @@ class Profile extends React.Component {
               <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
               handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
               followUser = { this.followUser } /> : null 
-            }
+            }  
+             <Following />
           </div>
+
           <div className="main_content">
             { this.props.userData ? 
               <Feed myTattoos = {this.props.userData.tattoo} myDesigns = {this.props.userData.design} myInspirations = {this.props.userData.inspiration}/>

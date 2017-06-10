@@ -44,8 +44,23 @@
   display: inline-block;
 }
 
-// .edit-icon {
-//   background: url('/assets/icons/edit.png') no-repeat center;
-//   width: $icon-size;
-//   height: $icon-size;
-// }
+.following {
+  padding: $small-spacing $small-spacing 0 $small-spacing;
+  border: 1px solid $divider-grey;
+	margin-top: $mini-spacing;
+
+  img {
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 $mini-spacing $mini-spacing 0;
+    width: 40px;
+    height: 40px;
+  
+    &:nth-of-type(4) {
+      margin-right: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
