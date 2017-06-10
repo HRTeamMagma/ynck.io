@@ -3,6 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { recentImagesFetchData, addToFavorites } from '../../../actions/actionRecentImages';
 import { getUserFavorites } from '../../../actions/actionFavorites';
+import { CometSpinLoader } from 'react-css-loaders';
+
 
 class RecentTattoos extends React.Component {
   constructor(props) {
@@ -34,15 +36,12 @@ class RecentTattoos extends React.Component {
 
   render() {
 
-    if (this.props.recentImagesHasErrored) {
-      return <p>Sorry! There was an error loading the items</p>;
-    }
-    if (this.props.recentImagesIsLoading) {
-      return <p>Loading…</p>;
-    }
 
     return (
       <div className="feed_container">
+        { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
+        { this.props.recentImagesIsLoading ? <CometSpinLoader /> : null }
+
         <div className="recent_tattoos">
           <h2>Recent tattoos</h2>
 
