@@ -14,6 +14,11 @@ import StarRating from 'react-star-rating';
 class Shop extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showEditButton: false,
+      editMode: false,
+    };
   
     this.renderShopInfo = this.renderShopInfo.bind(this);
 
@@ -21,10 +26,12 @@ class Shop extends React.Component {
     //   console.log(res);
     // });
     //use of store (REDUXIFIED api call)
+    //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
     this.props.fetchShopInfo('/api/shop', 2);
     setTimeout( ()=> {
-      console.log('the shpppp:', this.props.shop.lat);
-    }, 1000);
+      console.log('the shpppp:', loggedInUser.shop_id);
+    }, 4000);
+    loggedInUser.shop_id === 2 ? this.setState({showEditButton: true}) : null;
   }
 
   
