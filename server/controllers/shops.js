@@ -42,11 +42,11 @@ module.exports.createShop = (req, res) => {
       id: owner
     })
     .fetch()
-    .then( res => {
+    .then(res => {
       res.save({shop_id: shop.get('id')}, {method: 'update'});
     })
-    .then( res => {
-      res.send(201);
+    .then(success => {
+      res.sendStatus(201);
     })
     .catch(error => console.log(error));
   });

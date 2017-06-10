@@ -40,7 +40,7 @@ class ClaimShop extends React.Component {
       data: selectedShop
     })
     .then((success) => {
-      console.log(success);
+      console.log('YAY: ', success);
     })
     .catch(error => console.log(error));
   }
