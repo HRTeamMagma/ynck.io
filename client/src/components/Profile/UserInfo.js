@@ -26,7 +26,8 @@ class UserInfo extends React.Component {
             <div>
               <a href="#" onClick={(e) => this.props.handleEditProfile(e)}>edit</a>
               </div>
-              : null
+              : 
+              <button onClick={(e) => this.props.followUser(e)} >Follow</button>
             }
           </div>
           : 

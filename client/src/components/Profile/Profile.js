@@ -18,6 +18,7 @@ class Profile extends React.Component {
     this.saveEdits = this.saveEdits.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
+    this.followUser = this.followUser.bind(this);
   }
 
   handleEditProfile(e) {
@@ -50,7 +51,11 @@ class Profile extends React.Component {
     this.getUserData();
   }
   
-
+  // TODO 
+  followUser(e) {
+    console.log('follow user called');
+  }
+  
   render() {
     return (
       <div>
@@ -58,7 +63,8 @@ class Profile extends React.Component {
           <div className="profile_sidebar">
             { this.props.userData.userProfile ? 
               <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
-              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } /> : null 
+              handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
+              followUser = { this.followUser } /> : null 
             }
           </div>
           <div className="main_content">
