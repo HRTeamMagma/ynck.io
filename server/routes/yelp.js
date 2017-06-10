@@ -7,7 +7,7 @@ module.exports = (query, callback) => {
     term: query.term,
     location: query.location,
     limit: 10,
-    category_filter: 'beautysvc,All,tattoo,All'
+    category_filter: 'beautysvc,tattoo'
   };
 
   yelp.accessToken(clientId, clientSecret).then(response => {
