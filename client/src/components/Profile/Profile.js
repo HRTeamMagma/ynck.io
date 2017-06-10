@@ -45,7 +45,7 @@ class Profile extends React.Component {
   }
 
   saveEdits(firstName, lastName, description) {  
-    this.props.updateUserData('/api/user/edit', this.props.userData.userProfile, loggedInUser.id, firstName, lastName, description);
+    this.props.updateUserData('/api/user/edit', loggedInUser.id, firstName, lastName, description);
     this.setState({
       editMode: false
     });
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
-    updateUserData: (url, userData, id, firstName, lastName, profile_description) => dispatch(updateUserData(url, userData, id, firstName, lastName, profile_description))
+    updateUserData: (url, id, firstName, lastName, profile_description) => dispatch(updateUserData(url, id, firstName, lastName, profile_description))
   };
 };
 

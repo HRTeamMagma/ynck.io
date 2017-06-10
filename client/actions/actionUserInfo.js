@@ -19,17 +19,16 @@ export const fetchAllUserData = (url, userId) => {
   };   
 };
 
-export const updateUserDataSuccess = (userData, first, last, profile_description) => {
+export const updateUserDataSuccess = (first, last, profile_description) => {
   return {
     type: 'UPDATE_USER_DATA_SUCCESS',
-    userData,
     first,
     last,
     profile_description
   };
 };
 
-export const updateUserData = (url, userData, id, first, last, profile_description) => {
+export const updateUserData = (url, id, first, last, profile_description) => {
 
   return (dispatch) => {
     axios.post(url, {
@@ -39,7 +38,7 @@ export const updateUserData = (url, userData, id, first, last, profile_descripti
       profile_description
     })
     .then(success => {
-      dispatch(updateUserDataSuccess(userData, first, last, profile_description));
+      dispatch(updateUserDataSuccess(first, last, profile_description));
     });
   };
 };
