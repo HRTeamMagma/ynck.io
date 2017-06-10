@@ -10,8 +10,12 @@ const YelpSearchForm = props => {
         <Field name="term" component="input" type="text" />
       </div>
       <div>
-        <label htmlFor="location">City, State</label>
-        <Field name="location" component="input" type="text" />
+        <label htmlFor="city">City</label>
+        <Field name="city" component="input" type="text" />
+      </div>
+      <div>
+        <label htmlFor="state">State</label>
+        <Field name="state" component="input" type="text" />
       </div>
       <button type="submit">Submit</button>
     </form>

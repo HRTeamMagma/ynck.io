@@ -5,17 +5,19 @@ const clientSecret = process.env.YELP_CLIENT_SECRET;
 module.exports = (query, callback) => {
   const searchRequest = {
     term: query.term,
-    location: query.location
+    location: query.location,
+    limit: 10,
+    category_filter: 'beautysvc,All,tattoo,All'
   };
 
   yelp.accessToken(clientId, clientSecret).then(response => {
     const client = yelp.client(response.jsonBody.access_token);
 
     client.search(searchRequest).then(response => {
-      console.log(response.jsonBody.businesses);
+      callback(null, response.jsonBody.businesses);
     });
   }).catch(e => {
-    console.log(e);
+    callback(e, null);
   });
   
 };

@@ -26,7 +26,6 @@ app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
 
 app.get('/api/yelp', (req, res) => {
-  console.log(req.query);
   Yelp(req.query, (err, data) => {
     if (err) {
       res.status(500).send(err);
