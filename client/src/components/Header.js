@@ -63,7 +63,7 @@ class Header extends React.Component {
               <nav>
                 <img className ='header-photo' src={this.state.userInfo.profile_image}/>
                 <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
-                <DropdownMenu isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
+                <DropdownMenu userInfo = {this.state.userInfo} isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
               </nav>
               ) : (
               <nav>

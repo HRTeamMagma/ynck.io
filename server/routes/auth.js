@@ -60,6 +60,14 @@ router.route('/shop') //change this route????
     });
   });
 
+//place holder server route, so shop renders on react router call
+router.route('/claimshop') //change this route????
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user // get the user out of session and pass to template
+    });
+  });
+
 router.route('/logout')
   .get((req, res) => {
     req.logout();

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const middleware = require('./middleware');
 const routes = require('./routes');
+const Yelp = require('./routes/yelp');
 
 const app = express();
 
@@ -23,5 +24,15 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/', routes.auth);
 app.use('/api', routes.api);
 app.use('/api/profiles', routes.profiles);
+
+app.get('/api/yelp', (req, res) => {
+  Yelp(req.query, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
 
 module.exports = app;
