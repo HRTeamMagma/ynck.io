@@ -48,14 +48,14 @@ class ClaimShop extends React.Component {
 
   render () {
     return ( 
-      <div> 
-        <h1>Claim Your Shop</h1>
+      <div className="feed_container"> 
+        <h1 className="profile_name">Claim Your Shop</h1>
         <YelpSearchForm onSubmit={this.submit}/>
         {this.state.tattooParlors.map((parlor, i) => {
           return (
-            <div key={i}>
+            <div key={i} className="image_grid">
               <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
-              <div className='recent_tattoos'>
+              <div>
                 <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height='60vh' width='60vh' zoom={13}/>
               </div>
               <button onClick={() => this.handleClick(parlor)}>Claim Shop</button>
