@@ -13,20 +13,13 @@ class Search extends React.Component {
   }
 
   captureSearchInput(e) {
-    console.log('searchinput', this.state.searchInput);
-
     this.setState({
       searchInput: e.target.value
     });
   }
 
-  submitSearch() {
-    console.log('submit search called');
-    // GET request to db to fetch list of shops, users, tags
-    // axios.get('/search')
-    // .then((response) => {
-    //   console.log('response', response);
-    // })
+  submitSearch(searchResults) {
+    this.props.search('/search', searchResults);
   }
 
   render() {
