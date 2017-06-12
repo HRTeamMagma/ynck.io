@@ -108,21 +108,22 @@ class Shop extends React.Component {
               </div>) 
               : null
             }
-            {this.props.shop.shopInfo ? 
+
+            {/*{this.props.shop.shopInfo ? 
             ( <MapView 
-              lat={this.props.shop.shopInfo.latitude} 
-              lon={this.props.shop.shopInfo.longitude}
+              lat={this.props.shop.shopInfo.lat} 
+              lon={this.props.shop.shopInfo.lon}
               height='50vh'
               width='50vh'
               /> )
-              :
-            ( <MapView 
+              :*/}
+            <MapView 
               lat={this.renderShopInfo('lat') || .34} 
               lon={this.renderShopInfo('lon') || 32.5}
               height='50vh'
               width='50vh'
-              /> )
-            }
+              />
+            {/*}*/}
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>

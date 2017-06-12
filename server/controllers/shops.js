@@ -13,6 +13,7 @@ module.exports.getShopInfoForUser = (req, res) => {
       responseObj.shopInfo = theData;
 
       var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.address2;
+
       latLong.latLong(address, function(result) {
         responseObj.lat = result[0].latitude;
         responseObj.lon = result[0].longitude;
