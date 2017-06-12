@@ -55,11 +55,12 @@ class UploadForm extends React.Component {
         url: this.state.uploadedImg,
         profile_id: loggedInUser.id,
         favoriteCount: 0,
-        image_type: 'tattoo',
+        image_type: this.props.image_type,
         title: this.state.title,
         tags: tagArray
       };
       this.props.updateUserPhotosSuccess(photoData);
+      this.setState({spinner: false, uploadedImg: null});
     })
     .catch(err => {
       console.log(err);
