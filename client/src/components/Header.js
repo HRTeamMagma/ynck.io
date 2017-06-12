@@ -59,7 +59,7 @@ class Header extends React.Component {
             <div className="logo">
               <Link to="/"><h1>ynck</h1></Link>
             </div>
-            <Search />
+            <Search submitSearch={this.props.submitSearch} />
             {this.props.loggedInUser ? (
               <nav>
                 <img className ='header-photo' src={this.state.userInfo.profile_image}/>

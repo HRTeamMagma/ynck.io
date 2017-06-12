@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class SearchResults extends React.Component {
     return (
       <div className="searchResults">
         <div className="feed_container">
-          
+          { console.log('search results', this.props.searchResults)}
         </div>
       </div>
     );

@@ -9,7 +9,7 @@ export const searchIsLoading = (bool) => {
 };
 
 
-export const searchResultsSuccess = (userData) => {
+export const searchResultsSuccess = (searchResults) => {
   return {
     type: 'SEARCH_RESULTS_SUCCESS',
     searchResults

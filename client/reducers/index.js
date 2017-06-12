@@ -5,6 +5,8 @@ import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './r
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
 import { userDataIsLoading, userData } from './reducerUserInfo';
 import { shop } from './reducerShopInfo';
+import { searchResults } from './reducerSearch';
+
 
 
 
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   userDataIsLoading,
   userData,
   shop,
+  searchResults,
   form: formReducer
 });
 
