@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateUserPhotosSuccess } from '../../../actions/actionUserInfo';
 const Dropzone = require('react-dropzone');
 const upload = require('superagent');
 const axios = require('axios');
@@ -27,8 +29,7 @@ class UploadForm extends React.Component {
   onDrop(files) {
     this.setState({spinner: true});
     upload.post('/api/upload-image')
-    // .field('image_type', this.props.image_type)
-    .field('image_type', 'tattoo')
+    .field('image_type', this.props.image_type)
     .attach('imageUpload', files[0])
     .end((err, res) => {
       this.setState({spinner: false});
@@ -46,13 +47,24 @@ class UploadForm extends React.Component {
   handleSubmitForm(e) {
     this.setState({spinner: true});
     e.preventDefault();
-    console.log(this.state);
     axios.post('/api/edit-image', this.state)
     .then(result => {
-      this.setState({spinner: false});
+      let tagArray = Object.keys(this.state.tags);
+      let photoData = {
+        id: this.state.imageId,
+        url: this.state.uploadedImg,
+        profile_id: loggedInUser.id,
+        favoriteCount: 0,
+        image_type: this.props.image_type,
+        title: this.state.title,
+        tags: tagArray
+      };
+      this.props.updateUserPhotosSuccess(photoData);
+      this.setState({spinner: false, uploadedImg: null});
     })
     .catch(err => {
-      this.setState({spinner: false});
+      console.log(err);
+      this.setState({spinner: false, uploadedImg: null});
     });
   }
 
@@ -150,4 +162,17 @@ class UploadForm extends React.Component {
   }
 }
 
-module.exports = UploadForm;
+
+const mapStateToProps = (state) => {
+  return {
+    userData: state.userData
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserPhotosSuccess: (photoData) => dispatch(updateUserPhotosSuccess(photoData))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UploadForm);
