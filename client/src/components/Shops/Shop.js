@@ -27,9 +27,13 @@ class Shop extends React.Component {
     this.renderShopInfo = this.renderShopInfo.bind(this);
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
-
-    this.props.fetchShopInfo('/api/shop', loggedInUser.id);
-       
+    
+    // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
+    //   console.log(res);
+    // });
+    //use of store (REDUXIFIED api call)
+    //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
+    this.props.fetchShopInfo('/api/shop');
   }
 
   componentDidMount() {
@@ -38,11 +42,11 @@ class Shop extends React.Component {
   }
   
   checkIfLoggedIn (userShopId) {
-    if (userShopId === loggedInUser.shopId) {
+    if (loggedInUser.shop_id) {
       this.setState({allowEdits: true});
     }
   }
-  
+
   renderShopInfo (key) {
     if (key === 'lon' || key === 'lat' || key === 'images') {
       return this.props.shop ? this.props.shop[key] : null;
@@ -51,7 +55,7 @@ class Shop extends React.Component {
   }
 
   saveEdits (name, address1, address2, city) {
-    this.props.updateShopData('/api/shop', loggedInUser.shop_id, name, address1, address2, city);
+    this.props.updateShopData('/api/shop', name, address1, address2, city);
     this.setState({editAddress: false, editName: false});
   }
 
@@ -139,8 +143,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchShopInfo: (url, id) => dispatch(fetchShopInfo(url, id)),
-    updateShopData: (url, id, name, address1, address2, city) => dispatch(updateShopData(url, id, name, address1, address2, city))
+    fetchShopInfo: (url) => dispatch(fetchShopInfo(url)),
+    updateShopData: (url, name, address1, address2, city) => dispatch(updateShopData(url, name, address1, address2, city))
   };
 };
 
