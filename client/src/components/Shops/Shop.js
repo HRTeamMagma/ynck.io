@@ -3,13 +3,11 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchShopInfo, updateShopData } from '../../../actions/actionShopInfo';
 
-
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
 import StarRating from 'react-star-rating';
 
-// import hopeify from '../../../../hopeify';
 
 class Shop extends React.Component {
   constructor(props) {
@@ -25,21 +23,14 @@ class Shop extends React.Component {
       editedCity: '',
       editedOffice: ''
     };
-  
+
     this.renderShopInfo = this.renderShopInfo.bind(this);
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
-    
-    // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
-    //   console.log(res);
-    // });
-    //use of store (REDUXIFIED api call)
-    //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
-    this.props.fetchShopInfo('/api/shop', 2);
+
+    this.props.fetchShopInfo('/api/shop', loggedInUser.id);
        
   }
-
-  
 
   componentDidMount() {
     this.checkIfLoggedIn(loggedInUser.shop_id);
@@ -47,12 +38,10 @@ class Shop extends React.Component {
   }
   
   checkIfLoggedIn (userShopId) {
-    if (userShopId === 2) {
+    if (userShopId === loggedInUser.shopId) {
       this.setState({allowEdits: true});
     }
-   
   }
-
   
   renderShopInfo (key) {
     if (key === 'lon' || key === 'lat' || key === 'images') {
@@ -62,17 +51,13 @@ class Shop extends React.Component {
   }
 
   saveEdits (name, address1, address2, city) {
-    this.props.updateShopData('/api/shop', 2, name, address1, address2, city);
+    this.props.updateShopData('/api/shop', loggedInUser.shop_id, name, address1, address2, city);
     this.setState({editAddress: false, editName: false});
   }
-
-
-  
 
   render () {
     return (
       <div >
-        {console.log('proppppppp:', this.props.shop) }
         <div className="feed_container">
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : null}
@@ -119,7 +104,21 @@ class Shop extends React.Component {
               </div>) 
               : null
             }
-            <MapView lat={this.renderShopInfo('lat') || .34} lon={this.renderShopInfo('lon') || 32.5}/>
+            {this.props.shop.shopInfo ? 
+            ( <MapView 
+              lat={this.props.shop.shopInfo.latitude} 
+              lon={this.props.shop.shopInfo.longitude}
+              height='50vh'
+              width='50vh'
+              /> )
+              :
+            ( <MapView 
+              lat={this.renderShopInfo('lat') || .34} 
+              lon={this.renderShopInfo('lon') || 32.5}
+              height='50vh'
+              width='50vh'
+              /> )
+            }
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>
@@ -132,6 +131,7 @@ class Shop extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     shop: state.shop
   };
