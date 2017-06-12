@@ -44,19 +44,19 @@ module.exports.createShop = (req, res) => {
     .then(res => {
       res.save({shop_id: shop.get('id')}, {method: 'update'});
     })
-    .then(success => {
-      res.sendStatus(201);
-    })
     .catch(error => console.log(error));
-  });
-  // .tap(shop => {
-  //   models.Shopimage.forge({
-  //     url: shopToAdd.image_url,
-  //     shop_id: shop.get('id')
-  //   })
-  //   .then(success => {
-  //     res.sendStatus(201);
-  //   })
-  //   .catch(error => console.log(error));
-  // });
+  })
+  .then(shop => {
+    console.log('shop: ', shop);
+    models.Shopimage.forge({
+      url: shopToAdd.image_url,
+      shop_id: shop.get('id')
+    })
+    .save()
+    .catch(error => console.log(error));
+  })
+  .then(success => {
+    res.sendStatus(201);
+  })
+  .catch(error => console.log(error));
 };
