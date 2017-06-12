@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Search from './Home/Search';
+import Search from './Search';
 import DropdownMenu from './DropdownMenu';
 
 
@@ -59,6 +59,7 @@ class Header extends React.Component {
             <div className="logo">
               <Link to="/"><h1>ynck</h1></Link>
             </div>
+            <Search />
             {this.props.loggedInUser ? (
               <nav>
                 <img className ='header-photo' src={this.state.userInfo.profile_image}/>
