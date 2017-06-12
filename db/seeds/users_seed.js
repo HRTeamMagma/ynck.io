@@ -14,7 +14,6 @@ let createShopImage = (knex, index) => {
 
 let createTag = (knex, id, word) => {
   return knex('tags').insert({
-    id,
     name: word
   });
 };
@@ -22,7 +21,6 @@ let createTag = (knex, id, word) => {
 let createImage = (knex, photo, id) => {
   var types = ['tattoo', 'inspiration', 'design'];
   return knex('images').insert({
-    id,
     url: photo.url,
     profile_id: Math.floor(Math.random() * 4) + 1,
     image_type: types[Math.floor(Math.random() * 3)],

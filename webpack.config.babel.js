@@ -8,6 +8,10 @@ const config = {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js'
   },
+  node: {
+    __dirname: true,
+  },
+  plugins: [new webpack.DefinePlugin({ "global.GENTLY": false })],
   externals: {
     'cheerio': 'window',
     'react/lib/ExecutionEnvironment': true,
