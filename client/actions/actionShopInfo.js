@@ -12,7 +12,7 @@ export const fetchShopInfo = (url, userId) => {
   return (dispatch) => {
     axios.get(url, {params: {id: userId}})
       .then(success => {
-        
+        console.log('success Data: ', success.data);
         dispatch(shopInfo(success.data));
       })
       .catch(error => {

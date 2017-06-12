@@ -28,7 +28,6 @@ class Shop extends React.Component {
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
 
-    console.log(loggedInUser);
     this.props.fetchShopInfo('/api/shop', loggedInUser.id);
        
   }
@@ -59,7 +58,6 @@ class Shop extends React.Component {
   render () {
     return (
       <div >
-        {console.log('Shop Component Props:', this.props.shop) }
         <div className="feed_container">
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : null}
@@ -106,7 +104,21 @@ class Shop extends React.Component {
               </div>) 
               : null
             }
-            <MapView lat={this.renderShopInfo('lat') || .34} lon={this.renderShopInfo('lon') || 32.5}/>
+            {this.props.shop.shopInfo ? 
+            ( <MapView 
+              lat={this.props.shop.shopInfo.latitude} 
+              lon={this.props.shop.shopInfo.longitude}
+              height='50vh'
+              width='50vh'
+              /> )
+              :
+            ( <MapView 
+              lat={this.renderShopInfo('lat') || .34} 
+              lon={this.renderShopInfo('lon') || 32.5}
+              height='50vh'
+              width='50vh'
+              /> )
+            }
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>
