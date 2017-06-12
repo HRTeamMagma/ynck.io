@@ -63,4 +63,13 @@ router.route('/latest-images')
 router.route('/upload-image')
   .post(upload.single('imageUpload'), ImageController.uploadImage);
 
+router.route('/edit-image')
+  .post(ImageController.editImage);
+
+router.route('/delete-tag')
+  .post(ImageController.removeTagFromImage);
+
+router.route('/add-tag')
+  .post(ImageController.addTagToImage);
+
 module.exports = router;
