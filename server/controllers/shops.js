@@ -3,21 +3,45 @@ const helper = require('../helpers/db_helpers');
 const latLong = require('../../LatLong');
 
 module.exports.getShopInfoForUser = (req, res) => {
-  models.Profile.where({shop_id: req.user.shop_id}).fetch({withRelated: ['shop', 'shop.shopimages']})
-  .then ( profile => {
-    let theData = profile.related('shop').toJSON();
-    let responseObj = {};
-    responseObj.images = theData.shopimages;
-    delete theData.shopimages;
-    responseObj.shopInfo = theData;
-    var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.address2;
-    latLong.latLong(address, function(result) {
-      responseObj.lat = result[0].latitude;
-      responseObj.lon = result[0].longitude;
-      res.send(responseObj);
+  if (req.user) {
+    models.Profile.where({id: req.user.id}).fetch({withRelated: ['shop', 'shop.shopimages']})
+    .then ( profile => {
+      let theData = profile.related('shop').toJSON();
+      let responseObj = {};
+      responseObj.images = theData.shopimages;
+      delete theData.shopimages;
+      responseObj.shopInfo = theData;
+
+      var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.address2;
+      latLong.latLong(address, function(result) {
+        responseObj.lat = result[0].latitude;
+        responseObj.lon = result[0].longitude;
+        res.send(responseObj);
+      });
     });
+  } else {
+    res.redirect('/');
+  }
+};
+
+module.exports.updateShopInfo = (req, res) => {
+  models.Profile.where({id: req.user.id})
+  .fetch()
+  .then(user => {
+    models.Shop.where({id: user.get('shop_id')})
+    .fetch()
+    .then(shop => {
+      shopData = req.body;
+      shop.save(shopData, {method: 'update'});
+      res.sendStatus(201);
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500);
   });
 };
+
 
 module.exports.createShop = (req, res) => {
   let shopToAdd = req.body.data;
