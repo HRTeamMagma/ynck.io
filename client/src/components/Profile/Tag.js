@@ -6,12 +6,11 @@ class Tag extends React.Component {
   }
 
   render() {
-    return <div className="tag">{this.props.tagName}<a href="" onClick={(e) => {
+    return <span className="tag">{this.props.tagName}<a href="" className="tag-delete" onClick={(e) => {
       e.preventDefault();
       this.props.deleteClick(this.props.tagName);
-    }} >x</a></div>;
+    }} >✖</a></span>;
   }
-
 }
 
 export default Tag;
