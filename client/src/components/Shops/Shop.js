@@ -109,14 +109,7 @@ class Shop extends React.Component {
               : null
             }
 
-            {/*{this.props.shop.shopInfo ? 
-            ( <MapView 
-              lat={this.props.shop.shopInfo.lat} 
-              lon={this.props.shop.shopInfo.lon}
-              height='50vh'
-              width='50vh'
-              /> )
-              :*/}
+            
             <MapView 
               lat={this.renderShopInfo('lat') || .34} 
               lon={this.renderShopInfo('lon') || 32.5}
