@@ -12,6 +12,8 @@ exports.up = function(knex, Promise) {
       table.string('zip', 10).nullable();
       table.string('phone', 100).nullable();
       table.string('rating', 10).nullable();
+      table.string('latitude', 100).nullable();
+      table.string('longitude', 100).nullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('images', function(table) {
