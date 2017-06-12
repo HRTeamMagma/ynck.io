@@ -30,6 +30,13 @@ export const fetchAllUserData = (url, userId) => {
   };   
 };
 
+export const updateUserPhotosSuccess = (photoData) => {
+  return {
+    type: 'UPDATE_USER_PHOTO_SUCCESS',
+    photoData
+  };
+};
+
 export const updateUserDataSuccess = (first, last, profile_description) => {
   return {
     type: 'UPDATE_USER_DATA_SUCCESS',

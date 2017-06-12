@@ -5,9 +5,11 @@ import { fetchAllUserData, updateUserData } from './../../../actions/actionUserI
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
+
 import Following from './Following';
 import { CometSpinLoader } from 'react-css-loaders';
 
+import UploadForm from './UploadForm';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -61,6 +63,7 @@ class Profile extends React.Component {
 
     return (
       <div>
+        <UploadForm image_type="design" />
         <div className="feed_container">
           {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
           <div className="profile_sidebar">
