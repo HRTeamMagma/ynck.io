@@ -48,11 +48,7 @@ router.route('/user/designs')
 
 router.route('/shop')
   .get(ShopController.getShopInfoForUser)
-
-  .post((req, res) => {
-    console.log(req.body);
-    res.send(201);
-  });
+  .post(ShopController.updateShopInfo);
 
 router.route('/create/shop')
   .post(ShopController.createShop);

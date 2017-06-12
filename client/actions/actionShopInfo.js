@@ -8,11 +8,10 @@ export const shopInfo = (shopData) => {
 };
 
 
-export const fetchShopInfo = (url, userId) => {
+export const fetchShopInfo = (url) => {
   return (dispatch) => {
-    axios.get(url, {params: {id: userId}})
+    axios.get(url)
       .then(success => {
-        console.log('success Data: ', success.data);
         dispatch(shopInfo(success.data));
       })
       .catch(error => {
@@ -31,10 +30,9 @@ export const updateShopDataSuccess = (name, address1, address2, city) => {
   };
 };
 
-export const updateShopData = (url, id, name, address1, address2, city) => {
+export const updateShopData = (url, name, address1, address2, city) => {
   return (dispatch) => {
     axios.post(url, {
-      id,
       name,
       address1,
       address2,
