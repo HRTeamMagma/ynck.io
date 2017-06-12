@@ -1,12 +1,15 @@
 .search {
   width: 520px;
   display: inline;
-
 }
 
 .searchbox {
   width: 500px;
   height: 40px;
-  margin-left: 60px;
+  margin-left: $large-spacing;
   margin-bottom: 0;
+}
+
+.search button {
+  margin-left: $mini-spacing;
 }

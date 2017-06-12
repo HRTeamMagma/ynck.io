@@ -10,6 +10,7 @@ class Search extends React.Component {
     return (
       <div className="search" >
         <input className="searchbox" placeholder="Search for shops, users, tags"></input>
+        <button>Search</button>
       </div>
     );
   }
