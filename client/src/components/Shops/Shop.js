@@ -21,7 +21,9 @@ class Shop extends React.Component {
       editedName: '',
       editedAddress: '',
       editedCity: '',
-      editedOffice: ''
+      editedOffice: '',
+      editedState: '',
+      editedPhone: ''
     };
 
     this.renderShopInfo = this.renderShopInfo.bind(this);
@@ -54,8 +56,8 @@ class Shop extends React.Component {
     return this.props.shop.shopInfo ? this.props.shop.shopInfo[key] : null;
   }
 
-  saveEdits (name, address1, address2, city) {
-    this.props.updateShopData('/api/shop', name, address1, address2, city, () => {
+  saveEdits (name, address1, address2, city, state, phone) {
+    this.props.updateShopData('/api/shop', name, address1, address2, city, state, phone, () => {
       this.setState({editAddress: false, editName: false }, ()=> {
         this.props.fetchShopInfo('/api/shop');
       });
@@ -67,8 +69,8 @@ class Shop extends React.Component {
       <div >
         {console.log('shop props: ', this.props)}
         <div className="feed_container">
-          <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
-            {!this.state.editName ? this.renderShopInfo('name') : null}
+          <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true, editedName: this.state.editedName || this.props.shop.shopInfo.name}) : null} className="profile_name">
+            {!this.state.editName ? this.renderShopInfo('name') : ''}
           </h1> 
             {this.state.editName ? 
             (<div>
@@ -81,11 +83,11 @@ class Shop extends React.Component {
                   <a href="#" onClick={(e) => this.saveEdits(this.state.editedName, this.props.shop.shopInfo.address1, this.props.shop.shopInfo.address2, this.props.shop.shopInfo.city)}>Save Changes</a>
                 </div>
               </div>
-            </div>) : null}
+            </div>) : ''}
           
           <div className="profile_sidebar">
             <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
-            <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city, editedOffice: this.state.editedOffice || this.props.shop.shopInfo.address2}) : null}>
+            <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city, editedOffice: this.state.editedOffice || this.props.shop.shopInfo.address2, editedState: this.state.editedState || this.props.shop.shopInfo.state, editedPhone: this.state.editedPhone || this.props.shop.shopInfo.phone}) : null}>
             {!this.state.editAddress ?
             <ShopInfo address1={this.renderShopInfo('address1')} address2={this.renderShopInfo('address2')} city={this.renderShopInfo('city')} state={this.renderShopInfo('state')} phone={this.renderShopInfo('phone')} rating={this.renderShopInfo('rating')}/>
             : null
@@ -93,6 +95,7 @@ class Shop extends React.Component {
             </div>
             {this.state.editAddress ?
             (<div>
+
               <div>Address: 
                 <input type="text" value={this.state.editedAddress} onChange={(e)=> this.setState({editedAddress: e.target.value})}/>
               </div>
@@ -138,7 +141,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchShopInfo: (url) => dispatch(fetchShopInfo(url)),
-    updateShopData: (url, name, address1, address2, city, cb) => dispatch(updateShopData(url, name, address1, address2, city, cb))
+    updateShopData: (url, name, address1, address2, city, state, phone, cb) => dispatch(updateShopData(url, name, address1, address2, city, state, phone, cb))
   };
 };
 
