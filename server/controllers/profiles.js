@@ -198,10 +198,10 @@ module.exports.editUserProfile = (req, res) => {
 
 module.exports.getUserFollowing = (req, res) => {
   models.Profile.where({id: req.query.id})
-  .fetch({withRelated: 'following'})
-  .then(peopleFollowing => {
-    console.log(peopleFollowing.toJSON());
-    res.send(peopleFollowing.toJSON());
+  .fetch({withRelated: 'followers'})
+  .then(peopleFollowers => {
+    console.log(peopleFollowers);
+    res.send(peopleFollowers.toJSON());
   });
 };
 
@@ -224,10 +224,10 @@ module.exports.followUnfollowUser = (req, res) => {
 
 module.exports.getUserFollowers = (req, res) => {
   models.Profile.where({id: req.query.id})
-  .fetch({withRelated: 'followers'})
-  .then(listOfFollowers => {
-    console.log(listOfFollowers.toJSON());
-    res.send(listOfFollowers.toJSON());
+  .fetch({withRelated: 'following'})
+  .then(listOfFollowing => {
+    console.log(listOfFollowing.toJSON());
+    res.send(listOfFollowing.toJSON());
   });
 };
 // module.exports.deleteOne = (req, res) => {
