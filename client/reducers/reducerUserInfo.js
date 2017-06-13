@@ -12,6 +12,10 @@ export const userData = (state = [], action) => {
   switch (action.type) {
   case 'FETCH_USER_DATA_SUCCESS':
     return action.userData;
+  case 'UPDATE_FOLLOWING_SUCCESS':
+    return Object.assign({}, state, {
+      isBeingFollowed: !state.isBeingFollowed
+    });
   case 'UPDATE_USER_DATA_SUCCESS':
     return Object.assign({}, state, {
       userProfile: Object.assign({}, state.userProfile, {
