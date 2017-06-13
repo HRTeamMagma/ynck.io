@@ -11,8 +11,8 @@ module.exports.getShopInfoForUser = (req, res) => {
       responseObj.images = theData.shopimages;
       delete theData.shopimages;
       responseObj.shopInfo = theData;
-
-      var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.address2;
+      console.log(responseObj.shopInfo);
+      var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.city + ', ' + responseObj.shopInfo.state;
 
       latLong.latLong(address, function(result) {
         if (result[0]) {

@@ -20,13 +20,15 @@ export const fetchShopInfo = (url) => {
   };
 };
 
-export const updateShopDataSuccess = (name, address1, address2, city) => {
+export const updateShopDataSuccess = (name, address1, address2, city, state, phone) => {
   return {
     type: 'UPDATE_SHOP_DATA_SUCCESS',
     name,
     address1,
     address2,
-    city
+    city,
+    state,
+    phone
   };
 };
 
@@ -37,17 +39,19 @@ export const updateShopPhotosSuccess = (photoData) => {
   };
 };
 
-export const updateShopData = (url, name, address1, address2, city, cb) => {
+export const updateShopData = (url, name, address1, address2, city, state, phone, cb) => {
   return (dispatch) => {
     axios.post(url, {
       name,
       address1,
       address2,
-      city
+      city,
+      state,
+      phone
     })
     .then(success => {
       cb();
-      dispatch(updateShopDataSuccess(name, address1, address2, city));
+      dispatch(updateShopDataSuccess(name, address1, address2, city, state, phone));
     });
   };
 };
