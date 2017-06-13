@@ -73,4 +73,11 @@ router.route('/add-tag')
 router.route('/search')
   .get(SearchController.getSearchResults);
 
+router.route('/following')
+  .get(ProfileController.getUserFollowing)
+  .post(ProfileController.followUnfollowUser);
+
+router.route('/followers')
+  .get(ProfileController.getUserFollowers);
+
 module.exports = router;

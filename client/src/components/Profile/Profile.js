@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchAllUserData, updateUserData } from './../../../actions/actionUserInfo';
+import { updateIsFollowing, fetchAllUserData, updateUserData } from './../../../actions/actionUserInfo';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
@@ -48,15 +48,16 @@ class Profile extends React.Component {
   }
 
   saveEdits(firstName, lastName, description) {  
-    this.props.updateUserData('/api/user/edit', loggedInUser.id, firstName, lastName, description);
-    this.setState({
-      editMode: false
+    this.props.updateUserData('/api/user/edit', loggedInUser.id, firstName, lastName, description, () => {
+      this.setState({
+        editMode: false
+      });
     });
   }
   
   // TODO 
-  followUser(e) {
-    console.log('follow user called');
+  followUser(e, follows) {
+    this.props.updateIsFollowing('/api/following', follows);
   }
   
   render() {
@@ -71,7 +72,7 @@ class Profile extends React.Component {
               <div>
                 <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
                 handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
-                followUser = { this.followUser } />
+                followUser = { this.followUser } isBeingFollowed={this.props.userData.isBeingFollowed} />
                 <Following />
               </div>  
               : null
@@ -101,7 +102,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
-    updateUserData: (url, id, firstName, lastName, profile_description) => dispatch(updateUserData(url, id, firstName, lastName, profile_description))
+    updateUserData: (url, id, firstName, lastName, profile_description, callback) => dispatch(updateUserData(url, id, firstName, lastName, profile_description, callback)),
+    updateIsFollowing: (url, followeeId) => dispatch(updateIsFollowing(url, followeeId))
   };
 };
 

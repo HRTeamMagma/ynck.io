@@ -46,7 +46,7 @@ export const updateUserDataSuccess = (first, last, profile_description) => {
   };
 };
 
-export const updateUserData = (url, id, first, last, profile_description) => {
+export const updateUserData = (url, id, first, last, profile_description, callback) => {
 
   return (dispatch) => {
 
@@ -58,8 +58,22 @@ export const updateUserData = (url, id, first, last, profile_description) => {
     })
     .then(success => {
       dispatch(updateUserDataSuccess(first, last, profile_description));
+      callback();
     });
   };
 };
 
+export const updateFollowingSuccess = () => {
+  return {
+    type: 'UPDATE_FOLLOWING_SUCCESS'
+  };
+};
 
+export const updateIsFollowing = (url, follows) => {
+  return (dispatch) => {
+    axios.post(url, {follows})
+    .then(success => {
+      dispatch(updateFollowingSuccess());
+    });
+  };
+};
