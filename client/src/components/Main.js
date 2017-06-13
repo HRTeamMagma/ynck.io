@@ -33,7 +33,7 @@ class Main extends React.Component {
               <Route exact path="/" render={(props) => (<Home loggedInUser={loggedInUser} {...props} />)} />
               <Route path = "/user/:id" component={Profile} />
               <Route path = "/shop" component={Shop} />
-              <Route path = "/search" render={(props) => (<SearchResults imageResults={this.props.searchResults.imageResults} {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults imageResults={this.props.searchResults} {...props} />)} />
               <Route path = "/claimshop" component={ClaimShop} />
             </Template>
           </Switch>
