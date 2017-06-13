@@ -111,15 +111,12 @@ class Shop extends React.Component {
               </div>) 
               : null
             }
-
-            
             <MapView 
               lat={this.renderShopInfo('lat') || .34} 
               lon={this.renderShopInfo('lon') || 32.5}
               height='50vh'
               width='50vh'
               />
-            {/*}*/}
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>
