@@ -9,7 +9,7 @@ const Following = (props) => {
       {props.usersFollowing.map((users, i) => {
         return (
           <span key={i}>
-            <img src={users.profile_image} />
+            <a href={`/user/${users.id}`} ><img src={users.profile_image} /></a>
           </span>
         );
       })}
