@@ -20,7 +20,7 @@ export const search = (url, searchInput) => {
   return (dispatch) => {
     dispatch(searchIsLoading(true));
     axios.get(url, {
-      params: { searchInput: searchInput }
+      params: { q: searchInput }
     })
     .then(success => {
       dispatch(searchResultsSuccess(success.data));

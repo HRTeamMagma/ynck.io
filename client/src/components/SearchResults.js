@@ -6,22 +6,25 @@ class SearchResults extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.clearSearch();
+  }
+
   render() {
     return (
       <div className="searchResults">
         <div className="feed_container">
-          { this.props.imageResults.imageResults ? 
-            this.props.imageResults.imageResults.map((image, i) => {
+          { this.props.searchResults.imageResults ? 
+            this.props.searchResults.imageResults.map((image, i) => {
               return ( 
                 <div key={i}><img src={image.url}/></div> 
               );
             }) 
             : 
-            this.props.imageResults === undefined ?
-            null
+            this.props.searchResults === undefined ? null
             :
             <div>
-              <h2><strong>{this.props.imageResults}</strong></h2>
+              <h2><strong>{this.props.searchResults}</strong></h2>
             </div>
           }
         </div>
