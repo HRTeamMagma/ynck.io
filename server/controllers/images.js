@@ -5,21 +5,38 @@ const bookshelf = require('../../db/');
 
 module.exports.uploadImage = (req, res) => {
   console.log('got an upload', req.file);
-  models.Image.forge({
-    url: req.file.location,
-    profile_id: req.user.id,
-    image_type: req.body.image_type
-  })
-  .save()
-  .then(image => {
-    console.log(image);
-    req.file.imageId = image.attributes.id;
-    res.status(200).send(req.file);
-  })
-  .catch(error => {
-    console.log(error);
-    res.sendStatus(500);
-  });
+  if (req.body.image_type === 'shopimage') {
+    models.Profile.where({id: req.user.id})
+    .fetch({withRelated: 'shop'})
+    .then(profile => {
+      var theShop = profile.related('shop');
+      models.Shopimage.forge({
+        shop_id: theShop.get('id'),
+        url: req.file.location
+      })
+      .save()
+      .then(image => {
+        req.file.shopId = theShop.get('id');
+        req.file.shopimageId = image.get('id');
+        res.status(200).send(req.file);
+      });
+    });
+  } else {
+    models.Image.forge({
+      url: req.file.location,
+      profile_id: req.user.id,
+      image_type: req.body.image_type
+    })
+    .save()
+    .then(image => {
+      req.file.imageId = image.attributes.id;
+      res.status(200).send(req.file);
+    })
+    .catch(error => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  }
 };
 
 module.exports.editImage = (req, res) => {
@@ -50,7 +67,6 @@ module.exports.removeTagFromImage = (req, res) => {
     .catch(err => {
       res.sendStatus(500);
     });
-    // .del()
   });
 };
 
