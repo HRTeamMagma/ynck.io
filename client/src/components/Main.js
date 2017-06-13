@@ -24,7 +24,7 @@ class Main extends React.Component {
   }
 
   submitSearch(searchInput) {
-    this.props.search(`/api/search`, searchInput);
+    this.props.search('/api/search', searchInput);
 
     this.setState({
       searchSubmitted: true
