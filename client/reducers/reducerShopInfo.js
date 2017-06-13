@@ -8,7 +8,9 @@ export const shop = (state = [], action) => {
         name: action.name,
         address1: action.address1,
         address2: action.address2,
-        city: action.city
+        city: action.city,
+        state: action.state,
+        phone: action.phone
       })
     });
   case 'UPDATE_SHOP_IMAGE_SUCCESS':
