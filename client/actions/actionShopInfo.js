@@ -37,7 +37,7 @@ export const updateShopPhotosSuccess = (photoData) => {
   };
 };
 
-export const updateShopData = (url, name, address1, address2, city) => {
+export const updateShopData = (url, name, address1, address2, city, cb) => {
   return (dispatch) => {
     axios.post(url, {
       name,
@@ -46,6 +46,7 @@ export const updateShopData = (url, name, address1, address2, city) => {
       city
     })
     .then(success => {
+      cb();
       dispatch(updateShopDataSuccess(name, address1, address2, city));
     });
   };
