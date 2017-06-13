@@ -55,7 +55,11 @@ class Shop extends React.Component {
   }
 
   saveEdits (name, address1, address2, city) {
-    this.props.updateShopData('/api/shop', name, address1, address2, city, () => { this.setState({editAddress: false, editName: false });});
+    this.props.updateShopData('/api/shop', name, address1, address2, city, () => {
+      this.setState({editAddress: false, editName: false }, ()=> {
+        this.props.fetchShopInfo('/api/shop');
+      });
+    });
   }
 
   render () {
