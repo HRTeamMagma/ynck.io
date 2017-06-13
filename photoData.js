@@ -432,9 +432,6 @@ module.exports.data = [
     url: 'https://farm6.staticflickr.com/5070/5892549003_a2a0b575f6_z.jpg'
   },
   { 
-    url: 'https://www.flickr.com/apps/video/stewart.swf?v=384028786&photo_id=4223960717&photo_secret=7bd18476ea'
-  },
-  { 
     url: 'https://farm7.staticflickr.com/6132/6032548681_477a7ab0d0_z.jpg'
   },
   { 
