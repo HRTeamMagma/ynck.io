@@ -200,7 +200,6 @@ module.exports.getUserFollowing = (req, res) => {
   models.Profile.where({id: req.query.id})
   .fetch({withRelated: 'followers'})
   .then(peopleFollowers => {
-    console.log(peopleFollowers);
     res.send(peopleFollowers.toJSON());
   });
 };
@@ -226,7 +225,6 @@ module.exports.getUserFollowers = (req, res) => {
   models.Profile.where({id: req.query.id})
   .fetch({withRelated: 'following'})
   .then(listOfFollowing => {
-    console.log(listOfFollowing.toJSON());
     res.send(listOfFollowing.toJSON());
   });
 };
