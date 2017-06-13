@@ -41,6 +41,7 @@ class ClaimShop extends React.Component {
       data: selectedShop
     })
     .then((success) => {
+      //  CHANGE THIS TO REROUTE/ALERT CLAIM WAS SUCCESSFUL
       console.log('YAY: ', success);
     })
     .catch(error => console.log(error));

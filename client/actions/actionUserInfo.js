@@ -49,7 +49,6 @@ export const updateUserDataSuccess = (first, last, profile_description) => {
 export const updateUserData = (url, id, first, last, profile_description, callback) => {
 
   return (dispatch) => {
-
     axios.post(url, {
       id, 
       first,

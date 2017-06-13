@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateIsFollowing, fetchAllUserData, updateUserData } from './../../../actions/actionUserInfo';
+import { getUserFollowing } from './../../../actions/actionFollowing';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
-
 import Following from './Following';
 import { CometSpinLoader } from 'react-css-loaders';
-
 import UploadForm from './UploadForm';
 
 class Profile extends React.Component {
@@ -23,6 +22,7 @@ class Profile extends React.Component {
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.followUser = this.followUser.bind(this);
+    this.showFollowing = this.showFollowing.bind(this);
   }
 
   handleEditProfile(e) {
@@ -41,10 +41,15 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.getUserData();
+    this.showFollowing();
   }
 
   getUserData() {
     this.props.fetchAllUserData('/api/profiles/user-data', this.props.match.params.id);
+  }
+
+  showFollowing() {
+    this.props.getUserFollowing('/api/following', this.props.match.params.id);
   }
 
   saveEdits(firstName, lastName, description) {  
@@ -54,8 +59,8 @@ class Profile extends React.Component {
       });
     });
   }
+
   
-  // TODO 
   followUser(e, follows) {
     this.props.updateIsFollowing('/api/following', follows);
   }
@@ -64,6 +69,7 @@ class Profile extends React.Component {
 
     return (
       <div>
+        {console.log('propsFromInsideProfile: ', this.props)}
         <UploadForm image_type="design" />
         <div className="feed_container">
           {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
@@ -73,7 +79,7 @@ class Profile extends React.Component {
                 <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
                 handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
                 followUser = { this.followUser } isBeingFollowed={this.props.userData.isBeingFollowed} />
-                <Following />
+                <Following usersFollowing={this.props.userFollowing}/>
               </div>  
               : null
             }  
@@ -91,19 +97,21 @@ class Profile extends React.Component {
   }
 }
 
-
+//connect state to action
 const mapStateToProps = (state) => {
   return {
     userData: state.userData,
-    userDataIsLoading: state.userDataIsLoading
+    userDataIsLoading: state.userDataIsLoading,
+    userFollowing: state.userFollowing
   };
 };
-
+//connects dispatch to action (fires the action)
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
     updateUserData: (url, id, firstName, lastName, profile_description, callback) => dispatch(updateUserData(url, id, firstName, lastName, profile_description, callback)),
-    updateIsFollowing: (url, followeeId) => dispatch(updateIsFollowing(url, followeeId))
+    updateIsFollowing: (url, followeeId) => dispatch(updateIsFollowing(url, followeeId)),
+    getUserFollowing: (url, id) => dispatch(getUserFollowing(url, id))
   };
 };
 

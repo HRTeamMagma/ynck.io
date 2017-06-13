@@ -1,14 +1,18 @@
 import React from 'react';
 
-const Following = () => {
+const Following = (props) => {
   return (
     <div className="following">
-      <img src="../../assets/images/following1.png" />
-      <img src="../../assets/images/following2.png" />
-      <img src="../../assets/images/following3.png" />
-      <img src="../../assets/images/following4.png" />
-      <img src="../../assets/images/following5.png" />
-      <img src="../../assets/images/following6.png" />  
+      <div>
+        Following
+      </div>
+      {props.usersFollowing.map((users, i) => {
+        return (
+          <span key={i}>
+            <a href={`/user/${users.id}`} ><img src={users.profile_image} /></a>
+          </span>
+        );
+      })}
     </div>
   );
 };

@@ -67,7 +67,6 @@ class Shop extends React.Component {
   render () {
     return (
       <div >
-        {console.log('shop props: ', this.props)}
         <div className="feed_container">
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true, editedName: this.state.editedName || this.props.shop.shopInfo.name}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : ''}
@@ -125,7 +124,6 @@ class Shop extends React.Component {
             <OurWork images={this.renderShopInfo('images') || []}/>
           </div>
         </div>
-
       </div>
     );
   }
