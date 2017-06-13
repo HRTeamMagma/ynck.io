@@ -20,7 +20,7 @@ class Main extends React.Component {
 
   submitSearch(searchInput) {
     console.log('searchInput ', searchInput);
-    this.props.search('/search', searchInput);
+    this.props.search('/api/search', searchInput);
   }
  
 
