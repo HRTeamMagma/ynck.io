@@ -30,6 +30,13 @@ export const updateShopDataSuccess = (name, address1, address2, city) => {
   };
 };
 
+export const updateShopPhotosSuccess = (photoData) => {
+  return {
+    type: 'UPDATE_SHOP_IMAGE_SUCCESS',
+    photoData
+  };
+};
+
 export const updateShopData = (url, name, address1, address2, city) => {
   return (dispatch) => {
     axios.post(url, {
