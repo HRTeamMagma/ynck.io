@@ -14,6 +14,12 @@ class UserInfo extends React.Component {
   }
 
   render() {
+    let blueNotBlue;
+    if (this.props.isBeingFollowed) {
+      blueNotBlue = 'button-blue';
+    } else {
+      blueNotBlue = '';
+    }
     return ( 
       <div className="profile_info">
         <img src={this.props.userData.profile_image} className="user_profile_image"/>
@@ -27,7 +33,7 @@ class UserInfo extends React.Component {
               <a href="#" onClick={(e) => this.props.handleEditProfile(e)}>edit</a>
               </div>
               : 
-              <button onClick={(e) => this.props.followUser(e)} >Follow</button>
+              <button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Follow</button>
             }
           </div>
           : 
