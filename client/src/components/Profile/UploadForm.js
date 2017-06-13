@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateUserPhotosSuccess } from '../../../actions/actionUserInfo';
+import { updateShopPhotosSuccess } from '../../../actions/actionShopInfo';
 const Dropzone = require('react-dropzone');
 const upload = require('superagent');
 const axios = require('axios');
@@ -15,6 +16,7 @@ class UploadForm extends React.Component {
       title: '',
       currentTag: '',
       imageId: null,
+      shopId: null,
       spinner: false
     };
 
@@ -36,36 +38,64 @@ class UploadForm extends React.Component {
       if (err) {
         console.log(err);
       }
-      console.log('stuff from Amazon:', JSON.parse(res.text));
       let data = JSON.parse(res.text);
       let imgURL = data.location;
       let imageId = data.imageId;
-      this.setState({uploadedImg: imgURL, imageId });
+      let shopId;
+      if (data.shopId) {
+        shopId = data.shopId;
+        imageId = data.shopimageId;
+      }
+      this.setState({uploadedImg: imgURL, imageId, shopId });
     });
   }
 
   handleSubmitForm(e) {
     this.setState({spinner: true});
     e.preventDefault();
-    axios.post('/api/edit-image', this.state)
-    .then(result => {
-      let tagArray = Object.keys(this.state.tags);
-      let photoData = {
-        id: this.state.imageId,
-        url: this.state.uploadedImg,
-        profile_id: loggedInUser.id,
-        favoriteCount: 0,
-        image_type: this.props.image_type,
+    if (this.props.image_type === 'shopimage') {
+      let reqObj = {
+        uploadedImg: this.state.uploadedImg,
         title: this.state.title,
-        tags: tagArray
+        imageId: this.state.imageId,
+        shopId: this.state.shopId
       };
-      this.props.updateUserPhotosSuccess(photoData);
-      this.setState({spinner: false, uploadedImg: null});
-    })
-    .catch(err => {
-      console.log(err);
-      this.setState({spinner: false, uploadedImg: null});
-    });
+      axios.post('/api/edit-image', reqObj)
+      .then(result => {
+        let photoData = {
+          id: this.state.imageId,
+          url: this.state.uploadedImg,
+          title: this.state.title,
+          shopId: this.state.shopId
+        };
+        this.props.updateShopPhotosSuccess(photoData);
+        this.setState({spinner: false, uploadedImg: null});
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({spinner: false, uploadedImg: null});
+      });
+    } else {
+      axios.post('/api/edit-image', this.state)
+      .then(result => {
+        let tagArray = Object.keys(this.state.tags);
+        let photoData = {
+          id: this.state.imageId,
+          url: this.state.uploadedImg,
+          profile_id: loggedInUser.id,
+          favoriteCount: 0,
+          image_type: this.props.image_type,
+          title: this.state.title,
+          tags: tagArray
+        };
+        this.props.updateUserPhotosSuccess(photoData);
+        this.setState({spinner: false, uploadedImg: null});
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({spinner: false, uploadedImg: null});
+      });
+    }
   }
 
   handleTagInput(event) {
@@ -111,7 +141,25 @@ class UploadForm extends React.Component {
   }
 
   render() {
-    let theForm;
+    let theForm, showTags;
+    // if this is a regular image, show the tag component
+    if (this.props.image_type !== 'shopimage') {
+      showTags = <div>
+        <label>
+          Add a tag:
+          <input
+            type="text"
+            value={this.state.currentTag}
+            onChange={this.handleTagInput} />
+          <input type="submit" value="Add tag" onClick={this.handleTagSubmit}/>
+        </label>
+        <div>
+          {Object.keys(this.state.tags).map(tag => {
+            return <Tag key={tag} tagName={tag} deleteClick={this.handleTagDeleteClick}/>;
+          })}
+        </div>
+       </div>;
+    }
     if (this.state.uploadedImg) {
       // present a form
       theForm = 
@@ -126,20 +174,8 @@ class UploadForm extends React.Component {
               value={this.state.title}
               onChange={this.handleInputChange} />
           </label>
-          <label>
-            Add a tag:
-            <input
-              type="text"
-              value={this.state.currentTag}
-              onChange={this.handleTagInput} />
-            <input type="submit" value="Add tag" onClick={this.handleTagSubmit}/>
-          </label>
-          <div>
-            {Object.keys(this.state.tags).map(tag => {
-              return <Tag key={tag} tagName={tag} deleteClick={this.handleTagDeleteClick}/>;
-            })}
-          </div>
-          <p><input type="submit" value="Save" /></p>
+          {showTags}
+           <p><input type="submit" value="Save" /></p>
         </form>
       </div>;
     } else {
@@ -165,13 +201,15 @@ class UploadForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userData: state.userData
+    userData: state.userData,
+    shop: state.shop
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUserPhotosSuccess: (photoData) => dispatch(updateUserPhotosSuccess(photoData))
+    updateUserPhotosSuccess: (photoData) => dispatch(updateUserPhotosSuccess(photoData)),
+    updateShopPhotosSuccess: (photoData) => dispatch(updateShopPhotosSuccess(photoData))
   };
 };
 
