@@ -49,7 +49,7 @@ class Profile extends React.Component {
   }
 
   showFollowing() {
-    this.props.getUserFollowing('/api/following', loggedInUser.id);
+    this.props.getUserFollowing('/api/following', this.props.match.params.id);
   }
 
   saveEdits(firstName, lastName, description) {  
