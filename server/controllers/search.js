@@ -3,7 +3,7 @@ const helper = require('../helpers/db_helpers');
 
 
 module.exports.getSearchResults = (req, res) => {
-  models.Tag.where({name: req.query.searchInput}).fetch({withRelated: 'image'})
+  models.Tag.where({name: req.query.q}).fetch({withRelated: 'image'})
   .then(results => {
     res.send({imageResults: results.related('image').toJSON()});
   })
