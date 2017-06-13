@@ -1,5 +1,6 @@
 const models = require('../../db/models');
 const helper = require('../helpers/db_helpers');
+const knex = require('../../db/').knex;
 
 module.exports.getAll = (req, res) => {
   models.Profile.fetchAll()
@@ -62,6 +63,10 @@ module.exports.update = (req, res) => {
 };
 
 
+// all of user 4's followers
+//select * from profiles join followers on followers.user_id = profiles.id where followers.follower_id=4;
+
+
 module.exports.getUserProfilePage = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch({withRelated: ['images.tags']})
     .then(profile => {
@@ -106,23 +111,37 @@ module.exports.getUserImages = (req, res) => {
         models.Profile.where({id: req.query.id}).fetch()
         .then(result => {
           let allImages = helper.cleanTags(results.toJSON());
-    //       res.send(allImages)
-    //     })
-    // }
           let responseObj = {};
           responseObj.userProfile = result.toJSON();
-          allImages.forEach(function(image) {
-            // let thisImage = {};
-            // thisImage.id = image.id;
-            // thisImage.url = image.url;
-            if (responseObj[image.image_type]) {
-              responseObj[image.image_type].push(image);
-            } else {
-              responseObj[image.image_type] = [image];
-            }
-          });
-          // console.log(responseObj);
-          res.send(responseObj);
+          if (req.user) {
+            knex('profiles_profiles')
+            .where('follower_id', '=', req.user.id)
+            .andWhere('user_id', '=', req.query.id)
+            .then(rows => {
+              if (rows.length > 0) {
+                responseObj.isBeingFollowed = true;
+              } else {
+                responseObj.isBeingFollowed = false;
+              }
+              allImages.forEach(function(image) {
+                if (responseObj[image.image_type]) {
+                  responseObj[image.image_type].push(image);
+                } else {
+                  responseObj[image.image_type] = [image];
+                }
+              });
+              res.send(responseObj);
+            });
+          } else {
+            allImages.forEach(function(image) {
+              if (responseObj[image.image_type]) {
+                responseObj[image.image_type].push(image);
+              } else {
+                responseObj[image.image_type] = [image];
+              }
+            });
+            res.send(responseObj);
+          }
         });
       }
     });
@@ -175,6 +194,41 @@ module.exports.editUserProfile = (req, res) => {
   } else {
     res.sendStatus(500);
   }
+};
+
+module.exports.getUserFollowing = (req, res) => {
+  models.Profile.where({id: req.query.id})
+  .fetch({withRelated: 'following'})
+  .then(peopleFollowing => {
+    console.log(peopleFollowing.toJSON());
+    res.send(peopleFollowing.toJSON());
+  });
+};
+
+module.exports.followUnfollowUser = (req, res) => {
+  knex.raw(`select * from profiles_profiles where follower_id=${req.user.id} and user_id=${req.body.follows}`)
+  .then(result => {
+    if (result.rowCount === 0) {
+      res.sendStatus(200);
+      return knex('profiles_profiles')
+      .insert({follower_id: req.user.id, user_id: req.body.follows});
+    } else {
+      res.sendStatus(200);
+      return knex.raw(`delete from profiles_profiles where follower_id=${req.user.id} and user_id=${req.body.follows}`);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
+
+module.exports.getUserFollowers = (req, res) => {
+  models.Profile.where({id: req.query.id})
+  .fetch({withRelated: 'followers'})
+  .then(listOfFollowers => {
+    console.log(listOfFollowers.toJSON());
+    res.send(listOfFollowers.toJSON());
+  });
 };
 // module.exports.deleteOne = (req, res) => {
 //   models.Profile.where({ id: req.params.id }).fetch()
