@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, Link, BrowserRouter, Switch, Redirect, withRouter } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+
 import { connect } from 'react-redux';
 import { search } from './../../actions/actionSearch';
 
@@ -14,14 +16,27 @@ import ClaimShop from './Shops/ClaimShop';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      searchSubmitted: false
+    };
     this.submitSearch = this.submitSearch.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   submitSearch(searchInput) {
-    this.props.search('/api/search', searchInput);
+    this.props.search(`/api/search`, searchInput);
+
+    this.setState({
+      searchSubmitted: true
+    });
+    history.push(`/search?q=${searchInput}`);
   }
- 
+
+  clearSearch() {
+    this.setState({
+      searchSubmitted: false
+    });
+  }
 
   render() {
     return (
@@ -29,11 +44,11 @@ class Main extends React.Component {
         <BrowserRouter>
           <Switch>
             <Template submitSearch={this.submitSearch} >  
-              <Route exact path="/" render={(props) => (<Home loggedInUser={loggedInUser} {...props} />)} />
-              <Route path = "/user/:id" component={Profile} />
-              <Route path = "/shop" component={Shop} />
-              <Route path = "/search" render={(props) => (<SearchResults imageResults={this.props.searchResults} {...props} />)} />
-              <Route path = "/claimshop" component={ClaimShop} />
+              <Route exact path="/" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Home loggedInUser={loggedInUser} {...props} />)} />
+              <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
+              <Route path = "/shop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
+              <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults imageResults={this.props.searchResults.imageResults} clearSearch={this.clearSearch} {...props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
@@ -41,7 +56,6 @@ class Main extends React.Component {
     );
   }
 }
-
 
 
 const mapStateToProps = (state) => {
@@ -56,5 +70,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const history = createHistory();
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
