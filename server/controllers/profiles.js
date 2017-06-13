@@ -68,7 +68,6 @@ module.exports.getUserProfilePage = (req, res) => {
       if (!profile) {
         throw profile;
       }
-      
       let allImages = profile.related('images').toJSON();
       let responseObj = {};
       allImages.forEach(function(image) {

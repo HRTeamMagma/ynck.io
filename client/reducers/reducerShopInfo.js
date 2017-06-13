@@ -11,6 +11,12 @@ export const shop = (state = [], action) => {
         city: action.city
       })
     });
+  case 'UPDATE_SHOP_IMAGE_SUCCESS':
+    let imageCopy = state.images.slice();
+    imageCopy.push(action.photoData);
+    return Object.assign({}, state, {
+      images: imageCopy
+    });
   default:
     return state;
   }

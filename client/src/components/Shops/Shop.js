@@ -55,11 +55,11 @@ class Shop extends React.Component {
   }
 
   saveEdits (name, address1, address2, city) {
-    this.props.updateShopData('/api/shop', name, address1, address2, city);
-    this.setState({editAddress: false, editName: false});
-    setTimeout(() => {
-      this.props.fetchShopInfo('/api/shop');
-    }, 1000);
+    this.props.updateShopData('/api/shop', name, address1, address2, city, () => {
+      this.setState({editAddress: false, editName: false }, ()=> {
+        this.props.fetchShopInfo('/api/shop');
+      });
+    });
   }
 
   render () {
@@ -111,15 +111,12 @@ class Shop extends React.Component {
               </div>) 
               : null
             }
-
-            
             <MapView 
               lat={this.renderShopInfo('lat') || .34} 
               lon={this.renderShopInfo('lon') || 32.5}
               height='50vh'
               width='50vh'
               />
-            {/*}*/}
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>
@@ -141,7 +138,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchShopInfo: (url) => dispatch(fetchShopInfo(url)),
-    updateShopData: (url, name, address1, address2, city) => dispatch(updateShopData(url, name, address1, address2, city))
+    updateShopData: (url, name, address1, address2, city, cb) => dispatch(updateShopData(url, name, address1, address2, city, cb))
   };
 };
 
