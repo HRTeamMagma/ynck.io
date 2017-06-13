@@ -8,7 +8,7 @@ module.exports.getSearchResults = (req, res) => {
     res.send({imageResults: results.related('image').toJSON()});
   })
   .catch(err => {
-    res.send('No results were found for ' + req.query.searchInput);
+    res.send(`No results were found for "${req.query.q}"`);
   });
 };
 

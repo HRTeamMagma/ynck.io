@@ -48,7 +48,7 @@ class Main extends React.Component {
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
               <Route path = "/shop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
-              <Route path = "/search" render={(props) => (<SearchResults imageResults={this.props.searchResults.imageResults} clearSearch={this.clearSearch} {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
