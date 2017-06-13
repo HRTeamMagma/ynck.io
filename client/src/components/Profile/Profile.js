@@ -55,11 +55,10 @@ class Profile extends React.Component {
     });
   }
   
-<<<<<<< HEAD
   // TODO 
   followUser(e, follows) {
     this.props.updateIsFollowing('/api/following', follows);
-=======
+    
   followUser(userData) {
     axios.post('/api/following', {
       id: userData.id
@@ -68,7 +67,6 @@ class Profile extends React.Component {
       console.log('You are now following another person');
     })
     .catch (error => console.log(error));
->>>>>>> (Feat) Complete client side axios post to add to 'following'
   }
   
   render() {
