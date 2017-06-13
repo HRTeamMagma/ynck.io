@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   userData,
   shop,
   searchResults,
+  //following,
   form: formReducer
 });
 
