@@ -4,7 +4,6 @@ const helper = require('../helpers/db_helpers');
 const bookshelf = require('../../db/');
 
 module.exports.uploadImage = (req, res) => {
-  console.log('got an upload', req.file);
   if (req.body.image_type === 'shopimage') {
     models.Profile.where({id: req.user.id})
     .fetch({withRelated: 'shop'})

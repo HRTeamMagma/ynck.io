@@ -13,7 +13,6 @@ class DropdownMenu extends React.Component {
     if (this.props.isOpen) {
       return (
         <div className="dropdown">
-          {console.log(this.props)}
           <ul>
             <li><a href={`/user/${this.props.loggedInUser.id}`}>Profile</a></li>
             { this.props.userInfo.shop_id ?
