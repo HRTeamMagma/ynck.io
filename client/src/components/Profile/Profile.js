@@ -55,9 +55,20 @@ class Profile extends React.Component {
     });
   }
   
+<<<<<<< HEAD
   // TODO 
   followUser(e, follows) {
     this.props.updateIsFollowing('/api/following', follows);
+=======
+  followUser(userData) {
+    axios.post('/api/following', {
+      id: userData.id
+    })
+    .then((success) => {
+      console.log('You are now following another person');
+    })
+    .catch (error => console.log(error));
+>>>>>>> (Feat) Complete client side axios post to add to 'following'
   }
   
   render() {
@@ -91,14 +102,15 @@ class Profile extends React.Component {
   }
 }
 
-
+//connect state to action
 const mapStateToProps = (state) => {
   return {
     userData: state.userData,
-    userDataIsLoading: state.userDataIsLoading
+    userDataIsLoading: state.userDataIsLoading,
+    follow: state.following
   };
 };
-
+//connects dispatch to reducer
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
