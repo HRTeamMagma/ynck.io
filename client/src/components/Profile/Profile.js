@@ -54,6 +54,10 @@ class Profile extends React.Component {
       });
     });
   }
+
+  showFollowing() {
+    this.props.getUserFollowing('', this.props.match.params.id);
+  }
   
   // TODO 
   followUser(e, follows) {
@@ -105,15 +109,16 @@ const mapStateToProps = (state) => {
   return {
     userData: state.userData,
     userDataIsLoading: state.userDataIsLoading,
-    follow: state.following
+    following: state.following
   };
 };
-//connects dispatch to reducer
+//connects dispatch to action (fires the action)
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllUserData: (url, id) => dispatch(fetchAllUserData(url, id)),
     updateUserData: (url, id, firstName, lastName, profile_description, callback) => dispatch(updateUserData(url, id, firstName, lastName, profile_description, callback)),
-    updateIsFollowing: (url, followeeId) => dispatch(updateIsFollowing(url, followeeId))
+    updateIsFollowing: (url, followeeId) => dispatch(updateIsFollowing(url, followeeId)),
+    getUserFollowing: (url, id) => dispatch(getUserFollowing(url, id))
   };
 };
 

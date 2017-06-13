@@ -7,9 +7,6 @@ import { userDataIsLoading, userData } from './reducerUserInfo';
 import { shop } from './reducerShopInfo';
 import { searchResults } from './reducerSearch';
 
-
-
-
 const rootReducer = combineReducers({
   recentImages, 
   recentImagesHasErrored,
@@ -21,7 +18,7 @@ const rootReducer = combineReducers({
   userData,
   shop,
   searchResults,
-  //following,
+  following,
   form: formReducer
 });
 
