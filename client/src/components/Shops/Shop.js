@@ -65,6 +65,7 @@ class Shop extends React.Component {
   render () {
     return (
       <div >
+        {console.log('shop props: ', this.props)}
         <div className="feed_container">
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : null}
@@ -92,31 +93,31 @@ class Shop extends React.Component {
             </div>
             {this.state.editAddress ?
             (<div>
-                <div>Address: 
-                  <input type="text" value={this.state.editedAddress} onChange={(e)=> this.setState({editedAddress: e.target.value})}/>
-                </div>
-                <div>Office#: 
-                  <input type="text" value={this.state.editedOffice} onChange={(e)=> this.setState({editedOffice: e.target.value})}/>
-                </div>
-                <div>
-                  City: 
-                  <input type="text" value={this.state.editedCity} onChange={(e)=> this.setState({editedCity: e.target.value})}/>
-                </div>
-                <div>
-                  <a href="#" onClick={(e) => this.setState({editAddress: false})}>Cancel</a>
-                </div>
-                <div>
-                  <a href="#" onClick={(e) => this.saveEdits(this.props.shop.shopInfo.name, this.state.editedAddress, this.state.editedOffice, this.state.editedCity)}>Save changes</a>
-                </div>
-              </div>) 
-              : null
+              <div>Address: 
+                <input type="text" value={this.state.editedAddress} onChange={(e)=> this.setState({editedAddress: e.target.value})}/>
+              </div>
+              <div>Office#: 
+                <input type="text" value={this.state.editedOffice} onChange={(e)=> this.setState({editedOffice: e.target.value})}/>
+              </div>
+              <div>
+                City: 
+                <input type="text" value={this.state.editedCity} onChange={(e)=> this.setState({editedCity: e.target.value})}/>
+              </div>
+              <div>
+                <a href="#" onClick={(e) => this.setState({editAddress: false})}>Cancel</a>
+              </div>
+              <div>
+                <a href="#" onClick={(e) => this.saveEdits(this.props.shop.shopInfo.name, this.state.editedAddress, this.state.editedOffice, this.state.editedCity)}>Save changes</a>
+              </div>
+            </div>) 
+            : null
             }
             <MapView 
-              lat={this.renderShopInfo('lat') || .34} 
-              lon={this.renderShopInfo('lon') || 32.5}
+              lat={this.renderShopInfo('lat') || this.renderShopInfo('latitude') || .34} 
+              lon={this.renderShopInfo('lon') || this.renderShopInfo('longitude') || 32.5}
               height='50vh'
               width='50vh'
-              />
+            />
           </div>
           <div className="main_content">
             <OurWork images={this.renderShopInfo('images') || []}/>
