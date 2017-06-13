@@ -69,11 +69,11 @@ class UploadForm extends React.Component {
           shopId: this.state.shopId
         };
         this.props.updateShopPhotosSuccess(photoData);
-        this.setState({spinner: false, uploadedImg: null});
+        this.setState({spinner: false, uploadedImg: null, title: ''});
       })
       .catch(err => {
         console.log(err);
-        this.setState({spinner: false, uploadedImg: null});
+        this.setState({spinner: false, uploadedImg: null, title: ''});
       });
     } else {
       axios.post('/api/edit-image', this.state)
@@ -89,11 +89,11 @@ class UploadForm extends React.Component {
           tags: tagArray
         };
         this.props.updateUserPhotosSuccess(photoData);
-        this.setState({spinner: false, uploadedImg: null});
+        this.setState({spinner: false, uploadedImg: null, title: ''});
       })
       .catch(err => {
         console.log(err);
-        this.setState({spinner: false, uploadedImg: null});
+        this.setState({spinner: false, uploadedImg: null, title: ''});
       });
     }
   }
