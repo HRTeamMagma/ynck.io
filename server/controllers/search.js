@@ -6,6 +6,9 @@ module.exports.getSearchResults = (req, res) => {
   models.Tag.where({name: req.query.searchInput}).fetch({withRelated: 'image'})
   .then(results => {
     res.send({imageResults: results.related('image').toJSON()});
+  })
+  .catch(err => {
+    res.send('No results were found for ' + req.query.searchInput);
   });
 };
 
