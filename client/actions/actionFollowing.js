@@ -27,12 +27,12 @@ export const getUserFollowing = (url, id) => {
     dispatch(getFollowingIsLoading(true));
     axios.get(url, {
       params: {
-        user_id: id
+        id
       }
     })
     .then(success => {
       dispatch(getFollowingIsLoading(false));
-      dispatch(getFollowingSuccess(success.data.images));
+      dispatch(getFollowingSuccess(success.data.followers));
     })
     .catch(error => {
       dispatch(getFollowingIsLoading(false));

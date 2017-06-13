@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateIsFollowing, fetchAllUserData, updateUserData } from './../../../actions/actionUserInfo';
+import { getUserFollowing } from './../../../actions/actionFollowing';
 
 import UserInfo from './UserInfo';
 import Feed from './Feed';
-
 import Following from './Following';
 import { CometSpinLoader } from 'react-css-loaders';
-
 import UploadForm from './UploadForm';
 
 class Profile extends React.Component {
@@ -23,6 +22,7 @@ class Profile extends React.Component {
     this.handleEditProfile = this.handleEditProfile.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.followUser = this.followUser.bind(this);
+    this.showFollowing = this.showFollowing.bind(this);
   }
 
   handleEditProfile(e) {
@@ -41,10 +41,15 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.getUserData();
+    this.showFollowing();
   }
 
   getUserData() {
     this.props.fetchAllUserData('/api/profiles/user-data', this.props.match.params.id);
+  }
+
+  showFollowing() {
+    this.props.getUserFollowing('/api/following', loggedInUser.id);
   }
 
   saveEdits(firstName, lastName, description) {  
@@ -55,28 +60,16 @@ class Profile extends React.Component {
     });
   }
 
-  showFollowing() {
-    this.props.getUserFollowing('', this.props.match.params.id);
-  }
   
-  // TODO 
   followUser(e, follows) {
     this.props.updateIsFollowing('/api/following', follows);
-    
-  followUser(userData) {
-    axios.post('/api/following', {
-      id: userData.id
-    })
-    .then((success) => {
-      console.log('You are now following another person');
-    })
-    .catch (error => console.log(error));
   }
   
   render() {
 
     return (
       <div>
+        {console.log('propsFromInsideProfile: ', this.props)}
         <UploadForm image_type="design" />
         <div className="feed_container">
           {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
@@ -109,7 +102,7 @@ const mapStateToProps = (state) => {
   return {
     userData: state.userData,
     userDataIsLoading: state.userDataIsLoading,
-    following: state.following
+    userFollowing: state.userFollowing
   };
 };
 //connects dispatch to action (fires the action)
