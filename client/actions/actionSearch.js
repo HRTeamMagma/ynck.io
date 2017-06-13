@@ -23,7 +23,7 @@ export const search = (url, searchInput) => {
       params: { searchInput: searchInput }
     })
     .then(success => {
-      dispatch(searchResultsSuccess(success));
+      dispatch(searchResultsSuccess(success.data));
       dispatch(searchIsLoading(false));      
     })
     .catch(error => {

@@ -10,7 +10,13 @@ class SearchResults extends React.Component {
     return (
       <div className="searchResults">
         <div className="feed_container">
-          { console.log('search results', this.props.searchResults)}
+          { this.props.imageResults ? 
+            this.props.imageResults.map((image, i) => {
+              return ( 
+                <div key={i}><img src={image.url}/></div> 
+              );
+            }) : null
+          }
         </div>
       </div>
     );
