@@ -1,7 +1,10 @@
 
 nav {
   float: right;
-
+  margin-top: $mini-spacing;
+  display: inline;
+  position: relative;
+  
   li {
     display: inline;
     padding-right: $med-spacing;

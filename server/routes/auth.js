@@ -48,23 +48,28 @@ router.route('/user') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     console.log('REQ: ', req);
     res.render('index.ejs', { 
-      user: req.user // get the user out of session and pass to template
+      user: req.user 
     });
   });
 
-//place holder server route, so shop renders on react router call
 router.route('/shop') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     res.render('index.ejs', { 
-      user: req.user // get the user out of session and pass to template
+      user: req.user 
     });
   });
 
-//place holder server route, so shop renders on react router call
 router.route('/claimshop') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     res.render('index.ejs', { 
-      user: req.user // get the user out of session and pass to template
+      user: req.user 
+    });
+  });
+  
+router.route('/search') 
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user 
     });
   });
 

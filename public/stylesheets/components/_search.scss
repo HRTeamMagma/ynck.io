@@ -1,0 +1,26 @@
+.search {
+  width: 520px;
+  display: inline;
+  position: relative;
+}
+
+.searchbox {
+  width: 500px;
+  height: 40px;
+  margin-left: $large-spacing;
+  margin-bottom: 0;
+}
+
+.search-icon {
+  background: url('/assets/icons/search.png') no-repeat center;
+  background-size: 20px 20px;
+  position: absolute;  
+  width: 20px;
+  height: 20px;
+  top: 0px;
+  right: 15px;
+}
+
+.search button {
+  margin-left: $mini-spacing;
+}

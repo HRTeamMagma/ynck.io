@@ -6,6 +6,8 @@ const ProfileController = require('../controllers').Profiles;
 const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
 const FavoriteController = require('../controllers').Favorites;
+const SearchController = require('../controllers').Search;
+
 const upload = require('../helpers/upload_helpers');
 
 router.route('/')
@@ -67,5 +69,8 @@ router.route('/delete-tag')
 
 router.route('/add-tag')
   .post(ImageController.addTagToImage);
+
+router.route('/search')
+  .get(SearchController.getSearchResults);
 
 module.exports = router;

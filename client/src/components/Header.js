@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Search from './Home/Search';
+import Search from './Search';
 import DropdownMenu from './DropdownMenu';
 
 
@@ -59,10 +59,19 @@ class Header extends React.Component {
             <div className="logo">
               <Link to="/"><h1>ynck</h1></Link>
             </div>
+            <Search submitSearch={this.props.submitSearch} />
             {this.props.loggedInUser ? (
               <nav>
                 <img className ='header-photo' src={this.state.userInfo.profile_image}/>
-                <li><a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } <span className="dropdown_arrow"></span></a></li>
+                
+                <li>
+                  <a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } 
+                  {this.state.isOpen ?
+                    <span className="dropdown_up_arrow"></span> :
+                    <span className="dropdown_down_arrow"></span>
+                  }
+                  </a>
+                </li>
                 <DropdownMenu userInfo = {this.state.userInfo} isOpen={this.state.isOpen} loggedInUser={this.props.loggedInUser}/>
               </nav>
               ) : (

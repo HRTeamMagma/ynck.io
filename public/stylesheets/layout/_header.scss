@@ -21,9 +21,24 @@
   margin-top: -5px;
 }
 
-// .dropdown_arrow {
-//   width: 16px;
-//   height: 16px;
-//   background: url('/assets/icons/menu_more.png') no-repeat center;
-// }
 
+.dropdown_down_arrow {
+  background: url('/assets/icons/dropdown_down_arrow.png') no-repeat center;
+  background-size: 10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 12px;
+  right: 15px;
+}
+
+
+.dropdown_up_arrow {
+  background: url('/assets/icons/dropdown_up_arrow.png') no-repeat center;
+  background-size: 10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 12px;
+  right: 15px;
+}
