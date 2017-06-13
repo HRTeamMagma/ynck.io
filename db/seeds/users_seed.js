@@ -180,6 +180,38 @@ exports.seed = function (knex, Promise) {
       });
     })
     .then(() => {
+      return knex('profiles_profiles').insert([
+        {
+          user_id: 1,
+          follower_id: 2
+        },
+        {
+          user_id: 1,
+          follower_id: 3
+        },
+        {
+          user_id: 4,
+          follower_id: 3
+        },
+        {
+          user_id: 4,
+          follower_id: 2
+        },
+        {
+          user_id: 4,
+          follower_id: 1
+        },
+        {
+          user_id: 2,
+          follower_id: 4
+        },
+        {
+          user_id: 3,
+          follower_id: 4
+        }
+      ]);
+    })
+    .then(() => {
       return knex('ratings').insert([
         {
           shop_id: 2,
@@ -211,6 +243,7 @@ exports.seed = function (knex, Promise) {
       return Promise.all(shopImages);
     })
     .then(() => {
+      console.log('testing to see if Travis gets this far');
       return knex('favorites').insert([
         {
           profile_id: 2,
