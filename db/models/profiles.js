@@ -16,6 +16,12 @@ const Profile = bookshelf.Model.extend({
   },
   favorites: function() {
     return this.belongsToMany('Image').through('Favorite');
+  },
+  following: function() {
+    return this.belongsToMany('Profile', 'profiles_profiles', 'user_id', 'follower_id');
+  },
+  followers: function() {
+    return this.belongsToMany('Profile', 'profiles_profiles', 'follower_id', 'user_id' );
   }
 });
 
