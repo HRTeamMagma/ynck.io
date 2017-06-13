@@ -46,7 +46,6 @@ router.route('/signup')
 
 router.route('/user') //change this route????
   .get(middleware.auth.verify, (req, res) => {
-    console.log('REQ: ', req);
     res.render('index.ejs', { 
       user: req.user 
     });

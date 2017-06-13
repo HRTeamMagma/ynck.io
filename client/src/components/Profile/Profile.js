@@ -69,7 +69,6 @@ class Profile extends React.Component {
 
     return (
       <div>
-        {console.log('propsFromInsideProfile: ', this.props)}
         <UploadForm image_type="design" />
         <div className="feed_container">
           {this.props.userDataIsLoading ? <CometSpinLoader /> : null }

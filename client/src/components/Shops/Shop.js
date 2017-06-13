@@ -8,7 +8,6 @@ import OurWork from './OurWork';
 import MapView from './MapView';
 import StarRating from 'react-star-rating';
 
-
 class Shop extends React.Component {
   constructor(props) {
     super(props);
@@ -29,12 +28,7 @@ class Shop extends React.Component {
     this.renderShopInfo = this.renderShopInfo.bind(this);
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
-    
-    // hopeify.get('http://localhost:3000/api/profile/my-tattoos', function(res) {
-    //   console.log(res);
-    // });
-    //use of store (REDUXIFIED api call)
-    //2 is placeholder, in future it will come from either the user shop or shop that is selected in search
+
     this.props.fetchShopInfo('/api/shop');
   }
 
@@ -130,7 +124,6 @@ class Shop extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     shop: state.shop
   };
