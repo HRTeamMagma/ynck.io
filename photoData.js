@@ -24,7 +24,10 @@ module.exports.data = [
     url: 'https://farm4.staticflickr.com/3311/3561296585_9cbdc045e7_z.jpg'
   },
   { 
-    url: 'https://farm5.staticflickr.com/4075/4761156100_943b45be05_z.jpghttps://farm1.staticflickr.com/38/95647028_ac6ae5ab25_z.jpg'
+    url: 'https://farm5.staticflickr.com/4075/4761156100_943b45be05_z.jpg'
+  },
+  { 
+    url: 'https://farm1.staticflickr.com/38/95647028_ac6ae5ab25_z.jpg'
   },
   { 
     url: 'https://farm8.staticflickr.com/7014/6758765165_a951e41fd2_z.jpg'
