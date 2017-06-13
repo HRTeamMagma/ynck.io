@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Following = () => {
+const Following = (props) => {
   return (
     <div className="following">
+      {console.log('FOLLOWING PROPS: ', props)}
       <img src="../../assets/images/following1.png" />
       <img src="../../assets/images/following2.png" />
       <img src="../../assets/images/following3.png" />

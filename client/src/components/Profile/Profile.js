@@ -79,7 +79,7 @@ class Profile extends React.Component {
                 <UserInfo userData = {this.props.userData.userProfile} saveEdits = { this.saveEdits } 
                 handleEditProfile = { this.handleEditProfile } cancelEdit = { this.cancelEdit } editMode = { this.state.editMode } 
                 followUser = { this.followUser } isBeingFollowed={this.props.userData.isBeingFollowed} />
-                <Following />
+                <Following usersFollowing={this.props.userFollowing}/>
               </div>  
               : null
             }  
