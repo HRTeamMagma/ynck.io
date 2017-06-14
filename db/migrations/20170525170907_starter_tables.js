@@ -22,6 +22,10 @@ exports.up = function(knex, Promise) {
       table.string('url', 150).notNullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.integer('x').nullable();
+      table.integer('y').nullable();
+      table.integer('width').nullable();
+      table.integer('height').nullable();
       table.integer('favoriteCount').defaultTo(0);
       table.string('image_type', 100);
       table.index('image_type');

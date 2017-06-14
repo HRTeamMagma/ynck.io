@@ -2,6 +2,25 @@ const models = require('../../db/models');
 const knex = require('../../db/').knex;
 const helper = require('../helpers/db_helpers');
 const bookshelf = require('../../db/');
+const smartcrop = require('smartcrop-gm');
+const request = require('request');
+
+const cropImage = (imageUrl, width, height, cb) => {
+  request(imageUrl, {encoding: null}, function process(error, response, body) {
+    console.log(body);
+    if (error) {
+      return console.error(error);
+    }
+    smartcrop.crop(body, {width: width, height: height})
+    .then(function(result) {
+      var crop = result.topCrop;
+      cb(crop);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  });
+};
 
 module.exports.uploadImage = (req, res) => {
   if (req.body.image_type === 'shopimage') {
@@ -9,34 +28,73 @@ module.exports.uploadImage = (req, res) => {
     .fetch({withRelated: 'shop'})
     .then(profile => {
       var theShop = profile.related('shop');
-      models.Shopimage.forge({
-        shop_id: theShop.get('id'),
-        url: req.file.location
+      cropImage(req.file.location, 200, 150, (cropResult)=> {
+        models.Shopimage.forge({
+          x: cropResult.x,
+          y: cropResult.y,
+          width: cropResult.width,
+          height: cropResult.height,
+          shop_id: theShop.get('id'),
+          url: req.file.location
+        })
+        .save()
+        .then(image => {
+          req.file.shopId = theShop.get('id');
+          req.file.shopimageId = image.get('id');
+          res.status(200).send(req.file);
+        })
+        .catch(error => {
+          console.error(error);
+          res.sendStatus(500);
+        });
+      });
+    });
+        // request(req.file.location, {encoding: null}, function process(error, response, body) {
+        //   if (error) return console.error(error);
+        //   smartcrop.crop(body, {width: 300, height: 200})
+        //   .then(function(result){
+        //     var crop = result.topCrop;
+        //     req.file.crop = crop;
+          // })
+          // .catch(error => {
+          //   console.log(error)
+          // });
+
+  } else {
+    cropImage(req.file.location, 300, 200, (cropResult) => {
+      models.Image.forge({
+        url: req.file.location,
+        x: cropResult.x,
+        y: cropResult.y,
+        width: cropResult.width,
+        height: cropResult.height,
+        profile_id: req.user.id,
+        image_type: req.body.image_type
       })
       .save()
       .then(image => {
-        req.file.shopId = theShop.get('id');
-        req.file.shopimageId = image.get('id');
+        req.file.imageId = image.attributes.id;
         res.status(200).send(req.file);
+      })
+      .catch(error => {
+        console.log(error);
+        res.sendStatus(500);
       });
-    });
-  } else {
-    models.Image.forge({
-      url: req.file.location,
-      profile_id: req.user.id,
-      image_type: req.body.image_type
-    })
-    .save()
-    .then(image => {
-      req.file.imageId = image.attributes.id;
-      res.status(200).send(req.file);
-    })
-    .catch(error => {
-      console.log(error);
-      res.sendStatus(500);
     });
   }
 };
+
+      // request(req.file.location, {encoding: null}, function process(error, response, body) {
+      //   if (error) return console.error(error);
+      //   smartcrop.crop(body, {width: 300, height: 200})
+      //   .then(function(result){
+      //     var crop = result.topCrop;
+      //     req.file.crop = crop;
+      //   })
+      //   .catch(error => {
+      //     console.log(error)
+      //   });
+      // });
 
 module.exports.editImage = (req, res) => {
   console.log(req.body);

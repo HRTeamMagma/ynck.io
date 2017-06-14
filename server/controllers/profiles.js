@@ -85,6 +85,10 @@ module.exports.getUserProfilePage = (req, res) => {
           });
         }
         thisImage.url = image.url;
+        thisImage.x = image.x;
+        thisImage.y = image.y;
+        thisImage.width = image.width;
+        thisImage.height = image.height;
         if (responseObj[image._pivot_image_type]) {
           responseObj[image._pivot_image_type].push(thisImage);
         } else {
