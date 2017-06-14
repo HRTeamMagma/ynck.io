@@ -103,7 +103,7 @@ module.exports.getUserProfilePage = (req, res) => {
 };
 
 module.exports.getUserImages = (req, res) => {
-  models.Image.where({ profile_id: req.query.id }).fetchAll({withRelated: ['tags']})
+  models.Image.where({ profile_id: req.query.id }).fetchAll({withRelated: ['tags', 'favorites']})
     .then(results => {
       if (!results) {
         throw results;
@@ -124,6 +124,12 @@ module.exports.getUserImages = (req, res) => {
                 responseObj.isBeingFollowed = false;
               }
               allImages.forEach(function(image) {
+                image.isFavorited = false;
+                image.favorites.forEach(favorite => {
+                  if (favorite._pivot_profile_id === req.user.id) {
+                    image.isFavorited = true;
+                  }
+                });
                 if (responseObj[image.image_type]) {
                   responseObj[image.image_type].push(image);
                 } else {
