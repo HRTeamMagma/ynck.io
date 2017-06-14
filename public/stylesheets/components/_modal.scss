@@ -1,0 +1,33 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $transparent;
+  padding: $large-spacing;
+};
+
+.modal {
+  background-color: $white;
+  border-radius: 3px;
+  max-width: 500px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: $med-spacing;
+
+  input {
+    width: 300px;
+    border: none;
+  }
+};
+
+.modalButtons {
+  padding-top: 30px;
+  border-top: solid 1px $light-grey;
+  float: right;
+
+  button {
+     margin-left: $small-spacing;
+  }
+}
