@@ -25,17 +25,17 @@ module.exports.getShopInfoForUser = (req, res) => {
     models.Shop.where({id: req.query.shopId}).fetch({withRelated: 'shopimages'})
     .then(shop => {
       let theData = shop.toJSON();
-      let responsObj = {};
-      responsObj.images = theData.shopimages;
+      let responseObj = {};
+      responseObj.images = theData.shopimages;
       delete theData.shopimages;
-      responsObj.shopInfo = theData;
+      responseObj.shopInfo = theData;
       var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.city + ', ' + responseObj.shopInfo.state;
       latLong.latLong(address, function(result) {
         if (result[0]) {
           responseObj.lat = result[0].latitude;
           responseObj.lon = result[0].longitude;
         }
-        res.send(responsObj);
+        res.send(responseObj);
       });
     });
   }
