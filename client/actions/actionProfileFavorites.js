@@ -22,13 +22,13 @@ export const profileFavoritesSuccess = (profileFavorites) => {
   };
 };
 
-export const getProfileFavorites = (url, id) => {
+export const getProfileFavorites = (url, loggedInUserId, imageId) => {
+  console.log('ACTION>>>>>>>', loggedInUserId, imageId);
   return (dispatch) => {
     dispatch(profileFavoritesIsLoading(true));
-    axios.get(url, {
-      params: {
-        id
-      }
+    axios.post(url, {
+      loggedInUser: loggedInUserId,
+      favoritedImage: imageId
     })
     .then(success => {
       console.log('profileFavoritesSuccess: ', success);

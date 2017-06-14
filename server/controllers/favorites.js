@@ -17,7 +17,7 @@ module.exports.getUserFavorites = (req, res) => {
 };
 
 module.exports.addToUserFavorites = (req, res) => {
-  let loggedInUserID = req.body.loggedInUser.id;
+  let loggedInUserID = req.body.loggedInUser;
   let favoritedImageID = req.body.favoritedImage;
   models.Favorite.where({profile_id: loggedInUserID, image_id: favoritedImageID}).fetchAll()
   .then( result => {

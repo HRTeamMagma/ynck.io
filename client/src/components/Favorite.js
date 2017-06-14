@@ -9,28 +9,22 @@ class Favorite extends React.Component {
   constructor(props) {
     super(props);
 
-    this.addToFavorites = this.addToFavorites.bind(this);
+    this.addToProfileFavorites = this.addToProfileFavorites.bind(this);
   }
 
-  addToFavorites(imageId) {
-    axios.post('/api/user/favorites', {
-      loggedInUser,
-      favoritedImage: imageId
-    })
-    .then((success) => {
-      console.log('IMAGE ADDED SUCCESS: ', this.state);
-    })
-    .catch((error) => console.log(error));
-  }
+  addToProfileFavorites(imageId) {
+    this.props.getProfileFavorites('/api/user/favorites', loggedInUser.id, imageId);
+  }  
 
   render() {
     return (
       <div key={this.props.i}>
         <div className="overlay_container">
-          { this.state.isFavorited ?
+          {/*{ this.state.isFavorited ?
             <img src="./../../assets/icons/favorited.png" className="heart" onClick={ () => { this.addToFavorites(this.props.images.id); } }/> 
-          : <img src="./../../assets/icons/heart.png" className="heart" onClick={ () => { this.addToFavorites(this.props.images.id); } }/> 
-            }
+          : */}
+            <img src="./../../assets/icons/heart.png" className="heart" onClick={ () => { this.addToProfileFavorites(this.props.images.id); } }/> 
+            {/*}*/}
         </div>
         <img src={this.props.images.url} />
       </div>
@@ -48,8 +42,8 @@ const mapStateToProps = (state) => {
 //connects dispatch to action (fires the action)
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProfileFavorites: (url) => dispatch(getProfileFavorites(url)),
+    getProfileFavorites: (url, userId, imageId) => dispatch(getProfileFavorites(url, userId, imageId)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorite);
