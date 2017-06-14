@@ -86,7 +86,7 @@ class Profile extends React.Component {
 
           <div className="main_content">
             { this.props.userData ? 
-              <Feed myTattoos = {this.props.userData.tattoo} myDesigns = {this.props.userData.design} myInspirations = {this.props.userData.inspiration}/>
+              <Feed viewedUser={this.props.match.params.id} myTattoos = {this.props.userData.tattoo} myDesigns = {this.props.userData.design} myInspirations = {this.props.userData.inspiration}/>
               : null 
             }
           </div>
