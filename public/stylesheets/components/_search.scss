@@ -1,7 +1,11 @@
-.search {
+.search form  {
   width: 520px;
   display: inline;
   position: relative;
+}
+
+.search {
+  display: inline;
 }
 
 .searchbox {
@@ -19,6 +23,10 @@
   height: 20px;
   top: 0px;
   right: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .search button {

@@ -25,7 +25,8 @@ class Main extends React.Component {
     this.clearSearch = this.clearSearch.bind(this);
   }
 
-  submitSearch(searchTerm, searchType) {
+  submitSearch(e, searchTerm, searchType) {
+    e.preventDefault();
     this.props.search('/api/search', searchTerm, searchType, () => {
       this.setState({
         searchSubmitted: true,
