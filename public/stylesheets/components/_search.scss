@@ -7,7 +7,7 @@
 .searchbox {
   width: 500px;
   height: 40px;
-  margin-left: $large-spacing;
+  margin-left: $mini-spacing;
   margin-bottom: 0;
 }
 
@@ -22,5 +22,9 @@
 }
 
 .search button {
-  margin-left: $mini-spacing;
+  margin-left: $small-spacing;
+}
+
+.searchFilter {
+  margin-left: $large-spacing;
 }
