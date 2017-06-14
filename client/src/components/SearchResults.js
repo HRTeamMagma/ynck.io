@@ -11,21 +11,33 @@ class SearchResults extends React.Component {
   }
 
   render() {
+
+    if (this.props.searchType === "tags") {
+      var tagResults = this.props.searchResults.imageResults;
+    } else if (this.props.searchType === "shops") {
+      var shopResults = this.props.searchResults.shops;
+    } else {
+      var userResults = this.props.searchResults.users;
+    }
+
     return (
       <div className="searchResults">
         <div className="feed_container">
-          { this.props.searchResults.imageResults ? 
-            this.props.searchResults.imageResults.map((image, i) => {
-              return ( 
-                <div key={i}><img src={image.url}/></div> 
-              );
-            }) 
-            : 
-            this.props.searchResults === undefined ? null
-            :
-            <div>
-              <h2><strong>{this.props.searchResults}</strong></h2>
-            </div>
+          { tagResults ? tagResults.map((image, i) => 
+            <div key={i}><img src={image.url}/></div>) : null
+          }
+
+          { shopResults ? shopResults.map((shop, i) => 
+            <div key={i}><h4>{shop.name}</h4>
+              <img src={shop.shop_image}/>
+            </div>) : null
+          }
+
+          {
+            userResults ? userResults.map((user, i) => 
+            <div key={i}><h4>{user.first} {user.last}</h4>
+              <img src={user.profile_image}/>
+            </div>) : null
           }
         </div>
       </div>
