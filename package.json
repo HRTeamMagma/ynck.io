@@ -75,6 +75,7 @@
     "superagent": "^3.5.2",
     "tunnel-agent": "^0.6.0",
     "uuid": "^3.0.1",
+    "webpack": "^2.3.2",
     "yelp-fusion": "^1.0.3"
   },
   "devDependencies": {
@@ -90,7 +91,6 @@
     "mocha": "^3.2.0",
     "node-mocks-http": "^1.6.1",
     "supertest": "^3.0.0",
-    "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
   },
   "babel": {
