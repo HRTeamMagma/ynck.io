@@ -11,7 +11,6 @@ class SearchResults extends React.Component {
   }
 
   render() {
-
     if (this.props.searchType === "tags") {
       var tagResults = this.props.searchResults.imageResults;
     } else if (this.props.searchType === "shops") {
@@ -27,7 +26,7 @@ class SearchResults extends React.Component {
           {
             this.props.searchResults.msg ? 
             <h3>{ this.props.searchResults.msg } </h3>
-            : <h2>Search results</h2>
+            : <h2>Search results for "{this.props.searchTerm}"</h2>
           }
           <div className="image_grid">
 

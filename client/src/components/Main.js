@@ -18,19 +18,21 @@ class Main extends React.Component {
     super(props);
     this.state = {
       searchSubmitted: false,
+      searchTerm: '',
       searchType: ''
     };
     this.submitSearch = this.submitSearch.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
   }
 
-  submitSearch(searchInput, searchType) {
-    this.props.search('/api/search', searchInput, searchType, () => {
+  submitSearch(searchTerm, searchType) {
+    this.props.search('/api/search', searchTerm, searchType, () => {
       this.setState({
         searchSubmitted: true,
+        searchTerm: searchTerm,
         searchType: searchType
       });
-      history.push(`/search?q=${searchInput}`);
+      history.push(`/search?q=${searchTerm}`);
     });
   }
 
@@ -50,7 +52,7 @@ class Main extends React.Component {
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
               <Route path = "/shop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
-              <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm}  searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
@@ -68,7 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: (url, searchInput, searchType, callback) => dispatch(search(url, searchInput, searchType, callback))
+    search: (url, searchTerm, searchType, callback) => dispatch(search(url, searchTerm, searchType, callback))
   };
 };
 
