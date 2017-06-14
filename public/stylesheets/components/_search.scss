@@ -28,3 +28,25 @@
 .searchFilter {
   margin-left: $large-spacing;
 }
+
+
+// On search results
+.searchResults {
+  .solo_image {
+    margin-right: $med-spacing;
+    display: inline-block;
+
+    .base_pic {
+      width: 300px;
+      height: 200px;
+      margin-top: $small-spacing;
+    }
+
+    &:nth-of-type(4) {
+      margin-right: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

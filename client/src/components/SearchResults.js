@@ -11,7 +11,6 @@ class SearchResults extends React.Component {
   }
 
   render() {
-
     if (this.props.searchType === "tags") {
       var tagResults = this.props.searchResults.imageResults;
     } else if (this.props.searchType === "shops") {
@@ -21,24 +20,36 @@ class SearchResults extends React.Component {
     }
 
     return (
-      <div className="searchResults">
         <div className="feed_container">
-          { tagResults ? tagResults.map((image, i) => 
-            <div key={i}><img src={image.url}/></div>) : null
-          }
-
-          { shopResults ? shopResults.map((shop, i) => 
-            <div key={i}><h4>{shop.name}</h4>
-              <img src={shop.shop_image}/>
-            </div>) : null
-          }
-
+          <div className="searchResults">
+          
           {
-            userResults ? userResults.map((user, i) => 
-            <div key={i}><h4>{user.first} {user.last}</h4>
-              <img src={user.profile_image}/>
-            </div>) : null
+            this.props.searchResults.msg ? 
+            <h3>{ this.props.searchResults.msg } </h3>
+            : <h2>Search results for "{this.props.searchTerm}"</h2>
           }
+          <div className="image_grid">
+
+            { tagResults ? tagResults.map((image, i) => 
+            <div key={i} className="solo_image">
+                <img src={image.url} className="base_pic"/>
+              </div>) : null
+            }
+
+            { shopResults ? shopResults.map((shop, i) => 
+              <div key={i} className="solo_image"><h4>{shop.name}</h4>
+                <img src={shop.shop_image} className="base_pic"/>
+              </div>) : null
+            }
+
+            {
+              userResults ? userResults.map((user, i) => 
+              <div key={i} className="solo_image"><h4>{user.first} {user.last}</h4>
+                <img src={user.profile_image} className="user_profile_image"/>
+              </div>) : null
+            }
+
+          </div>          
         </div>
       </div>
     );
