@@ -7,8 +7,8 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      searchInput: '',
-      searchType: ''
+      searchTerm: '',
+      searchType: 'tags'
     };
     this.captureSearchInput = this.captureSearchInput.bind(this);
   }
@@ -28,8 +28,8 @@ class Search extends React.Component {
           <option value="shops">Shops</option>
           <option value="users">Users</option>
         </select>       
-        <input className="searchbox" name="searchInput" placeholder="Search for tags, shops, or users" onChange={(e) => this.captureSearchInput(e)}></input>
-        <span className="search-icon" onClick={ () => this.props.submitSearch(this.state.searchInput, this.state.searchType) }></span>
+        <input className="searchbox" name="searchTerm" placeholder="Search for tags, shops, or users" onChange={(e) => this.captureSearchInput(e)}></input>
+        <span className="search-icon" onClick={ () => this.props.submitSearch(this.state.searchTerm, this.state.searchType) }></span>
       </div>
     );
   }
