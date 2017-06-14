@@ -5,7 +5,7 @@ import { recentImages, recentImagesHasErrored, recentImagesIsLoading } from './r
 import { getFavoritesIsLoading, getFavoritesHasErrored, userFavorites } from './reducerFavorites';
 import { userDataIsLoading, userData } from './reducerUserInfo';
 import { shop } from './reducerShopInfo';
-import { searchResults } from './reducerSearch';
+import { searchResults, searchIsLoading } from './reducerSearch';
 import { userFollowing } from './reducerFollowing';
 
 const rootReducer = combineReducers({
@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
   userDataIsLoading,
   userData,
   shop,
+  searchIsLoading,
   searchResults,
   userFollowing,
   form: formReducer

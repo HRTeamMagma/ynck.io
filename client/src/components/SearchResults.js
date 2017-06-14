@@ -1,4 +1,5 @@
 import React from 'react';
+import { CometSpinLoader } from 'react-css-loaders';
 
 
 class SearchResults extends React.Component {
@@ -21,36 +22,34 @@ class SearchResults extends React.Component {
 
     return (
         <div className="feed_container">
-          <div className="searchResults">
-          
-          {
-            this.props.searchResults.msg ? 
-            <h3>{ this.props.searchResults.msg } </h3>
-            : <h2>Search results for "{this.props.searchTerm}"</h2>
-          }
-          <div className="image_grid">
+          { this.props.searchIsLoading ? <CometSpinLoader /> : (
+            <div className="searchResults">
+              {
+                this.props.searchResults.msg ? 
+                <h3>{ this.props.searchResults.msg } </h3>
+                : <h2>Search results for "{this.props.searchTerm}"</h2>
+              }
+              <div className="image_grid">
+                { tagResults ? tagResults.map((image, i) => 
+                <div key={i} className="solo_image">
+                    <img src={image.url} className="base_pic"/>
+                  </div>) : null
+                }
 
-            { tagResults ? tagResults.map((image, i) => 
-            <div key={i} className="solo_image">
-                <img src={image.url} className="base_pic"/>
-              </div>) : null
-            }
-
-            { shopResults ? shopResults.map((shop, i) => 
-              <div key={i} className="solo_image"><h4>{shop.name}</h4>
-                <img src={shop.shop_image} className="base_pic"/>
-              </div>) : null
-            }
-
-            {
-              userResults ? userResults.map((user, i) => 
-              <div key={i} className="solo_image"><h4>{user.first} {user.last}</h4>
-                <img src={user.profile_image} className="user_profile_image"/>
-              </div>) : null
-            }
-
-          </div>          
-        </div>
+                { shopResults ? shopResults.map((shop, i) => 
+                  <div key={i} className="solo_image"><h4>{shop.name}</h4>
+                    <img src={shop.shop_image} className="base_pic"/>
+                  </div>) : null
+                }
+                {
+                  userResults ? userResults.map((user, i) => 
+                  <div key={i} className="solo_image"><h4>{user.first} {user.last}</h4>
+                    <img src={user.profile_image} className="user_profile_image"/>
+                  </div>) : null
+                }
+            </div>          
+          </div>
+        )}
       </div>
     );
   }
