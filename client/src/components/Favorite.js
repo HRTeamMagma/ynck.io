@@ -14,17 +14,17 @@ class Favorite extends React.Component {
 
   addToProfileFavorites(imageId) {
     this.props.getProfileFavorites('/api/user/favorites', loggedInUser.id, imageId);
-  }  
+  } 
 
   render() {
     return (
-      <div key={this.props.i}>
+      <div key={this.props.key}>
         <div className="overlay_container">
-          {/*{ this.state.isFavorited ?
+          { this.props.images.isFavorited ?
             <img src="./../../assets/icons/favorited.png" className="heart" onClick={ () => { this.addToFavorites(this.props.images.id); } }/> 
-          : */}
+          : 
             <img src="./../../assets/icons/heart.png" className="heart" onClick={ () => { this.addToProfileFavorites(this.props.images.id); } }/> 
-            {/*}*/}
+            }
         </div>
         <img src={this.props.images.url} />
       </div>

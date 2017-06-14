@@ -10,7 +10,7 @@ class MyTattoos extends React.Component {
         <h2>My Tattoos</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-              {this.props.myTattoos.map ((images, i) => <Favorite images={images} i={i}/> )}
+              {this.props.myTattoos.map ((images, i) => <Favorite images={images} key={i}/> )}
             </Carousel>
           </div>
       </div>

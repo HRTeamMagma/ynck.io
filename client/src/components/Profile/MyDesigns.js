@@ -10,7 +10,7 @@ class MyDesigns extends React.Component {
         <h2>My Designs</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-            {this.props.myDesigns.map ((images, i) => <Favorite images={images} i={i}/> )}
+            {this.props.myDesigns.map ((images, i) => <Favorite images={images} key={i}/> )}
 
             </Carousel>
           </div>
