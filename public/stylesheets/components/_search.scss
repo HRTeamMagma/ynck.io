@@ -1,7 +1,11 @@
-.search {
+.search form  {
   width: 520px;
   display: inline;
   position: relative;
+}
+
+.search {
+  display: inline;
 }
 
 .searchbox {
@@ -13,12 +17,16 @@
 
 .search-icon {
   background: url('/assets/icons/search.png') no-repeat center;
-  background-size: 20px 20px;
-  position: absolute;  
-  width: 20px;
-  height: 20px;
-  top: 0px;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+  top: 3px;
   right: 15px;
+  position: absolute;  
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .search button {

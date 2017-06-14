@@ -3,7 +3,7 @@ const helper = require('../helpers/db_helpers');
 const latLong = require('../../LatLong');
 
 module.exports.getShopInfoForUser = (req, res) => {
-  if (req.user) {
+  if (req.user && req.query.shopId === undefined) {
     models.Profile.where({id: req.user.id}).fetch({withRelated: ['shop', 'shop.shopimages']})
     .then ( profile => {
       let theData = profile.related('shop').toJSON();
@@ -17,13 +17,27 @@ module.exports.getShopInfoForUser = (req, res) => {
         if (result[0]) {
           responseObj.lat = result[0].latitude;
           responseObj.lon = result[0].longitude;
-        }
-        
+        }   
         res.send(responseObj);
       });
     });
   } else {
-    res.redirect('/');
+    models.Shop.where({id: req.query.shopId}).fetch({withRelated: 'shopimages'})
+    .then(shop => {
+      let theData = shop.toJSON();
+      let responseObj = {};
+      responseObj.images = theData.shopimages;
+      delete theData.shopimages;
+      responseObj.shopInfo = theData;
+      var address = responseObj.shopInfo.address1 + ' ' + responseObj.shopInfo.city + ', ' + responseObj.shopInfo.state;
+      latLong.latLong(address, function(result) {
+        if (result[0]) {
+          responseObj.lat = result[0].latitude;
+          responseObj.lon = result[0].longitude;
+        }
+        res.send(responseObj);
+      });
+    });
   }
 };
 
