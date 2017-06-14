@@ -5,7 +5,8 @@
     "start": "nodemon server",
     "test": "NODE_ENV=test grunt test",
     "build": "webpack --watch",
-    "heroku-postbuild": "webpack"
+    "heroku-postbuild": "webpack",
+    "postinstall": "npm rebuild node-sass"
   },
   "author": "Ynck",
   "license": "MIT",
