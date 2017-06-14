@@ -55,10 +55,8 @@ router.route('/user') //change this route????
 
 router.route('/shop/:id') //change this route????
   .get(middleware.auth.verify, (req, res) => {
-    console.log('reqparams id', req.params.id);
     models.Shop.where({id: req.params.id}).fetch({withRelated: 'shopimages'})
     .then(shop => {
-      console.log('shop', shop.toJSON());
       shop = shop.toJSON();
       if (!req.user) {
         var loggedInUser = false;

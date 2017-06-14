@@ -10,7 +10,6 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    console.log('*******userinfo', this.props.userInfo);
     if (this.props.isOpen) {
       return (
         <div className="dropdown">
