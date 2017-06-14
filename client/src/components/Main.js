@@ -25,7 +25,8 @@ class Main extends React.Component {
     this.clearSearch = this.clearSearch.bind(this);
   }
 
-  submitSearch(searchTerm, searchType) {
+  submitSearch(e, searchTerm, searchType) {
+    e.preventDefault();
     this.props.search('/api/search', searchTerm, searchType, () => {
       this.setState({
         searchSubmitted: true,
@@ -50,9 +51,9 @@ class Main extends React.Component {
             <Template submitSearch={this.submitSearch} >  
               <Route exact path="/" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Home loggedInUser={loggedInUser} {...props} />)} />
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
-              <Route path = "/shop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
+              <Route path = "/shop/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
-              <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm}  searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm} searchIsLoading={this.props.searchIsLoading} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
@@ -64,6 +65,7 @@ class Main extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    searchIsLoading: state.searchIsLoading,
     searchResults: state.searchResults
   };
 };

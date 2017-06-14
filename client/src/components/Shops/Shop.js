@@ -29,7 +29,7 @@ class Shop extends React.Component {
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
 
-    this.props.fetchShopInfo('/api/shop');
+    this.props.fetchShopInfo('/api/shop', this.props.match.params.id);
   }
 
   componentDidMount() {
@@ -53,12 +53,14 @@ class Shop extends React.Component {
   saveEdits (name, address1, address2, city, state, phone) {
     this.props.updateShopData('/api/shop', name, address1, address2, city, state, phone, () => {
       this.setState({editAddress: false, editName: false }, ()=> {
-        this.props.fetchShopInfo('/api/shop');
+        this.props.fetchShopInfo('/api/shop', this.props.match.params.id);
       });
     });
   }
 
   render () {
+    console.log('props', this.props.match.params.id);
+
     return (
       <div >
         <div className="feed_container">
@@ -131,7 +133,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchShopInfo: (url) => dispatch(fetchShopInfo(url)),
+    fetchShopInfo: (url, shopId) => dispatch(fetchShopInfo(url, shopId)),
     updateShopData: (url, name, address1, address2, city, state, phone, cb) => dispatch(updateShopData(url, name, address1, address2, city, state, phone, cb))
   };
 };

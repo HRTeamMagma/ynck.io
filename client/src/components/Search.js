@@ -22,14 +22,16 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className="search" > 
-        <select className="searchFilter" name="searchType" onChange={(e) => this.captureSearchInput(e)} >
-          <option value="tags">Tags</option>
-          <option value="shops">Shops</option>
-          <option value="users">Users</option>
-        </select>       
-        <input className="searchbox" name="searchTerm" placeholder="Search for tags, shops, or users" onChange={(e) => this.captureSearchInput(e)}></input>
-        <span className="search-icon" onClick={ () => this.props.submitSearch(this.state.searchTerm, this.state.searchType) }></span>
+      <div className="search" >
+        <form onSubmit={ (e) => this.props.submitSearch(e,this.state.searchTerm, this.state.searchType) } >
+          <select className="searchFilter" name="searchType" onChange={(e) => this.captureSearchInput(e)} >
+            <option value="tags">Tags</option>
+            <option value="shops">Shops</option>
+            <option value="users">Users</option>
+          </select>       
+          <input className="searchbox" name="searchTerm" placeholder="Search for tags, shops, or users" onChange={(e) => this.captureSearchInput(e)}></input>
+          <span className="search-icon" onClick={ (e) => this.props.submitSearch(e, this.state.searchTerm, this.state.searchType) }></span>
+        </form>
       </div>
     );
   }

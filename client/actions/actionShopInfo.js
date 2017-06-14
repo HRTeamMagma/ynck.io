@@ -7,10 +7,12 @@ export const shopInfo = (shopData) => {
   };
 };
 
-export const fetchShopInfo = (url) => {
+export const fetchShopInfo = (url, shopId) => {
+  console.log('************fetchShopInfo');
   return (dispatch) => {
-    axios.get(url)
+    axios.get(url, {params: {shopId: shopId}})
       .then(success => {
+        console.log('************successdata', success.data);
         dispatch(shopInfo(success.data));
       })
       .catch(error => {
