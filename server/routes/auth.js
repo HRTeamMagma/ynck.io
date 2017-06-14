@@ -1,6 +1,8 @@
 const express = require('express');
 const middleware = require('../middleware');
 const ProfileController = require('../controllers').Profiles;
+const ShopController = require('../controllers').Shops;
+const models = require('../../db/models');
 
 const router = express.Router();
 
@@ -51,10 +53,17 @@ router.route('/user') //change this route????
     });
   });
 
-router.route('/shop') //change this route????
+router.route('/shop/:id') //change this route????
   .get(middleware.auth.verify, (req, res) => {
-    res.render('index.ejs', { 
-      user: req.user 
+    models.Shop.where({id: req.params.id}).fetch({withRelated: 'shopimages'})
+    .then(shop => {
+      shop = shop.toJSON();
+      if (!req.user) {
+        var loggedInUser = false;
+      } else {
+        var loggedInUser = req.user;
+      }
+      res.render('index.ejs', { user: loggedInUser, shop: shop});
     });
   });
 
