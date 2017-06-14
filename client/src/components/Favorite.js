@@ -9,11 +9,17 @@ class Favorite extends React.Component {
   constructor(props) {
     super(props);
 
-    this.addAFavorite = this.addAFavorite.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
   }
 
-  addAFavorite(imageId, index) {
-    
+  addToFavorites(imageId) {
+    axios.post('/api/user/favorites', {
+      loggedInUser,
+      favoritedImage: imageId
+    })
+    .then((success) => {
+      console.log('IMAGE ADDED');
+    });
   }
 
   render() {
@@ -21,8 +27,8 @@ class Favorite extends React.Component {
       <div key={this.props.i}>
         <div className="overlay_container">
           { this.props.images.isFavorited ?
-            <img src="./../../assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(this.props.images.id, this.props.i); } }/> 
-          : <img src="./../../assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(this.props.images.id, this.props.i); } }/> 
+            <img src="./../../assets/icons/favorited.png" className="heart" onClick={ () => { this.addToFavorites(this.props.images.id); } }/> 
+          : <img src="./../../assets/icons/heart.png" className="heart" onClick={ () => { this.addToFavorites(this.props.images.id); } }/> 
             }
         </div>
         <img src={this.props.images.url} />
@@ -31,16 +37,4 @@ class Favorite extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorite);
+export default Favorite;
