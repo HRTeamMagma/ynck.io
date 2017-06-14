@@ -32,7 +32,7 @@ module.exports.getSearchResults = (req, res) => {
         }
       });
   } else {
-    res.send({ msg: `Nothing found.`});
+    res.send({ msg: 'Nothing found.'});
   }
 };
 
