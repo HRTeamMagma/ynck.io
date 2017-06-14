@@ -13,12 +13,13 @@ class Feed extends React.Component {
   }
 
   addToProfileFavorites(imageId, typeOfImage, i) {
-    this.props.getProfileFavorites('/api/user/favorites', loggedInUser.id, imageId, typeOfImage, i);
+    this.props.getProfileFavorites('/api/user/favorites', loggedInUser, imageId, typeOfImage, i);
   } 
 
   render() {
     return (
       <div className="user_stream">
+        {console.log('FEED PROPS: ', this.props)}
         { this.props.userData.tattoo ?
           <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites}/>
           : null 
@@ -39,7 +40,7 @@ class Feed extends React.Component {
 //connect state to action
 const mapStateToProps = (state) => {
   return {
-    userData: state.userData
+    userData: state.userData,
   };
 };
 

@@ -6,6 +6,7 @@ class MyFavorites extends React.Component {
   render() {
     return (
       <div>  
+        {console.log('FAVORITEPROPS: ', props)}
         <h2>Favorites</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
