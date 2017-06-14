@@ -23,10 +23,11 @@ class Feed extends React.Component {
   }
 
   grabFavorites() {
-    console.log('triggered', loggedInUser.id);
+    console.log(this.props);
+    console.log('triggered', this.props.viewedUser);
     axios.get('/api/user/favorites', {
       params: {
-        user_id: loggedInUser.id,
+        user_id: this.props.viewedUser,
       }
     })
     .then((success) => {
