@@ -14,7 +14,7 @@ module.exports.getSearchResults = (req, res) => {
       res.send({ msg: `No tattoos found for "${req.query.q}". Try, try again.`});
     });
   } else if (req.query.searchType === 'shops') {
-    knex.raw(`SELECT name, shop_image FROM shops where lower(name) like '%${req.query.q}%'`)
+    knex.raw(`SELECT * FROM shops where lower(name) like '%${req.query.q}%'`)
       .then(results => {
         if (results.rows[0]) {
           res.send({shops: results.rows});
