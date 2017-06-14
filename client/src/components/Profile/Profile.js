@@ -8,7 +8,7 @@ import UserInfo from './UserInfo';
 import Feed from './Feed';
 import Following from './Following';
 import { CometSpinLoader } from 'react-css-loaders';
-import UploadForm from './UploadForm';
+import UploadForm from '../UploadForm';
 
 class Profile extends React.Component {
   constructor(props) {

@@ -1,16 +1,24 @@
 import React from 'react';
-import UploadForm from '../../components/Profile/UploadForm';
+import UploadForm from '../UploadForm';
+import Modal from '../Modal';
 
 class OurWork extends React.Component {
   constructor(props) {
     super(props);
-  
-    this.state = {
-      
+
+    this.state = { 
+      isOpen: false 
     };
-    
-      
+    this.toggleModal = this.toggleModal.bind(this);
   }
+
+
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   render () {
     return (
       <div className="user_stream">
