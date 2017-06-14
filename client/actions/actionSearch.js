@@ -4,7 +4,7 @@ import axios from 'axios';
 export const searchIsLoading = (bool) => {
   return {
     type: 'SEARCH_RESULTS_ARE_LOADING',
-    userDataIsLoading: bool
+    searchIsLoading: bool
   };
 };
 
