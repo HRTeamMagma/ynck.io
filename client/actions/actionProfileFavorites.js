@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-//getProfileFavorites
+//addToProfileFavorites
 export const profileFavoritesHasErrored = (bool) => {
   return {
     type: 'PROFILE_FAVORITES_HAS_ERRORED',
@@ -15,15 +15,14 @@ export const profileFavoritesIsLoading = (bool) => {
   };
 };
 
-export const profileFavoritesSuccess = (profileFavorites) => {
+export const profileFavoritesSuccess = () => {
   return {
     type: 'PROFILE_FAVORITES_SUCCESS',
-    profileFavorites
   };
 };
 
+//megaAction
 export const getProfileFavorites = (url, loggedInUserId, imageId) => {
-  console.log('ACTION>>>>>>>', loggedInUserId, imageId);
   return (dispatch) => {
     dispatch(profileFavoritesIsLoading(true));
     axios.post(url, {
@@ -31,9 +30,9 @@ export const getProfileFavorites = (url, loggedInUserId, imageId) => {
       favoritedImage: imageId
     })
     .then(success => {
-      console.log('profileFavoritesSuccess: ', success);
+      let requestData = JSON.parse(success.config.data);
       dispatch(profileFavoritesIsLoading(false));
-      dispatch(profileFavoritesSuccess(success.data));
+      dispatch(profileFavoritesSuccess(success));
     })
     .catch(error => {
       dispatch(profileFavoritesIsLoading(false));
