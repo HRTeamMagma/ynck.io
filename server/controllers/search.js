@@ -23,7 +23,7 @@ module.exports.getSearchResults = (req, res) => {
         }
       });
   } else if (req.query.searchType === 'users') {
-    knex.raw(`SELECT first, last, profile_image FROM profiles where lower(first) like '%${req.query.q}%' OR lower(last) like '%${req.query.q}%'`)
+    knex.raw(`SELECT * FROM profiles where lower(first) like '%${req.query.q}%' OR lower(last) like '%${req.query.q}%'`)
       .then(results => {
         if (results.rows[0]) {
           res.send({users: results.rows});
