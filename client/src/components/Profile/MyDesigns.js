@@ -1,15 +1,20 @@
 import React from 'react';
 import Carousel from 'nuka-carousel';
+import Favorite from './../Favorite';
 
 class MyDesigns extends React.Component {
-
+  constructor (props) {
+    super (props);
+  }
+  
   render() {
     return (
       <div>  
         <h2>My Designs</h2>
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-              {this.props.myDesigns.map ((images, i) => <img key={i} src={images.url}/>)}
+            {this.props.myDesigns.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='design' i={i} images={images}/> )}
+
             </Carousel>
           </div>
       </div>
