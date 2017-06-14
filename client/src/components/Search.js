@@ -24,11 +24,11 @@ class Search extends React.Component {
     return (
       <div className="search" > 
         <select className="searchFilter" name="searchType" onChange={(e) => this.captureSearchInput(e)} >
+          <option value="tags">Tags</option>
           <option value="shops">Shops</option>
           <option value="users">Users</option>
-          <option value="tags">Tags</option>
         </select>       
-        <input className="searchbox" name="searchInput" placeholder="Search for shops, users, tags" onChange={(e) => this.captureSearchInput(e)}></input>
+        <input className="searchbox" name="searchInput" placeholder="Search for tags, shops, or users" onChange={(e) => this.captureSearchInput(e)}></input>
         <span className="search-icon" onClick={ () => this.props.submitSearch(this.state.searchInput, this.state.searchType) }></span>
       </div>
     );
