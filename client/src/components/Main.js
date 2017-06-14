@@ -17,17 +17,19 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchSubmitted: false
+      searchSubmitted: false,
+      searchType: ''
     };
     this.submitSearch = this.submitSearch.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
   }
 
-  submitSearch(searchInput) {
-    this.props.search('/api/search', searchInput);
+  submitSearch(searchInput, searchType) {
+    this.props.search('/api/search', searchInput, searchType);
 
     this.setState({
-      searchSubmitted: true
+      searchSubmitted: true,
+      searchType: searchType
     });
     history.push(`/search?q=${searchInput}`);
   }
@@ -48,7 +50,7 @@ class Main extends React.Component {
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
               <Route path = "/shop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
-              <Route path = "/search" render={(props) => (<SearchResults searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
+              <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
@@ -66,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: (url, searchInput) => dispatch(search(url, searchInput))
+    search: (url, searchInput, searchType) => dispatch(search(url, searchInput, searchType))
   };
 };
 

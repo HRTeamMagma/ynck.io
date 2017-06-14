@@ -16,11 +16,11 @@ export const searchResultsSuccess = (searchResults) => {
   };
 };
 
-export const search = (url, searchInput) => {
+export const search = (url, searchInput, searchType) => {
   return (dispatch) => {
     dispatch(searchIsLoading(true));
     axios.get(url, {
-      params: { q: searchInput }
+      params: { q: searchInput, searchType: searchType }
     })
     .then(success => {
       dispatch(searchResultsSuccess(success.data));
