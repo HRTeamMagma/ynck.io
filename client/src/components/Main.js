@@ -25,13 +25,13 @@ class Main extends React.Component {
   }
 
   submitSearch(searchInput, searchType) {
-    this.props.search('/api/search', searchInput, searchType);
-
-    this.setState({
-      searchSubmitted: true,
-      searchType: searchType
+    this.props.search('/api/search', searchInput, searchType, () => {
+      this.setState({
+        searchSubmitted: true,
+        searchType: searchType
+      });
+      history.push(`/search?q=${searchInput}`);
     });
-    history.push(`/search?q=${searchInput}`);
   }
 
   clearSearch() {
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: (url, searchInput, searchType) => dispatch(search(url, searchInput, searchType))
+    search: (url, searchInput, searchType, callback) => dispatch(search(url, searchInput, searchType, callback))
   };
 };
 

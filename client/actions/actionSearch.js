@@ -16,7 +16,7 @@ export const searchResultsSuccess = (searchResults) => {
   };
 };
 
-export const search = (url, searchInput, searchType) => {
+export const search = (url, searchInput, searchType, callback) => {
   return (dispatch) => {
     dispatch(searchIsLoading(true));
     axios.get(url, {
@@ -25,6 +25,7 @@ export const search = (url, searchInput, searchType) => {
     .then(success => {
       dispatch(searchResultsSuccess(success.data));
       dispatch(searchIsLoading(false));      
+      callback();
     })
     .catch(error => {
       throw error;
