@@ -23,21 +23,22 @@ class SearchResults extends React.Component {
     return (
       <div className="searchResults">
         <div className="feed_container">
-
           { tagResults ? tagResults.map((image, i) => 
-            <div key={i}><img src={image.url}/></div>) : null
+            <div key={i}>
+              <img src={image.url} className="tattoo_image"/>
+            </div>) : null
           }
 
           { shopResults ? shopResults.map((shop, i) => 
             <div key={i}><h4>{shop.name}</h4>
-              <img src={shop.shop_image}/>
+              <img src={shop.shop_image} className="profile_image"/>
             </div>) : null
           }
 
           {
             userResults ? userResults.map((user, i) => 
             <div key={i}><h4>{user.first} {user.last}</h4>
-              <img src={user.profile_image}/>
+              <img src={user.profile_image} className="user_profile_image"/>
             </div>) : null
           }
           {
