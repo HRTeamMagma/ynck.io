@@ -23,6 +23,7 @@ class SearchResults extends React.Component {
     return (
       <div className="searchResults">
         <div className="feed_container">
+
           { tagResults ? tagResults.map((image, i) => 
             <div key={i}><img src={image.url}/></div>) : null
           }
@@ -38,6 +39,11 @@ class SearchResults extends React.Component {
             <div key={i}><h4>{user.first} {user.last}</h4>
               <img src={user.profile_image}/>
             </div>) : null
+          }
+          {
+            this.props.searchResults.msg ? 
+            <h3>{ this.props.searchResults.msg } </h3>
+            : null
           }
         </div>
       </div>
