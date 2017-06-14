@@ -15,14 +15,18 @@ export const profileFavoritesIsLoading = (bool) => {
   };
 };
 
-export const profileFavoritesSuccess = () => {
+export const profileFavoritesSuccess = (loggedInUserId, imageId, typeOfImage, i) => {
   return {
     type: 'PROFILE_FAVORITES_SUCCESS',
+    loggedInUserId,
+    imageId,
+    typeOfImage, 
+    i
   };
 };
 
 //megaAction
-export const getProfileFavorites = (url, loggedInUserId, imageId) => {
+export const getProfileFavorites = (url, loggedInUserId, imageId, typeOfImage, i) => {
   return (dispatch) => {
     dispatch(profileFavoritesIsLoading(true));
     axios.post(url, {
@@ -32,7 +36,7 @@ export const getProfileFavorites = (url, loggedInUserId, imageId) => {
     .then(success => {
       let requestData = JSON.parse(success.config.data);
       dispatch(profileFavoritesIsLoading(false));
-      dispatch(profileFavoritesSuccess(success));
+      dispatch(profileFavoritesSuccess(loggedInUserId, imageId, typeOfImage, i));
     })
     .catch(error => {
       dispatch(profileFavoritesIsLoading(false));
