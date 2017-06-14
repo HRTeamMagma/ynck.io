@@ -26,17 +26,17 @@ export const profileFavoritesSuccess = (loggedInUserId, imageId, typeOfImage, i)
 };
 
 //megaAction
-export const getProfileFavorites = (url, loggedInUserId, imageId, typeOfImage, i) => {
+export const getProfileFavorites = (url, loggedInUser, imageId, typeOfImage, i) => {
   return (dispatch) => {
     dispatch(profileFavoritesIsLoading(true));
     axios.post(url, {
-      loggedInUser: loggedInUserId,
+      loggedInUser: loggedInUser,
       favoritedImage: imageId
     })
     .then(success => {
       let requestData = JSON.parse(success.config.data);
       dispatch(profileFavoritesIsLoading(false));
-      dispatch(profileFavoritesSuccess(loggedInUserId, imageId, typeOfImage, i));
+      dispatch(profileFavoritesSuccess(loggedInUser.Id, imageId, typeOfImage, i));
     })
     .catch(error => {
       dispatch(profileFavoritesIsLoading(false));
