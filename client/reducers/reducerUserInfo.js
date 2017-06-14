@@ -44,6 +44,27 @@ export const userData = (state = [], action) => {
         inspiration: newArray
       });
     }
+  case 'PROFILE_FAVORITES_SUCCESS' :
+    let i = action.i;
+    if (action.typeOfImage === 'tattoo') {
+      return Object.assign({}, state, { 
+        tattoo: [
+          ...state.tattoo.slice(0, i), 
+          Object.assign({}, state.tattoo[i], { 
+            isFavorited: !state.tattoo[i].isFavorited
+          }), 
+          ...state.tattoo.slice(i + 1)]
+      });
+    } else if (action.typeOfImage === 'design') {
+      return Object.assign({}, state, {
+        design: [
+          ...state.design.slice(0, i), 
+          Object.assign({}, state.design[i], {
+            isFavorited: !state.design[i].isFavorited
+          }), 
+          ...state.design.slice(i + 1)]
+      });
+    }
   default:
     return state;
   }
