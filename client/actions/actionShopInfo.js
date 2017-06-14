@@ -7,9 +7,9 @@ export const shopInfo = (shopData) => {
   };
 };
 
-export const fetchShopInfo = (url) => {
+export const fetchShopInfo = (url, shopId) => {
   return (dispatch) => {
-    axios.get(url)
+    axios.get(url, {params: {shopId: shopId}})
       .then(success => {
         dispatch(shopInfo(success.data));
       })
