@@ -7,6 +7,7 @@ import { userDataIsLoading, userData } from './reducerUserInfo';
 import { shop } from './reducerShopInfo';
 import { searchResults, searchIsLoading } from './reducerSearch';
 import { userFollowing } from './reducerFollowing';
+import { profileFavorites } from './reducerProfileFavorites'; 
 
 const rootReducer = combineReducers({
   recentImages, 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   searchIsLoading,
   searchResults,
   userFollowing,
+  profileFavorites,
   form: formReducer
 });
 
