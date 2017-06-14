@@ -59,7 +59,7 @@ class Shop extends React.Component {
   }
 
   render () {
-    console.log('props', this.props.match.params.id)
+    console.log('props', this.props.match.params.id);
 
     return (
       <div >

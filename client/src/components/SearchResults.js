@@ -38,7 +38,7 @@ class SearchResults extends React.Component {
 
                 { shopResults ? shopResults.map((shop, i) => 
                   <div key={i} className="solo_image">
-                    <h4>{shop.name}</h4>
+                     <a href={`/shop/${shop.id}`} ><h4>{shop.name}</h4></a>
                     <img src={shop.shop_image} className="base_pic"/>
                   </div>) : null
                 }
