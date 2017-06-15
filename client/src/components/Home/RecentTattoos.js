@@ -13,12 +13,14 @@ class RecentTattoos extends React.Component {
       hasMoreItems: true,
       isLoading: false,
       pageNum: 1,
-      pageSize: 1
+      pageSize: 1,
+      hoverDisplay: false
     };
     this.getLatestImages = this.getLatestImages.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
     this.addAFavorite = this.addAFavorite.bind(this);
     this.getTotalTattooPageSize = this.getTotalTattooPageSize.bind(this);
+    this.toggleOverlayInfo = this.toggleOverlayInfo.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +59,12 @@ class RecentTattoos extends React.Component {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
   }
 
+  toggleOverlayInfo() {
+    this.setState({
+      hoverDisplay: !this.state.hoverDisplay
+    });
+  }
+
   render() {
     let loader;
     if (this.state.pageNum > this.state.pageSize) {
@@ -73,7 +81,14 @@ class RecentTattoos extends React.Component {
       this.props.recentImages.forEach((image, i) => {
         items.push(
           <div key={i} className="solo_image">
-            <div className="overlay_container_front_page">
+            { this.state.hoverDisplay ?
+              <div className="hover-info">
+                <h4>{image.display}</h4>
+                <h4>{image.title}</h4>
+                <h4>{image.favoriteCount}</h4>
+              </div> : null
+            }
+            <div className="overlay_container_front_page" onMouseEnter={this.toggleOverlayInfo} >
               { image.isFavorited ?
                 <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
               : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
@@ -95,26 +110,26 @@ class RecentTattoos extends React.Component {
       }) 
     );
     return (
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.getLatestImages}
-              hasMore={this.state.hasMoreItems}
-              loader={loader}
-              threshold={20}
-              initialLoad={false}>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.getLatestImages}
+        hasMore={this.state.hasMoreItems}
+        loader={loader}
+        threshold={20}
+        initialLoad={false}>
 
-              <div className="feed_container">
-                { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
-                { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
+        <div className="feed_container">
+          { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
+          { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
 
-                <div className="recent_tattoos">
-                  <h2>Recent tattoos</h2>
-                  <div className="image_grid">
-                    {items}
-                  </div>
-                </div>
-              </div>
-            </InfiniteScroll>
+          <div className="recent_tattoos">
+            <h2>Recent tattoos</h2>
+            <div className="image_grid">
+              {items}
+            </div>
+          </div>
+        </div>
+      </InfiniteScroll>
     );
   }
 }
