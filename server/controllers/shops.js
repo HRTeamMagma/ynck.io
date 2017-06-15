@@ -101,3 +101,11 @@ module.exports.createShop = (req, res) => {
   })
   .catch(error => console.log(error));
 };
+
+module.exports.getAllShops = (req, res) => {
+  models.Shop.fetchAll()
+  .then((shops) => {
+    res.status(200).send(shops);
+  })
+  .catch(error => console.log(error));
+};
