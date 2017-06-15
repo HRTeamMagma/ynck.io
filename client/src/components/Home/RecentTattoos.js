@@ -4,24 +4,47 @@ import { connect } from 'react-redux';
 import { recentImagesFetchData, addToFavorites } from '../../../actions/actionRecentImages';
 import { getUserFavorites } from '../../../actions/actionFavorites';
 import { CometSpinLoader } from 'react-css-loaders';
-
+import InfiniteScroll from 'react-infinite-scroller';
 
 class RecentTattoos extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      hasMoreItems: true,
+      isLoading: false,
+      pageNum: 1,
+      pageSize: 1
+    };
     this.getLatestImages = this.getLatestImages.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
     this.addAFavorite = this.addAFavorite.bind(this);
+    this.getTotalTattooPageSize = this.getTotalTattooPageSize.bind(this);
   }
 
   componentDidMount() {
+    this.getTotalTattooPageSize();
     this.getLatestImages();
     this.getFavorites();
   }
 
   getLatestImages() {
-    this.props.recentImagesFetchData('/api/latest-images');
+    // console.log(page)
+    if (this.state.isLoading === false && this.state.pageNum <= this.state.pageSize) {
+      this.setState({isLoading: true}, ()=> {
+        this.props.recentImagesFetchData('/api/latest-images', this.state.pageNum, ()=> {
+          this.setState({isLoading: false, pageNum: this.state.pageNum + 1});
+        });
+      });
+    }
+    // let nextPage = this.state.nextPage + 1
+    // this.setState({nextPage})
+  }
+
+  getTotalTattooPageSize() {
+    axios.get('/api/get-page-size')
+    .then(results => {
+      this.setState({pageSize: results.data.pageSize});
+    });
   }
 
   getFavorites() {
@@ -35,33 +58,52 @@ class RecentTattoos extends React.Component {
   }
 
   render() {
+    let loader;
+    if (this.state.pageNum > this.state.pageSize) {
+      loader = null;
+    } else {
+      loader = <CometSpinLoader />;
+    }
+    var items = [];
+    if (items.length > 60) {
+      this.setState({hasMoreItems: false});
+    }
 
+    this.props.recentImages.forEach((image, i) => {
+      items.push(
+        <div key={i} className="solo_image">
+          <div className="overlay_container">
+            { image.isFavorited ?
+              <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
+            : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
+              }
+          </div>
+          <img src={image.url} className="base_pic" />
+        </div>
+      );
+    });
 
     return (
-      <div className="feed_container">
-        { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
-        { this.props.recentImagesIsLoading ? <CometSpinLoader /> : null }
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getLatestImages}
+              hasMore={this.state.hasMoreItems}
+              loader={loader}
+              threshold={20}
+              initialLoad={false}>
 
-        <div className="recent_tattoos">
-          <h2>Recent tattoos</h2>
+              <div className="feed_container">
+                { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
+                { this.props.recentImagesIsLoading ? <CometSpinLoader /> : null }
 
-          <div className="image_grid">
-              { this.props.recentImages.map((image, i) => {
-                return (
-                  <div key={i} className="solo_image">
-                    <div className="overlay_container">
-                      { image.isFavorited ?
-                        <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-                      : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-                        }
-                    </div>
-                    <img src={image.url} className="base_pic" />
+                <div className="recent_tattoos">
+                  <h2>Recent tattoos</h2>
+                  <div className="image_grid">
+                    {items}
                   </div>
-                ); 
-              })}
-          </div>
-        </div>
-      </div>
+                </div>
+              </div>
+            </InfiniteScroll>
     );
   }
 }
@@ -79,7 +121,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    recentImagesFetchData: (url) => dispatch(recentImagesFetchData(url)),
+    recentImagesFetchData: (url, pageNum, cb) => dispatch(recentImagesFetchData(url, pageNum, cb)),
     getUserFavorites: (url, id) => dispatch(getUserFavorites(url, id)),
     addToFavorites: (url, loggedInUser, imageId, imageArray, index) => dispatch(addToFavorites(url, loggedInUser, imageId, imageArray, index))
   };
