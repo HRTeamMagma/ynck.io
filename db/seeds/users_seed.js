@@ -1,5 +1,6 @@
 const models = require('../models');
 const photoData = require('../../photoData');
+const drawingData = require('../../drawingData');
 var faker = require('faker');
 var randomWords = require('random-words');
 const dummyData = require('../../dummyData');
@@ -19,12 +20,20 @@ let createTag = (knex, id, word) => {
 };
 
 let createImage = (knex, photo, id) => {
-  var types = ['tattoo', 'inspiration', 'design'];
   return knex('images').insert({
     url: photo.url,
     profile_id: Math.floor(Math.random() * 4) + 1,
-    image_type: types[Math.floor(Math.random() * 3)],
-    favoriteCount: Math.floor(Math.random() * 100)
+    image_type: 'tattoo',
+    favoriteCount: Math.floor(Math.random() * 40)
+  });
+};
+
+let createDrawing = (knex, photo, id) => {
+  return knex('images').insert({
+    url: photo.url,
+    profile_id: Math.floor(Math.random() * 4) + 1,
+    image_type: 'design',
+    favoriteCount: Math.floor(Math.random() * 40)
   });
 };
 
@@ -119,6 +128,13 @@ exports.seed = function (knex, Promise) {
       let records = [];
       for (let i = 1; i < photoData.data.length; i++) {
         records.push(createImage(knex, photoData.data[i], i));
+      }
+      return Promise.all(records);
+    })
+    .then(() => {
+      let records = [];
+      for (let i = 1; i < drawingData.data.length; i++) {
+        records.push(createDrawing(knex, drawingData.data[i], i));
       }
       return Promise.all(records);
     })
