@@ -68,21 +68,32 @@ class RecentTattoos extends React.Component {
     if (items.length > 60) {
       this.setState({hasMoreItems: false});
     }
-
-    this.props.recentImages.forEach((image, i) => {
-      items.push(
-        <div key={i} className="solo_image">
-          <div className="overlay_container_front_page">
-            { image.isFavorited ?
-              <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-            : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-              }
+    
+    loggedInUser ? (
+      this.props.recentImages.forEach((image, i) => {
+        items.push(
+          <div key={i} className="solo_image">
+            <div className="overlay_container_front_page">
+              { image.isFavorited ?
+                <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
+              : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
+                }
+            </div>
+            <img src={image.url} className="base_pic" />
           </div>
-          <img src={image.url} className="base_pic" />
-        </div>
-      );
-    });
-
+        );
+      }) 
+    )
+    :
+    (
+      this.props.recentImages.forEach((image, i) => {
+        items.push(
+          <div key={i} className="solo_image">
+            <img src={image.url} className="base_pic" />
+          </div>
+        );
+      }) 
+    );
     return (
             <InfiniteScroll
               pageStart={0}
