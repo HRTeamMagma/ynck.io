@@ -156,14 +156,10 @@ class UploadForm extends React.Component {
     // if this is a regular image, show the tag component
     if (this.props.image_type !== 'shopimage') {
       showTags = <div>
-        <label>
-          Add a tag:
-          <input
-            type="text"
-            value={this.state.currentTag}
-            onChange={this.handleTagInput} />
-          <input type="submit" value="Add tag" onClick={this.handleTagSubmit}/>
-        </label>
+        <div className="imageInfo">
+          <input type="text" value={this.state.currentTag} onChange={this.handleTagInput} placeholder="Add tags..."/>
+          <button onClick={this.handleTagSubmit}>Add tag</button>
+        </div>
         <div>
           {Object.keys(this.state.tags).map(tag => {
             return <Tag key={tag} tagName={tag} deleteClick={this.handleTagDeleteClick}/>;
@@ -202,11 +198,11 @@ class UploadForm extends React.Component {
           <div className="modalButtons">
             <button onClick={this.toggleModal}>Cancel</button>
           </div>
-        </div>
+        </div>;
     }
     return (
       <div>
-        <button onClick={this.toggleModal}>Upload work</button>
+        <button onClick={this.toggleModal}>Upload image</button>
         <Modal showModal={this.state.modalIsOpen} onClose={this.toggleModal}>
           {theForm}
         </Modal>
