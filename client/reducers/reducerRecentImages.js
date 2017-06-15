@@ -19,7 +19,11 @@ export const recentImagesIsLoading = (state = false, action) => {
 export const recentImages = (state = [], action) => {
   switch (action.type) {
   case 'RECENT_IMAGES_FETCH_DATA_SUCCESS':
-    return action.recentImages;
+    let stateCopy = state.slice();
+    for (let i = 0; i < action.recentImages.length; i++) {
+      stateCopy.push(action.recentImages[i]);
+    }
+    return stateCopy;
   case 'RECENT_IMAGE_WAS_FAVORITED':
     let i = action.i;
     return [
