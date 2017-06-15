@@ -4,6 +4,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import { connect } from 'react-redux';
 import { search } from './../../actions/actionSearch';
+import { getAllShops } from './../../actions/actionShopInfo';
 
 import Template from './Template';
 import Home from './Home/Home';
@@ -11,6 +12,8 @@ import Profile from './Profile/Profile';
 import Shop from './Shops/Shop';
 import SearchResults from './SearchResults';
 import ClaimShop from './Shops/ClaimShop';
+import AllShops from './Shops/AllShops';
+import Stats from './Stats';
 
 
 class Main extends React.Component {
@@ -23,6 +26,12 @@ class Main extends React.Component {
     };
     this.submitSearch = this.submitSearch.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.fetchAllShops = this.fetchAllShops.bind(this);
+
+  }
+
+  componentDidMount() {
+    this.fetchAllShops('/api/allShops');
   }
 
   submitSearch(e, searchTerm, searchType) {
@@ -43,6 +52,10 @@ class Main extends React.Component {
     });
   }
 
+  fetchAllShops (url) {
+    this.props.getAllShops(url);
+  }
+
   render() {
     return (
       <div>      
@@ -53,7 +66,9 @@ class Main extends React.Component {
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
               <Route path = "/shop/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
+              <Route path = "/stats" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Stats {...props} />)} />
               <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm} searchIsLoading={this.props.searchIsLoading} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
+              <Route path = "/allShops" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<AllShops loggedInUser={loggedInUser} {...this.props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
@@ -66,13 +81,15 @@ class Main extends React.Component {
 const mapStateToProps = (state) => {
   return {
     searchIsLoading: state.searchIsLoading,
-    searchResults: state.searchResults
+    searchResults: state.searchResults,
+    allShops: state.allShops
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    search: (url, searchTerm, searchType, callback) => dispatch(search(url, searchTerm, searchType, callback))
+    search: (url, searchTerm, searchType, callback) => dispatch(search(url, searchTerm, searchType, callback)),
+    getAllShops: (url) => dispatch(getAllShops(url))
   };
 };
 

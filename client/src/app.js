@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import { connect } from 'react-redux';
 import '../../public/stylesheets/main.scss'; 
 
 

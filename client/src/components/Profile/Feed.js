@@ -23,8 +23,6 @@ class Feed extends React.Component {
   }
 
   grabFavorites() {
-    console.log(this.props);
-    console.log('triggered', this.props.viewedUser);
     axios.get('/api/user/favorites', {
       params: {
         user_id: this.props.viewedUser,
@@ -46,14 +44,11 @@ class Feed extends React.Component {
     return (
       <div className="user_stream">
         
-        { this.props.userData.tattoo ?
-          <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites}/>
-          : null 
-        }
-        { this.props.userData.design ?
-          <MyDesigns myDesigns = {this.props.userData.design} addToProfileFavorites={this.addToProfileFavorites}/>
-          : null
-        }
+      
+          <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
+         
+          <MyDesigns myDesigns = {this.props.userData.design} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
+          
         { this.state.favoritedImages.length > 0 ?
           <MyFavorites myFavorites = {this.state.favoritedImages}/>
           : null

@@ -38,7 +38,7 @@ class Shop extends React.Component {
   }
   
   checkIfLoggedIn (userShopId) {
-    if (loggedInUser.shop_id) {
+    if (loggedInUser.shop_id === Number(this.props.match.params.id)) {
       this.setState({allowEdits: true});
     }
   }

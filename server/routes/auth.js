@@ -57,6 +57,10 @@ router.route('/shop/:id') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     models.Shop.where({id: req.params.id}).fetch({withRelated: 'shopimages'})
     .then(shop => {
+      if (!shop) {
+        res.redirect('/');
+        return;
+      }
       shop = shop.toJSON();
       if (!req.user) {
         var loggedInUser = false;
@@ -73,6 +77,13 @@ router.route('/claimshop') //change this route????
       user: req.user 
     });
   });
+
+router.route('/allShops') //change this route????
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user 
+    });
+  });
   
 router.route('/search') 
   .get(middleware.auth.verify, (req, res) => {
@@ -81,6 +92,13 @@ router.route('/search')
     });
   });
 
+router.route('/stats') 
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user 
+    });
+  });
+  
 router.route('/logout')
   .get((req, res) => {
     req.logout();
@@ -112,5 +130,7 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
   successRedirect: '/',
   failureRedirect: '/login'
 }));
+
+
 
 module.exports = router;

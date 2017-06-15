@@ -3,11 +3,16 @@
 // -----------------------------------------------------------------------------
 
 footer {
+  @include secondary-body-font;
   clear: both;
-  color: $mid-grey;
   background-color: $light-grey;
-  font-size: $text-small;
   text-align: center;
   height: 100px;
   padding-top: $med-spacing;
+
+  a.footer-link {
+    margin-left: 5px;
+  }
+
 }
+

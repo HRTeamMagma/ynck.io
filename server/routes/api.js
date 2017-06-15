@@ -7,6 +7,8 @@ const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
 const FavoriteController = require('../controllers').Favorites;
 const SearchController = require('../controllers').Search;
+const StatsController = require('../controllers/stats');
+
 
 const upload = require('../helpers/upload_helpers');
 
@@ -54,6 +56,9 @@ router.route('/shop')
 router.route('/create/shop')
   .post(ShopController.createShop);
 
+router.route('/allShops')
+  .get(ShopController.getAllShops);
+
 router.route('/latest-images')
   .get(ImageController.getLatestImages);
 
@@ -81,5 +86,11 @@ router.route('/followers')
 
 router.route('/seed-db')
   .get(ImageController.seedDBreal);
+
+router.route('/stats/count-per-tag')
+  .get(StatsController.getNumberOfTattoosPerTags);
+
+router.route('/stats/total-tagged')
+  .get(StatsController.getTotalNumOfTaggedImages);
 
 module.exports = router;
