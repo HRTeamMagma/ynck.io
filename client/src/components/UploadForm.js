@@ -20,7 +20,7 @@ class UploadForm extends React.Component {
       imageId: null,
       shopId: null,
       spinner: false,
-      modalIsOpen: false 
+      modalIsOpen: false
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -85,6 +85,7 @@ class UploadForm extends React.Component {
         };
         this.props.updateShopPhotosSuccess(photoData);
         this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
+        this.toggleModal();
       })
       .catch(err => {
         console.log(err);
@@ -105,6 +106,7 @@ class UploadForm extends React.Component {
         };
         this.props.updateUserPhotosSuccess(photoData);
         this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
+        this.toggleModal();
       })
       .catch(err => {
         console.log(err);
