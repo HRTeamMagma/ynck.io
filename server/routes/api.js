@@ -7,6 +7,8 @@ const ImageController = require('../controllers').Images;
 const ShopController = require('../controllers').Shops;
 const FavoriteController = require('../controllers').Favorites;
 const SearchController = require('../controllers').Search;
+const StatsController = require('../controllers/stats');
+
 
 const upload = require('../helpers/upload_helpers');
 
@@ -81,5 +83,8 @@ router.route('/following')
 
 router.route('/followers')
   .get(ProfileController.getUserFollowers);
+
+router.route('/stats')
+  .get(StatsController.getNumberOfTattoosForTags);
 
 module.exports = router;
