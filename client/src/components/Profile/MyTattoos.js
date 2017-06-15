@@ -12,7 +12,7 @@ class MyTattoos extends React.Component {
     return (
       <div>  
         <h2>My Tattoos</h2>
-          <UploadForm image_type="tattoos" />
+          <UploadForm image_type="tattoo" />
 
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
