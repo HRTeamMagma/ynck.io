@@ -17,6 +17,39 @@
   margin-bottom: $small-spacing;
 }
 
+.overlay_container {
+  z-index: 2;
+  width: 200px;
+  height: 150px;
+  position: absolute; 
+
+  img {
+    width: 200px;
+    height: 150px;
+    margin-top: $small-spacing;
+    margin-right: $med-spacing;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  img.heart {
+    width: $icon-size;
+    height: $icon-size;
+    position: absolute; 
+    top: 16px;
+    right: 16px; 
+
+    &:hover {
+      width: $icon-enlarged-size;
+      height: $icon-enlarged-size;
+      cursor: pointer;
+    }
+  }
+}
+
+
 .profile_info {
   text-align: center;
   padding: $small-spacing;

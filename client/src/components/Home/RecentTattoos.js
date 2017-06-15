@@ -72,7 +72,7 @@ class RecentTattoos extends React.Component {
     this.props.recentImages.forEach((image, i) => {
       items.push(
         <div key={i} className="solo_image">
-          <div className="overlay_container">
+          <div className="overlay_container_front_page">
             { image.isFavorited ?
               <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
             : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
