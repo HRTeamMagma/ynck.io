@@ -13,6 +13,7 @@ import Shop from './Shops/Shop';
 import SearchResults from './SearchResults';
 import ClaimShop from './Shops/ClaimShop';
 import AllShops from './Shops/AllShops';
+import Stats from './Stats';
 
 
 class Main extends React.Component {
@@ -65,6 +66,7 @@ class Main extends React.Component {
               <Route path = "/user/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Profile {...props} />)} />
               <Route path = "/shop/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
+              <Route path = "/stats" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Stats {...props} />)} />
               <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm} searchIsLoading={this.props.searchIsLoading} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
               <Route path = "/allShops" render={(props) => (<AllShops loggedInUser={loggedInUser} {...this.props} />)} />
             </Template>
