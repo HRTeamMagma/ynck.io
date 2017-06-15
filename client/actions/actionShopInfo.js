@@ -54,3 +54,21 @@ export const updateShopData = (url, name, address1, address2, city, state, phone
     });
   };
 };
+
+//getAllShops
+export const getAllShopsSuccess = (allShops) => {
+  return {
+    type: 'GET_ALL_SHOPS_SUCCESS',
+    allShops,
+  };
+};
+
+export const getAllShops = (url) => {
+  return (dispatch) => {
+    axios.get(url)
+    .then((allShops) =>{
+      dispatch(getAllShopsSuccess(allShops));
+    })
+    .catch(error => console.log(error));
+  };
+};

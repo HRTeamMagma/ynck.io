@@ -73,6 +73,13 @@ router.route('/claimshop') //change this route????
       user: req.user 
     });
   });
+
+router.route('/allShops') //change this route????
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user 
+    });
+  });
   
 router.route('/search') 
   .get(middleware.auth.verify, (req, res) => {
