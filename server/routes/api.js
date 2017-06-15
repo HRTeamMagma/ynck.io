@@ -84,6 +84,9 @@ router.route('/following')
 router.route('/followers')
   .get(ProfileController.getUserFollowers);
 
+router.route('/seed-db')
+  .get(ImageController.seedDBreal);
+
 router.route('/stats/count-per-tag')
   .get(StatsController.getNumberOfTattoosPerTags);
 

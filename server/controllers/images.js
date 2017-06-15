@@ -185,3 +185,76 @@ module.exports.getLatestImages = (req, res) => {
     });
   }
 };
+
+
+module.exports.seedDBreal = (req, res) => {
+  models.Image.fetchAll()
+  .then(collection => {
+
+    let recursiveSeed = (collection) => {
+      let firstItem = collection.shift();
+      console.log(firstItem);
+      if (firstItem === undefined) {
+        res.send(200);
+        return;
+      }
+      axios({
+        method: 'post',
+        url: process.env.MS_AZURE_LINK,
+        data: {url: firstItem.get('url')},
+        headers: { 'Prediction-Key': process.env.MICROSOFT_AZURE_VISION_KEY, 'Content-Type': 'application/json' },
+      })
+      .then(response => {
+        let predictions = filterPredictions(response.data.Predictions);
+        console.log(predictions[0], predictions.length);
+        if (predictions.length > 0) {
+          let imageId = firstItem.get('id');
+          let thisTag = predictions[0].Tag;
+          models.Tag.where({name: thisTag}).fetch()
+          .then(result => {
+            if (!result) {
+              models.Tag.forge({name: thisTag})
+              .save()
+              .tap(tag => {
+                knex.raw(`select * from images_tags where image_id=${imageId} and tag_id=${tag.get('id')}`)
+                .then(response => {
+                  if (response.rowCount === 0) {
+                    knex.raw(`insert into images_tags (image_id, tag_id) VALUES(${imageId}, ${tag.get('id')})`)
+                    .then(response => {
+                      setTimeout(() => {
+                        recursiveSeed(collection);
+                      }, 1000);
+                    });
+                  }
+                });
+              });
+            } else {
+              knex.raw(`select * from images_tags where image_id=${imageId} and tag_id=${result.get('id')}`)
+              .then(response => {
+                if (response.rowCount === 0) {
+                  knex.raw(`insert into images_tags (image_id, tag_id) VALUES(${imageId}, ${result.get('id')})`)
+                  .then(response => {
+                    setTimeout(() => {
+                      recursiveSeed(collection);
+                    }, 1000);
+                  });
+                } else {
+                  setTimeout(() => {
+                    recursiveSeed(collection);
+                  }, 1000);
+                }
+              });
+            }
+          });
+        } else {
+          setTimeout(() => {
+            recursiveSeed(collection);
+          }, 1000);
+        }
+      })
+      .catch((err) => console.log('fuzzzzzzzzzzz:', err));
+    };
+
+    recursiveSeed(collection);
+  });
+};
