@@ -45,11 +45,11 @@ class Feed extends React.Component {
       <div className="user_stream">
         
         { this.props.userData.tattoo ?
-          <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites}/>
+          <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
           : null 
         }
         { this.props.userData.design ?
-          <MyDesigns myDesigns = {this.props.userData.design} addToProfileFavorites={this.addToProfileFavorites}/>
+          <MyDesigns myDesigns = {this.props.userData.design} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
           : null
         }
         { this.state.favoritedImages.length > 0 ?

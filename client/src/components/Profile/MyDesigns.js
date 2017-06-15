@@ -18,7 +18,11 @@ class MyDesigns extends React.Component {
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
             {this.props.myDesigns.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='design' i={i} images={images}/> )}
             </Carousel>
-            <UploadForm image_type="design" />
+            {loggedInUser.id === this.props.viewedUser ? (
+              <UploadForm image_type="design" />
+            )
+            :
+            null}
           </div>
       </div>
     );

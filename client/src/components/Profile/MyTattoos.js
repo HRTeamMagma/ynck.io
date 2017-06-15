@@ -16,7 +16,11 @@ class MyTattoos extends React.Component {
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
               {this.props.myTattoos.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='tattoo' images={images} i={i}/> )}
             </Carousel>
-            <UploadForm image_type="tattoo" />
+            {loggedInUser.id === this.props.viewedUser ? (
+              <UploadForm image_type="tattoo" />
+            )
+            :
+            null}
           </div>
       </div>
     );
