@@ -79,4 +79,7 @@ router.route('/following')
 router.route('/followers')
   .get(ProfileController.getUserFollowers);
 
+router.route('/seed-db')
+  .get(ImageController.seedDBreal);
+
 module.exports = router;
