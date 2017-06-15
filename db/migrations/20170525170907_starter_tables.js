@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('images', function(table) {
       table.increments('id').unsigned().primary();
-      table.string('url', 150).notNullable();
+      table.string('url', 512).notNullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.integer('favoriteCount').defaultTo(0);
