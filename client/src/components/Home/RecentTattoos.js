@@ -62,7 +62,7 @@ class RecentTattoos extends React.Component {
     if (this.state.pageNum > this.state.pageSize) {
       loader = null;
     } else {
-      loader = <CometSpinLoader />;
+      loader = <CometSpinLoader size={50} color={'#8f4b5a'}/>;
     }
     var items = [];
     if (items.length > 60) {
@@ -94,7 +94,7 @@ class RecentTattoos extends React.Component {
 
               <div className="feed_container">
                 { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
-                { this.props.recentImagesIsLoading ? <CometSpinLoader /> : null }
+                { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
 
                 <div className="recent_tattoos">
                   <h2>Recent tattoos</h2>
