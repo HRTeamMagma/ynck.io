@@ -66,7 +66,7 @@ class Main extends React.Component {
               <Route path = "/shop/:id" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<Shop {...props} />)} />
               <Route path = "/claimshop" render={(props) => this.state.searchSubmitted ? (<Redirect to="/search"/>) : (<ClaimShop {...props} />)} />
               <Route path = "/search" render={(props) => (<SearchResults searchType={this.state.searchType} searchTerm={this.state.searchTerm} searchIsLoading={this.props.searchIsLoading} searchResults={this.props.searchResults} clearSearch={this.clearSearch} {...props} />)} />
-              <Route path = "/allShops" render={(props) => (<AllShops fetchAllShops={this.fetchAllShops} loggedInUser={loggedInUser} {...this.props} />)} />
+              <Route path = "/allShops" render={(props) => (<AllShops loggedInUser={loggedInUser} {...this.props} />)} />
             </Template>
           </Switch>
         </BrowserRouter>
