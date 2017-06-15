@@ -136,6 +136,16 @@ module.exports.getUserImages = (req, res) => {
                   responseObj[image.image_type] = [image];
                 }
               });
+              if (responseObj['tattoo']) {
+                responseObj['tattoo'] = responseObj['tattoo'].sort((a,b) => {
+                  return b.id - a.id;
+                });
+              }
+              if (responseObj['design']) {
+                responseObj['design'] = responseObj['design'].sort((a,b) => {
+                  return b.id - a.id;
+                });
+              }
               res.send(responseObj);
             });
           } else {
@@ -146,6 +156,16 @@ module.exports.getUserImages = (req, res) => {
                 responseObj[image.image_type] = [image];
               }
             });
+            if (responseObj['tattoo']) {
+              responseObj['tattoo'] = responseObj['tattoo'].sort((a,b) => {
+                return b.id - a.id;
+              });
+            }
+            if (responseObj['design']) {
+              responseObj['design'] = responseObj['design'].sort((a,b) => {
+                return b.id - a.id;
+              });
+            }
             res.send(responseObj);
           }
         });
