@@ -84,7 +84,10 @@ router.route('/following')
 router.route('/followers')
   .get(ProfileController.getUserFollowers);
 
-router.route('/stats')
-  .get(StatsController.getNumberOfTattoosForTags);
+router.route('/stats/count-per-tag')
+  .get(StatsController.getNumberOfTattoosPerTags);
+
+router.route('/stats/total-tagged')
+  .get(StatsController.getTotalNumOfTaggedImages);
 
 module.exports = router;
