@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUserPhotosSuccess } from '../../../actions/actionUserInfo';
-import { updateShopPhotosSuccess } from '../../../actions/actionShopInfo';
+const axios = require('axios');
 const Dropzone = require('react-dropzone');
 const upload = require('superagent');
-const axios = require('axios');
-import Tag from './Tag';
+
+import Tag from './Profile/Tag';
+import Modal from './Modal';
+import { updateUserPhotosSuccess } from '../../actions/actionUserInfo';
+import { updateShopPhotosSuccess } from '../../actions/actionShopInfo';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class UploadForm extends React.Component {
       currentTag: '',
       imageId: null,
       shopId: null,
-      spinner: false
+      spinner: false,
+      modalIsOpen: false 
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -26,6 +29,13 @@ class UploadForm extends React.Component {
     this.handleTagInput = this.handleTagInput.bind(this);
     this.handleTagSubmit = this.handleTagSubmit.bind(this);
     this.handleTagDeleteClick = this.handleTagDeleteClick.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
   }
 
   onDrop(files) {
@@ -142,17 +152,14 @@ class UploadForm extends React.Component {
 
   render() {
     let theForm, showTags;
+
     // if this is a regular image, show the tag component
     if (this.props.image_type !== 'shopimage') {
       showTags = <div>
-        <label>
-          Add a tag:
-          <input
-            type="text"
-            value={this.state.currentTag}
-            onChange={this.handleTagInput} />
-          <input type="submit" value="Add tag" onClick={this.handleTagSubmit}/>
-        </label>
+        <div className="imageInfo">
+          <input type="text" value={this.state.currentTag} onChange={this.handleTagInput} placeholder="Add tags..."/>
+          <button onClick={this.handleTagSubmit}>Add tag</button>
+        </div>
         <div>
           {Object.keys(this.state.tags).map(tag => {
             return <Tag key={tag} tagName={tag} deleteClick={this.handleTagDeleteClick}/>;
@@ -164,18 +171,16 @@ class UploadForm extends React.Component {
       // present a form
       theForm = 
       <div>
-        <img className="uploaded-image" src={this.state.uploadedImg} height="300px"/>
+        <img className="uploadedImage" src={this.state.uploadedImg} height="300px"/>
         <form onSubmit={this.handleSubmitForm}>
-          <label>
-            Title
-            <input
-              name="title"
-              type="text"
-              value={this.state.title}
-              onChange={this.handleInputChange} />
-          </label>
-          {showTags}
-           <p><input type="submit" value="Save" /></p>
+          <div className="imageInfo">
+            <input name="title" type="text" value={this.state.title} onChange={this.handleInputChange} placeholder="Add a title..."/>
+            {showTags}
+          </div>
+          <div className="modalButtons">
+            <button onClick={this.props.onClose}>Cancel</button>
+            <button onClick={this.props.onClose}>Save</button>            
+          </div>
         </form>
       </div>;
     } else {
@@ -183,17 +188,25 @@ class UploadForm extends React.Component {
       if (this.state.spinner) {
         spinning = <div><img src="http://psdwizard.com/wp-content/uploads/2016/07/rubiks-loader.gif" width="200px" /></div>;
       } else {
-        spinning = <div>Try dropping a file here, or click to select a file to upload.</div>;
+        spinning = <div>Drop an image or click to upload</div>;
       }
       theForm = 
-      <div>
-        <Dropzone onDrop={this.onDrop} multiple={false}>
-          {spinning}
-        </Dropzone>
-      </div>;
+        <div>
+          <Dropzone onDrop={this.onDrop} multiple={false}>
+            {spinning}
+          </Dropzone>
+          <div className="modalButtons">
+            <button onClick={this.toggleModal}>Cancel</button>
+          </div>
+        </div>;
     }
     return (
-      <div>{theForm}</div>
+      <div>
+        <button onClick={this.toggleModal}>Upload image</button>
+        <Modal showModal={this.state.modalIsOpen} onClose={this.toggleModal}>
+          {theForm}
+        </Modal>
+      </div>
     );
   }
 }

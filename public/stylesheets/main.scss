@@ -30,7 +30,8 @@ This file should not contain anything but `@import` and comments.
   'components/feed',
   'components/forms',
   'components/search',
-  'components/_imageuploader';
+  'components/_imageuploader',
+  'components/_modal';
 // 5. Page-specific styles
 @import
   'pages/home',
