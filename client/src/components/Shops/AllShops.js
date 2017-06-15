@@ -5,19 +5,19 @@ class AllShops extends React.Component {
     super (props);
   
   }
-
-  componentDidMount() {
-    this.props.fetchAllShops('/api/allShops');
-  }
+  
 
 
   render () {
     return (
       <div> 
         <h1>HELLO</h1>
-        {this.props.allShops.data ? 
-          this.props.allShops.data.map((shop) => {
-            return <h1>shop.name</h1>;
+        
+        {this.props.allShops ? 
+          this.props.allShops.map((shop) => {
+            return (
+              <h1>{shop.name}</h1>
+            );
           })
         :
         null
