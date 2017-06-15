@@ -69,7 +69,6 @@ class Profile extends React.Component {
 
     return (
       <div>
-        <UploadForm image_type="design" />
         <div className="feed_container">
           {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
           <div className="profile_sidebar">
