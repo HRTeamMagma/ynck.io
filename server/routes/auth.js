@@ -88,6 +88,13 @@ router.route('/search')
     });
   });
 
+router.route('/stats') 
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('index.ejs', { 
+      user: req.user 
+    });
+  });
+  
 router.route('/logout')
   .get((req, res) => {
     req.logout();
