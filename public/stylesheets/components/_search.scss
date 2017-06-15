@@ -1,11 +1,15 @@
-.search form  {
-  width: 520px;
-  display: inline;
-  position: relative;
-}
-
 .search {
   display: inline;
+
+  form  {
+    width: 520px;
+    display: inline;
+    position: relative;
+  }
+
+  button {
+    margin-left: $small-spacing;
+  }
 }
 
 .searchbox {
@@ -29,17 +33,17 @@
   }
 }
 
-.search button {
-  margin-left: $small-spacing;
-}
-
 .searchFilter {
   margin-left: $large-spacing;
 }
 
-
 // On search results
 .searchResults {
+
+  h2 {
+    margin-bottom: $med-spacing;
+  }
+
   .solo_image {
     margin-right: $med-spacing;
     display: inline-block;
@@ -47,13 +51,19 @@
     .base_pic {
       width: 300px;
       height: 200px;
-      margin-top: $small-spacing;
+      margin-bottom: $small-spacing;
     }
 
-    &:nth-of-type(4) {
+    &:nth-of-type(3n) {
       margin-right: 0;
     }
-    &:last-of-type {
+  }
+
+  .solo_user_image {
+    margin-right: $med-spacing;
+    display: inline-block;
+
+    &:nth-of-type(4n) {
       margin-right: 0;
     }
   }
