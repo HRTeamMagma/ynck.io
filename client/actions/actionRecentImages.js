@@ -24,15 +24,23 @@ export const recentImagesFetchDataSuccess = (recentImages) => {
 };
 
 
-export const recentImagesFetchData = (url) => {
+export const recentImagesFetchData = (url, pageNum, cb) => {
   return (dispatch) => {
     dispatch(recentImagesIsLoading(true));
-    axios.get(url)
+    axios.get(url, {
+      params: {
+        pageNum
+      }
+    })
     .then((images) => { 
       dispatch(recentImagesFetchDataSuccess(images.data));
       dispatch(recentImagesIsLoading(false));
+      cb();
     })
-    .catch(() => dispatch(recentImagesHasErrored(true)));
+    .catch(() => {
+      dispatch(recentImagesHasErrored(true));
+      cb();
+    });
   };
 };
 

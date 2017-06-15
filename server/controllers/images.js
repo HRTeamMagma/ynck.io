@@ -112,12 +112,21 @@ module.exports.addTagToImage = (req, res) => {
   }
 };
 
+module.exports.getTotalNumberOfTattoos = (req, res) => {
+  models.Image.where({image_type: 'tattoo'})
+  .fetchAll()
+  .then(results => {
+    let pageSize = Math.floor(results.toJSON().length / 6) + 1;
+    res.send({pageSize});
+  });
+};
+
 module.exports.getLatestImages = (req, res) => {
   // if the user is logged in
   if (req.user) {
     models.Image.where({image_type: 'tattoo'})
     .orderBy('id', 'DESC')
-    .fetchPage({page: 1, pageSize: 6, withRelated: ['tags', 'profile', 'favorites']})
+    .fetchPage({page: req.query.pageNum, pageSize: 6, withRelated: ['tags', 'profile', 'favorites']})
     .then(images => {
       images = helper.cleanTags(images.toJSON());
       images.forEach(image => {
@@ -135,7 +144,7 @@ module.exports.getLatestImages = (req, res) => {
       res.send(500, 'Error: ' + err);
     });
   } else {
-    models.Image.where({image_type: 'tattoo'}).orderBy('id', 'DESC').fetchPage({page: 1, pageSize: 6, withRelated: ['tags', 'profile']})
+    models.Image.where({image_type: 'tattoo'}).orderBy('id', 'DESC').fetchPage({page: req.query.pageNum, pageSize: 6, withRelated: ['tags', 'profile']})
     .then(images => {
       images = helper.cleanTags(images.toJSON());
       images.forEach(function(image) {
