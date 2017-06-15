@@ -15,7 +15,7 @@ class MyTattoos extends React.Component {
           <div className="image_grid">  
             {this.props.myTattoos !== undefined ? (
               <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-                {this.props.myTattoos.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='tattoo' images={images} i={i}/> )}
+                {this.props.myTattoos.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='tattoo' viewedUser={this.props.viewedUser} images={images} i={i}/> )}
               </Carousel>  
             )
             : null

@@ -9,7 +9,7 @@ class Favorite extends React.Component {
   render() {
     let i = this.props.i;
     return (
-      loggedInUser ? (
+      loggedInUser && JSON.stringify(loggedInUser.id) !== this.props.viewedUser ? (
         <div key={this.props.i}>
           <div className="overlay_container">
             { this.props.images.isFavorited ?
