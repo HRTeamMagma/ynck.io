@@ -5270,6 +5270,12 @@ react-dropzone@^3.13.2:
     attr-accept "^1.0.3"
     prop-types "^15.5.7"
 
+react-infinite-scroller@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.0.12.tgz#a51fcb5dd82bc1b6207f69be747bd7b872917fa4"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-leaflet@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.2.1.tgz#ee240381f0ced00b09ca8cdce5ec599d16850656"
