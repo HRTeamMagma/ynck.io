@@ -57,6 +57,10 @@ router.route('/shop/:id') //change this route????
   .get(middleware.auth.verify, (req, res) => {
     models.Shop.where({id: req.params.id}).fetch({withRelated: 'shopimages'})
     .then(shop => {
+      if (!shop) {
+        res.redirect('/');
+        return;
+      }
       shop = shop.toJSON();
       if (!req.user) {
         var loggedInUser = false;
@@ -112,5 +116,7 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
   successRedirect: '/',
   failureRedirect: '/login'
 }));
+
+
 
 module.exports = router;
