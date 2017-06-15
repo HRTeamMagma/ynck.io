@@ -1,19 +1,19 @@
 .tag-delete {
   font-size: 0.5em;
   position: absolute;
-  background-color: #fefefe;
+  background-color: $white;
   border-radius: 6px;
   line-height: 5px;
   margin-left: 6px;
-  margin-top: 10px;
+  margin-top: $mini-spacing;
   padding: 3px;
-  color: #FFB300;
+  color: $placeholder;
   }
 
 .tag {
   margin-right: 15px;
-  color: #fefefe;
-  background-color: #FFB300;
+  color: $white;
+  background-color: $placeholder;
   padding: 4px 20px 4px 8px;
   border-radius: 6px;
   line-height: 2.5em;
@@ -25,5 +25,9 @@
 
 .uploadedImage {
   padding: 5px;
-  border: solid 1px #efefef;
+  border: solid 1px $divider-grey;
+}
+
+.upload button {
+  margin-top: $mini-spacing;
 }
