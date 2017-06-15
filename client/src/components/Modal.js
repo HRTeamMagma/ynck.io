@@ -2,7 +2,7 @@ import React from 'react';
 
 class Modal extends React.Component {
   render() {
-    if(!this.props.showModal) {
+    if (!this.props.showModal) {
       return null;
     }
     

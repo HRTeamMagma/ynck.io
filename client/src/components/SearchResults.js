@@ -12,9 +12,9 @@ class SearchResults extends React.Component {
   }
 
   render() {
-    if (this.props.searchType === "tags") {
+    if (this.props.searchType === 'tags') {
       var tagResults = this.props.searchResults.imageResults;
-    } else if (this.props.searchType === "shops") {
+    } else if (this.props.searchType === 'shops') {
       var shopResults = this.props.searchResults.shops;
     } else {
       var userResults = this.props.searchResults.users;
@@ -22,7 +22,7 @@ class SearchResults extends React.Component {
 
     return (
         <div className="feed_container">
-          { this.props.searchIsLoading ? <CometSpinLoader /> : (
+          { this.props.searchIsLoading ? <CometSpinLoader size={40} color={'#8f4b5a'}/> : (
             <div className="searchResults">
               {
                 this.props.searchResults.msg ? 

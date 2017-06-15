@@ -70,7 +70,7 @@ class Profile extends React.Component {
     return (
       <div>
         <div className="feed_container">
-          {this.props.userDataIsLoading ? <CometSpinLoader /> : null }
+          {this.props.userDataIsLoading ? <CometSpinLoader size={40} color={'#8f4b5a'}/> : null }
           <div className="profile_sidebar">
             { this.props.userData.userProfile ? 
               <div>
