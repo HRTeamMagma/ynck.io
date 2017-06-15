@@ -3,6 +3,8 @@ import YelpSearchForm from './YelpSearchForm';
 import axios from 'axios';
 import MapView from './MapView';
 
+import { BrowserRouter } from 'react-router-dom';
+
 class ClaimShop extends React.Component {
   constructor (props) {
     super (props);
@@ -40,30 +42,43 @@ class ClaimShop extends React.Component {
       data: selectedShop
     })
     .then((success) => {
-      //  CHANGE THIS TO REROUTE/ALERT CLAIM WAS SUCCESSFUL
-      console.log('YAY: ', success);
+      axios.get('/api/shop', {
+        id: loggedInUser.id
+      })
+      .then((success) => {
+        this.props.history.push(`/shop/${success.data.shopInfo.id}`);
+      });
     })
     .catch(error => console.log(error));
   }
 
   render () {
-    return ( 
-      <div className="feed_container"> 
-        <h1 className="profile_name">Claim Your Shop</h1>
-        <YelpSearchForm onSubmit={this.submit}/>
-        {this.state.tattooParlors.map((parlor, i) => {
-          return (
-            <div key={i} className="image_grid">
-              <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
-              <div>
-                <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height='60vh' width='60vh' zoom={13}/>
+    if (loggedInUser.shop_id === null) {
+      return ( 
+        <div className="feed_container"> 
+          <h1 className="profile_name">Claim Your Shop</h1>
+          <YelpSearchForm onSubmit={this.submit}/>
+          {this.state.tattooParlors.map((parlor, i) => {
+            return (
+              <div key={i} className="image_grid">
+                <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
+                <div>
+                  <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height='60vh' width='60vh' zoom={13}/>
+                </div>
+                <button onClick={() => this.handleClick(parlor)}>Claim Shop</button>
               </div>
-              <button onClick={() => this.handleClick(parlor)}>Claim Shop</button>
-            </div>
-          );
-        })}
-      </div>
-    );
+            );
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <div className="feed_container">
+          <h2>You have already claimed a shop! </h2>
+          <h3>Click <a className="secondary_link" href={`/shop/${loggedInUser.shop_id}`}>here</a> to see your claimed shop.</h3>
+        </div>
+      );
+    }
   }
 }
 
