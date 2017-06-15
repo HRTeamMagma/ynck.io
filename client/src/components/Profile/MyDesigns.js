@@ -13,7 +13,7 @@ class MyDesigns extends React.Component {
     return (
       <div>  
         <h2>My Designs</h2>
-          <UploadForm image_type="designs" />
+          <UploadForm image_type="design" />
         
           <div className="image_grid">  
             <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
