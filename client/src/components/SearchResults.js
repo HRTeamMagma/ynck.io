@@ -44,7 +44,7 @@ class SearchResults extends React.Component {
                 }
                 {
                   userResults ? userResults.map((user, i) => 
-                  <div key={i} className="solo_image">
+                  <div key={i} className="solo_user_image">
                     <a href={`/user/${user.id}`} ><h4>{user.first} {user.last}</h4></a>
                     <img src={user.profile_image} className="user_profile_image"/>
                   </div>) : null
