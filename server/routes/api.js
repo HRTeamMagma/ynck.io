@@ -44,6 +44,9 @@ router.route('/user/designs')
     res.send(201);
   });
 
+router.route('/get-page-size')
+  .get(ImageController.getTotalNumberOfTattoos);
+
 router.route('/shop')
   .get(ShopController.getShopInfoForUser)
   .post(ShopController.updateShopInfo);
