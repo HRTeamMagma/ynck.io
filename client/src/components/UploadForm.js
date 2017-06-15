@@ -30,6 +30,7 @@ class UploadForm extends React.Component {
     this.handleTagSubmit = this.handleTagSubmit.bind(this);
     this.handleTagDeleteClick = this.handleTagDeleteClick.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleDevonsRobot = this.handleDevonsRobot.bind(this);
   }
 
   toggleModal() {
@@ -56,7 +57,11 @@ class UploadForm extends React.Component {
         shopId = data.shopId;
         imageId = data.shopimageId;
       }
-      this.setState({uploadedImg: imgURL, imageId, shopId });
+      this.setState({uploadedImg: imgURL, imageId, shopId }, () => {
+        if (data.predictions.length > 0) {
+          this.handleDevonsRobot(data.predictions);
+        }
+      });
     });
   }
 
@@ -79,11 +84,11 @@ class UploadForm extends React.Component {
           shopId: this.state.shopId
         };
         this.props.updateShopPhotosSuccess(photoData);
-        this.setState({spinner: false, uploadedImg: null, title: ''});
+        this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
       })
       .catch(err => {
         console.log(err);
-        this.setState({spinner: false, uploadedImg: null, title: ''});
+        this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
       });
     } else {
       axios.post('/api/edit-image', this.state)
@@ -99,11 +104,11 @@ class UploadForm extends React.Component {
           tags: tagArray
         };
         this.props.updateUserPhotosSuccess(photoData);
-        this.setState({spinner: false, uploadedImg: null, title: ''});
+        this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
       })
       .catch(err => {
         console.log(err);
-        this.setState({spinner: false, uploadedImg: null, title: ''});
+        this.setState({spinner: false, uploadedImg: null, title: '', tags: {}});
       });
     }
   }
@@ -125,6 +130,23 @@ class UploadForm extends React.Component {
     .catch(err => {
       console.log(err);
     });
+  }
+
+  handleDevonsRobot(tagArray) {
+    if (tagArray.length === 0) {
+      return;
+    } else {
+      let tagCopy = Object.assign({}, this.state.tags );
+      let tagName = tagArray[0].Tag;
+      tagCopy[tagName] = true;
+      axios.post('/api/add-tag', {tagName, imageId: this.state.imageId})
+      .then(success => {
+        this.setState({tags: tagCopy, currentTag: ''}, () => {
+          tagArray.shift();
+          this.handleDevonsRobot(tagArray);
+        });
+      });
+    }
   }
 
   handleTagSubmit(event) {

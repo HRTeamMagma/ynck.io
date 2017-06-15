@@ -2,6 +2,7 @@ const models = require('../../db/models');
 const knex = require('../../db/').knex;
 const helper = require('../helpers/db_helpers');
 const bookshelf = require('../../db/');
+const axios = require('axios');
 
 module.exports.uploadImage = (req, res) => {
   if (req.body.image_type === 'shopimage') {
@@ -29,13 +30,33 @@ module.exports.uploadImage = (req, res) => {
     .save()
     .then(image => {
       req.file.imageId = image.attributes.id;
-      res.status(200).send(req.file);
+
+      axios({
+        method: 'post',
+        url: process.env.MS_AZURE_LINK,
+        data: {url: req.file.location},
+        headers: { 'Prediction-Key': process.env.MICROSOFT_AZURE_VISION_KEY, 'Content-Type': 'application/json' },
+      })
+        .then(response => {
+          let predictions = filterPredictions(response.data.Predictions);
+          req.file.predictions = predictions;
+          res.status(200).send(req.file);
+        })
+        .catch((err) => console.log('fuzzzzzzzzzzz:', err));
+
+
     })
     .catch(error => {
       console.log(error);
       res.sendStatus(500);
     });
   }
+};
+
+filterPredictions = (predictionArray) => {
+  return predictionArray.filter(prediction => {
+    return prediction.Probability > 0.4;
+  });
 };
 
 module.exports.editImage = (req, res) => {
@@ -55,6 +76,7 @@ module.exports.editImage = (req, res) => {
 };
 
 module.exports.removeTagFromImage = (req, res) => {
+  console.log(req.body);
   let imageId = req.body.imageId;
   let tag = req.body.tagName;
   models.Tag.where({name: tag}).fetch()
