@@ -1,4 +1,5 @@
 import React from 'react';
+import MapView from './MapView';
 
 class AllShops extends React.Component {
   constructor (props) {
@@ -10,13 +11,18 @@ class AllShops extends React.Component {
 
   render () {
     return (
-      <div> 
-        <h1>HELLO</h1>
-        
+      <div className="feed-container"> 
         {this.props.allShops ? 
-          this.props.allShops.map((shop) => {
-            return (
-              <h1>{shop.name}</h1>
+          this.props.allShops.map((shop, i) => {
+            return ( 
+              <div key={i}>
+                <h3><a href={`/shop/${shop.id}`}>{shop.name}</a></h3>
+                <p>{shop.address1}</p>
+                <p>{shop.address2}</p>
+                <p>{shop.city}, {shop.state}</p>
+                <p>{shop.phone}</p>
+                <MapView lat={shop.latitude || 0 } lon={shop.longitude || 0} height='30vh' width='30vh' zoom={13}/>
+              </div>
             );
           })
         :
