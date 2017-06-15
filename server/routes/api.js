@@ -54,6 +54,9 @@ router.route('/shop')
 router.route('/create/shop')
   .post(ShopController.createShop);
 
+router.route('/allShops')
+  .get(ShopController.getAllShops);
+
 router.route('/latest-images')
   .get(ImageController.getLatestImages);
 
