@@ -225,7 +225,7 @@ class UploadForm extends React.Component {
         </div>;
     }
     return (
-      <div>
+      <div className="upload">
         <button onClick={this.toggleModal}>Upload image</button>
         <Modal showModal={this.state.modalIsOpen} onClose={this.toggleModal}>
           {theForm}
