@@ -3,38 +3,15 @@ import ReactHighcharts from 'react-highcharts';
 import axios from 'axios';
 
 
-/*
-Currently retrieves # of images for each tag in the db, calculates % based on
-unique # of images in images_tags.
-
-TODO: Change to only retrieve # for category tags:
-
-blackwork
-dotwork
-geometric
-japanese
-neo-traditional
-new school
-realism
-traditional
-trash_polka
-tribal
-watercolor
-
-Will have to change total # query in StatsController
-
-*/
-
 class Stats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalPicsPerTag: {},
+      tagCount: {},
       percentagePerTag: {},
-      totalTagged: 0
+      totalTagged: 0      
     };
     this.getCountPerTag = this.getCountPerTag.bind(this);
-    this.getTotalTagged = this.getTotalTagged.bind(this);    
     this.calculatePercentage = this.calculatePercentage.bind(this);
   }
 
@@ -43,24 +20,21 @@ class Stats extends React.Component {
   }
 
   getCountPerTag() {
-    axios.get('/api/stats/count-per-tag')
+    var categoryTags = ['blackwork', 'dotwork', 'geometric', 'japanese', 'neo-traditional', 'new school',
+      'realism', 'traditional', 'trash polka', 'tribal', 'watercolor'];
+    
+    axios.get('/api/stats/tag-data')
       .then(response => {
-        let totalPicsPerTag = {};
+        let [tagCount, countSum] = [{}, 0];
         response.data.map(tag => {
-          totalPicsPerTag[tag.tag_id] = tag.count;
+          if (categoryTags.includes(tag.name)) {
+            tagCount[tag.name] = tag.image.length;
+            countSum += tag.image.length;
+          }
         });
         this.setState({
-          totalPicsPerTag
-        });
-        this.getTotalTagged();
-      });
-  }
-
-  getTotalTagged() {
-    axios.get('/api/stats/total-tagged')
-      .then(response => {
-        this.setState({
-          totalTagged: response.data[0].count
+          tagCount,
+          totalTagged: countSum
         });
         this.calculatePercentage();
       });
@@ -69,17 +43,18 @@ class Stats extends React.Component {
   calculatePercentage() {
     let percentagePerTag = {};
 
-    for (let key in this.state.totalPicsPerTag) {
-      let percentage = this.state.totalPicsPerTag[key] / this.state.totalTagged * 100;
-      percentage.toFixed(2);
-      percentagePerTag[key] = percentage;
+    for (let key in this.state.tagCount) {
+      let percentage = this.state.tagCount[key] / this.state.totalTagged * 100;
+      percentagePerTag[key] = parseFloat(percentage.toFixed(2));
       this.setState({
         percentagePerTag
       });
     }
   }
+  
   render() {
 
+    // Highcharts config format
     const config = {
       chart: {
         style: {
@@ -114,44 +89,21 @@ class Stats extends React.Component {
         }
       },
       series: [{
-        name: 'Tattoos',
+        name: 'Percentage of tattoos',
         colorByPoint: true,
-        data: [{
-          name: 'Dotwork',
-          // y: 56.33
-          y: this.state.percentagePerTag['1']
-        }, {
-          name: 'Trash Polka',
-          // y: 24.03,
-          y: this.state.percentagePerTag['2'],
-          sliced: true,
-          selected: true
-        }, {
-          name: 'Geometric',
-          // y: 10.38
-          y: this.state.percentagePerTag['3']
-        }, {
-          name: 'Watercolor',
-          // y: 4.77
-          y: this.state.percentagePerTag['4']
-        }, {
-          name: 'Neoclassical',
-          // y: 0.91
-          y: this.state.percentagePerTag['5']
-        }, {
-          name: 'Blackwork',
-          // y: 0.2
-          y: this.state.percentagePerTag['6']
-        }]
+        data: []
       }]
     };
 
-    // if (this.state.percentagePerTag) {
-    //   console.log('state percentagePerTag', this.state.percentagePerTag);
-    //   config.series[0].data.map(category => {
-    //     console.log(category.y);
-    //   })
-    // }
+    // Update Highcharts config with new name/percentage pairs
+    if (this.state.percentagePerTag) {
+      for (let tag in this.state.percentagePerTag) {
+        let tagPair = {};
+        tagPair['name'] = tag; // name is a Highcharts keyword
+        tagPair['y'] = this.state.percentagePerTag[tag]; // y is a Highcharts keyword
+        config.series[0].data.push(tagPair);
+      }
+    }
 
     return (
       <div className="stats">
