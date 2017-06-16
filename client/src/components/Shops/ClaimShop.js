@@ -62,17 +62,19 @@ class ClaimShop extends React.Component {
           {this.state.tattooParlors.map((parlor, i) => {
             return (
               <div className="outer-card">
-                <div key={i} className="shop-card">
-                  <div className="card-shop-info">
-                    <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
-                    <p>{parlor.location.address1}</p>
-                    <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
+                <a href={parlor.url} target="_blank" >
+                  <div key={i} className="shop-card">
+                    <div className="card-shop-info">
+                      <h3>{parlor.name}</h3>
+                      <p>{parlor.location.address1}</p>
+                      <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
+                    </div>
+                    <div className="map">
+                      <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height="30vh" zoom={13}/>
+                    </div>
+                    <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
                   </div>
-                  <div className="map">
-                    <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height="30vh" zoom={13}/>
-                  </div>
-                  <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
-                </div>
+                </a>
               </div>
             );
           })}
