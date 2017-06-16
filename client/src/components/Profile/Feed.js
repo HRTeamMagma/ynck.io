@@ -44,9 +44,7 @@ class Feed extends React.Component {
     return (
       <div className="user_stream">
         
-      
           <MyTattoos myTattoos = {this.props.userData.tattoo} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
-         
           <MyDesigns myDesigns = {this.props.userData.design} addToProfileFavorites={this.addToProfileFavorites} viewedUser={this.props.viewedUser}/>
           
         { this.state.favoritedImages.length > 0 ?

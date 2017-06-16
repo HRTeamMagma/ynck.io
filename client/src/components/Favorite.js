@@ -6,7 +6,6 @@ class Favorite extends React.Component {
   }
   
   render() {
-    let i = this.props.i;
     return (
       loggedInUser && JSON.stringify(loggedInUser.id) !== this.props.viewedUser ? (
         <div key={this.props.i}>

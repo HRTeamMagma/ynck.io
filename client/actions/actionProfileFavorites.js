@@ -36,7 +36,7 @@ export const getProfileFavorites = (url, loggedInUser, imageId, typeOfImage, i) 
     .then(success => {
       let requestData = JSON.parse(success.config.data);
       dispatch(profileFavoritesIsLoading(false));
-      dispatch(profileFavoritesSuccess(loggedInUser.Id, imageId, typeOfImage, i));
+      dispatch(profileFavoritesSuccess(loggedInUser.id, imageId, typeOfImage, i));
     })
     .catch(error => {
       dispatch(profileFavoritesIsLoading(false));
