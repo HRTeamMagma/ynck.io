@@ -8,6 +8,7 @@ import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
 import MapView from './MapView';
 import StarRating from 'react-star-rating';
+import UploadForm from '../UploadForm';
 
 class Shop extends React.Component {
   constructor(props) {
@@ -23,13 +24,17 @@ class Shop extends React.Component {
       editedCity: '',
       editedOffice: '',
       editedState: '',
-      editedPhone: ''
+      editedPhone: '',
+      isOpen: false,
+      shopProfileImage: null
     };
 
+    this.renderProfileImage = this.renderProfileImage.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.renderShopInfo = this.renderShopInfo.bind(this);
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.saveEdits = this.saveEdits.bind(this);
-
+    this.handleUpdateShopProfileImage = this.handleUpdateShopProfileImage.bind(this);
     this.props.fetchShopInfo('/api/shop', this.props.match.params.id);
   }
 
@@ -42,6 +47,16 @@ class Shop extends React.Component {
     if (loggedInUser.shop_id === Number(this.props.match.params.id)) {
       this.setState({allowEdits: true});
     }
+  }
+
+  handleUpdateShopProfileImage(url) {
+    this.setState({shopProfileImage: url});
+  }
+
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   renderShopInfo (key) {
@@ -61,6 +76,21 @@ class Shop extends React.Component {
         this.props.fetchShopInfo('/api/shop', this.props.match.params.id);
       });
     });
+  }
+
+  renderProfileImage() {
+    let shopProfileImage;
+    if (this.props.shop.shopInfo) {
+      if(this.props.shop.shopInfo['shop_image']) {
+        return <img src={this.renderShopInfo('shop_image')} className="profile_image"/>;
+      } else if (this.state.shopProfileImage) {
+        return <img src={this.state.shopProfileImage} className="profile_image" />;
+      } else if (this.state.allowEdits === false) {
+        return <img src={'https://s3-us-west-1.amazonaws.com/media.ynck.com/shop_icon.png'} className="profile_image"/>;
+      } else if (this.state.allowEdits === true) {
+        return <UploadForm image_type="shopProfile" handleUpdateShopProfileImage={this.handleUpdateShopProfileImage}/>;
+      }
+    }
   }
 
   render () {
@@ -85,7 +115,7 @@ class Shop extends React.Component {
             </div>) : ''}
           
           <div className="profile_sidebar">
-            <img src={this.renderShopInfo('shop_image')} className="profile_image"/>
+            {this.renderProfileImage()}
             <div onClick={(e) => this.state.allowEdits ? this.setState({editAddress: true, editedAddress: this.state.editedAddress || this.props.shop.shopInfo.address1, editedCity: this.state.editedCity || this.props.shop.shopInfo.city, editedOffice: this.state.editedOffice || this.props.shop.shopInfo.address2, editedState: this.state.editedState || this.props.shop.shopInfo.state, editedPhone: this.state.editedPhone || this.props.shop.shopInfo.phone}) : null}>
             {!this.state.editAddress ?
             <ShopInfo address1={this.renderShopInfo('address1')} address2={this.renderShopInfo('address2')} city={this.renderShopInfo('city')} state={this.renderShopInfo('state')} phone={this.renderShopInfo('phone')} rating={this.renderShopInfo('rating')}/>

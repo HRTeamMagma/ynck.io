@@ -5,10 +5,18 @@ class ShopInfo extends React.Component {
   constructor(props) {
     super(props);
   
-    this.state = {   
+    this.state = {
+      isOpen: false
     };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
+  toggleModal() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+  
   render () {
     return (
       <div className="shop_info">

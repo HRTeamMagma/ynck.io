@@ -22,6 +22,31 @@ module.exports.uploadImage = (req, res) => {
         res.status(200).send(req.file);
       });
     });
+  } else if (req.body.image_type === 'shopProfile') {
+    models.Profile.where({id: req.user.id})
+    .fetch({withRelated: 'shop'})
+    .then(profile => {
+      var theShop = profile.related('shop');
+      models.Shop.where({id: theShop.get('id')})
+      .fetch()
+      .then(shop => {
+        if (!shop) {
+          throw shop;
+        } else {
+          return shop.save({shop_image: req.file.location}, { method: 'update' });
+        }
+      })
+      .then(() => {
+        req.file.shopProfile = true;
+        res.send(req.file);
+      })
+      .error(err => {
+        res.status(500).send(err);
+      })
+      .catch(() => {
+        res.sendStatus(404);
+      });
+    });
   } else {
     models.Image.forge({
       url: req.file.location,
@@ -61,7 +86,6 @@ filterPredictions = (predictionArray) => {
 };
 
 module.exports.editImage = (req, res) => {
-  console.log(req.body);
   if (req.user.id) {
     models.Image.where({id: req.body.imageId})
     .fetch()
@@ -77,7 +101,6 @@ module.exports.editImage = (req, res) => {
 };
 
 module.exports.removeTagFromImage = (req, res) => {
-  console.log(req.body);
   let imageId = req.body.imageId;
   let tag = req.body.tagName;
   models.Tag.where({name: tag}).fetch()
