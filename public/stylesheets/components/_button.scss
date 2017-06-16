@@ -12,7 +12,20 @@ button {
   }
 }
 
-.button-blue {
-  background-color: #34b6f0;
+.button-grey {
+  background-color: $disabled-grey;
   color: white;
+
+  &:hover {
+    background-color: $maroon-light;
+  }
+}
+
+.button-maroon {
+  background-color: $maroon;
+  color: white;
+
+  &:hover {
+    background-color: $maroon-light;
+  }
 }
