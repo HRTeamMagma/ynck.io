@@ -8,6 +8,9 @@ module.exports.getUserFavorites = (req, res) => {
         throw results;
       }
       results = helper.cleanTags(results.related('favorites').toJSON());
+      results = results.sort((a,b) => {
+        return b.id - a.id;
+      });
       res.send({images: results});
     })
     .catch(error => {
