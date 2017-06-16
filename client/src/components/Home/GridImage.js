@@ -30,12 +30,15 @@ class GridImage extends React.Component {
             </div>
           </div> : null
         }
-        <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfo()} onMouseLeave ={() => this.toggleOverlayInfo()} >
-          { this.props.image.isFavorited ?
-            <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
-          : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
-          }
-        </div>
+        { loggedInUser ? (
+          <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfo()} onMouseLeave ={() => this.toggleOverlayInfo()} >
+            { this.props.image.isFavorited ?
+              <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
+            : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
+            }
+          </div>
+          ) : null 
+        }
         <img src={this.props.image.url} className="base_pic" />
       </div>
     );

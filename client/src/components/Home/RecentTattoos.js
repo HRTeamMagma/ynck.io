@@ -71,23 +71,14 @@ class RecentTattoos extends React.Component {
       this.setState({hasMoreItems: false});
     }
     
-    loggedInUser ? (
+    {
       this.props.recentImages.forEach((image, i) => {
         items.push(
           <GridImage image={image} i={i} addAFavorite={this.addAFavorite}/>
         );
-      }) 
-    )
-    :
-    (
-      this.props.recentImages.forEach((image, i) => {
-        items.push(
-          <div key={i} className="solo_image">
-            <img src={image.url} className="base_pic" />
-          </div>
-        );
-      }) 
-    );
+      });
+    }
+
     return (
       <InfiniteScroll
         pageStart={0}
