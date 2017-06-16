@@ -4,9 +4,7 @@ const Following = (props) => {
   return (
     props.usersFollowing.length > 0 ? (
       <div className="following">
-        <div>
-          Following
-        </div>
+        <h5>Following</h5>
         {props.usersFollowing.map((users, i) => {
           return (
             <span key={i}>

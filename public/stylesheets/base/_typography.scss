@@ -17,6 +17,11 @@ h3 {
   padding: 0px;
 }
 
+h5 {
+  margin: 0 0 $mini-spacing 0;
+  padding: 0px;
+}
+
 p {
   @include secondary-body-font
   margin: 0;
