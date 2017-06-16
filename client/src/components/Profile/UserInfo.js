@@ -33,7 +33,10 @@ class UserInfo extends React.Component {
               <a href="#" onClick={(e) => this.props.handleEditProfile(e)}>edit</a>
               </div>
               : 
-              <button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Follow</button>
+              blueNotBlue === 'button-blue' ? 
+              (<button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Following</button>)
+              :
+              (<button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Follow</button>)
             }
           </div>
           : 
