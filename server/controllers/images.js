@@ -212,6 +212,7 @@ module.exports.getLatestImages = (req, res) => {
 
 
 module.exports.seedDBreal = (req, res) => {
+  res.send(200);
   models.Image.fetchAll()
   .then(collection => {
 
@@ -219,7 +220,6 @@ module.exports.seedDBreal = (req, res) => {
       let firstItem = collection.shift();
       console.log(firstItem);
       if (firstItem === undefined) {
-        res.send(200);
         return;
       }
       axios({
