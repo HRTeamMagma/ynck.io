@@ -62,19 +62,19 @@ class ClaimShop extends React.Component {
           {this.state.tattooParlors.map((parlor, i) => {
             return (
               <div className="outer-card">
-                <a href={parlor.url} target="_blank" >
-                  <div key={i} className="shop-card">
+                <div key={i} className="shop-card">
+                  <a href={parlor.url} target="_blank" >
                     <div className="card-shop-info">
                       <h3>{parlor.name}</h3>
                       <p>{parlor.location.address1}</p>
                       <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
                     </div>
+                  </a>
                     <div className="map">
                       <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height="30vh" zoom={13}/>
                     </div>
-                    <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
-                  </div>
-                </a>
+                  <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
+                </div>
               </div>
             );
           })}
@@ -83,9 +83,11 @@ class ClaimShop extends React.Component {
       );
     } else {
       return (
-        <div className="claim_shop_container">
-          <h2>You have already claimed a shop! </h2>
-          <h3>Click <a className="secondary_link" href={`/shop/${loggedInUser.shop_id}`}>here</a> to see your claimed shop.</h3>
+        <div className="claim-shop-form">
+          <div className="form_title">
+            <h1>You have already claimed a shop! </h1>
+            <p>Click <a className="secondary_link" href={`/shop/${loggedInUser.shop_id}`}>here</a> to see your claimed shop.</p>
+          </div>
         </div>
       );
     }
