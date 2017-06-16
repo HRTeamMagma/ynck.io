@@ -28,7 +28,9 @@
   clear: both;
 }
 
-.uploadedImage {
+.user_stream .image_grid img.uploadedImage {
+  width: 400px;
+  height: auto;
   padding: 5px;
   border: solid 1px $divider-grey;
 }
