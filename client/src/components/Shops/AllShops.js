@@ -14,7 +14,6 @@ class AllShops extends React.Component {
       <div className="feed-container"> 
         {this.props.allShops ? 
           this.props.allShops.map((shop, i) => {
-            console.log(shop);
             return ( 
               <div key={i}>
                 <h3><a href={`/shop/${shop.id}`}>{shop.name}</a></h3>
