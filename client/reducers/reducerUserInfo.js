@@ -26,13 +26,19 @@ export const userData = (state = [], action) => {
     });
   case 'UPDATE_USER_PHOTO_SUCCESS':
     if (action.photoData.image_type === 'tattoo') {
-      let newArray = state.tattoo.slice();
+      let newArray = [];
+      if (state.tattoo) {
+        newArray = state.tattoo.slice();
+      }
       newArray.unshift(action.photoData);
       return Object.assign({}, state, {
         tattoo: newArray
       });
     } else if (action.photoData.image_type === 'design') {
-      let newArray = state.design.slice();
+      let newArray = [];
+      if (state.design) {
+        newArray = state.design.slice();
+      }
       newArray.unshift(action.photoData);
       return Object.assign({}, state, {
         design: newArray
