@@ -23,7 +23,11 @@ class OurWork extends React.Component {
     return (
       <div className="user_stream">
         <h2>Our Work</h2>
-        <UploadForm image_type="shopimage" />
+          {JSON.stringify(loggedInUser.shop_id) === this.props.viewedUser ? (
+            <UploadForm image_type="shopimage" />
+            )
+            :
+            null}
         <div className="image_grid">
         { this.props.images.map((image, i) => <img src={image.url} key={i} />) }
         </div>

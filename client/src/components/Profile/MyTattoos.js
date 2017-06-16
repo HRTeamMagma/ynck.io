@@ -20,7 +20,6 @@ class MyTattoos extends React.Component {
             )
             : null
             }
-            {console.log(loggedInUser, this.props.viewedUser)}
             {JSON.stringify(loggedInUser.id) === this.props.viewedUser ? (
               <UploadForm image_type="tattoo" />
             )

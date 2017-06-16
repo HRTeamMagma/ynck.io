@@ -117,7 +117,7 @@ class Shop extends React.Component {
             />
           </div>
           <div className="main_content">
-            <OurWork images={this.renderShopInfo('images') || []}/>
+            <OurWork viewedUser={this.props.viewedUser} images={this.renderShopInfo('images') || []}/>
           </div>
         </div>
       </div>
