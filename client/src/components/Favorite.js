@@ -4,8 +4,7 @@ class Favorite extends React.Component {
   constructor(props) {
     super(props);
   }
-
-
+  
   render() {
     let i = this.props.i;
     return (

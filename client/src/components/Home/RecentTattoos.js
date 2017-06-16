@@ -5,6 +5,8 @@ import { recentImagesFetchData, addToFavorites } from '../../../actions/actionRe
 import { getUserFavorites } from '../../../actions/actionFavorites';
 import { CometSpinLoader } from 'react-css-loaders';
 import InfiniteScroll from 'react-infinite-scroller';
+import GridImage from './GridImage';
+
 
 class RecentTattoos extends React.Component {
   constructor(props) {
@@ -69,52 +71,35 @@ class RecentTattoos extends React.Component {
       this.setState({hasMoreItems: false});
     }
     
-    loggedInUser ? (
+    {
       this.props.recentImages.forEach((image, i) => {
         items.push(
-          <div key={i} className="solo_image">
-            <div className="overlay_container_front_page">
-              { image.isFavorited ?
-                <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-              : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-                }
-            </div>
-            <img src={image.url} className="base_pic" />
-          </div>
+          <GridImage image={image} i={i} addAFavorite={this.addAFavorite}/>
         );
-      }) 
-    )
-    :
-    (
-      this.props.recentImages.forEach((image, i) => {
-        items.push(
-          <div key={i} className="solo_image">
-            <img src={image.url} className="base_pic" />
-          </div>
-        );
-      }) 
-    );
+      });
+    }
+
     return (
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.getLatestImages}
-              hasMore={this.state.hasMoreItems}
-              loader={loader}
-              threshold={20}
-              initialLoad={false}>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.getLatestImages}
+        hasMore={this.state.hasMoreItems}
+        loader={loader}
+        threshold={20}
+        initialLoad={false}>
 
-              <div className="feed_container">
-                { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
-                { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
+        <div className="feed_container">
+          { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
+          { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
 
-                <div className="recent_tattoos">
-                  <h2>Recent tattoos</h2>
-                  <div className="image_grid">
-                    {items}
-                  </div>
-                </div>
-              </div>
-            </InfiniteScroll>
+          <div className="recent_tattoos">
+            <h2>Recent tattoos</h2>
+            <div className="image_grid">
+              {items}
+            </div>
+          </div>
+        </div>
+      </InfiniteScroll>
     );
   }
 }

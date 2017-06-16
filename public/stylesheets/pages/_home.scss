@@ -24,6 +24,7 @@
   width: 300px;
   height: 200px;
   position: absolute; 
+  margin-top: $small-spacing;
 
   img {
     width: 300px;
@@ -40,7 +41,6 @@
     width: $icon-size;
     height: $icon-size;
     position: absolute; 
-    top: 16px;
     right: 16px; 
 
     &:hover {
@@ -51,3 +51,39 @@
   }
 }
 
+.hover-info {
+  z-index: 2;
+  width: 300px;
+  height: 40px;
+  position: absolute;  
+  bottom: 5px;  
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.mini-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline;
+  margin: $small-spacing $small-spacing;
+  position: absolute;
+  bottom: 0px;
+  text-align: middle;
+}
+
+.overlay-name {
+  position: absolute;
+  display: inline;
+  color: white;
+  font-weight: bold;
+  bottom: 10px;
+  margin-left: $small-spacing;
+  left: 50px;
+}
+
+.info {
+  bottom: 0;
+  position: absolute;
+  display: inline;
+}
