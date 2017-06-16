@@ -24,6 +24,9 @@ class GridImage extends React.Component {
   }
 
   render() {
+    let favoriteStatus;
+    this.props.image.isFavorited ? favoriteStatus = 'favorited' : favoriteStatus = 'heart';
+ 
     return (
       <div key={this.props.i} className="solo_image">
         { this.state.hoverDisplay ?
@@ -34,18 +37,12 @@ class GridImage extends React.Component {
             </div>
           </div> : null
         }
-        { loggedInUser ? (
-          <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfoEnter()} onMouseLeave ={() => this.toggleOverlayInfoLeave()} >
-            { this.props.image.isFavorited ?
-              <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
-            : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
-            }
-          </div>
-          ) : (
-             <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfo()} onMouseLeave ={() => this.toggleOverlayInfo()} >
-             </div>
-          )
-        }
+        <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfoEnter()} onMouseLeave ={() => this.toggleOverlayInfoLeave()} >
+          { loggedInUser ? 
+            <img src={`./assets/icons/${favoriteStatus}.png`} className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/>  
+            : null 
+          }
+        </div>
         <img src={this.props.image.url} className="base_pic" />
       </div>
     );
