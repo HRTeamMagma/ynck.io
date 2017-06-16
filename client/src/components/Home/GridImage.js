@@ -24,9 +24,8 @@ class GridImage extends React.Component {
           <div className="hover-info">
             <div className="info">
               <h4>{this.props.image.title}</h4>
-              <h4>{this.props.image.favoriteCount}</h4>
               <img src={this.props.image.profile.profile_image} className="mini-avatar" />
-              <h4>{this.props.image.profile.display}</h4>
+              <p className="overlay-name">{this.props.image.profile.display}</p>
             </div>
           </div> : null
         }
