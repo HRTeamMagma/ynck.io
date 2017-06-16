@@ -5,13 +5,6 @@ const bookshelf = require('../../db/');
 const axios = require('axios');
 
 
-module.exports.getTagData = (req, res) => {
-  models.Tag.fetchAll({withRelated: 'image'})
-  .then(results => {
-    res.send(results);
-  });
-};
-
 module.exports.uploadImage = (req, res) => {
   if (req.body.image_type === 'shopimage') {
     models.Profile.where({id: req.user.id})

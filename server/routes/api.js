@@ -87,13 +87,7 @@ router.route('/followers')
 router.route('/seed-db')
   .get(ImageController.seedDBreal);
 
-router.route('/stats/count-per-tag')
-  .get(StatsController.getNumberOfTattoosPerTags);
-
-router.route('/stats/total-tagged')
-  .get(StatsController.getTotalNumOfTaggedImages);
-
 router.route('/stats/tag-data')
-  .get(ImageController.getTagData);
+  .get(StatsController.getTagData);
 
 module.exports = router;
