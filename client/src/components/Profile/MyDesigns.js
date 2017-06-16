@@ -12,7 +12,7 @@ class MyDesigns extends React.Component {
   render() {
     return (
       <div>  
-        <h2>My Designs</h2>
+        <h2>Designs</h2>
           <div className="image_grid">  
             {this.props.myDesigns !== undefined ? (
               <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
