@@ -13,10 +13,11 @@
 }
 
 .searchbox {
-  width: 500px;
+  width: 400px;
   height: 40px;
-  margin-left: $mini-spacing;
+  margin-left: 0;
   margin-bottom: 0;
+  position: relative;
 }
 
 .search-icon {
@@ -27,6 +28,7 @@
   top: 3px;
   right: 15px;
   position: absolute;  
+  display:inline-block;
 
   &:hover {
     cursor: pointer;
@@ -35,6 +37,12 @@
 
 .searchFilter {
   margin-left: $large-spacing;
+  width: 60px;
+  height: 40px;
+  padding-right: 0px;
+  border: 1px solid $divider-grey;
+  background-color: white;
+  overflow: hidden;
 }
 
 // On search results
@@ -67,4 +75,20 @@
       margin-right: 0;
     }
   }
+}
+
+.browse-button {
+  border-style: solid; 
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: $mid-grey;
+  padding: .7em;
+  color: white;
+  text-decoration: none;
+  margin-left: 70px;
+  }
+.browse-button:focus,
+.browse-button:hover {
+  background-color: $maroon;
+  color: white;
 }

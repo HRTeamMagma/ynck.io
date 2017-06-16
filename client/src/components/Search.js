@@ -23,7 +23,7 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search" >
-        <form onSubmit={ (e) => this.props.submitSearch(e,this.state.searchTerm, this.state.searchType) } >
+        <form onSubmit={ (e) => this.props.submitSearch(e, this.state.searchTerm, this.state.searchType) } >
           <select className="searchFilter" name="searchType" onChange={(e) => this.captureSearchInput(e)} >
             <option value="tags">Tags</option>
             <option value="shops">Shops</option>
