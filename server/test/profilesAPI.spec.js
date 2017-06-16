@@ -121,4 +121,14 @@ describe('Profiles API', function () {
   //     .expect(404)
   //     .end(done);
   // });
+
+  it('returns correct user on get request for user data', function(done) {
+    request(app)
+      .get('/api/profiles/user-data?id=1')
+      .expect(200)
+      .expect(function(res) {
+        expect(res.body.userProfile.id).to.equal(1);
+      })
+      .end(done);
+  });
 });
