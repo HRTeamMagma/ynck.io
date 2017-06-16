@@ -60,8 +60,6 @@ class Shop extends React.Component {
   }
 
   render () {
-    console.log('propsssssssssssssss', this.props);
-
     return (
       <div >
         <div className="feed_container">

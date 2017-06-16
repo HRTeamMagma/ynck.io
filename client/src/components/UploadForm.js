@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 const axios = require('axios');
 const Dropzone = require('react-dropzone');
 const upload = require('superagent');
+import { CometSpinLoader } from 'react-css-loaders';
 
 import Tag from './Profile/Tag';
 import Modal from './Modal';
@@ -58,8 +59,10 @@ class UploadForm extends React.Component {
         imageId = data.shopimageId;
       }
       this.setState({uploadedImg: imgURL, imageId, shopId }, () => {
-        if (data.predictions.length > 0) {
-          this.handleDevonsRobot(data.predictions);
+        if (data.predictions) {
+          if (data.predictions.length > 0) {
+            this.handleDevonsRobot(data.predictions);
+          }
         }
       });
     });
@@ -210,13 +213,26 @@ class UploadForm extends React.Component {
     } else {
       let spinning;
       if (this.state.spinner) {
-        spinning = <div><img src="http://psdwizard.com/wp-content/uploads/2016/07/rubiks-loader.gif" width="200px" /></div>;
+        spinning = < CometSpinLoader size={50} color={'#35b6f0'} />;
       } else {
         spinning = <div>Drop an image or click to upload</div>;
       }
+      let background = 'https://s3-us-west-1.amazonaws.com/media.ynck.com/upload_icon.png';
       theForm = 
         <div>
-          <Dropzone onDrop={this.onDrop} multiple={false}>
+          <Dropzone 
+          onDrop={this.onDrop} 
+          style={{
+            "width" : "auto",
+            "height" : "200px", 
+            "border" : "1px dashed #cecece", 
+            "padding" : "10px",
+            "background-image" : "url(" + background + ")",
+            "background-repeat" : "no-repeat",
+            "background-position" : "center",
+            "background-size" : "80px 80px"
+          }}
+          multiple={false}>
             {spinning}
           </Dropzone>
           <div className="modalButtons">
