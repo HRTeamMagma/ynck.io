@@ -19,13 +19,14 @@ class AllShops extends React.Component {
                 return ( 
                   <div className="outer-card">
                     <div key={i} className="shop-card">
-                      <div className="card-shop-info">
-                        <h3><a href={`/shop/${shop.id}`}>{shop.name}</a></h3>
-                        <p>{shop.address1}</p>
-                        <p>{shop.address2}</p>
-                        <p>{shop.city}, {shop.state}</p>
-                        <p>{shop.phone}</p>
-                      </div>
+                      <a href={`/shop/${shop.id}`}>
+                        <div className="card-shop-info">
+                          <h3>{shop.name}</h3>
+                          <p>{shop.address1}</p>
+                          <p>{shop.city}, {shop.state}</p>
+                          <p>{shop.phone}</p>
+                        </div>
+                      </a>
                       <div className="map">
                         <MapView lat={shop.latitude || shop.lat || .34 } lon={shop.longitude || shop.lon || 32} height="30vh" zoom={13}/>
                       </div>

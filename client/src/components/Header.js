@@ -64,10 +64,11 @@ class Header extends React.Component {
             <Search submitSearch={this.props.submitSearch} />
             {this.props.loggedInUser ? (
               <nav>
-                <img className ='header-photo' src={this.state.userInfo.profile_image}/>
                 
                 <li>
-                  <a onClick={this.handleDropdownClick} href="#">{ this.props.loggedInUser.first } 
+                  <a onClick={this.handleDropdownClick} href="#"> 
+                  <img className ='header-photo' src={this.state.userInfo.profile_image}/>
+                  { this.props.loggedInUser.first }
                   {this.state.isOpen ?
                     <span className="dropdown_up_arrow"></span> :
                     <span className="dropdown_down_arrow"></span>
