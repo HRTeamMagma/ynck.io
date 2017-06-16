@@ -55,25 +55,34 @@ class ClaimShop extends React.Component {
   render () {
     if (loggedInUser.shop_id === null) {
       return ( 
-        <div className="feed_container"> 
-          <h1 className="profile_name">Claim Your Shop</h1>
-          <YelpSearchForm onSubmit={this.submit}/>
-          {this.state.tattooParlors.map((parlor, i) => {
-            return (
-              <div key={i} className="shop-card">
-                <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
-                <div>
-                  <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} zoom={13}/>
-                </div>
-                <button onClick={() => this.handleClick(parlor)}>Claim Shop</button>
-              </div>
-            );
-          })}
+        <div className="wrapper">
+          <div className="claim_shop_container"> 
+            <div className="claim-shop-form">
+              <h1 className="profile_name">Claim Your Shop</h1>
+              <YelpSearchForm onSubmit={this.submit}/>
+              {this.state.tattooParlors.map((parlor, i) => {
+                console.log(parlor);
+                return (
+                  <div className="outer-card">
+                    <div key={i} className="shop-card">
+                      <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
+                      <p>{parlor.location.address1}</p>
+                      <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
+                      <div>
+                        <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} zoom={13}/>
+                      </div>
+                      <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div className="feed_container">
+        <div className="claim_shop_container">
           <h2>You have already claimed a shop! </h2>
           <h3>Click <a className="secondary_link" href={`/shop/${loggedInUser.shop_id}`}>here</a> to see your claimed shop.</h3>
         </div>

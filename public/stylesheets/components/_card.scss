@@ -7,3 +7,64 @@
   padding: 10px;
   margin: 10px;
 }
+
+.outer-card {
+  display: inline-block;
+}
+
+.claim-shop-button {
+  width: 100%;
+  border-style: solid; 
+  border-width: 100%;
+  border-radius: 5px;
+  background-color: $maroon;
+  padding: .7em;
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+
+  &:focus,
+  &:hover {
+    background-color: $mid-grey;
+    color: white;
+  }
+}
+
+.yelp_form {
+  display: inline-block;
+  padding-bottom: 100px;
+}
+
+.form_label {
+  padding-left: 0px;
+}
+
+.form_input {
+  margin-right: 15px;
+}
+
+.shop-search-button {
+  border-style: solid; 
+  border-width: 1px;
+  border-radius: 5px;
+  background-color: $maroon;
+  padding: .7em;
+  color: white;
+  text-decoration: none;
+  height: 40px;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  &:focus,
+  &:hover {
+    background-color: $mid-grey;
+    color: white;
+    right: -20px;
+  }
+}
+
+.claim-shop-form {
+  text-align: center;
+  padding-top: 50px;
+}
