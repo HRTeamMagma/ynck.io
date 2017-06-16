@@ -27,7 +27,7 @@ class SearchResults extends React.Component {
               {
                 this.props.searchResults.msg ? 
                 <h3>{ this.props.searchResults.msg } </h3> :
-                <h2>Search results for "{this.props.searchTerm}"</h2>
+                <h2>Search results for “{this.props.searchTerm}”</h2>
               }
               <div className="image_grid">
                 { tagResults ? tagResults.map((image, i) => 
