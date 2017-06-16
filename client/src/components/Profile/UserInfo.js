@@ -14,11 +14,11 @@ class UserInfo extends React.Component {
   }
 
   render() {
-    let blueNotBlue;
+    let greyNotgrey;
     if (this.props.isBeingFollowed) {
-      blueNotBlue = 'button-blue';
+      greyNotgrey = 'button-grey';
     } else {
-      blueNotBlue = '';
+      greyNotgrey = 'button-maroon';
     }
     return ( 
       <div className="profile_info">
@@ -33,10 +33,10 @@ class UserInfo extends React.Component {
               <a href="#" onClick={(e) => this.props.handleEditProfile(e)}>edit</a>
               </div>
               : 
-              blueNotBlue === 'button-blue' ? 
-              (<button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Following</button>)
+              greyNotgrey === 'button-grey' ? 
+              (<button className={greyNotgrey} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Following</button>)
               :
-              (<button className={blueNotBlue} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Follow</button>)
+              (<button className={greyNotgrey} onClick={(e) => this.props.followUser(e, this.props.userData.id)} >Follow</button>)
             }
           </div>
           : 
