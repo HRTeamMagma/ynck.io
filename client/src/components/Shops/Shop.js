@@ -65,7 +65,7 @@ class Shop extends React.Component {
 
   render () {
     return (
-      <div >
+      <div className="wrapper">
         <div className="feed_container">
           {this.props.shopInfoIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null}
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true, editedName: this.state.editedName || this.props.shop.shopInfo.name}) : null} className="profile_name">

@@ -89,7 +89,6 @@ class RecentTattoos extends React.Component {
         initialLoad={false}>
 
         <div className="feed_container">
-          { this.props.recentImagesHasErrored ? <p>Sorry! There was an error loading the items</p> : null }
           { this.props.recentImagesIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null }
 
           <div className="recent_tattoos">

@@ -37,12 +37,14 @@
 
 .searchFilter {
   margin-left: $large-spacing;
+  margin-right: 5px;
   width: 60px;
   height: 40px;
   padding-right: 0px;
   border: 1px solid $divider-grey;
   background-color: white;
   overflow: hidden;
+
 }
 
 // On search results

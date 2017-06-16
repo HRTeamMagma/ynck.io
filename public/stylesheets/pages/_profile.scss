@@ -2,11 +2,15 @@
 // This file contains styles that are specific to the profile page.
 // -----------------------------------------------------------------------------
 
+.wrapper {
+  background-color: $light-grey;
+}
 
 .profile_sidebar {
   width: 240px;
   margin: 0 $med-spacing 0 0;
   float: left;
+  border-radius: 4px;
 }
 
 .user_profile_image {
@@ -50,9 +54,11 @@
 }
 
 .profile_info {
+  background-color: $white;
   text-align: center;
   padding: $small-spacing;
   border: 1px solid $divider-grey;
+  border-radius: 4px;
 
   textarea {
     margin: $mini-spacing auto;
@@ -79,7 +85,9 @@
 .following {
   padding: $small-spacing $small-spacing 0 $small-spacing;
   border: 1px solid $divider-grey;
+  border-radius: 4px;
 	margin-top: $mini-spacing;
+  background-color: $white;
 
   img {
     object-fit: cover;
