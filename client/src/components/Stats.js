@@ -3,38 +3,15 @@ import ReactHighcharts from 'react-highcharts';
 import axios from 'axios';
 
 
-/*
-Currently retrieves # of images for each tag in the db, calculates % based on
-unique # of images in images_tags.
-
-TODO: Change to only retrieve # for category tags:
-
-blackwork
-dotwork
-geometric
-japanese
-neo-traditional
-new school
-realism
-traditional
-trash_polka
-tribal
-watercolor
-
-Will have to change total # query in StatsController
-
-*/
-
 class Stats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalPicsPerTag: {},
+      tagCount: {},
+      totalTagged: 0,
       percentagePerTag: {},
-      totalTagged: 0
     };
     this.getCountPerTag = this.getCountPerTag.bind(this);
-    this.getTotalTagged = this.getTotalTagged.bind(this);    
     this.calculatePercentage = this.calculatePercentage.bind(this);
   }
 
@@ -43,41 +20,41 @@ class Stats extends React.Component {
   }
 
   getCountPerTag() {
-    axios.get('/api/stats/count-per-tag')
+    var categoryTags = ['blackwork', 'dotwork', 'geometric', 'japanese', 'neo-traditional', 'new school',
+      'realism', 'traditional', 'trash polka', 'tribal', 'watercolor'];
+    
+    axios.get('/api/stats/tag-data')
       .then(response => {
-        let totalPicsPerTag = {};
+        let [tagCount, countSum] = [{}, 0];
         response.data.map(tag => {
-          totalPicsPerTag[tag.tag_id] = tag.count;
+          if (categoryTags.includes(tag.name)) {
+            tagCount[tag.name] = tag.image.length;
+            countSum += tag.image.length;
+          }
         });
         this.setState({
-          totalPicsPerTag
+          tagCount,
+          totalTagged: countSum
         });
-        this.getTotalTagged();
+        this.calculatePercentage();
+        // console.log('tagCount', this.state.tagCount);
       });
   }
 
-  getTotalTagged() {
-    axios.get('/api/stats/total-tagged')
-      .then(response => {
-        this.setState({
-          totalTagged: response.data[0].count
-        });
-        this.calculatePercentage();
-      });
-  }
 
   calculatePercentage() {
     let percentagePerTag = {};
 
-    for (let key in this.state.totalPicsPerTag) {
-      let percentage = this.state.totalPicsPerTag[key] / this.state.totalTagged * 100;
-      percentage.toFixed(2);
-      percentagePerTag[key] = percentage;
+    for (let key in this.state.tagCount) {
+      let percentage = this.state.tagCount[key] / this.state.totalTagged * 100;
+      percentagePerTag[key] = parseFloat(percentage.toFixed(2));
       this.setState({
         percentagePerTag
       });
     }
+    console.log('percentagePerTag', percentagePerTag);
   }
+  
   render() {
 
     const config = {
@@ -117,31 +94,40 @@ class Stats extends React.Component {
         name: 'Tattoos',
         colorByPoint: true,
         data: [{
-          name: 'Dotwork',
-          // y: 56.33
-          y: this.state.percentagePerTag['1']
+          name: 'Blackwork',
+          y: this.state.percentagePerTag['blackwork']
         }, {
-          name: 'Trash Polka',
-          // y: 24.03,
-          y: this.state.percentagePerTag['2'],
+          name: 'Dotwork',
+          y: this.state.percentagePerTag['dotwork'],
           sliced: true,
           selected: true
         }, {
           name: 'Geometric',
-          // y: 10.38
-          y: this.state.percentagePerTag['3']
+          y: this.state.percentagePerTag['geometric']
+        }, {
+          name: 'Japanese',
+          y: this.state.percentagePerTag['japanese']
+        }, {
+          name: 'Neo-traditional',
+          y: this.state.percentagePerTag['neo-traditional']
+        }, {
+          name: 'New school',
+          y: this.state.percentagePerTag['new school']
+        }, {
+          name: 'Realism',
+          y: this.state.percentagePerTag['realism']
+        }, {
+          name: 'Traditional',
+          y: this.state.percentagePerTag['traditional']
+        }, {
+          name: 'Trash Polka',
+          y: this.state.percentagePerTag['trash polka']
+        }, {
+          name: 'Tribal',
+          y: this.state.percentagePerTag['trash polka']
         }, {
           name: 'Watercolor',
-          // y: 4.77
-          y: this.state.percentagePerTag['4']
-        }, {
-          name: 'Neoclassical',
-          // y: 0.91
-          y: this.state.percentagePerTag['5']
-        }, {
-          name: 'Blackwork',
-          // y: 0.2
-          y: this.state.percentagePerTag['6']
+          y: this.state.percentagePerTag['watercolor']        
         }]
       }]
     };
