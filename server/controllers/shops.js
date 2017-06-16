@@ -105,19 +105,6 @@ module.exports.createShop = (req, res) => {
 module.exports.getAllShops = (req, res) => {
   models.Shop.fetchAll()
   .then((shops) => {
-    shops.models.map((shop) => {
-      if (!shop.attributes.latitude) {
-        var address = shop.attributes.address1 + ' ' + shop.attributes.city + ', ' + shop.attributes.state;
-        latLong.latLong(address, function(result) {
-          if (result[0]) {
-            shop.attributes.latitude = result[0].latitude;
-            shop.attributes.longitude = result[0].longitude;
-          }
-        });
-      }
-      console.log('GETALLSHOPSAFTER>>>>>: ', shop.attributes);
-    }); 
-    console.log(shops.models);
     res.status(200).send(shops);
   })
   .catch(error => console.log(error));
