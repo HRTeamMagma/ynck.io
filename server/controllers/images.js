@@ -213,7 +213,8 @@ module.exports.getLatestImages = (req, res) => {
 
 module.exports.seedDBreal = (req, res) => {
   res.send(200);
-  models.Image.fetchAll()
+  models.Image.where({image_type: 'tattoo'})
+  .fetchAll()
   .then(collection => {
 
     let recursiveSeed = (collection) => {
