@@ -73,7 +73,9 @@ class Stats extends React.Component {
         enabled: false
       },
       title: {
-        text: 'Breakdown of tattoo styles'
+        text: 'Breakdown of tattoo styles',
+        fontSize: '30px',
+        fontWeight: '700'
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -108,7 +110,9 @@ class Stats extends React.Component {
     return (
       <div className="stats">
         <div className="feed_container">
-          <ReactHighcharts config = {config} />
+          <div className="inner_container">
+            <ReactHighcharts config = {config} />
+          </div>
         </div>
       </div>
     );

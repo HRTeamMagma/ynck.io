@@ -11,7 +11,7 @@ module.exports.getSearchResults = (req, res) => {
       res.send({imageResults: results.related('image').toJSON()});
     })
     .catch(err => {
-      res.send({ msg: `No tattoos found for "${req.query.q}". Try, try again.`});
+      res.send({ msg: `No tattoos found for “${req.query.q}”. Try, try again.`});
     });
   } else if (req.query.searchType === 'shops') {
     knex.raw(`SELECT * FROM shops where lower(name) like '%${req.query.q}%'`)
@@ -19,7 +19,7 @@ module.exports.getSearchResults = (req, res) => {
         if (results.rows[0]) {
           res.send({shops: results.rows});
         } else {
-          res.send({ msg: `No shops named for "${req.query.q}" were found. Try, try again.`});
+          res.send({ msg: `No shops named for “${req.query.q}” were found. Try, try again.`});
         }
       });
   } else if (req.query.searchType === 'users') {
@@ -28,7 +28,7 @@ module.exports.getSearchResults = (req, res) => {
         if (results.rows[0]) {
           res.send({users: results.rows});
         } else {
-          res.send({ msg: `No users named "${req.query.q}" were found. Try, try again.`});
+          res.send({ msg: `No users named “${req.query.q}” were found. Try, try again.`});
         }
       });
   } else {

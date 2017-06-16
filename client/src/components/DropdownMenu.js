@@ -17,7 +17,7 @@ class DropdownMenu extends React.Component {
             <a href={`/user/${this.props.loggedInUser.id}`}><li>Profile</li></a>
             { this.props.userInfo.shop_id ?
               <a href={`/shop/${this.props.userInfo.shop_id}`}><li>Shop</li> </a>
-              : <a href="/claimshop"><li>Add A Shop</li></a> 
+              : <a href="/claimshop"><li>Add a shop</li></a> 
             }
             <a href="/logout"><li>Log out</li></a>
           </ul>
