@@ -15,8 +15,13 @@
   color: $white;
   background-color: $placeholder;
   padding: 4px 20px 4px 8px;
-  border-radius: 6px;
+  border-radius: 3px;
   line-height: 2.5em;
+}
+
+.tag a:hover {
+  color: $placeholder;
+  background-color: $maroon;
 }
 
 .imageInfo {
