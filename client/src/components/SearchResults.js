@@ -38,15 +38,19 @@ class SearchResults extends React.Component {
 
                 { shopResults ? shopResults.map((shop, i) => 
                   <div key={i} className="solo_image">
-                     <a href={`/shop/${shop.id}`} ><h4>{shop.name}</h4></a>
-                    <img src={shop.shop_image} className="base_pic"/>
+                    <a href={`/shop/${shop.id}`} >
+                      <h4>{shop.name}</h4>
+                      <img src={shop.shop_image} className="base_pic"/>
+                    </a>
                   </div>) : null
                 }
                 {
                   userResults ? userResults.map((user, i) => 
                   <div key={i} className="solo_user_image">
-                    <a href={`/user/${user.id}`} ><h4>{user.first} {user.last}</h4></a>
-                    <img src={user.profile_image} className="user_profile_image"/>
+                    <a href={`/user/${user.id}`} >
+                      <h4>{user.first} {user.last}</h4>
+                      <img src={user.profile_image} className="user_profile_image"/>
+                    </a>
                   </div>) : null
                 }
             </div>          
