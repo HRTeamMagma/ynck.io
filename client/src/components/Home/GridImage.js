@@ -11,11 +11,11 @@ class GridImage extends React.Component {
   }
 
   toggleOverlayInfo() {
-    console.log('inside toggle overlay');
     this.setState({
       hoverDisplay: !this.state.hoverDisplay
     });
   }
+
 
   render() {
     return (
@@ -25,7 +25,7 @@ class GridImage extends React.Component {
             <div className="info">
               <h4>{this.props.image.title}</h4>
               <img src={this.props.image.profile.profile_image} className="mini-avatar" />
-              <p className="overlay-name">{this.props.image.profile.display}</p>
+              <p className="overlay-name"><a>{this.props.image.profile.display}</a></p>
             </div>
           </div> : null
         }
