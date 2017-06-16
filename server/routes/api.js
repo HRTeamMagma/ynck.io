@@ -93,4 +93,7 @@ router.route('/stats/count-per-tag')
 router.route('/stats/total-tagged')
   .get(StatsController.getTotalNumOfTaggedImages);
 
+router.route('/stats/tag-data')
+  .get(ImageController.getTagData);
+
 module.exports = router;
