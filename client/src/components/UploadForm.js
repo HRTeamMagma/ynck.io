@@ -213,7 +213,7 @@ class UploadForm extends React.Component {
     } else {
       let spinning;
       if (this.state.spinner) {
-        spinning = < CometSpinLoader size={50} color={'#35b6f0'} />;
+        spinning = < CometSpinLoader size={50} color={'#8f4b5a'} />;
       } else {
         spinning = <div>Drop an image or click to upload</div>;
       }
