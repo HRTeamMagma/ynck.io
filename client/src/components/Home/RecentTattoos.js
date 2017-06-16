@@ -5,6 +5,8 @@ import { recentImagesFetchData, addToFavorites } from '../../../actions/actionRe
 import { getUserFavorites } from '../../../actions/actionFavorites';
 import { CometSpinLoader } from 'react-css-loaders';
 import InfiniteScroll from 'react-infinite-scroller';
+import GridImage from './GridImage';
+
 
 class RecentTattoos extends React.Component {
   constructor(props) {
@@ -13,14 +15,12 @@ class RecentTattoos extends React.Component {
       hasMoreItems: true,
       isLoading: false,
       pageNum: 1,
-      pageSize: 1,
-      hoverDisplay: false
+      pageSize: 1
     };
     this.getLatestImages = this.getLatestImages.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
     this.addAFavorite = this.addAFavorite.bind(this);
     this.getTotalTattooPageSize = this.getTotalTattooPageSize.bind(this);
-    this.toggleOverlayInfo = this.toggleOverlayInfo.bind(this);
   }
 
   componentDidMount() {
@@ -59,12 +59,6 @@ class RecentTattoos extends React.Component {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
   }
 
-  // toggleOverlayInfo() {
-  //   this.setState({
-  //     hoverDisplay: !this.state.hoverDisplay
-  //   });
-  // }
-
   render() {
     let loader;
     if (this.state.pageNum > this.state.pageSize) {
@@ -80,25 +74,7 @@ class RecentTattoos extends React.Component {
     loggedInUser ? (
       this.props.recentImages.forEach((image, i) => {
         items.push(
-          <div key={i} className="solo_image">
-            { this.state.hoverDisplay ?
-              <div className="hover-info">
-                <div className="info">
-                  <h4>{image.title}</h4>
-                  <h4>{image.favoriteCount}</h4>
-                  <img src={image.profile.profile_image} className="mini-avatar" />
-                  <h4>{image.profile.display}</h4>
-                </div>
-              </div> : null
-            }
-            <div key={i} className="overlay_container_front_page" onMouseEnter={ () => this.toggleOverlayInfo(image.id) } >
-              { image.isFavorited ?
-                <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-              : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-              }
-            </div>
-            <img src={image.url} className="base_pic" />
-          </div>
+          <GridImage image={image} i={i} addAFavorite={this.addAFavorite}/>
         );
       }) 
     )

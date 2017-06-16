@@ -4,14 +4,7 @@ class Favorite extends React.Component {
   constructor(props) {
     super(props);
   }
-
-
-  toggleOverlayInfo() {
-    this.setState({
-      hoverDisplay: !this.state.hoverDisplay
-    });
-  }
-
+  
   render() {
     let i = this.props.i;
     return (
