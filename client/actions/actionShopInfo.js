@@ -1,5 +1,20 @@
 import axios from 'axios';
 
+export const shopInfoHasErrored = (bool) => {
+  return {
+    type: 'SHOP_INFO_HAS_ERRORED',
+    shopInfoHasErrored: bool
+  };
+};
+
+
+export const shopInfoIsLoading = (bool) => {
+  return {
+    type: 'SHOP_INFO_IS_LOADING',
+    shopInfoIsLoading: bool
+  };
+};
+
 export const shopInfo = (shopData) => {
   return {
     type: 'SHOP_INFO_SUCCESS',
@@ -9,9 +24,11 @@ export const shopInfo = (shopData) => {
 
 export const fetchShopInfo = (url, shopId) => {
   return (dispatch) => {
+    dispatch(shopInfoIsLoading(true));
     axios.get(url, {params: {shopId: shopId}})
       .then(success => {
         dispatch(shopInfo(success.data));
+        dispatch(shopInfoIsLoading(false));
       })
       .catch(error => {
         throw error;

@@ -1,3 +1,13 @@
+export const shopInfoIsLoading = (state = false, action) => {
+  switch (action.type) {
+  case 'SHOP_INFO_IS_LOADING':
+    return action.shopInfoIsLoading;
+  default:
+    return state;
+  }
+};
+
+
 export const shop = (state = [], action) => {
   switch (action.type) {
   case 'SHOP_INFO_SUCCESS':
