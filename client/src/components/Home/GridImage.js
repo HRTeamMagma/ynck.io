@@ -36,7 +36,10 @@ class GridImage extends React.Component {
             : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.props.addAFavorite(this.props.image.id, this.props.i); } }/> 
             }
           </div>
-          ) : null 
+          ) : (
+             <div className="overlay_container_front_page" onMouseEnter={()=> this.toggleOverlayInfo()} onMouseLeave ={() => this.toggleOverlayInfo()} >
+             </div>
+          )
         }
         <img src={this.props.image.url} className="base_pic" />
       </div>
