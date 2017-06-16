@@ -16,7 +16,7 @@ class MyDesigns extends React.Component {
           <div className="image_grid">  
             {this.props.myDesigns !== undefined ? (
               <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-              {this.props.myDesigns.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='design' viewedUser={this.props.viewedUser} i={i} images={images}/> )}
+              {this.props.myDesigns.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='design' viewedUser={this.props.viewedUser} key={i} images={images}/> )}
               </Carousel>
               )
             : null

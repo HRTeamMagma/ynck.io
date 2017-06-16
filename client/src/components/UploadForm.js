@@ -227,10 +227,10 @@ class UploadForm extends React.Component {
             "height" : "200px", 
             "border" : "1px dashed #cecece", 
             "padding" : "10px",
-            "background-image" : "url(" + background + ")",
-            "background-repeat" : "no-repeat",
-            "background-position" : "center",
-            "background-size" : "80px 80px"
+            "backgroundImage" : "url(" + background + ")",
+            "backgroundRepeat" : "no-repeat",
+            "backgroundPosition" : "center",
+            "backgroundSize" : "80px 80px"
           }}
           multiple={false}>
             {spinning}
