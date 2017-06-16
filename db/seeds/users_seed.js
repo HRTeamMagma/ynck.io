@@ -190,7 +190,7 @@ exports.seed = function (knex, Promise) {
       });
     })
     .then(() => {
-      return knex('profiles').where('id', '=', '2')
+      return knex('profiles').where('id', '=', '4')
       .update({
         shop_id: 1
       });
