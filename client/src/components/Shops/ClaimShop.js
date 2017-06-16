@@ -55,29 +55,28 @@ class ClaimShop extends React.Component {
   render () {
     if (loggedInUser.shop_id === null) {
       return ( 
-        <div className="wrapper">
-          <div className="claim_shop_container"> 
-            <div className="claim-shop-form">
-              <h1 className="profile_name">Claim Your Shop</h1>
-              <YelpSearchForm onSubmit={this.submit}/>
-              {this.state.tattooParlors.map((parlor, i) => {
-                console.log(parlor);
-                return (
-                  <div className="outer-card">
-                    <div key={i} className="shop-card">
-                      <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
-                      <p>{parlor.location.address1}</p>
-                      <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
-                      <div>
-                        <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} zoom={13}/>
-                      </div>
-                      <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
-                    </div>
+        <div className="claim-shop-form">
+          <h1 className="form_title">Claim Your Shop</h1>
+          <YelpSearchForm onSubmit={this.submit}/>
+          <div className="shop-wrapper">
+          {this.state.tattooParlors.map((parlor, i) => {
+            return (
+              <div className="outer-card">
+                <div key={i} className="shop-card">
+                  <div className="card-shop-info">
+                    <h3><a href={parlor.url} target="_blank" >{parlor.name}</a></h3>
+                    <p>{parlor.location.address1}</p>
+                    <p>{parlor.location.city}, {parlor.location.state} {parlor.location.zip_code}</p>
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                  <div className="map">
+                    <MapView lat={parlor.coordinates.latitude} lon={parlor.coordinates.longitude} height="30vh" zoom={13}/>
+                  </div>
+                  <button className="claim-shop-button"onClick={() => this.handleClick(parlor)}>Claim Shop</button>
+                </div>
+              </div>
+            );
+          })}
+          </div>  
         </div>
       );
     } else {
