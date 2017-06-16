@@ -14,12 +14,12 @@ class DropdownMenu extends React.Component {
       return (
         <div className="dropdown">
           <ul>
-            <li><a href={`/user/${this.props.loggedInUser.id}`}>Profile</a></li>
+            <a href={`/user/${this.props.loggedInUser.id}`}><li>Profile</li></a>
             { this.props.userInfo.shop_id ?
-              <li><a href={`/shop/${this.props.userInfo.shop_id}`}>Shop</a></li> 
-              : <li><a href="/claimshop">Add A Shop</a></li> 
+              <a href={`/shop/${this.props.userInfo.shop_id}`}><li>Shop</li> </a>
+              : <a href="/claimshop"><li>Add A Shop</li></a> 
             }
-            <li><a href="/logout">Log out</a></li>
+            <a href="/logout"><li>Log out</li></a>
           </ul>
         </div>
       );

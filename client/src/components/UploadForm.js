@@ -58,6 +58,10 @@ class UploadForm extends React.Component {
         shopId = data.shopId;
         imageId = data.shopimageId;
       }
+      if (data.shopProfile) {
+        this.toggleModal();
+        this.props.handleUpdateShopProfileImage(data.location);
+      }
       this.setState({uploadedImg: imgURL, imageId, shopId }, () => {
         if (data.predictions) {
           if (data.predictions.length > 0) {
