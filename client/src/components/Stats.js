@@ -8,8 +8,8 @@ class Stats extends React.Component {
     super(props);
     this.state = {
       tagCount: {},
-      totalTagged: 0,
       percentagePerTag: {},
+      totalTagged: 0      
     };
     this.getCountPerTag = this.getCountPerTag.bind(this);
     this.calculatePercentage = this.calculatePercentage.bind(this);
@@ -37,10 +37,8 @@ class Stats extends React.Component {
           totalTagged: countSum
         });
         this.calculatePercentage();
-        // console.log('tagCount', this.state.tagCount);
       });
   }
-
 
   calculatePercentage() {
     let percentagePerTag = {};
@@ -52,11 +50,11 @@ class Stats extends React.Component {
         percentagePerTag
       });
     }
-    console.log('percentagePerTag', percentagePerTag);
   }
   
   render() {
 
+    // Highcharts config format
     const config = {
       chart: {
         style: {
@@ -91,53 +89,21 @@ class Stats extends React.Component {
         }
       },
       series: [{
-        name: 'Tattoos',
+        name: 'Percentage of tattoos',
         colorByPoint: true,
-        data: [{
-          name: 'Blackwork',
-          y: this.state.percentagePerTag['blackwork']
-        }, {
-          name: 'Dotwork',
-          y: this.state.percentagePerTag['dotwork'],
-          sliced: true,
-          selected: true
-        }, {
-          name: 'Geometric',
-          y: this.state.percentagePerTag['geometric']
-        }, {
-          name: 'Japanese',
-          y: this.state.percentagePerTag['japanese']
-        }, {
-          name: 'Neo-traditional',
-          y: this.state.percentagePerTag['neo-traditional']
-        }, {
-          name: 'New school',
-          y: this.state.percentagePerTag['new school']
-        }, {
-          name: 'Realism',
-          y: this.state.percentagePerTag['realism']
-        }, {
-          name: 'Traditional',
-          y: this.state.percentagePerTag['traditional']
-        }, {
-          name: 'Trash Polka',
-          y: this.state.percentagePerTag['trash polka']
-        }, {
-          name: 'Tribal',
-          y: this.state.percentagePerTag['trash polka']
-        }, {
-          name: 'Watercolor',
-          y: this.state.percentagePerTag['watercolor']        
-        }]
+        data: []
       }]
     };
 
-    // if (this.state.percentagePerTag) {
-    //   console.log('state percentagePerTag', this.state.percentagePerTag);
-    //   config.series[0].data.map(category => {
-    //     console.log(category.y);
-    //   })
-    // }
+    // Update Highcharts config with new name/percentage pairs
+    if (this.state.percentagePerTag) {
+      for (let tag in this.state.percentagePerTag) {
+        let tagPair = {};
+        tagPair['name'] = tag; // name is a Highcharts keyword
+        tagPair['y'] = this.state.percentagePerTag[tag]; // y is a Highcharts keyword
+        config.series[0].data.push(tagPair);
+      }
+    }
 
     return (
       <div className="stats">
