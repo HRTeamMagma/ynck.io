@@ -58,7 +58,7 @@ class Stats extends React.Component {
     const config = {
       chart: {
         style: {
-          fontFamily: 'Arial'
+          fontFamily: 'Catamaran'
         },
         plotBackgroundColor: null,
         plotBorderWidth: null,
