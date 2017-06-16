@@ -59,11 +59,11 @@ class RecentTattoos extends React.Component {
     this.props.addToFavorites('/api/user/favorites', this.props.loggedInUser, imageId, this.props.recentImages, index);
   }
 
-  toggleOverlayInfo() {
-    this.setState({
-      hoverDisplay: !this.state.hoverDisplay
-    });
-  }
+  // toggleOverlayInfo() {
+  //   this.setState({
+  //     hoverDisplay: !this.state.hoverDisplay
+  //   });
+  // }
 
   render() {
     let loader;
@@ -83,16 +83,19 @@ class RecentTattoos extends React.Component {
           <div key={i} className="solo_image">
             { this.state.hoverDisplay ?
               <div className="hover-info">
-                <h4>{image.display}</h4>
-                <h4>{image.title}</h4>
-                <h4>{image.favoriteCount}</h4>
+                <div className="info">
+                  <h4>{image.title}</h4>
+                  <h4>{image.favoriteCount}</h4>
+                  <img src={image.profile.profile_image} className="mini-avatar" />
+                  <h4>{image.profile.display}</h4>
+                </div>
               </div> : null
             }
-            <div className="overlay_container_front_page" onMouseEnter={this.toggleOverlayInfo} >
+            <div key={i} className="overlay_container_front_page" onMouseEnter={ () => this.toggleOverlayInfo(image.id) } >
               { image.isFavorited ?
                 <img src="./assets/icons/favorited.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
               : <img src="./assets/icons/heart.png" className="heart" onClick={ () => { this.addAFavorite(image.id, i); } }/> 
-                }
+              }
             </div>
             <img src={image.url} className="base_pic" />
           </div>

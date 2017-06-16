@@ -59,5 +59,28 @@
   margin-top: $small-spacing;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
+  
+  h4 {
+    margin: 0 $small-spacing $small-spacing $small-spacing;
+  }
 }
 
+.mini-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline;
+  margin: $small-spacing;
+}
+
+.overlay-name {
+  position: absolute;
+  bottom: 0;
+  font-weight: normal;
+}
+
+.info {
+  bottom: 0;
+  position: absolute;
+  display: inline;
+}
