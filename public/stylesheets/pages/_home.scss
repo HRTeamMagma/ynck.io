@@ -80,10 +80,19 @@
   bottom: 10px;
   margin-left: $small-spacing;
   left: 50px;
+  z-index: 500;
 }
 
 .info {
+  z-index: 500; // temp: trying to make link clickable
   bottom: 0;
   position: absolute;
   display: inline;
+    a {
+      color: $white;
+    }
+    a:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
 }
