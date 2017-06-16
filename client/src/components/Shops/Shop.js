@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchShopInfo, updateShopData } from '../../../actions/actionShopInfo';
+import { CometSpinLoader } from 'react-css-loaders';
 
 import ShopInfo from './ShopInfo';
 import OurWork from './OurWork';
@@ -62,6 +63,7 @@ class Shop extends React.Component {
     return (
       <div >
         <div className="feed_container">
+          {this.props.shopInfoIsLoading ? <CometSpinLoader size={50} color={'#8f4b5a'}/> : null}
           <h1 onClick={(e) => this.state.allowEdits ? this.setState({editName: true, editedName: this.state.editedName || this.props.shop.shopInfo.name}) : null} className="profile_name">
             {!this.state.editName ? this.renderShopInfo('name') : ''}
           </h1> 
@@ -115,7 +117,7 @@ class Shop extends React.Component {
             />
           </div>
           <div className="main_content">
-            <OurWork images={this.renderShopInfo('images') || []}/>
+            <OurWork viewedUser={this.props.viewedUser} images={this.renderShopInfo('images') || []}/>
           </div>
         </div>
       </div>
@@ -125,7 +127,8 @@ class Shop extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    shop: state.shop
+    shop: state.shop,
+    shopInfoIsLoading: state.shopInfoIsLoading
   };
 };
 

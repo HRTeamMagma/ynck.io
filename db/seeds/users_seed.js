@@ -167,6 +167,8 @@ exports.seed = function (knex, Promise) {
           zip: '90038-1023',
           phone: '310-555-1212',
           rating: '4.5',
+          latitude: '34.0941918',
+          longitude: '-118.34435',
           shop_image: 'https://store.bandmerch.com/katvond/v1/img/logo.png'
         },
         {
