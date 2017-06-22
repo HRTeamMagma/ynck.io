@@ -9,10 +9,6 @@ ynck is a platform for tattoo enthusiasts to discover artists/designs, find insp
 - Devon Weldon
 - Scott Moschella
 
-## Usage
-
-> Some usage instructions
-
 ## Development
 
 ### Installing System Dependencies
@@ -31,7 +27,7 @@ yarn global add grunt-cli knex eslint
 
 ## Database Initialization
 
-IMPORTANT: ensure `postgres` is running before performing these steps.
+Ensure `postgres` is running before performing these steps.
 
 ### Database Creation:
 
