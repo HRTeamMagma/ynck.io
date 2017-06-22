@@ -1,6 +1,6 @@
 ## ynck.io
 
-The project description
+Ynck is a platform for tattoo enthusiasts to discover artists/designs, find inspiration, and connect with others in the community.
 
 ## Team
 
@@ -9,32 +9,9 @@ The project description
 - Devon Weldon
 - Scott Moschella
 
-## Roadmap
-
-View the project roadmap [here](LINK_TO_DOC)
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
-
-# Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-
 ## Usage
 
 > Some usage instructions
-
-## Requirements
-
-- Node 6.9.x
-- Redis 3.2.x
-- Postgresql 9.6.x
-- etc
 
 ## Development
 
@@ -45,8 +22,6 @@ brew install yarn
 brew install redis
 brew install postgresql
 ```
-
-Yarn is a replacement for npm. It's faster and *guarantees* consistency -- as you deploy your code in various environments, you won't run the risk of slight variations in what gets installed.
 
 ### Install Project Dependencies
 
