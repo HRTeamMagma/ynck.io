@@ -12,20 +12,20 @@ class MyTattoos extends React.Component {
     return (
       <div>  
         <h2>Tattoos</h2>
-          <div className="image_grid">  
-            {this.props.myTattoos !== undefined ? (
+        <div className="image_grid">  
+          {this.props.myTattoos !== undefined ? 
+            (
               <Carousel slidesToShow={3} decorators={Carousel.getDefaultProps().decorators.slice(0, 2)}>
-                {this.props.myTattoos.map ((images, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='tattoo' viewedUser={this.props.viewedUser} images={images} i={i}/> )}
+                {this.props.myTattoos.map ((image, i) => <Favorite addToProfileFavorites={this.props.addToProfileFavorites} typeOfImage='tattoo' viewedUser={this.props.viewedUser} image={image} i={i}/> )}
               </Carousel>  
-            )
-            : null
-            }
-            {JSON.stringify(loggedInUser.id) === this.props.viewedUser ? (
+            ) : null
+          }
+          {JSON.stringify(loggedInUser.id) === this.props.viewedUser ? 
+            (
               <UploadForm image_type="tattoo" />
-            )
-            :
-            null}
-          </div>
+            ) : null
+          }
+        </div>
       </div>
     );
   }
