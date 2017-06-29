@@ -60,7 +60,7 @@
   width: 300px;
   height: 40px;
   position: absolute;  
-  bottom: 5px;  
+  bottom: 7px;  
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
 }
@@ -69,7 +69,7 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  margin: $small-spacing $small-spacing;
+  margin: $small-spacing $large-spacing 15px $small-spacing;
   position: absolute;
   bottom: 0px;
   text-align: middle;
@@ -79,7 +79,7 @@
   position: absolute;
   color: white;
   font-weight: bold;
-  bottom: 10px;
+  bottom: 8px;
   margin-left: $small-spacing;
   left: 50px;
   z-index: 500;
@@ -87,7 +87,6 @@
 }
 
 .info {
-  z-index: 500; // temp: trying to make link clickable
   bottom: 0;
   position: absolute;
   display: inline;

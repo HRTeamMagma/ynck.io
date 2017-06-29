@@ -1,6 +1,6 @@
 button {
   @include secondary-body-font;
-  padding: $mini-spacing $small-spacing;
+  padding: $mini-spacing $small-spacing 8px $small-spacing;
   cursor: pointer;
   text-decoration: none;
   border-radius: 4px;
