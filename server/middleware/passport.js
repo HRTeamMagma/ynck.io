@@ -140,23 +140,24 @@ passport.use('twitter', new TwitterStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  console.log(oauthProfile);
+  // console.log("1", oauthProfile);
   return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
     .then(oauthAccount => {
 
-      if (oauthAccount) {
-        throw oauthAccount;
-      }
+      // if (oauthAccount) {
+      //   throw oauthAccount;
+      // }
 
-      if (!oauthProfile.emails || !oauthProfile.emails.length) {
-        // FB users can register with a phone number, which is not exposed by Passport
-        throw null;
-      }
+      // if (!oauthProfile.emails || !oauthProfile.emails.length) {
+      //   // FB users can register with a phone number, which is not exposed by Passport
+      //   throw null;
+      // }
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
-    .then(profile => {
+    .then( profile => {
+
       let profileInfo = {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
