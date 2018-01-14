@@ -1,6 +1,6 @@
 # ynck.io
 
-ynck is a platform for tattoo enthusiasts to discover artists/designs, find inspiration, and connect with others in the community.
+[ynck](http://www.ynck.io) is a platform for tattoo enthusiasts to discover artists/designs, find inspiration, and connect with others in the community.
 
 ## Team
 
